@@ -1,0 +1,10 @@
+[14:04:52] [main/INFO]: Writing debug log file accesstransform.log
+[14:04:52] [main/INFO]: Access Transformer processor running version 8.2.14
+[14:04:52] [main/INFO]: Command line arguments [--inJar, C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\net\minecraftforge\forge\1.20.1-47.4.10\forge-1.20.1-47.4.10-injected.jar, --outJar, C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\net\minecraftforge\forge\1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1\forge-1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1.jar, --logFile, accesstransform.log, --atFile, C:\Users\Drifter\IdeaProjects\solaris_compat\src\main\resources\META-INF\accesstransformer.cfg, --atFile, C:\Users\Drifter\IdeaProjects\solaris_compat\build\_atJar_7\parent_at.cfg]
+[14:04:52] [main/INFO]: Reading from C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\net\minecraftforge\forge\1.20.1-47.4.10\forge-1.20.1-47.4.10-injected.jar
+[14:04:52] [main/INFO]: Writing to C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\net\minecraftforge\forge\1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1\forge-1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1.jar
+[14:04:52] [main/INFO]: Transformer file C:\Users\Drifter\IdeaProjects\solaris_compat\src\main\resources\META-INF\accesstransformer.cfg
+[14:04:52] [main/INFO]: Transformer file C:\Users\Drifter\IdeaProjects\solaris_compat\build\_atJar_7\parent_at.cfg
+[14:04:52] [main/WARN]: Found existing output jar C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\net\minecraftforge\forge\1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1\forge-1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1.jar, overwriting
+[14:04:52] [main/DEBUG]: Loading access transformer accesstransformer.cfg from path C:\Users\Drifter\IdeaProjects\solaris_compat\src\main\resources\META-INF\accesstransformer.cfg
+[14:04:52] [main/ERROR]: Invalid access transformer line in accesstransformer.cfg: public dev.ftb.mods.ftbquests.quest.QuestObjectBase f_ tags

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "thirstcanteen:leather_canteen_full"
+    }
+  ],
+  "result": {
+    "item": "thirstcanteen:leather_canteen",
+    "count": 1
+  }
+}

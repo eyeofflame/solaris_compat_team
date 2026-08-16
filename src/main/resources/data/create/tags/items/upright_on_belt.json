@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "thirstcanteen:leather_canteen",
+    "thirstcanteen:military_bottle",
+    "thirstcanteen:dragon_bottle",
+    "thirstcanteen:leather_canteen_full",
+    "thirstcanteen:military_bottle_full",
+    "thirstcanteen:dragon_bottle_full"
+  ]
+}

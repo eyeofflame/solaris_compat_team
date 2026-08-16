@@ -1,0 +1,15 @@
+{
+  "name": "simple_pool",
+  "requireItems": [
+    {
+      "Count": 1,
+      "id": "minecraft:stone"
+    }
+  ],
+  "rewards": [
+    {
+      "Count": 1,
+      "id": "minecraft:diamond"
+    }
+  ]
+}

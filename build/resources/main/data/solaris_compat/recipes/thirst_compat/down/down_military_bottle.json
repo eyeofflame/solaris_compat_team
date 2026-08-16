@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "thirstcanteen:military_bottle_full"
+    }
+  ],
+  "result": {
+    "item": "thirstcanteen:military_bottle",
+    "count": 1
+  }
+}

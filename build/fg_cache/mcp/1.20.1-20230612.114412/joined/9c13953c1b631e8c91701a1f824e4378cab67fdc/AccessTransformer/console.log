@@ -1,0 +1,6 @@
+JVM:         D:\jdk\zulu17\bin\java.exe
+JVM Args:    
+Run Args:    "--inJar", "C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\mcp\1.20.1-20230612.114412\joined\9c13953c1b631e8c91701a1f824e4378cab67fdc\rename\output.jar", "--outJar", "C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\mcp\1.20.1-20230612.114412\joined\9c13953c1b631e8c91701a1f824e4378cab67fdc\AccessTransformer\output.jar", "--atFile", "C:\Users\Drifter\IdeaProjects\solaris_compat\src\main\resources\META-INF\accesstransformer.cfg", "--atFile", "C:\Users\Drifter\AppData\Local\Temp\FG_ats_13411968742907494374.cfg"
+Classpath:   C:\Users\Drifter\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\accesstransformers\8.2.14\accesstransformers-8.2.14-fatjar.jar
+Working Dir: C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\mcp\1.20.1-20230612.114412\joined\9c13953c1b631e8c91701a1f824e4378cab67fdc\AccessTransformer
+Main Class:  net.minecraftforge.accesstransformer.TransformerProcessor

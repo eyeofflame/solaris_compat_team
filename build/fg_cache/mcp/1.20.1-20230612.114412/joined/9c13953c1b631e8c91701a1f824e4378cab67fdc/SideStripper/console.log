@@ -1,0 +1,9 @@
+JVM:         D:\jdk\zulu17\bin\java.exe
+JVM Args:    
+Run Args:    "--strip", "--input", "C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\mcp\1.20.1-20230612.114412\joined\9c13953c1b631e8c91701a1f824e4378cab67fdc\AccessTransformer\output.jar", "--output", "C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\mcp\1.20.1-20230612.114412\joined\9c13953c1b631e8c91701a1f824e4378cab67fdc\SideStripper\output.jar", "--data", "C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\mcp\1.20.1-20230612.114412\joined\9c13953c1b631e8c91701a1f824e4378cab67fdc\SideStripper\string_data.sas"
+Classpath:   C:\Users\Drifter\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\mergetool\1.2.5\mergetool-1.2.5-fatjar.jar
+Working Dir: C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\mcp\1.20.1-20230612.114412\joined\9c13953c1b631e8c91701a1f824e4378cab67fdc\SideStripper
+Main Class:  net.minecraftforge.mergetool.ConsoleMerger
+Input:  C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\mcp\1.20.1-20230612.114412\joined\9c13953c1b631e8c91701a1f824e4378cab67fdc\AccessTransformer\output.jar
+Output: C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\mcp\1.20.1-20230612.114412\joined\9c13953c1b631e8c91701a1f824e4378cab67fdc\SideStripper\output.jar
+Data:   C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\mcp\1.20.1-20230612.114412\joined\9c13953c1b631e8c91701a1f824e4378cab67fdc\SideStripper\string_data.sas

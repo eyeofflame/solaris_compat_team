@@ -1,0 +1,15 @@
+{
+  "name": "fuck_pool",
+  "requireItems": [
+    {
+      "Count": 1,
+      "id": "minecraft:stone"
+    }
+  ],
+  "rewards": [
+    {
+      "Count": 1,
+      "id": "minecraft:diamond"
+    }
+  ]
+}

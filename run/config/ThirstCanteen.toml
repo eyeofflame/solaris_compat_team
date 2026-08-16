@@ -1,0 +1,9 @@
+
+[Settings]
+	ThirstRestoreEachSip = 6
+	QuenchedRestoreEachSip = 8
+	DragonBottleDefaultPurity = 2
+	LeatherCanteenUsableTime = 8
+	MilitaryBottleUsableTime = 12
+	DragonBottleUsableTime = 16
+

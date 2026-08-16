@@ -1,0 +1,16 @@
+{
+  "title.solaris_compat.config": "Solaris 配置",
+  "category.solaris_compat.general": "通用",
+  "option.solaris_compat.flushTime": "刷新时间（s）",
+  "item.solaris_compat.empty_contract": "空白契约",
+  "item.solaris_compat.villager_contract": "村民契约",
+  "title.solaris_compat.tab": "Solaris Compat",
+  "title.solaris.villager_bounty": "村民契约栏",
+  "title.solaris.contracts": "村民契约",
+  "tip.solaris.completed_to_remove": "领取该奖励后，任务会自动关闭！请确保已领取真实的奖励！",
+  "rarity.solaris.common": "&f普通契约",
+  "rarity.solaris.uncommon": "&a不凡契约",
+  "rarity.solaris.epic": "&5史诗契约",
+  "rarity.solaris.rare": "&6稀有契约",
+  "tip.solaris.corpse_void_fix": "检测到你死于虚空，已将尸体传送至 "
+}

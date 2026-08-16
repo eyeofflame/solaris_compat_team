@@ -1,0 +1,7 @@
+Java Launcher: D:\jdk\zulu17\bin\java.exe
+Arguments: '--inJar, C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\net\minecraftforge\forge\1.20.1-47.4.10\forge-1.20.1-47.4.10-injected.jar, --outJar, C:\Users\Drifter\IdeaProjects\solaris_compat\build\fg_cache\net\minecraftforge\forge\1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1\forge-1.20.1-47.4.10_mapped_parchment_2023.09.03-1.20.1.jar, --logFile, accesstransform.log, --atFile, C:\Users\Drifter\IdeaProjects\solaris_compat\src\main\resources\META-INF\accesstransformer.cfg, --atFile, C:\Users\Drifter\IdeaProjects\solaris_compat\build\_atJar_4\parent_at.cfg'
+Classpath:
+ - C:\Users\Drifter\.gradle\caches\forge_gradle\maven_downloader\net\minecraftforge\accesstransformers\8.2.14\accesstransformers-8.2.14-fatjar.jar
+Working directory: C:\Users\Drifter\IdeaProjects\solaris_compat\build\_atJar_4
+Main class: net.minecraftforge.accesstransformer.TransformerProcessor
+====================================

@@ -1,0 +1,14 @@
+{
+  "mappings": {
+    "dev/efm/solaris_compat/mixin/corpseFix/DeathEventsMixin": {
+      "Lnet/minecraft/server/level/ServerLevel;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z": "Lnet/minecraft/server/level/ServerLevel;m_7967_(Lnet/minecraft/world/entity/Entity;)Z"
+    }
+  },
+  "data": {
+    "searge": {
+      "dev/efm/solaris_compat/mixin/corpseFix/DeathEventsMixin": {
+        "Lnet/minecraft/server/level/ServerLevel;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z": "Lnet/minecraft/server/level/ServerLevel;m_7967_(Lnet/minecraft/world/entity/Entity;)Z"
+      }
+    }
+  }
+}

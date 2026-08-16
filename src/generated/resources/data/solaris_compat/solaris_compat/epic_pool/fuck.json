@@ -1,0 +1,21 @@
+{
+  "name": "fuck_pool",
+  "requireEntities": [
+    {
+      "Count": 3,
+      "id": "minecraft:zombie"
+    }
+  ],
+  "requireItems": [
+    {
+      "Count": 1,
+      "id": "minecraft:stone"
+    }
+  ],
+  "rewards": [
+    {
+      "Count": 1,
+      "id": "minecraft:diamond"
+    }
+  ]
+}
