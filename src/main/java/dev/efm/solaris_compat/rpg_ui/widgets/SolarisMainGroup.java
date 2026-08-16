@@ -35,7 +35,7 @@ public class SolarisMainGroup extends WidgetGroup {
     public void handleClientAction(int id, FriendlyByteBuf buffer) {
         if (id == 11451) {
             int button = buffer.readVarInt();
-
+            return;
         }
         super.handleClientAction(id, buffer);
     }
