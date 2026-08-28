@@ -4,9 +4,6 @@ buildscript {
         maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
         mavenCentral()
     }
-    dependencies {
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-    }
 }
 
 plugins {
@@ -14,9 +11,8 @@ plugins {
     id 'idea'
     id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version "0.7.+"
 }
-
-apply plugin: 'org.spongepowered.mixin'
 
 group = mod_group_id
 version = mod_version
@@ -59,11 +55,13 @@ minecraft {
         client {
 
             property 'forge.enabledGameTestNamespaces', mod_id
+
         }
 
         server {
             property 'forge.enabledGameTestNamespaces', mod_id
             args '--nogui'
+
         }
 
 
@@ -127,10 +125,10 @@ dependencies {
     implementation fg.deobf("libs:ldlib:forge-1.20.1-1.0.52")
 
 
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'
 
-    runtimeOnly "top.theillusivec4.curios:curios-forge:${curios_version}"
-    compileOnly "top.theillusivec4.curios:curios-forge:${curios_version}:api"
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
 
 }
 
