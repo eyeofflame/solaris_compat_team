@@ -91,8 +91,10 @@ mixin {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-
-
+    maven {
+        name = "Curios"
+        url = uri("https://maven.theillusivec4.top/")
+    }
     flatDir {
         dir 'libs'
     }
@@ -126,6 +128,9 @@ dependencies {
 
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    runtimeOnly "top.theillusivec4.curios:curios-forge:${curios_version}"
+    compileOnly "top.theillusivec4.curios:curios-forge:${curios_version}:api"
 
 }
 
