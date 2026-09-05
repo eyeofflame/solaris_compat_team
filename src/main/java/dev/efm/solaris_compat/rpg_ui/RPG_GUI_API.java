@@ -1,11 +1,11 @@
 package dev.efm.solaris_compat.rpg_ui;
 
-import com.lowdragmc.lowdraglib.gui.modular.IUIHolder;
-import com.lowdragmc.lowdraglib.gui.modular.ModularUI;
+import com.lowdragmc.lowdraglib.networking.LDLNetworking;
+import dev.efm.solaris_compat.rpg_ui.network.UIPacket;
 import net.minecraft.world.entity.player.Player;
 
 public interface RPG_GUI_API {
-    default void createTextGUI(Player player) {
-        ModularUI ui = new ModularUI(IUIHolder.EMPTY, player);
+    static void createTextGUI(Player player) {
+        LDLNetworking.NETWORK.sendToServer(new UIPacket());
     }
 }
