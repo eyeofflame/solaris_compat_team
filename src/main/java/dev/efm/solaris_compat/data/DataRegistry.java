@@ -1,6 +1,6 @@
 package dev.efm.solaris_compat.data;
 
-import dev.efm.solaris_compat.Solaris_compat;
+import dev.efm.solaris_compat.SolarisCompat;
 import dev.efm.solaris_compat.api.SHelper;
 import dev.efm.solaris_compat.data.pools.CommonPool;
 import dev.efm.solaris_compat.data.pools.EpicPool;
@@ -19,11 +19,11 @@ import java.util.List;
 import java.util.Set;
 
 public class DataRegistry {
-    //public static final ResourceKey<Registry<BountyPool>> BOUNTY_POOL_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(Solaris_compat.MODID, "bounty_pool"));
-    public static final ResourceKey<Registry<CommonPool>> COMMON_POOL_KEY = ResourceKey.createRegistryKey(SHelper.buildRes(Solaris_compat.MODID, "common_pool"));
-    public static final ResourceKey<Registry<UncommonPool>> UNCOMMON_POOL_KEY = ResourceKey.createRegistryKey(SHelper.buildRes(Solaris_compat.MODID, "uncommon_pool"));
-    public static final ResourceKey<Registry<EpicPool>> EPIC_POOL_KEY = ResourceKey.createRegistryKey(SHelper.buildRes(Solaris_compat.MODID, "epic_pool"));
-    public static final ResourceKey<Registry<RarePool>> RARE_POOL_KEY = ResourceKey.createRegistryKey(SHelper.buildRes(Solaris_compat.MODID, "rare_pool"));
+    //public static final ResourceKey<Registry<BountyPool>> BOUNTY_POOL_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(SolarisCompat.MODID, "bounty_pool"));
+    public static final ResourceKey<Registry<CommonPool>> COMMON_POOL_KEY = ResourceKey.createRegistryKey(SHelper.buildRes(SolarisCompat.MODID, "common_pool"));
+    public static final ResourceKey<Registry<UncommonPool>> UNCOMMON_POOL_KEY = ResourceKey.createRegistryKey(SHelper.buildRes(SolarisCompat.MODID, "uncommon_pool"));
+    public static final ResourceKey<Registry<EpicPool>> EPIC_POOL_KEY = ResourceKey.createRegistryKey(SHelper.buildRes(SolarisCompat.MODID, "epic_pool"));
+    public static final ResourceKey<Registry<RarePool>> RARE_POOL_KEY = ResourceKey.createRegistryKey(SHelper.buildRes(SolarisCompat.MODID, "rare_pool"));
 
     public static void DataRegistryEvent(DataPackRegistryEvent.NewRegistry evt) {
         //evt.dataPackRegistry(BOUNTY_POOL_KEY, BountyPool.CODEC);
@@ -35,12 +35,12 @@ public class DataRegistry {
 
     //pool registry
 
-    //public static final ResourceKey<BountyPool> COMMON_POOL = ResourceKey.create(BOUNTY_POOL_KEY, SHelper.buildRes(Solaris_compat.MODID, "common_pool"));
-    //public static final ResourceKey<BountyPool> UNCOMMON_POOL = ResourceKey.create(BOUNTY_POOL_KEY, SHelper.buildRes(Solaris_compat.MODID, "uncommon_pool"));
-    public static final ResourceKey<CommonPool> EXAMPLE_POOL = ResourceKey.create(COMMON_POOL_KEY, SHelper.buildRes(Solaris_compat.MODID, "fuck"));
-    public static final ResourceKey<UncommonPool> EXAMPLE_POOL0 = ResourceKey.create(UNCOMMON_POOL_KEY, SHelper.buildRes(Solaris_compat.MODID, "fuck"));
-    public static final ResourceKey<EpicPool> EXAMPLE_POOL1 = ResourceKey.create(EPIC_POOL_KEY, SHelper.buildRes(Solaris_compat.MODID, "fuck"));
-    public static final ResourceKey<RarePool> EXAMPLE_POOL2 = ResourceKey.create(RARE_POOL_KEY, SHelper.buildRes(Solaris_compat.MODID, "fuck"));
+    //public static final ResourceKey<BountyPool> COMMON_POOL = ResourceKey.create(BOUNTY_POOL_KEY, SHelper.buildRes(SolarisCompat.MODID, "common_pool"));
+    //public static final ResourceKey<BountyPool> UNCOMMON_POOL = ResourceKey.create(BOUNTY_POOL_KEY, SHelper.buildRes(SolarisCompat.MODID, "uncommon_pool"));
+    public static final ResourceKey<CommonPool> EXAMPLE_POOL = ResourceKey.create(COMMON_POOL_KEY, SHelper.buildRes(SolarisCompat.MODID, "fuck"));
+    public static final ResourceKey<UncommonPool> EXAMPLE_POOL0 = ResourceKey.create(UNCOMMON_POOL_KEY, SHelper.buildRes(SolarisCompat.MODID, "fuck"));
+    public static final ResourceKey<EpicPool> EXAMPLE_POOL1 = ResourceKey.create(EPIC_POOL_KEY, SHelper.buildRes(SolarisCompat.MODID, "fuck"));
+    public static final ResourceKey<RarePool> EXAMPLE_POOL2 = ResourceKey.create(RARE_POOL_KEY, SHelper.buildRes(SolarisCompat.MODID, "fuck"));
 
     public static void GatherDataEvent(GatherDataEvent evt) {
         DataGenerator generator = evt.getGenerator();
@@ -66,7 +66,7 @@ public class DataRegistry {
                         generator.getPackOutput(),
                         evt.getLookupProvider(),
                         builder,
-                        Set.of(Solaris_compat.MODID)
+                        Set.of(SolarisCompat.MODID)
                 )
         );
     }

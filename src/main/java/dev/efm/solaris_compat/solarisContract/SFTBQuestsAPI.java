@@ -1,7 +1,7 @@
 package dev.efm.solaris_compat.solarisContract;
 
 import dev.architectury.event.EventResult;
-import dev.efm.solaris_compat.Solaris_compat;
+import dev.efm.solaris_compat.SolarisCompat;
 import dev.efm.solaris_compat.data.BountyPool;
 import dev.efm.solaris_compat.events.BountyCache;
 import dev.ftb.mods.ftblibrary.config.Tristate;
@@ -225,7 +225,7 @@ public class SFTBQuestsAPI {
         }
     }
 
-    private static List<Integer> randomList = new ArrayList<>(Solaris_compat.randomListHundred);
+    private static List<Integer> randomList = new ArrayList<>(SolarisCompat.randomListHundred);
 
     private static List<BountyPool> randomPoolChoose() {
         var newlist = new ArrayList<>(randomList);
@@ -235,7 +235,7 @@ public class SFTBQuestsAPI {
         List<Integer> epic = newlist.subList(80, 94);
         List<Integer> rare = newlist.subList(95, 99);
 
-        Integer integer = Solaris_compat.random.nextInt(100);
+        Integer integer = SolarisCompat.random.nextInt(100);
 
         if (common.contains(integer)) {
             return BountyCache.getCachePools().stream().map((pool) -> (BountyPool) pool).toList();
@@ -251,7 +251,7 @@ public class SFTBQuestsAPI {
     }
 
     private static BountyPool getRandomPool(List<BountyPool> list) {
-        return list.get(Solaris_compat.random.nextInt(list.size()));
+        return list.get(SolarisCompat.random.nextInt(list.size()));
     }
 
     public static EventResult onRewardGot(CustomRewardEvent evt) {

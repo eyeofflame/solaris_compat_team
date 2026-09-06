@@ -1,0 +1,30 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="galgame"
+version="${file.jarVersion}"
+displayName="GalGame Dialogue System"
+authors="you"
+description='''A visual-novel (GalGame) dialogue system for Minecraft 1.20.1 Forge, built with the LDlib (LowDragLib) GUI framework.
+
+Features: character portrait, auto-wrapping typewriter text, named dialogue box, branching choices, transitions and a chain-DSL script builder.
+'''
+# 本系统为纯客户端演出叠加层，故仅在客户端加载
+side="CLIENT"
+
+[[dependencies.galgame]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.galgame]]
+# LDlib / LowDragLib —— 对话系统全部构建在此 GUI 框架之上
+modId="ldlib"
+mandatory=true
+versionRange="[1.0.0,)"
+ordering="NONE"
+side="CLIENT"

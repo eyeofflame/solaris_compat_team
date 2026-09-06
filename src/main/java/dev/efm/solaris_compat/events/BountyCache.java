@@ -1,6 +1,6 @@
 package dev.efm.solaris_compat.events;
 
-import dev.efm.solaris_compat.Solaris_compat;
+import dev.efm.solaris_compat.SolarisCompat;
 import dev.efm.solaris_compat.data.DataRegistry;
 import dev.efm.solaris_compat.data.pools.CommonPool;
 import dev.efm.solaris_compat.data.pools.EpicPool;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Mod.EventBusSubscriber(modid = Solaris_compat.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = SolarisCompat.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class BountyCache implements ResourceManagerReloadListener {
     private static List<CommonPool> cacheCommonPools = new ArrayList<>();
     private static List<UncommonPool> cacheUncommonPools = new ArrayList<>();

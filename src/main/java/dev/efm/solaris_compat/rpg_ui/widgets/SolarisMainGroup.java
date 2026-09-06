@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SolarisMainGroup extends WidgetGroup {
+    private static final int CLICK_ACTION_ID = 11451;
+
     private final float widthRatio;
     private final float heightRatio;
     private final int marginX;
@@ -88,20 +90,25 @@ public class SolarisMainGroup extends WidgetGroup {
     @OnlyIn(Dist.CLIENT)
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         boolean consumed = super.mouseClicked(mouseX, mouseY, button);
-        long now = System.currentTimeMillis();
-        if (now - lastClick >= 200) {
-            lastClick = now;
-            writeClientAction(11451, buf -> buf.writeVarInt(button));
+        if (!consumed && isMouseOverElement(mouseX, mouseY)) {
+            long now = System.currentTimeMillis();
+            if (now - lastClick >= 100) {
+                lastClick = now;
+                writeClientAction(CLICK_ACTION_ID, buf -> buf.writeVarInt(button));
+            }
         }
         return consumed;
     }
 
     @Override
     public void handleClientAction(int id, FriendlyByteBuf buffer) {
-        if (id == 11451) {
+        if (id == CLICK_ACTION_ID) {
             int button = buffer.readVarInt();
             Player player = this.getGui().entityPlayer;
-            player.sendSystemMessage(Component.literal("hello!"));
+            if (player != null) {
+                player.sendSystemMessage(Component.literal("hello!"));
+            }
+            return;
         }
         super.handleClientAction(id, buffer);
     }

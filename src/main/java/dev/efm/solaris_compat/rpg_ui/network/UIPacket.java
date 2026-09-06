@@ -21,7 +21,7 @@ public class UIPacket implements IPacket {
 
     @Override
     public void execute(IHandlerContext handler) {
-        if (handler.getPlayer() != null) {
+        if (handler.getLevel() != null && handler.getPlayer() != null) {
             SolarisUIFactory.INSTANCE.openUI(new SolarisUIFactory.Holder(), handler.getPlayer());
         }
     }

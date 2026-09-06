@@ -93,6 +93,10 @@ repositories {
         name = "Curios"
         url = uri("https://maven.theillusivec4.top/")
     }
+    maven {
+        name "firstdarkdev"
+        url "https://maven.firstdark.dev/snapshots"
+    }
     flatDir {
         dir 'libs'
     }
@@ -122,7 +126,10 @@ dependencies {
     )
 
     implementation fg.deobf("libs:corpse:forge-1.20.1-1.0.23")
-    implementation fg.deobf("libs:ldlib:forge-1.20.1-1.0.52")
+    //implementation fg.deobf("libs:ldlib:forge-1.20.1-1.0.52")
+    implementation fg.deobf("com.lowdragmc.ldlib:ldlib-forge-1.20.1:1.0.52") {
+        transitive = false
+    }
 
 
     annotationProcessor 'org.spongepowered:mixin:0.8.7:processor'

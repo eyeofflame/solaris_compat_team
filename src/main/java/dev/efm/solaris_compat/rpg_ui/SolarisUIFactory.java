@@ -1,6 +1,7 @@
 package dev.efm.solaris_compat.rpg_ui;
 
 import com.lowdragmc.lowdraglib.LDLib;
+import com.lowdragmc.lowdraglib.Platform;
 import com.lowdragmc.lowdraglib.gui.animation.Transform;
 import com.lowdragmc.lowdraglib.gui.factory.UIFactory;
 import com.lowdragmc.lowdraglib.gui.modular.IUIHolder;
@@ -8,6 +9,8 @@ import com.lowdragmc.lowdraglib.gui.modular.ModularUI;
 import com.lowdragmc.lowdraglib.gui.widget.layout.Align;
 import com.lowdragmc.lowdraglib.utils.interpolate.Eases;
 import com.mojang.blaze3d.platform.Window;
+import dev.efm.solaris_compat.SolarisCompat;
+import dev.efm.solaris_compat.api.SHelper;
 import dev.efm.solaris_compat.rpg_ui.resources.SolaBorderTexture;
 import dev.efm.solaris_compat.rpg_ui.widgets.SolarisMainGroup;
 import net.minecraft.client.Minecraft;
@@ -21,7 +24,7 @@ public class SolarisUIFactory extends UIFactory<SolarisUIFactory.Holder> {
     public static final SolarisUIFactory INSTANCE = new SolarisUIFactory();
 
     private SolarisUIFactory() {
-        super(LDLib.location("solaris_gui"));
+        super(SHelper.buildRes(SolarisCompat.MODID, "solaris_gui"));
     }
 
     @Override
@@ -34,16 +37,7 @@ public class SolarisUIFactory extends UIFactory<SolarisUIFactory.Holder> {
         mainGroup.setBackground(SolaBorderTexture.SOLA_BORDER_BACKGROUND);
         mainGroup.setText(Component.literal("test----------------------------------------------------------------------------------------------"));
 
-        if (LDLib.isClient()) {
-            Window win = Minecraft.getInstance().getWindow();
-            mainGroup.animation(
-                    new Transform()
-                            .offset(0, win.getGuiScaledHeight() / 4)
-                            .setIn()
-                            .duration(600)
-                            .ease(Eases.EaseQuadOut)
-            );
-        }
+        if (Platform.isClient()) clientMethod(mainGroup);
         return mainGroup;
     }
 
@@ -76,6 +70,20 @@ public class SolarisUIFactory extends UIFactory<SolarisUIFactory.Holder> {
 
         @Override
         public void markAsDirty() {
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private void clientMethod(SolarisMainGroup mainGroup) {
+        if (LDLib.isClient()) {
+            Window win = Minecraft.getInstance().getWindow();
+            mainGroup.animation(
+                    new Transform()
+                            .offset(0, win.getGuiScaledHeight() / 4)
+                            .setIn()
+                            .duration(600)
+                            .ease(Eases.EaseQuadOut)
+            );
         }
     }
 }

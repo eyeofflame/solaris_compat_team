@@ -6,13 +6,12 @@ import dev.efm.solaris_compat.common.SRegistry;
 import dev.efm.solaris_compat.config.ConfigScreen;
 import dev.efm.solaris_compat.config.SolarisConfig;
 import dev.efm.solaris_compat.data.DataRegistry;
-import dev.efm.solaris_compat.rpg_ui.RPG_GUI_API;
+import dev.efm.solaris_compat.rpg_ui.RpgGuiApi;
 import dev.efm.solaris_compat.rpg_ui.SolarisUIFactory;
 import dev.efm.solaris_compat.rpg_ui.network.UIPacket;
 import dev.efm.solaris_compat.solarisContract.SFTBQuestsAPI;
 import dev.ftb.mods.ftbquests.events.CustomRewardEvent;
 import dev.ftb.mods.ftbquests.quest.ServerQuestFile;
-import net.minecraft.client.Minecraft;
 import net.minecraft.commands.Commands;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.client.ConfigScreenHandler;
@@ -27,14 +26,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-@Mod(Solaris_compat.MODID)
-public class Solaris_compat {
+@Mod(SolarisCompat.MODID)
+public class SolarisCompat {
     public static final String MODID = "solaris_compat";
 
     public static final List<Integer> randomListHundred = new ArrayList<>();
     public static final Random random = new Random();
 
-    public Solaris_compat(FMLJavaModLoadingContext context) {
+    public SolarisCompat(FMLJavaModLoadingContext context) {
         context.registerConfig(ModConfig.Type.COMMON, SolarisConfig.SPEC);
 
         context.registerExtensionPoint(
@@ -73,7 +72,7 @@ public class Solaris_compat {
         evt.getDispatcher().register(
                 Commands.literal("std_create").executes(context -> {
                     Player player = context.getSource().getPlayer();
-                    RPG_GUI_API.createTextGUI(player);
+                    RpgGuiApi.createTextGUI(player);
                     return 1;
                 })
         );
