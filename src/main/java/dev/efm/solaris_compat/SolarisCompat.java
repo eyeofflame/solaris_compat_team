@@ -1,16 +1,20 @@
 package dev.efm.solaris_compat;
 
 import com.lowdragmc.lowdraglib.gui.factory.UIFactory;
-import com.lowdragmc.lowdraglib.networking.LDLNetworking;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import dev.efm.solaris_compat.common.SRegistry;
 import dev.efm.solaris_compat.config.ConfigScreen;
 import dev.efm.solaris_compat.config.SolarisConfig;
 import dev.efm.solaris_compat.data.DataRegistry;
 import dev.efm.solaris_compat.rpg_ui.SolarisUIFactory;
+import dev.efm.solaris_compat.rpg_ui.data.DialogueScript;
+import dev.efm.solaris_compat.rpg_ui.data.SolarisDialogueRegistry;
 import dev.efm.solaris_compat.solarisContract.SFTBQuestsAPI;
 import dev.ftb.mods.ftbquests.events.CustomRewardEvent;
 import dev.ftb.mods.ftbquests.quest.ServerQuestFile;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -58,6 +62,8 @@ public class SolarisCompat {
         CustomRewardEvent.EVENT.register(SFTBQuestsAPI::onRewardGot);
 
         UIFactory.register(SolarisUIFactory.INSTANCE);
+
+        SolarisDialogueRegistry.registerDefaults();
     }
 
     public void onServerStarted(ServerStartedEvent event) {
@@ -67,11 +73,20 @@ public class SolarisCompat {
 
     public void onCommand(RegisterCommandsEvent evt) {
         evt.getDispatcher().register(
-                Commands.literal("std_create").executes(context -> {
-                    ServerPlayer player = context.getSource().getPlayerOrException();
-                    SolarisUIFactory.INSTANCE.openUI(new SolarisUIFactory.Holder(), player);
-                    return 1;
-                })
+                Commands.literal("std:dialogue")
+                        .then(Commands.argument("id", StringArgumentType.string())
+                                .then(Commands.argument("target", EntityArgument.player())
+                                        .executes(ctx -> {
+                                            String id = StringArgumentType.getString(ctx, "id");
+                                            ServerPlayer player = EntityArgument.getPlayer(ctx, "target");
+                                            DialogueScript script = SolarisDialogueRegistry.get(id);
+                                            if (script == null) {
+                                                ctx.getSource().sendFailure(Component.literal("failed!"));
+                                                return 0;
+                                            }
+                                            SolarisUIFactory.INSTANCE.openUI(new SolarisUIFactory.Holder(script), player);
+                                            return 1;
+                                        })))
         );
     }
 }

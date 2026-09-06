@@ -11,12 +11,13 @@ import com.lowdragmc.lowdraglib.utils.interpolate.Eases;
 import com.mojang.blaze3d.platform.Window;
 import dev.efm.solaris_compat.SolarisCompat;
 import dev.efm.solaris_compat.api.SHelper;
+import dev.efm.solaris_compat.rpg_ui.data.DialogueScript;
 import dev.efm.solaris_compat.rpg_ui.resources.SolaBorderTexture;
+import dev.efm.solaris_compat.rpg_ui.widgets.SolarisDialogueWidget;
 import dev.efm.solaris_compat.rpg_ui.widgets.SolarisMainGroup;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -30,13 +31,13 @@ public class SolarisUIFactory extends UIFactory<SolarisUIFactory.Holder> {
 
     @Override
     protected ModularUI createUITemplate(SolarisUIFactory.Holder holder, Player player) {
-        return new ModularUI(holder, player).widget(createMainGroup());
+        return new ModularUI(holder, player).widget(createMainGroup(holder));
     }
 
-    private SolarisMainGroup createMainGroup() {
-        SolarisMainGroup mainGroup = new SolarisMainGroup(1f, 0.25f, 0, 0, Align.BOTTOM_LEFT);
+    private SolarisMainGroup createMainGroup(Holder holder) {
+        SolarisDialogueWidget mainGroup = new SolarisDialogueWidget(1f, 0.25f, 0, 0, Align.BOTTOM_LEFT);
         mainGroup.setBackground(SolaBorderTexture.SOLA_BORDER_BACKGROUND);
-        mainGroup.setText(Component.literal("test--------------------").withStyle(ChatFormatting.GOLD).append(Component.literal("fucking").withStyle(ChatFormatting.AQUA)));
+        mainGroup.setScript(holder.script());
         if (Platform.isClient()) clientMethod(mainGroup);
         return mainGroup;
     }
@@ -44,15 +45,16 @@ public class SolarisUIFactory extends UIFactory<SolarisUIFactory.Holder> {
     @Override
     @OnlyIn(Dist.CLIENT)
     protected Holder readHolderFromSyncData(FriendlyByteBuf friendlyByteBuf) {
-        return new Holder();
+        CompoundTag tag = friendlyByteBuf.readNbt();
+        return new Holder(DialogueScript.deserializeNBT(tag));
     }
 
     @Override
     protected void writeHolderToSyncData(FriendlyByteBuf friendlyByteBuf, Holder holder) {
-
+        friendlyByteBuf.writeNbt(holder.script.serializeNBT());
     }
 
-    public static class Holder implements IUIHolder {
+    public record Holder(DialogueScript script) implements IUIHolder {
         @Override
         public ModularUI createUI(Player player) {
             return null;

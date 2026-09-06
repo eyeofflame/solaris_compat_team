@@ -204,4 +204,18 @@ public class SolarisMainGroup extends WidgetGroup {
         }
         return result;
     }
+
+    public boolean isTyping() {
+        return running;
+    }
+
+    public void finishTypingNow() {
+        progress = fullText.stream().mapToInt(c -> c.getString().length()).sum();
+        running = false;
+        rebuildText();
+    }
+
+    public boolean hasNext() {
+        return false;
+    }
 }
