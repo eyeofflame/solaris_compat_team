@@ -55,6 +55,8 @@ minecraft {
         client {
 
             property 'forge.enabledGameTestNamespaces', mod_id
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
         }
 
@@ -97,6 +99,13 @@ repositories {
         name "firstdarkdev"
         url "https://maven.firstdark.dev/snapshots"
     }
+    maven {
+
+        url = "https://maven.architectury.dev"
+        content {
+            includeGroup "dev.architectury"
+        }
+    }
     flatDir {
         dir 'libs'
     }
@@ -118,7 +127,6 @@ dependencies {
     implementation fg.deobf("libs:cloth-config:11.1.136-forge")
 
     implementation(
-            fg.deobf("libs:architectury:9.2.14-forge"),
             fg.deobf("libs:ftb-library:forge-2001.2.13"),
             fg.deobf("libs:ftb-quests:forge-2001.4.22"),
             fg.deobf("libs:ftb-teams:forge-2001.3.2"),
@@ -126,7 +134,7 @@ dependencies {
     )
 
     implementation fg.deobf("libs:corpse:forge-1.20.1-1.0.23")
-    //implementation fg.deobf("libs:ldlib:forge-1.20.1-1.0.52")
+
     implementation fg.deobf("com.lowdragmc.ldlib:ldlib-forge-1.20.1:1.0.52") {
         transitive = false
     }
@@ -137,6 +145,12 @@ dependencies {
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
 
+
+    compileOnly fg.deobf("libs:kubejs-forge:${kubejs_version}")
+    compileOnly fg.deobf("libs:rhino-forge:${rhino_version}")
+    runtimeOnly fg.deobf("libs:kubejs-forge:${kubejs_version}")
+    runtimeOnly fg.deobf("libs:rhino-forge:${rhino_version}")
+    implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
 }
 
 

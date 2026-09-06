@@ -198,7 +198,7 @@ public class SolarisMainGroup extends WidgetGroup {
                 result.append(leaf);
                 remaining -= s.length();
             } else {
-                result.append(Component.literal(s.substring(0, remaining))).withStyle(leaf.getStyle());
+                result.append(Component.literal(s.substring(0, remaining)).withStyle(leaf.getStyle()));
                 remaining = 0;
             }
         }
