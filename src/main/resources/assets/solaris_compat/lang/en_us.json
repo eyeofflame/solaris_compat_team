@@ -1,4 +1,4 @@
-{
+  {
   "title.solaris_compat.config": "Solaris Config",
   "category.solaris_compat.general": "General",
   "option.solaris_compat.flushTime": "Flush Time",
@@ -12,5 +12,6 @@
   "rarity.solaris.uncommon": "&aUncommon Contract",
   "rarity.solaris.epic" : "&5Epic Contract",
   "rarity.solaris.rare": "&6Rare Contract",
-  "tip.solaris.corpse_void_fix": "You were detected dying in the void, your body has been teleported to "
+  "tip.solaris.corpse_void_fix": "You were detected dying in the void, your body has been teleported to ",
+    "entity.solaris_compat.olivia": "Olivia"
 }

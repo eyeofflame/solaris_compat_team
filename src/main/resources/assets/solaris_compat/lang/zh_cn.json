@@ -12,5 +12,6 @@
   "rarity.solaris.uncommon": "&a不凡契约",
   "rarity.solaris.epic": "&5史诗契约",
   "rarity.solaris.rare": "&6稀有契约",
-  "tip.solaris.corpse_void_fix": "检测到你死于虚空，已将尸体传送至 "
+  "tip.solaris.corpse_void_fix": "检测到你死于虚空，已将尸体传送至 ",
+  "entity.solaris_compat.olivia": "Olivia"
 }
