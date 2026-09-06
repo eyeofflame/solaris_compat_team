@@ -6,14 +6,12 @@ import dev.efm.solaris_compat.common.SRegistry;
 import dev.efm.solaris_compat.config.ConfigScreen;
 import dev.efm.solaris_compat.config.SolarisConfig;
 import dev.efm.solaris_compat.data.DataRegistry;
-import dev.efm.solaris_compat.rpg_ui.RpgGuiApi;
 import dev.efm.solaris_compat.rpg_ui.SolarisUIFactory;
-import dev.efm.solaris_compat.rpg_ui.network.UIPacket;
 import dev.efm.solaris_compat.solarisContract.SFTBQuestsAPI;
 import dev.ftb.mods.ftbquests.events.CustomRewardEvent;
 import dev.ftb.mods.ftbquests.quest.ServerQuestFile;
 import net.minecraft.commands.Commands;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -60,7 +58,6 @@ public class SolarisCompat {
         CustomRewardEvent.EVENT.register(SFTBQuestsAPI::onRewardGot);
 
         UIFactory.register(SolarisUIFactory.INSTANCE);
-        LDLNetworking.NETWORK.registerC2S(UIPacket.class);
     }
 
     public void onServerStarted(ServerStartedEvent event) {
@@ -71,8 +68,8 @@ public class SolarisCompat {
     public void onCommand(RegisterCommandsEvent evt) {
         evt.getDispatcher().register(
                 Commands.literal("std_create").executes(context -> {
-                    Player player = context.getSource().getPlayer();
-                    RpgGuiApi.createTextGUI(player);
+                    ServerPlayer player = context.getSource().getPlayerOrException();
+                    SolarisUIFactory.INSTANCE.openUI(new SolarisUIFactory.Holder(), player);
                     return 1;
                 })
         );

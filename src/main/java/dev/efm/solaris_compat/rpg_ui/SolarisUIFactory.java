@@ -36,7 +36,6 @@ public class SolarisUIFactory extends UIFactory<SolarisUIFactory.Holder> {
         SolarisMainGroup mainGroup = new SolarisMainGroup(1f, 0.25f, 0, 0, Align.BOTTOM_LEFT);
         mainGroup.setBackground(SolaBorderTexture.SOLA_BORDER_BACKGROUND);
         mainGroup.setText(Component.literal("test----------------------------------------------------------------------------------------------"));
-
         if (Platform.isClient()) clientMethod(mainGroup);
         return mainGroup;
     }
@@ -75,15 +74,14 @@ public class SolarisUIFactory extends UIFactory<SolarisUIFactory.Holder> {
 
     @OnlyIn(Dist.CLIENT)
     private void clientMethod(SolarisMainGroup mainGroup) {
-        if (LDLib.isClient()) {
-            Window win = Minecraft.getInstance().getWindow();
-            mainGroup.animation(
-                    new Transform()
-                            .offset(0, win.getGuiScaledHeight() / 4)
-                            .setIn()
-                            .duration(600)
-                            .ease(Eases.EaseQuadOut)
-            );
-        }
+        Window win = Minecraft.getInstance().getWindow();
+        mainGroup.animation(
+                new Transform()
+                        .offset(0, win.getGuiScaledHeight() / 4)
+                        .setIn()
+                        .duration(400)
+                        .ease(Eases.EaseQuadOut)
+                        .onFinish(mainGroup::startType)
+        );
     }
 }

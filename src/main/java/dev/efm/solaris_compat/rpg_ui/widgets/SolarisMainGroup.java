@@ -22,7 +22,11 @@ public class SolarisMainGroup extends WidgetGroup {
     private final Align corner;
 
     private final List<Component> textContent = new ArrayList<>();
+    private final List<Component> fullText = new ArrayList<>();
     private ComponentPanelWidget textPanel;
+
+    private int progress = 0;
+    private boolean running = false;
 
     private long lastClick = 0;
 
@@ -104,7 +108,7 @@ public class SolarisMainGroup extends WidgetGroup {
     public void handleClientAction(int id, FriendlyByteBuf buffer) {
         if (id == CLICK_ACTION_ID) {
             int button = buffer.readVarInt();
-            Player player = this.getGui().entityPlayer;
+            Player player = this.getGui() == null ? null : this.getGui().entityPlayer;
             if (player != null) {
                 player.sendSystemMessage(Component.literal("hello!"));
             }
@@ -117,11 +121,50 @@ public class SolarisMainGroup extends WidgetGroup {
     public SolarisMainGroup setText(Component... lines) {
         textContent.clear();
         textContent.addAll(List.of(lines));
+        running = false;
+        progress = 0;
         if (textPanel == null) {
             textPanel = new ComponentPanelWidget(5, 5, list -> list.addAll(textContent));
             textPanel.setSpace(2);
+            textPanel.setClientSideWidget();
             addWidget(textPanel);
         }
+        rebuildText();
         return this;
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void updateScreen() {
+        super.updateScreen();
+        if (running) {
+            int total = fullText.stream().mapToInt(c -> c.getString().length()).sum();
+            if (progress < total) {
+                progress++;
+                rebuildText();
+            } else {
+                running = false;
+            }
+        }
+    }
+
+    private void rebuildText() {
+        textContent.clear();
+        int remaining = progress;
+        for (Component line : fullText) {
+            if (remaining <= 0) break;
+            String str = line.getString();
+            if (str.length() <= remaining) {
+                textContent.add(line);
+                remaining -= str.length();
+            } else {
+                textContent.add(Component.literal(str.substring(0, remaining)));
+                remaining = 0;
+            }
+        }
+    }
+
+    public void startType() {
+        running = true;
     }
 }
