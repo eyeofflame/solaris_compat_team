@@ -5,6 +5,9 @@ import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
 import com.lowdragmc.lowdraglib.gui.widget.layout.Align;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -121,6 +124,8 @@ public class SolarisMainGroup extends WidgetGroup {
     public SolarisMainGroup setText(Component... lines) {
         textContent.clear();
         textContent.addAll(List.of(lines));
+        fullText.clear();
+        fullText.addAll(List.of(lines));
         running = false;
         progress = 0;
         if (textPanel == null) {
@@ -153,18 +158,50 @@ public class SolarisMainGroup extends WidgetGroup {
         int remaining = progress;
         for (Component line : fullText) {
             if (remaining <= 0) break;
-            String str = line.getString();
-            if (str.length() <= remaining) {
-                textContent.add(line);
-                remaining -= str.length();
-            } else {
-                textContent.add(Component.literal(str.substring(0, remaining)));
-                remaining = 0;
-            }
+            Component slice = truncatePreservingStyle(line, remaining);
+            textContent.add(slice);
+            remaining -= line.getString().length();
         }
     }
 
     public void startType() {
         running = true;
+    }
+
+    private void flatten(Component component, Style style, List<Component> leaves) {
+        Style s = component.getStyle().applyTo(style);
+        if (component.getContents() instanceof LiteralContents lit) {
+            String text = lit.text();
+            if (!text.isEmpty()) {
+                leaves.add(Component.literal(text).withStyle(s));
+            }
+        } else {
+            String text = component.getString();
+            if (!text.isEmpty()) {
+                leaves.add(Component.literal(text).withStyle(s));
+            }
+        }
+        for (Component sibling : component.getSiblings()) {
+            flatten(sibling, s, leaves);
+        }
+    }
+
+    private Component truncatePreservingStyle(Component line, int maxChars) {
+        List<Component> leaves = new ArrayList<>();
+        flatten(line, Style.EMPTY, leaves);
+        MutableComponent result = Component.empty();
+        int remaining = maxChars;
+        for (Component leaf : leaves) {
+            if (remaining <= 0) break;
+            String s = leaf.getString();
+            if (s.length() <= remaining) {
+                result.append(leaf);
+                remaining -= s.length();
+            } else {
+                result.append(Component.literal(s.substring(0, remaining))).withStyle(leaf.getStyle());
+                remaining = 0;
+            }
+        }
+        return result;
     }
 }

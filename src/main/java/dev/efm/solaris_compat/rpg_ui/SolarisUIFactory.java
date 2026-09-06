@@ -13,6 +13,7 @@ import dev.efm.solaris_compat.SolarisCompat;
 import dev.efm.solaris_compat.api.SHelper;
 import dev.efm.solaris_compat.rpg_ui.resources.SolaBorderTexture;
 import dev.efm.solaris_compat.rpg_ui.widgets.SolarisMainGroup;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -35,7 +36,7 @@ public class SolarisUIFactory extends UIFactory<SolarisUIFactory.Holder> {
     private SolarisMainGroup createMainGroup() {
         SolarisMainGroup mainGroup = new SolarisMainGroup(1f, 0.25f, 0, 0, Align.BOTTOM_LEFT);
         mainGroup.setBackground(SolaBorderTexture.SOLA_BORDER_BACKGROUND);
-        mainGroup.setText(Component.literal("test----------------------------------------------------------------------------------------------"));
+        mainGroup.setText(Component.literal("test--------------------").withStyle(ChatFormatting.GOLD).append(Component.literal("fucking").withStyle(ChatFormatting.AQUA)));
         if (Platform.isClient()) clientMethod(mainGroup);
         return mainGroup;
     }
