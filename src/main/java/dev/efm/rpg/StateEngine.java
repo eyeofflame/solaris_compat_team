@@ -26,6 +26,8 @@ public class StateEngine {
     private Node current;
     private boolean finished;
     private int revision;
+    /** 当前实际显示的立绘路径，"" = 不显示。 */
+    private String portrait = "";
 
     public StateEngine(Script script) {
         this.script = script;
@@ -78,6 +80,16 @@ public class StateEngine {
     }
 
     /**
+     * 当前该显示的立绘路径（{@code "命名空间:路径"}），{@code ""} 表示不显示。
+     *
+     * <p>节点的 {@code portrait} 有三种取值：留空 = 沿用上一个节点的立绘；
+     * {@link Node#PORTRAIT_HIDE} = 隐藏；其他 = 换成这张图。
+     */
+    public String portrait() {
+        return portrait;
+    }
+
+    /**
      * 线性节点前进。
      *
      * @return {@code false} 表示剧情已经结束（界面该关了），
@@ -119,7 +131,21 @@ public class StateEngine {
             finished = true;
         } else {
             current = next;
+            resolvePortrait(next);
         }
         revision++;
+    }
+
+    /**
+     * 立绘是"黏"的：留空就沿用上一个节点显示的那张，这样旁白节点不会把立绘弄没，
+     * 也不用在每一句上重复写同一个路径。
+     */
+    private void resolvePortrait(Node node) {
+        String requested = node.portrait();
+        if (Node.PORTRAIT_HIDE.equals(requested)) {
+            portrait = "";
+        } else if (!requested.isEmpty()) {
+            portrait = requested;
+        }
     }
 }
