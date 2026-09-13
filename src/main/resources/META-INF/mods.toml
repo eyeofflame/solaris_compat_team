@@ -20,3 +20,9 @@ mandatory = true
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
+[[dependencies."${mod_id}"]]
+modId = "ldlib"
+mandatory = true
+versionRange = "[0,10000000)"
+ordering = "NONE"
+side = "BOTH"
