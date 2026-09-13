@@ -10,6 +10,7 @@ import com.lowdragmc.lowdraglib.gui.widget.LabelWidget;
 import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
 import dev.efm.rpg.StateEngine;
 import dev.efm.rpg.data.Script;
+import dev.efm.rpg.network.RpgNetwork;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import org.lwjgl.glfw.GLFW;
@@ -32,8 +33,9 @@ import org.lwjgl.glfw.GLFW;
  * 这里每个客户端 tick 比对一次。这样按钮回调里不需要动控件，避开了
  * {@code WidgetGroup.mouseClicked} 遍历子控件时增删同层导致的 ConcurrentModificationException。
  *
- * <p>整棵子树标了 client-side，不进初始数据同步、也不会发 client action——
- * 对话完全在本地跑，零网络往返。
+ * <p>整棵子树标了 client-side，不进初始数据同步、也不会走 LDLib 的 client action 通道。
+ * 对话推进完全在本地跑；唯一的网络流量是玩家点选项时自己发的一个 C2S 包
+ * （见 {@link dev.efm.rpg.network.RpgNetwork}），用来让服务端触发脚本回调。
  *
  * <p><b>注意这里没有任何 {@code @OnlyIn(Dist.CLIENT)}。</b>构造函数里用到了 {@code this::layout}
  * 和 {@code this::onChoose} 两个方法引用，而 Forge 的 RuntimeDistCleaner 会在专用服务器上
@@ -48,6 +50,8 @@ public class DialogueRoot extends FullScreenGroup {
     private static final int TEXT_BASELINE = 32;
 
     private final StateEngine engine;
+    /** 发包回服务端时用来标识是哪个剧本。 */
+    private final String scriptId;
     private int lastRevision = -1;
     private boolean pendingClose;
 
@@ -68,6 +72,7 @@ public class DialogueRoot extends FullScreenGroup {
     public DialogueRoot(Script script) {
         engine = new StateEngine(script);
         engine.start();
+        scriptId = script == null ? "" : script.scriptId();
 
         background = new ImageWidget(0, 0, 0, 0,
                 new ResourceBorderTexture("solaris_compat:textures/gui/sola_background.png", 16, 16, 5, 5));
@@ -217,9 +222,15 @@ public class DialogueRoot extends FullScreenGroup {
 
     /**
      * 点击选项按钮。只推进状态机，界面刷新交给下一次 tick 的轮询。
+     *
+     * <p>除了本地推进，还会发个包通知服务端"玩家选了什么"。顺序是先本地后发包：
+     * 服务端的回调只是通知语义、不参与走向，所以包丢了也不会卡住对话。
      */
     private void onChoose(String choiceId) {
-        engine.select(choiceId);
+        String nodeId = engine.currentNodeId();
+        if (engine.select(choiceId)) {
+            RpgNetwork.sendChoice(scriptId, nodeId, choiceId);
+        }
     }
 
     @Override

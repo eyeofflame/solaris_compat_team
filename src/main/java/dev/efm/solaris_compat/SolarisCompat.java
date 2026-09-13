@@ -6,6 +6,8 @@ import dev.efm.rpg.SFactory;
 import dev.efm.rpg.SHolder;
 import dev.efm.rpg.data.Script;
 import dev.efm.rpg.data.ScriptRegistry;
+import dev.efm.rpg.data.ScriptReloadListener;
+import dev.efm.rpg.network.RpgNetwork;
 import dev.efm.solaris_compat.common.SRegistry;
 import dev.efm.solaris_compat.config.ConfigScreen;
 import dev.efm.solaris_compat.config.SolarisConfig;
@@ -18,6 +20,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -63,8 +66,14 @@ public class SolarisCompat {
         CustomRewardEvent.EVENT.register(SFTBQuestsAPI::onRewardGot);
 
         fbus.addListener(this::onCommand);
+        fbus.addListener(this::onAddReloadListeners);
 
         ScriptRegistry.defaultReg();
+    }
+
+    /** 挂数据包剧本加载器。每次 /reload 会重新读 {@code data/<ns>/solaris_rpg/*.json}。 */
+    public void onAddReloadListeners(AddReloadListenerEvent event) {
+        event.addListener(new ScriptReloadListener());
     }
 
     public void onServerStarted(ServerStartedEvent event) {
@@ -78,7 +87,7 @@ public class SolarisCompat {
                         .then(Commands.argument("id", StringArgumentType.string())
                                 .executes(ctx -> {
                                     String id = StringArgumentType.getString(ctx, "id");
-                                    Script script = ScriptRegistry.getMap().get(id);
+                                    Script script = ScriptRegistry.get(id);
                                     if (script == null) {
                                         ctx.getSource().sendFailure(Component.literal("未知剧本: " + id));
                                         return 0;
@@ -97,6 +106,8 @@ public class SolarisCompat {
     public void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             UIFactory.register(SFactory.INSTANCE);
+            // 网络频道要在玩家进服之前注册好，两端都会跑到这里
+            RpgNetwork.register();
         });
     }
 }

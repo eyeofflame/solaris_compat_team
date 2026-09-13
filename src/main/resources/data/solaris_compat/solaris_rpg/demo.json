@@ -1,0 +1,38 @@
+{
+  "start": "start",
+  "nodes": [
+    {
+      "id": "start",
+      "text": "（这个剧本是从数据包读出来的，没写一行 Java。）",
+      "next": "greet"
+    },
+    {
+      "id": "greet",
+      "speaker": "奥利维亚",
+      "portrait": "solaris_compat:textures/gui/portrait/olivia.png",
+      "text": "文件在 data/solaris_compat/solaris_rpg/demo.json，剧本 id 是 solaris_compat:demo。",
+      "next": "branch"
+    },
+    {
+      "id": "branch",
+      "speaker": "奥利维亚",
+      "text": "想看看分支吗？",
+      "choices": [
+        { "id": "yes", "text": "想", "next": "yes_node" },
+        { "id": "no", "text": "不用了", "next": "end" }
+      ]
+    },
+    {
+      "id": "yes_node",
+      "speaker": "奥利维亚",
+      "text": "看，这就是分支。同一个文件改完 /reload 就能生效。",
+      "next": "end"
+    },
+    {
+      "id": "end",
+      "portrait": "-",
+      "text": "（剧本结束。portrait 写 \"-\" 就能收起立绘。）",
+      "next": ""
+    }
+  ]
+}

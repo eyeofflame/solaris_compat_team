@@ -79,6 +79,11 @@ public class StateEngine {
         return current == null ? "" : current.text();
     }
 
+    /** 当前节点 id，没有节点时是 {@code ""}。发包给服务端做校验时要用。 */
+    public String currentNodeId() {
+        return current == null ? "" : current.id();
+    }
+
     /**
      * 当前该显示的立绘路径（{@code "命名空间:路径"}），{@code ""} 表示不显示。
      *

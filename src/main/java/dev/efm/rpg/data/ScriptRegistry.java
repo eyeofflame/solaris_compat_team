@@ -1,13 +1,20 @@
 package dev.efm.rpg.data;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * 剧本注册表。目前是内存里的静态表，剧本由 {@link #defaultReg()} 硬编码。
- * 以后要改成从数据包 JSON 加载的话，只要在资源重载时调 {@link #register(Script)} 就行。
+ * 剧本注册表，分三层存：
+ * <ul>
+ *     <li>{@link #BUILTIN} —— Java 里硬编码的内置剧本，永远保留</li>
+ *     <li>{@link #DATAPACK} —— 数据包 {@code data/<ns>/solaris_rpg/*.json}，每次 /reload 整体替换</li>
+ *     <li>{@link #SCRIPTED} —— KubeJS 注册的，每次 /reload 整体替换</li>
+ * </ul>
+ *
+ * <p>拆成三层是因为 /reload 时后两者要整体换掉、而内置的不能被冲掉。
+ * {@link #getMap()} 返回三者合并后的视图，同 id 时优先级 <b>KubeJS &gt; 数据包 &gt; 内置</b>。
  */
 public class ScriptRegistry {
 
@@ -19,18 +26,63 @@ public class ScriptRegistry {
      */
     private static final String PORTRAIT_OLIVIA = "solaris_compat:textures/gui/portrait/olivia.png";
 
-    private static final HashMap<String, Script> map = new LinkedHashMap<>();
+    private static final Map<String, Script> BUILTIN = new LinkedHashMap<>();
+    private static final Map<String, Script> DATAPACK = new LinkedHashMap<>();
+    private static final Map<String, Script> SCRIPTED = new LinkedHashMap<>();
+    /** 合并视图，前三者任一变化时由 {@link #rebuild()} 重建。 */
+    private static final Map<String, Script> MERGED = new LinkedHashMap<>();
 
-    public static HashMap<String, Script> getMap() {
-        return map;
+    private ScriptRegistry() {
     }
 
-    public static void remove(String scriptId) {
-        map.remove(scriptId);
+    /** 合并后的全部剧本。返回的 map 是内部视图，不要改它。 */
+    public static Map<String, Script> getMap() {
+        return MERGED;
     }
 
-    public static void register(Script script) {
-        map.put(script.scriptId(), script);
+    public static Script get(String scriptId) {
+        return scriptId == null ? null : MERGED.get(scriptId);
+    }
+
+    /** 注册内置剧本。{@link #defaultReg()} 用这个。 */
+    public static void registerBuiltin(Script script) {
+        if (script == null) {
+            return;
+        }
+        BUILTIN.put(script.scriptId(), script);
+        rebuild();
+    }
+
+    /** 整体替换数据包剧本。传进来的 map 会被复制。 */
+    public static void setDatapack(Map<String, Script> scripts) {
+        DATAPACK.clear();
+        if (scripts != null) {
+            DATAPACK.putAll(scripts);
+        }
+        rebuild();
+    }
+
+    /** 整体替换 KubeJS 注册的剧本。传进来的 map 会被复制。 */
+    public static void setScripted(Map<String, Script> scripts) {
+        SCRIPTED.clear();
+        if (scripts != null) {
+            SCRIPTED.putAll(scripts);
+        }
+        rebuild();
+    }
+
+    /** 清掉数据包和 KubeJS 两层，只留内置剧本。 */
+    public static void clearDynamic() {
+        DATAPACK.clear();
+        SCRIPTED.clear();
+        rebuild();
+    }
+
+    private static void rebuild() {
+        MERGED.clear();
+        MERGED.putAll(BUILTIN);
+        MERGED.putAll(DATAPACK);
+        MERGED.putAll(SCRIPTED);
     }
 
     /**
@@ -41,42 +93,42 @@ public class ScriptRegistry {
      * 玩家再点一下界面就关掉。
      */
     public static void defaultReg() {
-        List<Node> nodes = new ArrayList<>();
+        // 用链式 builder 写，顺便验证这套 API。
+        // 注意 line/say/choose 返回的是 NodeBuilder，链下去只能微调同一个节点，
+        // 要开新节点得重新从 script 调——JS 脚本里也是这个写法。
+        var script = new ScriptBuilder("test").start("start");
 
         // 旁白开场。立绘留空 = 沿用上一个节点（此时还没有立绘，所以什么都不显示）
-        nodes.add(line("start", "", "你推开酒馆的门，木地板在脚下吱呀作响。", "greet"));
+        script.line("start", "你推开酒馆的门，木地板在脚下吱呀作响。", "greet");
 
         // 奥利维亚登场，这里才把立绘立起来；后面所有节点都自动沿用
-        nodes.add(say("greet", "奥利维亚", PORTRAIT_OLIVIA,
-                "哟，稀客。这么晚了还来我这儿——是有事，还是单纯想喝酒？", "branch"));
+        script.say("greet", "奥利维亚",
+                        "哟，稀客。这么晚了还来我这儿——是有事，还是单纯想喝酒？", "branch")
+                .portrait(PORTRAIT_OLIVIA);
 
-        // 分支节点：choices 非空时 nextId 不参与
-        List<Choice> choices = new ArrayList<>();
-        choices.add(new Choice("ask", "我想打听点事。", "answer_ask"));
-        choices.add(new Choice("drink", "先来一杯吧。", "answer_drink"));
-        nodes.add(new Node("branch", "奥利维亚", "……说吧，我听着。",
-                Node.PORTRAIT_KEEP, choices, null));
+        // 分支节点
+        script.choose("branch", "奥利维亚", "……说吧，我听着。", choices -> choices
+                .option("ask", "我想打听点事。", "answer_ask")
+                .option("drink", "先来一杯吧。", "answer_drink"));
 
-        nodes.add(line("answer_ask", "奥利维亚", "打听消息可不便宜。不过看在你大半夜跑一趟的份上，这次算你免费。", "join"));
-        nodes.add(line("answer_drink", "奥利维亚", "爽快，我就喜欢你这种人。给你倒满，别客气。", "join"));
+        script.say("answer_ask", "奥利维亚",
+                "打听消息可不便宜。不过看在你大半夜跑一趟的份上，这次算你免费。", "join");
+        script.say("answer_drink", "奥利维亚",
+                "爽快，我就喜欢你这种人。给你倒满，别客气。", "join");
 
         // 两条分支在这里汇合
-        nodes.add(line("join", "奥利维亚", "不过说真的，最近那些委托有点不对劲，你最好小心点。", "end"));
+        script.say("join", "奥利维亚",
+                "不过说真的，最近那些委托有点不对劲，你最好小心点。", "end");
 
         // 结尾切回旁白，显式收起立绘；nextId 为 "" = 剧情结束
-        nodes.add(new Node("end", "", "她把杯子推回吧台，转身去招呼别的客人。",
-                Node.PORTRAIT_HIDE, List.of(), ""));
+        script.line("end", "她把杯子推回吧台，转身去招呼别的客人。", "")
+                .portrait(Node.PORTRAIT_HIDE);
 
-        register(new Script("test", nodes, "start"));
+        registerBuiltin(script.build());
     }
 
-    /** 对白 / 旁白，立绘沿用上一个节点。 */
-    private static Node line(String id, String speaker, String text, String nextId) {
-        return new Node(id, speaker, text, Node.PORTRAIT_KEEP, List.of(), nextId);
-    }
-
-    /** 带立绘的对白。 */
-    private static Node say(String id, String speaker, String portrait, String text, String nextId) {
-        return new Node(id, speaker, text, portrait, List.of(), nextId);
+    /** 内置剧本的 id 列表，调试用。 */
+    public static List<String> builtinIds() {
+        return new ArrayList<>(BUILTIN.keySet());
     }
 }
