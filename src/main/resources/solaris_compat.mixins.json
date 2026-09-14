@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "solaris_compat.refmap.json",
   "mixins": [
-    "corpseFix.DeathEventsMixin"
+    "corpseFix.DeathEventsMixin",
+    "functional_storage.FluidDrawerTileMixin"
   ],
   "client": [
   ],

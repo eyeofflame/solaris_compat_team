@@ -1,6 +1,7 @@
 package dev.efm.solaris_compat.common;
 
 import dev.efm.solaris_compat.SolarisCompat;
+import dev.efm.solaris_compat.common.items.WaterUpgradeItem;
 import dev.efm.solaris_compat.common.recipeType.SolarisRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -25,6 +26,9 @@ public class SRegistry {
     public static final DeferredRegister<RecipeSerializer<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, SolarisCompat.MODID);
 
     public static final RegistryObject<RecipeSerializer<?>> SOLARIS_RECIPE_SERIALIZER = RECIPES.register("solaris_shapeless", SolarisRecipe.Serializer::new);
+
+    public static final RegistryObject<Item> WATER_UPGRADE = ITEM_DEFERRED_REGISTER.register("water_upgrade", () -> new WaterUpgradeItem(WaterUpgradeItem.WaterTier.WATER));
+    public static final RegistryObject<Item> UPGRADED_WATER_UPGRADE = ITEM_DEFERRED_REGISTER.register("upgraded_water_upgrade", () -> new WaterUpgradeItem(WaterUpgradeItem.WaterTier.UPGRADED_WATER));
 
     public static void register(IEventBus ibus) {
         ITEM_DEFERRED_REGISTER.register(ibus);

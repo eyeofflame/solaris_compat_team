@@ -1,4 +1,4 @@
-  {
+{
   "title.solaris_compat.config": "Solaris Config",
   "category.solaris_compat.general": "General",
   "option.solaris_compat.flushTime": "Flush Time",
@@ -8,10 +8,15 @@
   "title.solaris.villager_bounty": "Villager Bounties",
   "title.solaris.contracts": "Contracts",
   "tip.solaris.completed_to_remove": "The quest will automatically close after claiming this reward!Please make sure you have claimed the real reward!",
-  "rarity.solaris.common" : "&fCommon Contract",
+  "rarity.solaris.common": "&fCommon Contract",
   "rarity.solaris.uncommon": "&aUncommon Contract",
-  "rarity.solaris.epic" : "&5Epic Contract",
+  "rarity.solaris.epic": "&5Epic Contract",
   "rarity.solaris.rare": "&6Rare Contract",
   "tip.solaris.corpse_void_fix": "You were detected dying in the void, your body has been teleported to ",
-    "entity.solaris_compat.olivia": "Olivia"
+  "entity.solaris_compat.olivia": "Olivia",
+  "item.solaris_compat.upgraded_water_upgrade": "Evolved Water Generation Upgrade",
+  "item.solaris_compat.water_upgrade": "Water Generation Upgrade",
+  "tooltip.solaris.water.desc": "Works only inside a Fluid Drawer",
+  "tooltip.solaris.water.generation": "Generates %s mB of water per tick",
+  "tooltip.solaris.water.stacking": "Multiple upgrades stack additively"
 }

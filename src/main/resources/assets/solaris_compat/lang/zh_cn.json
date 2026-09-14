@@ -13,5 +13,10 @@
   "rarity.solaris.epic": "&5史诗契约",
   "rarity.solaris.rare": "&6稀有契约",
   "tip.solaris.corpse_void_fix": "检测到你死于虚空，已将尸体传送至 ",
-  "entity.solaris_compat.olivia": "Olivia"
+  "entity.solaris_compat.olivia": "Olivia",
+  "item.solaris_compat.upgraded_water_upgrade": "水生成升级（进化版）",
+  "item.solaris_compat.water_upgrade": "水生成升级",
+  "tooltip.solaris.water.desc": "仅对流体抽屉生效",
+  "tooltip.solaris.water.generation": "每刻生成 %s mB 水",
+  "tooltip.solaris.water.stacking": "多个升级的生成速度可叠加"
 }
