@@ -12,9 +12,6 @@ import dev.efm.solaris_compat.common.SRegistry;
 import dev.efm.solaris_compat.config.ConfigScreen;
 import dev.efm.solaris_compat.config.SolarisConfig;
 import dev.efm.solaris_compat.data.DataRegistry;
-import dev.efm.solaris_compat.solarisContract.SFTBQuestsAPI;
-import dev.ftb.mods.ftbquests.events.CustomRewardEvent;
-import dev.ftb.mods.ftbquests.quest.ServerQuestFile;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,7 +19,6 @@ import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -52,7 +48,6 @@ public class SolarisCompat {
         var fbus = MinecraftForge.EVENT_BUS;
         var ibus = context.getModEventBus();
 
-        fbus.addListener(this::onServerStarted);
         ibus.addListener(DataRegistry::DataRegistryEvent);
         ibus.addListener(DataRegistry::GatherDataEvent);
         ibus.addListener(this::commonSetup);
@@ -63,23 +58,19 @@ public class SolarisCompat {
             randomListHundred.add(i);
         }
 
-        CustomRewardEvent.EVENT.register(SFTBQuestsAPI::onRewardGot);
-
         fbus.addListener(this::onCommand);
         fbus.addListener(this::onAddReloadListeners);
 
         ScriptRegistry.defaultReg();
     }
 
-    /** 挂数据包剧本加载器。每次 /reload 会重新读 {@code data/<ns>/solaris_rpg/*.json}。 */
+    /**
+     * 挂数据包剧本加载器。每次 /reload 会重新读 {@code data/<ns>/solaris_rpg/*.json}。
+     */
     public void onAddReloadListeners(AddReloadListenerEvent event) {
         event.addListener(new ScriptReloadListener());
     }
 
-    public void onServerStarted(ServerStartedEvent event) {
-        ServerQuestFile file = ServerQuestFile.INSTANCE;
-        SFTBQuestsAPI.createFTB(file);
-    }
 
     public void onCommand(RegisterCommandsEvent evt) {
         evt.getDispatcher().register(
