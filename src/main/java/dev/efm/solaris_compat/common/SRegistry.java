@@ -31,10 +31,10 @@ public class SRegistry {
     public static final RegistryObject<Item> WATER_UPGRADE = ITEMS.register("water_upgrade", () -> new WaterUpgradeItem(WaterUpgradeItem.WaterTier.WATER));
     public static final RegistryObject<Item> UPGRADED_WATER_UPGRADE = ITEMS.register("upgraded_water_upgrade", () -> new WaterUpgradeItem(WaterUpgradeItem.WaterTier.UPGRADED_WATER));
 
-    public static final RegistryObject<Item> GOO1_UPGRADE = ITEMS.register("goo1_upgrade", () -> new InsolatorSpeedUpgradeItem(1.2f, 0.10f, 1.2f));
-    public static final RegistryObject<Item> GOO2_UPGRADE = ITEMS.register("goo2_upgrade", () -> new InsolatorSpeedUpgradeItem(1.5f, 0.20f, 2f));
-    public static final RegistryObject<Item> GOO3_UPGRADE = ITEMS.register("goo3_upgrade", () -> new InsolatorSpeedUpgradeItem(2f, 0.30f, 2f));
-    public static final RegistryObject<Item> GOO4_UPGRADE = ITEMS.register("goo4_upgrade", () -> new InsolatorSpeedUpgradeItem(4f, 0.50f, 3f));
+    public static final RegistryObject<Item> GOO1_UPGRADE = ITEMS.register("goo1_upgrade", () -> new InsolatorSpeedUpgradeItem(2f, 0.10f, 1.2f));
+    public static final RegistryObject<Item> GOO2_UPGRADE = ITEMS.register("goo2_upgrade", () -> new InsolatorSpeedUpgradeItem(4f, 0.20f, 2f));
+    public static final RegistryObject<Item> GOO3_UPGRADE = ITEMS.register("goo3_upgrade", () -> new InsolatorSpeedUpgradeItem(8f, 0.30f, 3f));
+    public static final RegistryObject<Item> GOO4_UPGRADE = ITEMS.register("goo4_upgrade", () -> new InsolatorSpeedUpgradeItem(16f, 0.50f, 4f));
 
     public static void register(IEventBus ibus) {
         ITEMS.register(ibus);
