@@ -126,6 +126,13 @@ dependencies {
             fg.deobf("libs:item-filters:forge-2001.1.0-build.59")
     )
 
+    implementation(
+            fg.deobf("libs:justdirethings:1.1.7"),
+            fg.deobf("libs:cofh_core:1.20.1-11.0.2.56"),
+            fg.deobf("libs:thermal_expansion:1.20.1-11.0.1.29"),
+            fg.deobf("libs:thermal_foundation:1.20.1-11.0.6.70")
+    )
+
     implementation fg.deobf("libs:corpse:forge-1.20.1-1.0.23")
 
     implementation fg.deobf("libs:ldlib-forge-1.20.1:1.0.52.a")
