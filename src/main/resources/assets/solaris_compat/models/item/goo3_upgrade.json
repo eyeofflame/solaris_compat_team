@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "thermal:item/augments/machine_speed_augment"
+    "layer0": "solaris_compat:item/augments/goo3_upgrade"
   }
 }
