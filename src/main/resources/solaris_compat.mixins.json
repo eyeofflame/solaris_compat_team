@@ -1,4 +1,4 @@
-﻿{
+{
   "required": true,
   "minVersion": "0.8",
   "package": "dev.efm.solaris_compat.mixin",
@@ -6,7 +6,11 @@
   "refmap": "solaris_compat.refmap.json",
   "mixins": [
     "corpseFix.DeathEventsMixin",
-    "functional_storage.FluidDrawerTileMixin"
+    "functional_storage.FluidDrawerTileMixin",
+    "thermal.AugmentableBlockEntityInvoker",
+    "thermal.BlockItemAugmentableMixin",
+    "thermal.MachineBlockEntityMixin",
+    "thermal.Reconfigurable4WayBlockEntityInvoker"
   ],
   "client": [
   ],

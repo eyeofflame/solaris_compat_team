@@ -18,5 +18,12 @@
   "item.solaris_compat.water_upgrade": "Water Generation Upgrade",
   "tooltip.solaris.water.desc": "Works only inside a Fluid Drawer",
   "tooltip.solaris.water.generation": "Generates %s mB of water per tick",
-  "tooltip.solaris.water.stacking": "Multiple upgrades stack additively"
+  "tooltip.solaris.water.stacking": "Multiple upgrades stack additively",
+  "tooltip.solaris.insolator.speed": "+%s%% machine speed",
+  "tooltip.solaris.insolator.bonus": "%1$s%% chance to produce %2$sx the primary output",
+  "tooltip.solaris.insolator.desc": "Works only inside a Phytogenic Insolator",
+  "item.solaris_compat.goo1_upgrade": "Primogel Upgrade",
+  "item.solaris_compat.goo2_upgrade": "Blazebloom Upgrade",
+  "item.solaris_compat.goo3_upgrade": "VoidShimmer Upgrade",
+  "item.solaris_compat.goo4_upgrade": "Shadoepulse Upgrade"
 }

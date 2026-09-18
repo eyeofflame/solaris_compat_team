@@ -133,6 +133,11 @@ dependencies {
             fg.deobf("libs:thermal_foundation:1.20.1-11.0.6.70")
     )
 
+    // thermal_core 只以 jarjar 的形式嵌在 thermal_foundation 里，运行时会由 Forge 的
+    // JarInJar 加载，因此这里只用 compileOnly 拿编译期类型，绝不能进运行时 classpath，
+    // 否则会和 jarjar 出来的那份重名（Duplicate mods）。
+    compileOnly fg.deobf("libs:thermal_core:1.20.1-11.0.6.24")
+
     implementation fg.deobf("libs:corpse:forge-1.20.1-1.0.23")
 
     implementation fg.deobf("libs:ldlib-forge-1.20.1:1.0.52.a")

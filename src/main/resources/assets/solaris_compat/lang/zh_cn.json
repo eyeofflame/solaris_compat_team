@@ -18,5 +18,12 @@
   "item.solaris_compat.water_upgrade": "水生成升级",
   "tooltip.solaris.water.desc": "仅对流体抽屉生效",
   "tooltip.solaris.water.generation": "每刻生成 %s mB 水",
-  "tooltip.solaris.water.stacking": "多个升级的生成速度可叠加"
+  "tooltip.solaris.water.stacking": "多个升级的生成速度可叠加",
+  "tooltip.solaris.insolator.speed": "运行速度 +%s%%",
+  "tooltip.solaris.insolator.bonus": "有 %1$s%% 概率产出 %2$s 倍主产物",
+  "tooltip.solaris.insolator.desc": "仅对有机灌注器生效",
+  "item.solaris_compat.goo1_upgrade": "原初浆升级",
+  "item.solaris_compat.goo2_upgrade": "烈焰蕾升级",
+  "item.solaris_compat.goo3_upgrade": "虚空辉升级",
+  "item.solaris_compat.goo4_upgrade": "暗影脉升级"
 }

@@ -1,5 +1,6 @@
 package dev.efm.solaris_compat;
 
+import cofh.thermal.lib.util.ThermalAugmentRules;
 import com.lowdragmc.lowdraglib.gui.factory.UIFactory;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import dev.efm.rpg.SFactory;
@@ -99,6 +100,8 @@ public class SolarisCompat {
             UIFactory.register(SFactory.INSTANCE);
             // 网络频道要在玩家进服之前注册好，两端都会跑到这里
             RpgNetwork.register();
+            // 灌注器专属升级一台上只能装一个。想允许叠加就把这行删掉。
+            //ThermalAugmentRules.flagUniqueAugment(SRegistry.INSOLATOR_SPEED_UPGRADE.get());
         });
     }
 }

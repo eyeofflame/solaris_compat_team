@@ -26,3 +26,15 @@ mandatory = true
 versionRange = "[0,10000000)"
 ordering = "NONE"
 side = "BOTH"
+[[dependencies."${mod_id}"]]
+modId = "thermal"
+mandatory = true
+versionRange = "[0,10000000)"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies."${mod_id}"]]
+modId = "thermal_expansion"
+mandatory = true
+versionRange = "[0,10000000)"
+ordering = "NONE"
+side = "BOTH"
