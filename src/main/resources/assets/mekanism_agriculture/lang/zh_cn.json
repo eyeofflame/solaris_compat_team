@@ -1,0 +1,7 @@
+{
+  "block.mekanism_agriculture.agriculture_infusioner": "农业注魔机",
+  "container.mekanism_agriculture.agriculture_infusioner": "农业注魔机",
+  "description.mekanism_agriculture.mek_infusioner": "用 Mekanism 的能量驱动神秘农业的注魔配方。",
+  "constants.mekanism_agriculture.mod_name": "Mekanism 农业",
+  "constants.mekanism_agriculture.pack_description": "Mekanism 农业"
+}

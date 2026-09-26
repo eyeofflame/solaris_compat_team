@@ -54,7 +54,7 @@ public class DataRegistry {
             boot.register(EXAMPLE_POOL0, new UncommonPool("fuck_pool", List.of(Items.STONE.getDefaultInstance()), List.of(), List.of(Items.DIAMOND.getDefaultInstance())));
         });
         builder.add(EPIC_POOL_KEY, boot -> {
-            boot.register(EXAMPLE_POOL1, new EpicPool("fuck_pool", List.of(Items.STONE.getDefaultInstance()), List.of(new KilledEntityData("minecraft:zombie",3)), List.of(Items.DIAMOND.getDefaultInstance())));
+            boot.register(EXAMPLE_POOL1, new EpicPool("fuck_pool", List.of(Items.STONE.getDefaultInstance()), List.of(new KilledEntityData("minecraft:zombie", 3)), List.of(Items.DIAMOND.getDefaultInstance())));
         });
         builder.add(RARE_POOL_KEY, boot -> {
             boot.register(EXAMPLE_POOL2, new RarePool("fuck_pool", List.of(Items.STONE.getDefaultInstance()), List.of(), List.of(Items.DIAMOND.getDefaultInstance())));

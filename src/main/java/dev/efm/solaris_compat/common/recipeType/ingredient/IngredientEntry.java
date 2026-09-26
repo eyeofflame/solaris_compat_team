@@ -43,10 +43,10 @@ public class IngredientEntry {
         obj.remove("damage");
 
         Ingredient ingredient = Ingredient.fromJson(obj);
-        return new IngredientEntry(ingredient,damage,remainder);
+        return new IngredientEntry(ingredient, damage, remainder);
     }
 
-    public Ingredient toIngredient(){
+    public Ingredient toIngredient() {
         return this.ingredient;
     }
 }

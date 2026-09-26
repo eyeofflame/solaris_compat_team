@@ -1,10 +1,6 @@
 package dev.efm.rpg.widgets;
 
-import com.lowdragmc.lowdraglib.gui.texture.ColorBorderTexture;
-import com.lowdragmc.lowdraglib.gui.texture.ColorRectTexture;
-import com.lowdragmc.lowdraglib.gui.texture.IGuiTexture;
-import com.lowdragmc.lowdraglib.gui.texture.ResourceBorderTexture;
-import com.lowdragmc.lowdraglib.gui.texture.ResourceTexture;
+import com.lowdragmc.lowdraglib.gui.texture.*;
 import com.lowdragmc.lowdraglib.gui.widget.ImageWidget;
 import com.lowdragmc.lowdraglib.gui.widget.LabelWidget;
 import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
@@ -50,16 +46,24 @@ public class DialogueRoot extends FullScreenGroup {
     private static final int TEXT_BASELINE = 32;
 
     private final StateEngine engine;
-    /** 发包回服务端时用来标识是哪个剧本。 */
+    /**
+     * 发包回服务端时用来标识是哪个剧本。
+     */
     private final String scriptId;
     private int lastRevision = -1;
     private boolean pendingClose;
 
-    /** 立绘高度占屏幕高度的比例。 */
+    /**
+     * 立绘高度占屏幕高度的比例。
+     */
     private float portraitHeightRatio = 0.62f;
-    /** 立绘水平锚点：0 = 贴左边，0.5 = 居中，1 = 贴右边。 */
+    /**
+     * 立绘水平锚点：0 = 贴左边，0.5 = 居中，1 = 贴右边。
+     */
     private float portraitAnchor = 0.5f;
-    /** 上一帧用的立绘路径，避免每次布局都重建 ResourceTexture。 */
+    /**
+     * 上一帧用的立绘路径，避免每次布局都重建 ResourceTexture。
+     */
     private String lastPortraitPath = "";
 
     private final ImageWidget background;
@@ -156,13 +160,17 @@ public class DialogueRoot extends FullScreenGroup {
 
     // ------------------------------------------------------------------ 立绘
 
-    /** 立绘高度占屏幕高度的比例。默认 0.62。 */
+    /**
+     * 立绘高度占屏幕高度的比例。默认 0.62。
+     */
     public DialogueRoot setPortraitHeightRatio(float ratio) {
         this.portraitHeightRatio = Math.min(1.0f, Math.max(0.05f, ratio));
         return this;
     }
 
-    /** 立绘水平锚点：0 = 贴左边，0.5 = 居中（默认），1 = 贴右边。 */
+    /**
+     * 立绘水平锚点：0 = 贴左边，0.5 = 居中（默认），1 = 贴右边。
+     */
     public DialogueRoot setPortraitAnchor(float anchor) {
         this.portraitAnchor = Math.min(1.0f, Math.max(0.0f, anchor));
         return this;

@@ -7,6 +7,12 @@ version = "${mod_version}"
 displayName = "${mod_name}"
 authors = "${mod_authors}"
 
+[[mods]]
+modId = "mekanism_agriculture"
+version = "0.0.1-snapshot"
+displayName = "Mekanism Agriculture"
+authors = "墨尘"
+
 description = '''${mod_description}'''
 [[dependencies."${mod_id}"]]
 modId = "forge"
@@ -37,4 +43,18 @@ modId = "thermal_expansion"
 mandatory = true
 versionRange = "[0,10000000)"
 ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.mekanism_agriculture]]
+modId = "mekanism"
+mandatory = true
+versionRange = "[10,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.mekanism_agriculture]]
+modId = "mysticalagriculture"
+mandatory = true
+versionRange = "[7,)"
+ordering = "AFTER"
 side = "BOTH"

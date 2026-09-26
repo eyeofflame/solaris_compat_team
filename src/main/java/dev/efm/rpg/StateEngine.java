@@ -26,7 +26,9 @@ public class StateEngine {
     private Node current;
     private boolean finished;
     private int revision;
-    /** 当前实际显示的立绘路径，"" = 不显示。 */
+    /**
+     * 当前实际显示的立绘路径，"" = 不显示。
+     */
     private String portrait = "";
 
     public StateEngine(Script script) {
@@ -40,7 +42,9 @@ public class StateEngine {
         }
     }
 
-    /** 跳到剧本的起始节点。 */
+    /**
+     * 跳到剧本的起始节点。
+     */
     public void start() {
         if (script == null) {
             finished = true;
@@ -49,7 +53,9 @@ public class StateEngine {
         moveTo(script.startNodeId());
     }
 
-    /** 每次状态变化 +1，界面靠它判断要不要刷新。 */
+    /**
+     * 每次状态变化 +1，界面靠它判断要不要刷新。
+     */
     public int revision() {
         return revision;
     }
@@ -62,7 +68,9 @@ public class StateEngine {
         return finished;
     }
 
-    /** 分支节点才有选项。剧情结束后返回 false，否则最后一屏的按钮会一直点得动。 */
+    /**
+     * 分支节点才有选项。剧情结束后返回 false，否则最后一屏的按钮会一直点得动。
+     */
     public boolean hasChoices() {
         return !finished && current != null && !current.choices().isEmpty();
     }
@@ -79,7 +87,9 @@ public class StateEngine {
         return current == null ? "" : current.text();
     }
 
-    /** 当前节点 id，没有节点时是 {@code ""}。发包给服务端做校验时要用。 */
+    /**
+     * 当前节点 id，没有节点时是 {@code ""}。发包给服务端做校验时要用。
+     */
     public String currentNodeId() {
         return current == null ? "" : current.id();
     }

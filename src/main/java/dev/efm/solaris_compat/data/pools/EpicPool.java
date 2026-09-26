@@ -14,8 +14,8 @@ public class EpicPool extends BountyPool {
     public static final Codec<EpicPool> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.STRING.fieldOf("name").forGetter(EpicPool::getName),
-                    ItemStack.CODEC.listOf().optionalFieldOf("requireItems",List.of()).forGetter(EpicPool::getRequireItems),
-                    KilledEntityData.CODEC.listOf().optionalFieldOf("requireEntities",List.of()).forGetter(EpicPool::getRequireEntities),
+                    ItemStack.CODEC.listOf().optionalFieldOf("requireItems", List.of()).forGetter(EpicPool::getRequireItems),
+                    KilledEntityData.CODEC.listOf().optionalFieldOf("requireEntities", List.of()).forGetter(EpicPool::getRequireEntities),
                     ItemStack.CODEC.listOf().fieldOf("rewards").forGetter(EpicPool::getRewards)
             ).apply(instance, EpicPool::new)
     );

@@ -17,7 +17,9 @@ import java.util.List;
  */
 public final class DialogueHooks {
 
-    /** 玩家在对话里选了某个选项。 */
+    /**
+     * 玩家在对话里选了某个选项。
+     */
     @FunctionalInterface
     public interface ChoiceListener {
         void onChoice(ServerPlayer player, String scriptId, String nodeId, String choiceId);

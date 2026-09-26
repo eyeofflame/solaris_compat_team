@@ -32,18 +32,24 @@ public class ScriptBuilder {
         this.scriptId = scriptId == null ? "" : scriptId;
     }
 
-    /** 起始节点 id。不设的话取第一个加的节点。 */
+    /**
+     * 起始节点 id。不设的话取第一个加的节点。
+     */
     public ScriptBuilder start(String nodeId) {
         this.startNodeId = nodeId == null ? "" : nodeId;
         return this;
     }
 
-    /** 旁白线性节点。 */
+    /**
+     * 旁白线性节点。
+     */
     public NodeBuilder line(String id, String text, String next) {
         return say(id, "", text, next);
     }
 
-    /** 带说话人的线性节点。 */
+    /**
+     * 带说话人的线性节点。
+     */
     public NodeBuilder say(String id, String speaker, String text, String next) {
         NodeBuilder node = new NodeBuilder(id).speaker(speaker).text(text).next(next);
         nodes.add(node);

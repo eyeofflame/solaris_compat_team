@@ -43,7 +43,9 @@ public class NodeBuilder {
         return this;
     }
 
-    /** 下一节点 id。空字符串表示剧情到这儿结束。分支节点上这个值不参与。 */
+    /**
+     * 下一节点 id。空字符串表示剧情到这儿结束。分支节点上这个值不参与。
+     */
     public NodeBuilder next(String nextId) {
         this.nextId = nextId == null ? "" : nextId;
         return this;

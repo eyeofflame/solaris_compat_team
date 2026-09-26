@@ -34,7 +34,9 @@ public class ChoicePanel extends WidgetGroup {
         this.buttonWidth = Math.max(60, buttonWidth);
     }
 
-    /** 按当前节点的选项重建按钮，传空列表就是清空。 */
+    /**
+     * 按当前节点的选项重建按钮，传空列表就是清空。
+     */
     public void rebuild(List<Choice> choices) {
         clearAllWidgets();
         int y = 0;

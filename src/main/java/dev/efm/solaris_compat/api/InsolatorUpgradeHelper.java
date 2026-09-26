@@ -26,7 +26,9 @@ import java.util.function.Predicate;
  */
 public final class InsolatorUpgradeHelper {
 
-    /** 有机灌注器的方块注册名。 */
+    /**
+     * 有机灌注器的方块注册名。
+     */
     public static final ResourceLocation MACHINE_INSOLATOR = ResourceLocation.fromNamespaceAndPath("thermal", "machine_insolator");
 
     private InsolatorUpgradeHelper() {
@@ -34,7 +36,9 @@ public final class InsolatorUpgradeHelper {
 
     // ---------------------------------------------------------------- 校验
 
-    /** 是不是灌注器专属的那几个升级。 */
+    /**
+     * 是不是灌注器专属的那几个升级。
+     */
     public static boolean isInsolatorUpgrade(ItemStack stack) {
         return !stack.isEmpty() && stack.getItem() instanceof InsolatorSpeedUpgradeItem;
     }
@@ -52,7 +56,9 @@ public final class InsolatorUpgradeHelper {
         return MACHINE_INSOLATOR.equals(ForgeRegistries.BLOCKS.getKey(blockItem.getBlock()));
     }
 
-    /** 这批强化里是不是已经有灌注器专属升级了。 */
+    /**
+     * 这批强化里是不是已经有灌注器专属升级了。
+     */
     public static boolean hasInsolatorUpgrade(List<ItemStack> augments) {
         for (ItemStack augment : augments) {
             if (isInsolatorUpgrade(augment)) {
@@ -185,7 +191,9 @@ public final class InsolatorUpgradeHelper {
         }
     }
 
-    /** 找已装的那一个专属升级。互斥保证了最多只有一个。 */
+    /**
+     * 找已装的那一个专属升级。互斥保证了最多只有一个。
+     */
     private static InsolatorSpeedUpgradeItem findInstalledUpgrade(Object machine) {
         for (ItemStack augment : readAugments(machine)) {
             if (augment.getItem() instanceof InsolatorSpeedUpgradeItem upgrade) {
@@ -195,7 +203,9 @@ public final class InsolatorUpgradeHelper {
         return null;
     }
 
-    /** 每次现读，不要缓存返回值。 */
+    /**
+     * 每次现读，不要缓存返回值。
+     */
     private static List<ItemStack> readAugments(Object machine) {
         return machine instanceof AugmentableBlockEntityInvoker invoker
                 ? invoker.solaris$getAugmentsAsList()

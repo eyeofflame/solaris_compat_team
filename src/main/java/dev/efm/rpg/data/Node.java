@@ -21,9 +21,13 @@ import java.util.List;
  */
 public record Node(String id, String speaker, String text, String portrait, List<Choice> choices, String nextId) {
 
-    /** 立绘留空 = 沿用上一个节点显示的立绘。旁白节点不该把立绘弄没。 */
+    /**
+     * 立绘留空 = 沿用上一个节点显示的立绘。旁白节点不该把立绘弄没。
+     */
     public static final String PORTRAIT_KEEP = "";
-    /** 立绘设成这个 = 显式隐藏。 */
+    /**
+     * 立绘设成这个 = 显式隐藏。
+     */
     public static final String PORTRAIT_HIDE = "-";
 
     public Node {

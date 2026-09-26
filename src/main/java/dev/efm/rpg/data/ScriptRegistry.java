@@ -29,13 +29,17 @@ public class ScriptRegistry {
     private static final Map<String, Script> BUILTIN = new LinkedHashMap<>();
     private static final Map<String, Script> DATAPACK = new LinkedHashMap<>();
     private static final Map<String, Script> SCRIPTED = new LinkedHashMap<>();
-    /** 合并视图，前三者任一变化时由 {@link #rebuild()} 重建。 */
+    /**
+     * 合并视图，前三者任一变化时由 {@link #rebuild()} 重建。
+     */
     private static final Map<String, Script> MERGED = new LinkedHashMap<>();
 
     private ScriptRegistry() {
     }
 
-    /** 合并后的全部剧本。返回的 map 是内部视图，不要改它。 */
+    /**
+     * 合并后的全部剧本。返回的 map 是内部视图，不要改它。
+     */
     public static Map<String, Script> getMap() {
         return MERGED;
     }
@@ -44,7 +48,9 @@ public class ScriptRegistry {
         return scriptId == null ? null : MERGED.get(scriptId);
     }
 
-    /** 注册内置剧本。{@link #defaultReg()} 用这个。 */
+    /**
+     * 注册内置剧本。{@link #defaultReg()} 用这个。
+     */
     public static void registerBuiltin(Script script) {
         if (script == null) {
             return;
@@ -53,7 +59,9 @@ public class ScriptRegistry {
         rebuild();
     }
 
-    /** 整体替换数据包剧本。传进来的 map 会被复制。 */
+    /**
+     * 整体替换数据包剧本。传进来的 map 会被复制。
+     */
     public static void setDatapack(Map<String, Script> scripts) {
         DATAPACK.clear();
         if (scripts != null) {
@@ -62,7 +70,9 @@ public class ScriptRegistry {
         rebuild();
     }
 
-    /** 整体替换 KubeJS 注册的剧本。传进来的 map 会被复制。 */
+    /**
+     * 整体替换 KubeJS 注册的剧本。传进来的 map 会被复制。
+     */
     public static void setScripted(Map<String, Script> scripts) {
         SCRIPTED.clear();
         if (scripts != null) {
@@ -71,7 +81,9 @@ public class ScriptRegistry {
         rebuild();
     }
 
-    /** 清掉数据包和 KubeJS 两层，只留内置剧本。 */
+    /**
+     * 清掉数据包和 KubeJS 两层，只留内置剧本。
+     */
     public static void clearDynamic() {
         DATAPACK.clear();
         SCRIPTED.clear();
@@ -127,7 +139,9 @@ public class ScriptRegistry {
         registerBuiltin(script.build());
     }
 
-    /** 内置剧本的 id 列表，调试用。 */
+    /**
+     * 内置剧本的 id 列表，调试用。
+     */
     public static List<String> builtinIds() {
         return new ArrayList<>(BUILTIN.keySet());
     }

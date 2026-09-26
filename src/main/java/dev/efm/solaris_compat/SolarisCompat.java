@@ -1,6 +1,5 @@
 package dev.efm.solaris_compat;
 
-import cofh.thermal.lib.util.ThermalAugmentRules;
 import com.lowdragmc.lowdraglib.gui.factory.UIFactory;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import dev.efm.rpg.SFactory;

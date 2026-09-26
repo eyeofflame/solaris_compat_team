@@ -37,7 +37,9 @@ public interface SolarisRPGEvents {
 
     EventGroup GROUP = EventGroup.of("SolarisRPG");
 
-    /** 注册剧本。脚本里用 {@code event.create(id, builder => ...)}。 */
+    /**
+     * 注册剧本。脚本里用 {@code event.create(id, builder => ...)}。
+     */
     EventHandler SCRIPTS = GROUP.server("scripts", () -> ScriptsEventJS.class);
 
     /**
@@ -68,7 +70,9 @@ public interface SolarisRPGEvents {
             scripts.put(id, script.build());
         }
 
-        /** 插件内部用：事件跑完后交给 {@code ScriptRegistry}。 */
+        /**
+         * 插件内部用：事件跑完后交给 {@code ScriptRegistry}。
+         */
         public Map<String, Script> getScripts() {
             return scripts;
         }

@@ -55,6 +55,7 @@ minecraft {
         client {
 
             property 'forge.enabledGameTestNamespaces', mod_id
+            jvmArgs("-Xmx6G")
 
         }
 
@@ -100,6 +101,10 @@ repositories {
             includeGroup "dev.architectury"
         }
     }
+    maven { url 'https://modmaven.dev/' }
+    maven {
+        url 'https://maven.blakesmods.com'
+    }
     flatDir {
         dir 'libs'
     }
@@ -126,6 +131,8 @@ dependencies {
             fg.deobf("libs:item-filters:forge-2001.1.0-build.59")
     )
 
+    implementation fg.deobf("mekanism:Mekanism:${mekanism_version}")
+
     implementation(
             fg.deobf("libs:justdirethings:1.1.7"),
             fg.deobf("libs:cofh_core:1.20.1-11.0.2.56"),
@@ -133,9 +140,7 @@ dependencies {
             fg.deobf("libs:thermal_foundation:1.20.1-11.0.6.70")
     )
 
-    // thermal_core 只以 jarjar 的形式嵌在 thermal_foundation 里，运行时会由 Forge 的
-    // JarInJar 加载，因此这里只用 compileOnly 拿编译期类型，绝不能进运行时 classpath，
-    // 否则会和 jarjar 出来的那份重名（Duplicate mods）。
+
     compileOnly fg.deobf("libs:thermal_core:1.20.1-11.0.6.24")
 
     implementation fg.deobf("libs:corpse:forge-1.20.1-1.0.23")
@@ -159,6 +164,9 @@ dependencies {
     runtimeOnly fg.deobf("libs:kubejs-forge:${kubejs_version}")
     runtimeOnly fg.deobf("libs:rhino-forge:${rhino_version}")
     implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
+
+    implementation fg.deobf("com.blakebr0.cucumber:Cucumber:${cucumber_version}")
+    implementation fg.deobf("com.blakebr0.mysticalagriculture:MysticalAgriculture:${mysticalagriculture_version}")
 }
 
 

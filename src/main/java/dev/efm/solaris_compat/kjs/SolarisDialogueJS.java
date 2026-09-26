@@ -22,7 +22,9 @@ import net.minecraft.world.entity.player.Player;
  */
 public class SolarisDialogueJS {
 
-    /** 脚本里收起立绘用：{@code .portrait(SolarisDialogue.HIDE_PORTRAIT)} */
+    /**
+     * 脚本里收起立绘用：{@code .portrait(SolarisDialogue.HIDE_PORTRAIT)}
+     */
     public static final String HIDE_PORTRAIT = Node.PORTRAIT_HIDE;
 
     private SolarisDialogueJS() {
@@ -45,7 +47,9 @@ public class SolarisDialogueJS {
         return SFactory.INSTANCE.openUI(new SHolder(script), serverPlayer);
     }
 
-    /** 某个剧本 id 是否已注册（内置 / 数据包 / KubeJS 任意一层都算）。 */
+    /**
+     * 某个剧本 id 是否已注册（内置 / 数据包 / KubeJS 任意一层都算）。
+     */
     @Info("Returns true if a script with this id is registered.")
     public static boolean has(String scriptId) {
         return ScriptRegistry.get(scriptId) != null;

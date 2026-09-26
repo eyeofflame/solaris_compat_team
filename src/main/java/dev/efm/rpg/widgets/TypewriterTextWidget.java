@@ -74,7 +74,9 @@ public class TypewriterTextWidget extends Widget {
         return this;
     }
 
-    /** true = 不做逐字，直接整段显示。 */
+    /**
+     * true = 不做逐字，直接整段显示。
+     */
     public TypewriterTextWidget setInstant(boolean instant) {
         this.instant = instant;
         if (instant) {
@@ -97,7 +99,9 @@ public class TypewriterTextWidget extends Widget {
         return revealed >= totalChars;
     }
 
-    /** 点击跳过：立刻显示全文。 */
+    /**
+     * 点击跳过：立刻显示全文。
+     */
     public void revealAll() {
         revealed = totalChars;
     }

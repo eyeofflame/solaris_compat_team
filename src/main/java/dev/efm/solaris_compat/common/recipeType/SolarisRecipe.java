@@ -116,7 +116,7 @@ public class SolarisRecipe extends ShapelessRecipe {
             pBuffer.writeEnum(pRecipe.category());
             pBuffer.writeVarInt(pRecipe.entries.size());
 
-            for (IngredientEntry entry : pRecipe.entries){
+            for (IngredientEntry entry : pRecipe.entries) {
                 entry.ingredient.toNetwork(pBuffer);
                 pBuffer.writeVarInt(entry.damage);
                 pBuffer.writeItem(entry.remainder);

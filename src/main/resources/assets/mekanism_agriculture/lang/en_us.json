@@ -1,0 +1,7 @@
+{
+  "block.mekanism_agriculture.agriculture_infusioner": "Agricultural Infusioner",
+  "container.mekanism_agriculture.agriculture_infusioner": "Agricultural Infusioner",
+  "description.mekanism_agriculture.mek_infusioner": "Runs Mystical Agriculture infusion recipes using Mekanism energy.",
+  "constants.mekanism_agriculture.mod_name": "Mekanism Agriculture",
+  "constants.mekanism_agriculture.pack_description": "Mekanism Agriculture"
+}

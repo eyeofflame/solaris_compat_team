@@ -24,7 +24,7 @@ import java.util.List;
  *   ]
  * }
  * }</pre>
- *
+ * <p>
  * {@code portrait} 缺省 = 沿用上一个节点的立绘，{@code "-"} = 收起。
  * {@code next} 缺省 = 剧情到这儿结束。节点同时有 {@code choices} 和 {@code next} 时以 {@code choices} 为准。
  */

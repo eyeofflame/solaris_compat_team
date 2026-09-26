@@ -57,7 +57,9 @@ public final class PortraitTextures {
         }
     }
 
-    /** 资源包重载后调用，丢掉缓存的尺寸。 */
+    /**
+     * 资源包重载后调用，丢掉缓存的尺寸。
+     */
     public static void clearCache() {
         SIZE_CACHE.clear();
     }

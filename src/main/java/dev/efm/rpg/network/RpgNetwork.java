@@ -27,7 +27,9 @@ public final class RpgNetwork {
     private RpgNetwork() {
     }
 
-    /** 在 {@code FMLCommonSetupEvent} 里调，两端都要。 */
+    /**
+     * 在 {@code FMLCommonSetupEvent} 里调，两端都要。
+     */
     public static void register() {
         int id = 0;
         CHANNEL.registerMessage(id++, CPacketChoiceSelected.class,
@@ -36,7 +38,9 @@ public final class RpgNetwork {
                 CPacketChoiceSelected::handle);
     }
 
-    /** 客户端 → 服务端：告诉服务端玩家选了哪个选项。 */
+    /**
+     * 客户端 → 服务端：告诉服务端玩家选了哪个选项。
+     */
     public static void sendChoice(String scriptId, String nodeId, String choiceId) {
         CHANNEL.sendToServer(new CPacketChoiceSelected(scriptId, nodeId, choiceId));
     }

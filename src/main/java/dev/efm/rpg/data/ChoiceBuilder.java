@@ -11,7 +11,9 @@ public class ChoiceBuilder {
         this.parent = parent;
     }
 
-    /** 加一个选项。{@code next} 是选中后要跳到的节点 id。 */
+    /**
+     * 加一个选项。{@code next} 是选中后要跳到的节点 id。
+     */
     public ChoiceBuilder option(String id, String text, String next) {
         parent.choices.add(new Choice(id, text, next));
         return this;

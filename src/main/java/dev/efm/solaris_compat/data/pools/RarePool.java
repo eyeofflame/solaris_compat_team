@@ -14,8 +14,8 @@ public class RarePool extends BountyPool {
     public static final Codec<RarePool> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.STRING.fieldOf("name").forGetter(RarePool::getName),
-                    ItemStack.CODEC.listOf().optionalFieldOf("requireItems",List.of()).forGetter(RarePool::getRequireItems),
-                    KilledEntityData.CODEC.listOf().optionalFieldOf("requireEntities",List.of()).forGetter(RarePool::getRequireEntities),
+                    ItemStack.CODEC.listOf().optionalFieldOf("requireItems", List.of()).forGetter(RarePool::getRequireItems),
+                    KilledEntityData.CODEC.listOf().optionalFieldOf("requireEntities", List.of()).forGetter(RarePool::getRequireEntities),
                     ItemStack.CODEC.listOf().fieldOf("rewards").forGetter(RarePool::getRewards)
             ).apply(instance, RarePool::new)
     );

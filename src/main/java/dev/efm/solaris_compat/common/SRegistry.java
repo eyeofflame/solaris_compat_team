@@ -7,6 +7,7 @@ import dev.efm.solaris_compat.common.recipeType.SolarisRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -18,11 +19,9 @@ import net.minecraftforge.registries.RegistryObject;
 public class SRegistry {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, SolarisCompat.MODID);
 
-    public static final CreativeModeTab S_TAB = CreativeModeTab.builder().title(Component.translatable("title.solaris_compat.tab")).build();
 
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, SolarisCompat.MODID);
 
-    public static final RegistryObject<CreativeModeTab> SOLARIS_TAB = TABS.register("solaris", () -> S_TAB);
 
     public static final DeferredRegister<RecipeSerializer<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, SolarisCompat.MODID);
 
@@ -35,6 +34,9 @@ public class SRegistry {
     public static final RegistryObject<Item> GOO2_UPGRADE = ITEMS.register("goo2_upgrade", () -> new InsolatorSpeedUpgradeItem(4f, 0.20f, 2f));
     public static final RegistryObject<Item> GOO3_UPGRADE = ITEMS.register("goo3_upgrade", () -> new InsolatorSpeedUpgradeItem(8f, 0.30f, 3f));
     public static final RegistryObject<Item> GOO4_UPGRADE = ITEMS.register("goo4_upgrade", () -> new InsolatorSpeedUpgradeItem(16f, 0.50f, 4f));
+
+    public static final CreativeModeTab S_TAB = CreativeModeTab.builder().title(Component.translatable("title.solaris_compat.tab")).icon(() -> GOO1_UPGRADE.get().getDefaultInstance()).withTabsBefore(CreativeModeTabs.SPAWN_EGGS).build();
+    public static final RegistryObject<CreativeModeTab> SOLARIS_TAB = TABS.register("solaris", () -> S_TAB);
 
     public static void register(IEventBus ibus) {
         ITEMS.register(ibus);

@@ -1,0 +1,6 @@
+{
+  "parent": "mekanism_agriculture:block/agriculture_infusioner",
+  "textures": {
+    "front": "mekanism_agriculture:block/agriculture_infusioner_front_active"
+  }
+}

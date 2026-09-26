@@ -39,7 +39,9 @@ public class InsolatorSpeedUpgradeItem extends Item implements IAugmentItem {
 
     private final int SPEED_PERCENT;
 
-    /** 触发增产的概率，0~1。 */
+    /**
+     * 触发增产的概率，0~1。
+     */
     private final float BONUS_CHANCE;
 
     /**
