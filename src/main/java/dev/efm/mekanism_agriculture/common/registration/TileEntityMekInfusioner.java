@@ -4,15 +4,7 @@ import com.blakebr0.cucumber.crafting.ISpecialRecipe;
 import com.blakebr0.mysticalagriculture.api.crafting.IInfusionRecipe;
 import com.blakebr0.mysticalagriculture.init.ModRecipeTypes;
 import dev.efm.mekanism_agriculture.common.inventory.NineSlotItemHandler;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import mekanism.api.Action;
-import mekanism.api.AutomationType;
-import mekanism.api.IContentsListener;
-import mekanism.api.NBTConstants;
-import mekanism.api.RelativeSide;
-import mekanism.api.Upgrade;
+import mekanism.api.*;
 import mekanism.api.inventory.IInventorySlot;
 import mekanism.api.math.FloatingLong;
 import mekanism.common.capabilities.energy.MachineEnergyContainer;
@@ -41,6 +33,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 用电的注魔机器:直接复用神秘农业的注魔(infusion)配方,等价于一台可以接电、能自动化的注魔祭坛。
  *
@@ -64,11 +60,17 @@ import org.jetbrains.annotations.Nullable;
  */
 public class TileEntityMekInfusioner extends TileEntityConfigurableMachine {
 
-    /** 与神秘农业注魔祭坛保持一致:100 tick 完成一次注魔。 */
+    /**
+     * 与神秘农业注魔祭坛保持一致:100 tick 完成一次注魔。
+     */
     private static final int BASE_TICKS = 100;
-    /** 配方所需的输入格数,等于 {@code InfusionRecipe.RECIPE_SIZE}。 */
+    /**
+     * 配方所需的输入格数,等于 {@code InfusionRecipe.RECIPE_SIZE}。
+     */
     private static final int INFUSION_SLOTS = 9;
-    /** 槽 1..8 的 GUI 坐标,环绕居中的槽 0,镜像注魔祭坛的八座基座。 */
+    /**
+     * 槽 1..8 的 GUI 坐标,环绕居中的槽 0,镜像注魔祭坛的八座基座。
+     */
     private static final int[][] RING_POSITIONS = {
             {44, 17}, {62, 17}, {80, 17}, {80, 35}, {80, 53}, {62, 53}, {44, 53}, {44, 35}
     };
@@ -85,10 +87,14 @@ public class TileEntityMekInfusioner extends TileEntityConfigurableMachine {
 
     private int operatingTicks;
     private int ticksRequired = BASE_TICKS;
-    /** 当前锁定的配方。仅当它不再匹配时才重新扫描,避免每 tick 遍历全部注魔配方。 */
+    /**
+     * 当前锁定的配方。仅当它不再匹配时才重新扫描,避免每 tick 遍历全部注魔配方。
+     */
     @Nullable
     private IInfusionRecipe activeRecipe;
-    /** 上次扫描配方表时的输入指纹;输入没变就不必重扫。 */
+    /**
+     * 上次扫描配方表时的输入指纹;输入没变就不必重扫。
+     */
     private int lastScanHash;
     private boolean hasScanned;
 
@@ -120,7 +126,7 @@ public class TileEntityMekInfusioner extends TileEntityConfigurableMachine {
     @Override
     protected IEnergyContainerHolder getInitialEnergyContainers(IContentsListener listener) {
         EnergyContainerHelper builder = EnergyContainerHelper.forSideWithConfig(this::getDirection, this::getConfig);
-        // 能耗与容量直接取自方块类型上的 AttributeEnergy(500 FE/t、200k FE),并自动响应 ENERGY 升级
+        // 能耗与容量直接取自方块类型上的 AttributeEnergy(注意那边填的是焦耳,不是 FE),并自动响应 ENERGY 升级
         builder.addContainer(energyContainer = MachineEnergyContainer.input(this, listener));
         return builder.build();
     }
@@ -139,7 +145,7 @@ public class TileEntityMekInfusioner extends TileEntityConfigurableMachine {
         }
         reagentSlots = List.copyOf(infusionSlots.subList(1, INFUSION_SLOTS));
         infusionHandler = new NineSlotItemHandler(infusionSlots);
-        builder.addSlot(outputSlot = OutputInventorySlot.at(listener, 134, 35));
+        builder.addSlot(outputSlot = OutputInventorySlot.at(listener, 134, 30));
         builder.addSlot(energySlot = EnergyInventorySlot.fillOrConvert(energyContainer, this::getLevel, listener, 134, 53));
         return builder.build();
     }
@@ -202,7 +208,9 @@ public class TileEntityMekInfusioner extends TileEntityConfigurableMachine {
         return recipe != null && canStoreResult(recipe) ? recipe : null;
     }
 
-    /** 9 个槽的内容指纹,用来判断是否值得重新扫描配方表。 */
+    /**
+     * 9 个槽的内容指纹,用来判断是否值得重新扫描配方表。
+     */
     private int inputHash() {
         int hash = 1;
         for (int slot = 0; slot < INFUSION_SLOTS; slot++) {
@@ -235,7 +243,9 @@ public class TileEntityMekInfusioner extends TileEntityConfigurableMachine {
         return assignReagents(ingredients, 1, newReagentCounts(), new int[ingredients.size()], -1);
     }
 
-    /** 采集八个辅料槽当前的可用数量,供按数量匹配使用。 */
+    /**
+     * 采集八个辅料槽当前的可用数量,供按数量匹配使用。
+     */
     private int[] newReagentCounts() {
         int[] remaining = new int[INFUSION_SLOTS];
         for (int slot = 1; slot < INFUSION_SLOTS; slot++) {
@@ -281,7 +291,9 @@ public class TileEntityMekInfusioner extends TileEntityConfigurableMachine {
         return false;
     }
 
-    /** 中央槽只接受"能作为某条注魔配方 input"的物品,避免自动化把辅料塞进来。 */
+    /**
+     * 中央槽只接受"能作为某条注魔配方 input"的物品,避免自动化把辅料塞进来。
+     */
     private boolean isValidInfusionCore(ItemStack stack) {
         if (stack.isEmpty()) {
             return false;
@@ -299,7 +311,9 @@ public class TileEntityMekInfusioner extends TileEntityConfigurableMachine {
         return false;
     }
 
-    /** 产物必须能完整放进输出槽,否则不启动,避免进度跑满却卡住。 */
+    /**
+     * 产物必须能完整放进输出槽,否则不启动,避免进度跑满却卡住。
+     */
     private boolean canStoreResult(IInfusionRecipe recipe) {
         if (level == null) {
             return false;
