@@ -373,6 +373,15 @@ public class TileEntityMekInfusioner extends TileEntityConfigurableMachine {
         return energyContainer;
     }
 
+    /**
+     * 9 个注魔输入槽,索引 0 = 中央核心物、1..8 = 八份辅料。
+     *
+     * <p>JEI 的配方转移靠这个顺序把配方槽位对齐到容器槽位,别改这里的顺序语义。
+     */
+    public List<IInventorySlot> getInfusionSlots() {
+        return List.copyOf(infusionSlots);
+    }
+
     public double getScaledProgress() {
         return ticksRequired == 0 ? 0 : operatingTicks / (double) ticksRequired;
     }

@@ -6,14 +6,15 @@ modId = "${mod_id}"
 version = "${mod_version}"
 displayName = "${mod_name}"
 authors = "${mod_authors}"
+description = '''${mod_description}'''
 
 [[mods]]
 modId = "mekanism_agriculture"
 version = "0.0.1-snapshot"
 displayName = "Mekanism Agriculture"
 authors = "墨尘"
+description = '''An addon for Mekanism and Mystical Agriculture'''
 
-description = '''${mod_description}'''
 [[dependencies."${mod_id}"]]
 modId = "forge"
 mandatory = true
@@ -56,5 +57,12 @@ side = "BOTH"
 modId = "mysticalagriculture"
 mandatory = true
 versionRange = "[7,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.mekanism_agriculture]]
+modId = "jei"
+mandatory = false
+versionRange = "[15,)"
 ordering = "AFTER"
 side = "BOTH"
