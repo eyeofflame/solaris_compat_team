@@ -1,0 +1,173 @@
+import org.gradle.api.attributes.LibraryElements
+import org.gradle.api.attributes.Usage
+
+buildscript {
+    repositories {
+
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+    }
+}
+
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+}
+
+apply plugin: 'org.spongepowered.mixin'
+
+group = mod_group_id
+version = mod_version
+
+base {
+    archivesName = mod_id
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+}
+
+minecraft {
+
+
+    mappings channel: mapping_channel, version: mapping_version
+
+
+    copyIdeResources = true
+
+
+    runs {
+
+        configureEach {
+            workingDirectory project.file('run')
+
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        client {
+
+            property 'forge.enabledGameTestNamespaces', mod_id
+        }
+
+        server {
+            property 'forge.enabledGameTestNamespaces', mod_id
+            args '--nogui'
+        }
+
+
+        gameTestServer {
+            property 'forge.enabledGameTestNamespaces', mod_id
+        }
+
+        data {
+
+            workingDirectory project.file('run-data')
+
+
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+        }
+    }
+}
+
+mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
+
+    config "${mod_id}.mixins.json"
+}
+
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+
+
+    flatDir {
+        dir 'libs'
+    }
+}
+
+// ===== Solaris 跨工程编译期依赖（消费 named classes 变体）=====
+// 跨工程直接依赖产出的 jar 不可用：reobfJar 会原地覆盖成 SRG 名，编译不过。
+// 这里改为消费其 classes 变体（build/classes/java/main，named 映射）。
+// 用法：在 dependencies 里写   solarisCompile "dev.efm:solaris_core:1.1.6-hotfix"
+// 注意：依赖关系必须无环。
+configurations {
+    solarisCompile {
+        canBeConsumed = false
+        canBeResolved = true
+        transitive = false
+        attributes {
+            attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage, Usage.JAVA_RUNTIME))
+            attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements, LibraryElements.CLASSES))
+        }
+    }
+}
+
+dependencies {
+
+
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    implementation(
+            fg.deobf("libs:ars_nouveau:1.20.1-4.12.7-all"),
+            fg.deobf("libs:curios:forge-5.14.1+1.20.1"),
+            fg.deobf("libs:geckolib:forge-1.20.1-4.8.4"),
+            fg.deobf("libs:Patchouli:1.20.1-85-FORGE")
+    )
+
+    // Solaris 跨工程编译期依赖统一走这里（见上方 solarisCompile 说明）
+    compileOnly files(configurations.solarisCompile)
+}
+
+
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [minecraft_version   : minecraft_version, minecraft_version_range: minecraft_version_range,
+                             forge_version       : forge_version, forge_version_range: forge_version_range,
+                             loader_version_range: loader_version_range,
+                             mod_id              : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
+                             mod_authors         : mod_authors, mod_description: '''A mod that generate resources through magic in Solaris modpack''',]
+
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties + [project: project]
+    }
+}
+
+
+tasks.named('jar', Jar).configure {
+    manifest {
+        attributes(["Specification-Title"     : mod_id,
+                    "Specification-Vendor"    : mod_authors,
+                    "Specification-Version"   : "1",
+                    "Implementation-Title"    : project.name,
+                    "Implementation-Version"  : project.jar.archiveVersion,
+                    "Implementation-Vendor"   : mod_authors,
+                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")])
+    }
+
+
+    finalizedBy 'reobfJar'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

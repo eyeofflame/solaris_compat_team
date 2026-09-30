@@ -1,0 +1,28 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+license = "MIT"
+[[mods]]
+modId = "solaris_resources"
+version = "${mod_version}"
+displayName = "Solaris Resources"
+authors = "${mod_authors}"
+
+description = '''A mod that generate resources through magic in Solaris modpack'''
+[[dependencies.solaris_resources]]
+modId = "forge"
+mandatory = true
+versionRange = "${forge_version_range}"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies.solaris_resources]]
+modId = "minecraft"
+mandatory = true
+versionRange = "${minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"
+[[dependencies.solaris_resources]]
+modId = "ars_nouveau"
+mandatory = true
+versionRange = "[4.12.7,5)"
+ordering = "AFTER"
+side = "BOTH"

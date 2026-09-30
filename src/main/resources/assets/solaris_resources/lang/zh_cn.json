@@ -1,0 +1,10 @@
+{
+  "item.solaris_resources.crystallized_water": "晶化水",
+  "itemGroup.solaris_resources": "Solaris Resources",
+  "item.solaris_resources.water_convert_tome": "法术卷册：水转化",
+  "solaris_resources.glyph_name.convert_water": "水转化",
+  "solaris_resources.glyph_desc.convert_water": "将以目标为中心的3*3*3范围内的水源转化为晶化水。",
+  "item.solaris_resources.atom_hydrogen": "氢原子",
+  "item.solaris_resources.atom_oxygen": "氧原子",
+  "item.solaris.magic": "（受魔力影响而不稳定）"
+}
