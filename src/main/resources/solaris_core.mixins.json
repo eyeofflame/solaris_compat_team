@@ -1,0 +1,24 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.efm.solaris_core.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "solaris_core.refmap.json",
+  "mixins": [
+    "StructureTemplateMixin",
+    "alwaysEat.PlayerMixin",
+    "maxHealthFix.LivingEntityMixin",
+    "maxHealthFix.PlayerListMixin",
+    "noMoreString.TripWireHookBlockMixin",
+    "noXpCooldown.ExperienceMixin",
+    "noXpCooldown.PlayerMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

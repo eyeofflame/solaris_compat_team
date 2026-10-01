@@ -1,0 +1,7 @@
+{
+  "type": "solaris:loot_replacement",
+  "conditions": [],
+  "replacements": {
+    "minecraft:bread": "minecraft:bread"
+  }
+}
