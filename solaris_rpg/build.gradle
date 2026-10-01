@@ -3,6 +3,7 @@ plugins {
     id 'idea'
     id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version "0.7.+"
 }
 
 group = mod_group_id
@@ -42,6 +43,10 @@ minecraft {
     }
 }
 
+mixin {
+    add sourceSets.main, "solaris_rpg.refmap.json"
+}
+
 repositories {
     flatDir { dir rootProject.file('libs') }
     maven {
@@ -54,7 +59,6 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-
     implementation fg.deobf("libs:ldlib-forge-1.20.1:1.0.52.a")
     implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
 
