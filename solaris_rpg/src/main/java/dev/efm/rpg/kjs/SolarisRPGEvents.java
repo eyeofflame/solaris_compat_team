@@ -112,11 +112,16 @@ public interface SolarisRPGEvents {
         public final ServerPlayer player;
         public final String scriptId;
         public final String nodeId;
+        /**
+         * {@code false} = 正常走到结尾；{@code true} = 玩家按 ESC 确认跳过。
+         */
+        public final boolean skipped;
 
-        public EndEventJS(ServerPlayer player, String scriptId, String nodeId) {
+        public EndEventJS(ServerPlayer player, String scriptId, String nodeId, boolean skipped) {
             this.player = player;
             this.scriptId = scriptId;
             this.nodeId = nodeId;
+            this.skipped = skipped;
         }
     }
 }

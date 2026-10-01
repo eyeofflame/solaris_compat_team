@@ -22,19 +22,22 @@ public class CPacketDialogueEnded {
 
     private final String scriptId;
     private final String nodeId;
+    private final boolean skipped;
 
-    public CPacketDialogueEnded(String scriptId, String nodeId) {
+    public CPacketDialogueEnded(String scriptId, String nodeId, boolean skipped) {
         this.scriptId = scriptId == null ? "" : scriptId;
         this.nodeId = nodeId == null ? "" : nodeId;
+        this.skipped = skipped;
     }
 
     public void encode(FriendlyByteBuf buf) {
         buf.writeUtf(scriptId);
         buf.writeUtf(nodeId);
+        buf.writeBoolean(skipped);
     }
 
     public static CPacketDialogueEnded decode(FriendlyByteBuf buf) {
-        return new CPacketDialogueEnded(buf.readUtf(), buf.readUtf());
+        return new CPacketDialogueEnded(buf.readUtf(), buf.readUtf(), buf.readBoolean());
     }
 
     public void handle(Supplier<NetworkEvent.Context> contextSupplier) {
@@ -43,9 +46,9 @@ public class CPacketDialogueEnded {
             ServerPlayer player = context.getSender();
             if (player != null && RpgValidation.isDialogueOpen(player, scriptId)) {
                 // Forge 事件优先：其它 mod 的服务端逻辑
-                MinecraftForge.EVENT_BUS.post(new DialogueEndEvent(player, scriptId, nodeId));
+                MinecraftForge.EVENT_BUS.post(new DialogueEndEvent(player, scriptId, nodeId, skipped));
                 // KubeJS 层通过挂钩点解耦，未装 KubeJS 时这里是空转
-                DialogueHooks.fireDialogueEnd(player, scriptId, nodeId);
+                DialogueHooks.fireDialogueEnd(player, scriptId, nodeId, skipped);
             }
         });
         context.setPacketHandled(true);

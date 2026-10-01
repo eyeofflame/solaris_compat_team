@@ -1,3 +1,6 @@
 {
-  "entity.solaris_rpg.olivia": "Olivia"
+  "entity.solaris_rpg.olivia": "Olivia",
+  "solaris_rpg.dialogue.skip.title": "跳过这段对话?",
+  "solaris_rpg.dialogue.skip.confirm": "跳过",
+  "solaris_rpg.dialogue.skip.cancel": "继续"
 }

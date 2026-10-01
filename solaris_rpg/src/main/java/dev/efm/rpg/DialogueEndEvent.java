@@ -31,11 +31,16 @@ public class DialogueEndEvent extends PlayerEvent {
      * 结尾所在的节点 id（对话结束时会停留在最后一个节点上）。可能为空字符串。
      */
     private final String nodeId;
+    /**
+     * 是否为玩家主动"跳过"。{@code false} = 正常走到结尾，{@code true} = 按 ESC 确认跳过。
+     */
+    private final boolean skipped;
 
-    public DialogueEndEvent(ServerPlayer player, String scriptId, String nodeId) {
+    public DialogueEndEvent(ServerPlayer player, String scriptId, String nodeId, boolean skipped) {
         super(player);
         this.scriptId = scriptId;
         this.nodeId = nodeId;
+        this.skipped = skipped;
     }
 
     /**
@@ -57,5 +62,12 @@ public class DialogueEndEvent extends PlayerEvent {
      */
     public String getNodeId() {
         return nodeId;
+    }
+
+    /**
+     * 玩家是否主动跳过了对话。{@code false} = 正常走到结尾；{@code true} = 按 ESC 后确认跳过。
+     */
+    public boolean isSkipped() {
+        return skipped;
     }
 }

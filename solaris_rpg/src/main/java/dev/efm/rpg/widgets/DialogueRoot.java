@@ -1,6 +1,7 @@
 package dev.efm.rpg.widgets;
 
 import com.lowdragmc.lowdraglib.gui.texture.*;
+import com.lowdragmc.lowdraglib.gui.widget.ButtonWidget;
 import com.lowdragmc.lowdraglib.gui.widget.ImageWidget;
 import com.lowdragmc.lowdraglib.gui.widget.LabelWidget;
 import com.lowdragmc.lowdraglib.gui.widget.WidgetGroup;
@@ -8,6 +9,7 @@ import dev.efm.rpg.StateEngine;
 import dev.efm.rpg.data.Script;
 import dev.efm.rpg.network.RpgNetwork;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.lwjgl.glfw.GLFW;
 
@@ -77,6 +79,16 @@ public class DialogueRoot extends FullScreenGroup {
     private final TypewriterTextWidget text;
     private final ChoicePanel choices;
 
+    /**
+     * 跳过确认弹窗。默认隐藏，按 ESC 时显示；<b>置于最上层</b>，显示期间模态拦截输入。
+     */
+    private final WidgetGroup skipOverlay;
+    private final WidgetGroup skipPanel;
+    private final LabelWidget skipPrompt;
+    private final ButtonWidget skipYes;
+    private final ButtonWidget skipNo;
+    private boolean skipDialogOpen;
+
     public DialogueRoot(Script script) {
         engine = new StateEngine(script);
         engine.start();
@@ -96,6 +108,32 @@ public class DialogueRoot extends FullScreenGroup {
 
         choices = new ChoicePanel(this::onChoose);
 
+        // 跳过确认弹窗：半透明全屏遮罩 + 居中面板 + 两个按钮，默认隐藏
+        skipOverlay = new WidgetGroup(0, 0, 0, 0);
+        skipOverlay.setBackground(new ColorRectTexture(0x80000000));
+
+        skipPanel = new WidgetGroup(0, 0, 0, 0);
+        skipPanel.setBackground(new ColorRectTexture(0xF0151520), new ColorBorderTexture(1, 0xFF6A7A9A));
+
+        skipPrompt = new LabelWidget(0, 0, Component.translatable("solaris_rpg.dialogue.skip.title").getString());
+        skipPrompt.setTextColor(0xFFFFFFFF);
+        skipPrompt.setDropShadow(true);
+
+        skipYes = new ButtonWidget(0, 0, 0, 0,
+                new GuiTextureGroup(ResourceBorderTexture.BUTTON_COMMON,
+                        new TextTexture(Component.translatable("solaris_rpg.dialogue.skip.confirm").getString())),
+                clickData -> confirmSkip());
+        skipNo = new ButtonWidget(0, 0, 0, 0,
+                new GuiTextureGroup(ResourceBorderTexture.BUTTON_COMMON,
+                        new TextTexture(Component.translatable("solaris_rpg.dialogue.skip.cancel").getString())),
+                clickData -> closeSkipDialog());
+
+        skipPanel.addWidget(skipPrompt);
+        skipPanel.addWidget(skipYes);
+        skipPanel.addWidget(skipNo);
+        skipOverlay.addWidget(skipPanel);
+        skipOverlay.setVisible(false);
+
         box = new WidgetGroup(0, 0, 0, 0);
         box.setBackground(new ColorRectTexture(0xC8101018), new ColorBorderTexture(1, 0xFF6A7A9A));
         box.addWidget(speakerLabel);
@@ -105,6 +143,7 @@ public class DialogueRoot extends FullScreenGroup {
         addWidget(portrait);   // 背景之上、对话框之下
         addWidget(box);
         addWidget(choices);
+        addWidget(skipOverlay);   // 最上层：跳过确认弹窗
 
         onLayout(this::layout);
 
@@ -132,6 +171,23 @@ public class DialogueRoot extends FullScreenGroup {
         text.setSize(boxWidth - BOX_PADDING * 2, boxHeight - TEXT_BASELINE - BOX_PADDING);
 
         choices.setButtonWidth(Math.min((int) (screenWidth * 0.4f), 320));
+
+        // 跳过确认弹窗：遮罩铺满，面板居中
+        skipOverlay.setSelfPosition(0, 0);
+        skipOverlay.setSize(screenWidth, screenHeight);
+        int panelW = 260;
+        int panelH = 104;
+        skipPanel.setSize(panelW, panelH);
+        skipPanel.setSelfPosition((screenWidth - panelW) / 2, (screenHeight - panelH) / 2);
+        skipPrompt.setSelfPosition(16, 20);
+        skipPrompt.setSize(panelW - 32, 18);
+        int btnW = 108;
+        int btnH = 22;
+        int btnY = panelH - btnH - 14;
+        skipYes.setSelfPosition(16, btnY);
+        skipYes.setSize(btnW, btnH);
+        skipNo.setSelfPosition(panelW - 16 - btnW, btnY);
+        skipNo.setSize(btnW, btnH);
 
         syncToEngine(false);
     }
@@ -247,6 +303,11 @@ public class DialogueRoot extends FullScreenGroup {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        // 弹窗打开时模态：只让弹窗按钮处理，其余点击一律吞掉，不推进对话
+        if (skipDialogOpen) {
+            super.mouseClicked(mouseX, mouseY, button);
+            return true;
+        }
         // 选项按钮先吃掉点击；没有子控件处理才轮到推进对话
         if (super.mouseClicked(mouseX, mouseY, button)) {
             return true;
@@ -260,6 +321,18 @@ public class DialogueRoot extends FullScreenGroup {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        // 弹窗打开时模态：ESC = 取消，其余按键一律吞掉
+        if (skipDialogOpen) {
+            if (keyCode == GLFW.GLFW_KEY_ESCAPE) {
+                closeSkipDialog();
+            }
+            return true;
+        }
+        // ESC 不再直接关界面，改为弹出"是否跳过"确认
+        if (keyCode == GLFW.GLFW_KEY_ESCAPE) {
+            openSkipDialog();
+            return true;
+        }
         if (super.keyPressed(keyCode, scanCode, modifiers)) {
             return true;
         }
@@ -281,6 +354,9 @@ public class DialogueRoot extends FullScreenGroup {
      * </ol>
      */
     private void advanceInput() {
+        if (skipDialogOpen) {
+            return;
+        }
         if (!text.isFullyRevealed()) {
             text.revealAll();
             return;
@@ -291,14 +367,41 @@ public class DialogueRoot extends FullScreenGroup {
         if (!engine.advance()) {
             // 正常走到结尾：先通知服务端（触发 Forge / KubeJS 事件），再延到下一次 tick 关界面。
             // 同一 TCP 连接保序，结束包先于容器关闭到达服务端，校验时容器仍开着。
-            if (!endNotified) {
-                endNotified = true;
-                RpgNetwork.sendDialogueEnd(scriptId, engine.currentNodeId());
-            }
+            notifyEnd(false);
             // 延到下一次 tick 再关：现在还在 mouseClicked / keyPressed 的调用栈里，
             // 直接 setScreen(null) 会在遍历控件的途中把界面拆掉
             pendingClose = true;
         }
+    }
+
+    /**
+     * 通知服务端对话结束。{@code skipped} 为 true 表示玩家主动跳过。一次对话只发一次。
+     */
+    private void notifyEnd(boolean skipped) {
+        if (endNotified) {
+            return;
+        }
+        endNotified = true;
+        RpgNetwork.sendDialogueEnd(scriptId, engine.currentNodeId(), skipped);
+    }
+
+    private void openSkipDialog() {
+        skipDialogOpen = true;
+        skipOverlay.setVisible(true);
+    }
+
+    private void closeSkipDialog() {
+        skipDialogOpen = false;
+        skipOverlay.setVisible(false);
+    }
+
+    /**
+     * 玩家确认跳过：立刻结束对话，按"跳过"通知服务端，然后延到下一次 tick 关界面。
+     */
+    private void confirmSkip() {
+        notifyEnd(true);
+        closeSkipDialog();
+        pendingClose = true;
     }
 
     private void closeDialogue() {

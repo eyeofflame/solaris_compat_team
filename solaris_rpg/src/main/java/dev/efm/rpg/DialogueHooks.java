@@ -32,7 +32,7 @@ public final class DialogueHooks {
      */
     @FunctionalInterface
     public interface EndListener {
-        void onEnd(ServerPlayer player, String scriptId, String nodeId);
+        void onEnd(ServerPlayer player, String scriptId, String nodeId, boolean skipped);
     }
 
     private static final List<EndListener> END_LISTENERS = new ArrayList<>();
@@ -58,9 +58,9 @@ public final class DialogueHooks {
         }
     }
 
-    public static void fireDialogueEnd(ServerPlayer player, String scriptId, String nodeId) {
+    public static void fireDialogueEnd(ServerPlayer player, String scriptId, String nodeId, boolean skipped) {
         for (EndListener listener : END_LISTENERS) {
-            listener.onEnd(player, scriptId, nodeId);
+            listener.onEnd(player, scriptId, nodeId, skipped);
         }
     }
 }
