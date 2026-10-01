@@ -6,5 +6,8 @@
   "solaris_resources.glyph_desc.convert_water": "将以目标为中心的3*3*3范围内的水源转化为晶化水。",
   "item.solaris_resources.atom_hydrogen": "氢原子",
   "item.solaris_resources.atom_oxygen": "氧原子",
-  "item.solaris.magic": "（受魔力影响而不稳定）"
+  "item.solaris.magic": "（受魔力影响而不稳定）",
+  "solaris_resources.glyph_name.dissolve_water": "水分解",
+  "solaris_resources.glyph_desc.dissolve_water": "将目标上方3*3*3范围内的晶化水分解为不稳定的氢原子与氧原子：每份晶化水产出16个氢原子和8个氧原子。",
+  "item.solaris_resources.water_dissolve_tome": "法术卷册：水分解"
 }

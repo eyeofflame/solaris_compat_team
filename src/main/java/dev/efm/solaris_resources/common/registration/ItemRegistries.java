@@ -6,6 +6,7 @@ import dev.efm.solaris_resources.SolarisResources;
 import dev.efm.solaris_resources.common.item.AtomItem;
 import dev.efm.solaris_resources.common.item.PresetCasterTome;
 import dev.efm.solaris_resources.common.spells.EffectConvertWater;
+import dev.efm.solaris_resources.common.spells.EffectDissolveWater;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -21,20 +22,22 @@ public class ItemRegistries {
     public static final RegistryObject<Item> CRYSTALLIZED_WATER = ITEMS.register("crystallized_water", () -> new Item(new Item.Properties().stacksTo(64).setNoRepair()));
 
     public static void atomRegister(String path, String convertedItem) {
-        var item = ITEMS.register("atom_" + path, () -> new AtomItem(convertedItem, false,path));
-        var item0 = ITEMS.register("unstable_magic_atom_" + path, () -> new AtomItem(convertedItem, true,path));
+        var item = ITEMS.register("atom_" + path, () -> new AtomItem(convertedItem, false, path));
+        var item0 = ITEMS.register("unstable_magic_atom_" + path, () -> new AtomItem(convertedItem, true, path));
 
         items.add(item);
         items.add(item0);
     }
 
-    // Match Ars Nouveau's fireball and takeoff tome glyph sequences.
-    // Build a fresh Spell lazily, after Ars has registered its glyphs.
     public static final RegistryObject<PresetCasterTome> WATER_CONVERT_TOME = ITEMS.register("water_convert_tome",
             () -> new PresetCasterTome(() -> new Spell()
                     .add(MethodTouch.INSTANCE)
                     .add(EffectConvertWater.INSTANCE)
             )
+    );
+
+    public static final RegistryObject<PresetCasterTome> WATER_DISSOLVE_TOME = ITEMS.register("water_dissolve_tome",
+            () -> new PresetCasterTome(() -> new Spell().add(MethodTouch.INSTANCE).add(EffectDissolveWater.INSTANCE))
     );
 
     public static void register(IEventBus ibus) {

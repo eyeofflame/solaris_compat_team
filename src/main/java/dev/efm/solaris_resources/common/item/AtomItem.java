@@ -36,9 +36,6 @@ public class AtomItem extends Item {
         return 1200;
     }
 
-    // 让所有掉落的 AtomItem 都换成不可拾取的自定义实体。
-    // Forge 在 EntityJoinLevelEvent 里检测到 hasCustomEntity 为 true 时，
-    // 会 discard 原版 ItemEntity 并 addFreshEntity(createEntity(...))。
     @Override
     public boolean hasCustomEntity(ItemStack stack) {
         return true;
@@ -48,7 +45,7 @@ public class AtomItem extends Item {
     public Entity createEntity(Level level, Entity location, ItemStack stack) {
         AtomItemEntity entity = new AtomItemEntity(level,
                 location.getX(), location.getY(), location.getZ(), stack);
-        entity.setDeltaMovement(location.getDeltaMovement()); // 保留抛出时的速度
+        entity.setDeltaMovement(location.getDeltaMovement());
         return entity;
     }
 }

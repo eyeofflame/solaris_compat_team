@@ -7,6 +7,7 @@ import dev.efm.solaris_resources.common.registration.CreativeTabRegistries;
 import dev.efm.solaris_resources.common.registration.EntityTypeRegistries;
 import dev.efm.solaris_resources.common.registration.ItemRegistries;
 import dev.efm.solaris_resources.common.spells.EffectConvertWater;
+import dev.efm.solaris_resources.common.spells.EffectDissolveWater;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
@@ -33,6 +34,7 @@ public class SolarisResources {
         EntityTypeRegistries.register(ibus);
 
         GlyphRegistry.registerSpell(EffectConvertWater.INSTANCE);
+        GlyphRegistry.registerSpell(EffectDissolveWater.INSTANCE);
     }
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = SolarisResources.MODID, value = Dist.CLIENT)

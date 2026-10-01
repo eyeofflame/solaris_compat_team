@@ -18,30 +18,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-/**
- * 原子物品的掉落物：故意 <b>不是</b> {@link net.minecraft.world.entity.item.ItemEntity}。
- * 所有"吸取物品"的实现（原版漏斗 / 漏斗矿车、以及其它模组的收集器）都是靠
- * {@code getEntitiesOfClass(ItemEntity.class, ...)} 找目标的，只要它不是 ItemEntity，
- * 这些机制就永远看不到它 —— 不依赖任何 mixin/字节码，构造上就成立。
- *
- * <p>物理逻辑基本是从原版 {@code ItemEntity.tick()} 照抄的，只有 4 处无法直接复制：
- * <ol>
- *   <li>{@code setUnderwaterMovement()} / {@code setUnderLavaMovement()} 是 private → 本类里复制了一份。</li>
- *   <li>{@code getBlockPosBelowThatAffectsMyMovement()} → 内联成 {@code this.getOnPos(0.999999F)}。</li>
- *   <li>{@code ForgeEventFactory.onItemExpire(this, item)} 参数要求 {@code ItemEntity}，无法调用 →
- *       直接按 {@code lifespan} 消失。</li>
- *   <li>{@code fluidType.setItemMovement(this)} 参数同样要求 {@code ItemEntity} → 模组流体分支略过。</li>
- * </ol>
- * 另外原版靠 {@code ItemEntity.hurt} 掉血来被岩浆烧死，本类没有 hurt，改为显式判断销毁；
- * {@code pickupDelay}/{@code onEntityItemUpdate} 与本类无关，已去掉。
- */
 public class AtomItemEntity extends Entity {
 
     private static final EntityDataAccessor<ItemStack> DATA_ITEM =
             SynchedEntityData.defineId(AtomItemEntity.class, EntityDataSerializers.ITEM_STACK);
 
     private static final int DEFAULT_LIFESPAN = 6000;
-    /** 合并判定半径（对齐原版 ItemEntity 的 0.5,0,0.5）。 */
     private static final double MERGE_RANGE = 0.5D;
 
     public final float bobOffs;
@@ -89,23 +71,18 @@ public class AtomItemEntity extends Entity {
             return;
         }
 
-        // 虚空销毁发生在 baseTick 里：checkBelowWorld -> onBelowWorld -> discard
         super.tick();
 
-        // 岩浆 / 火焰销毁（原版是 ItemEntity.hurt 掉血，这里显式销毁）
         if (this.isInLava() || this.isOnFire()) {
             this.discard();
             return;
         }
 
-        // ================= 以下为原版 ItemEntity.tick() 的物理逻辑 =================
         this.xo = this.getX();
         this.yo = this.getY();
         this.zo = this.getZ();
         Vec3 vec3 = this.getDeltaMovement();
         float f = this.getEyeHeight() - 0.11111111F;
-        // 原版此处还有 Forge 的模组流体分支（fluidType.setItemMovement(this)），
-        // 但该方法参数类型是 ItemEntity，本类不是，无法调用，故略过。
         if (this.isInWater() && this.getFluidHeight(FluidTags.WATER) > (double) f) {
             this.setUnderwaterMovement();
         } else if (this.isInLava() && this.getFluidHeight(FluidTags.LAVA) > (double) f) {
@@ -162,8 +139,6 @@ public class AtomItemEntity extends Entity {
             }
         }
 
-        // 原版这里会调 ForgeEventFactory.onItemExpire(this, item)（参数要 ItemEntity），无法调用，
-        // 所以直接按 lifespan 消失。
         if (!this.level().isClientSide && this.age >= this.lifespan) {
             this.discard();
         }
@@ -173,7 +148,6 @@ public class AtomItemEntity extends Entity {
         }
     }
 
-    // 原版 ItemEntity 里是 private，这里原样复制
     private void setUnderwaterMovement() {
         Vec3 vec3 = this.getDeltaMovement();
         this.setDeltaMovement(vec3.x * (double) 0.99F,
@@ -187,10 +161,6 @@ public class AtomItemEntity extends Entity {
                 vec3.y + (double) (vec3.y < (double) 0.06F ? 5.0E-4F : 0.0F),
                 vec3.z * (double) 0.95F);
     }
-
-    // ------------------------------------------------------------------
-    // 合并（仅在同类 AtomItemEntity 之间，判定对齐原版 ItemEntity.areMergable）
-    // ------------------------------------------------------------------
 
     private boolean isMergable() {
         ItemStack stack = this.getItem();
@@ -229,10 +199,6 @@ public class AtomItemEntity extends Entity {
         this.age = Math.min(this.age, other.getAge());
         other.discard();
     }
-
-    // ------------------------------------------------------------------
-    // 存档
-    // ------------------------------------------------------------------
 
     @Override
     protected void addAdditionalSaveData(@NotNull CompoundTag tag) {

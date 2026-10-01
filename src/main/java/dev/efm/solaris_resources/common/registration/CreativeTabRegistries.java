@@ -22,6 +22,8 @@ public class CreativeTabRegistries {
                         output.accept(ItemRegistries.WATER_CONVERT_TOME.get());
 
                         ItemRegistries.items.forEach(atomItemRegistryObject -> output.accept(atomItemRegistryObject.get()));
+
+                        output.accept(ItemRegistries.WATER_DISSOLVE_TOME.get());
                     })
                     .build());
 
