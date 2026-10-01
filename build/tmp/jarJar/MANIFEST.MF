@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Specification-Title: solaris_progress
+Specification-Vendor: å¢¨å°
+Specification-Version: 1
+Implementation-Title: solaris_progress
+Implementation-Version: 1.0.0
+Implementation-Vendor: å¢¨å°
+Implementation-Timestamp: 2026-09-26T19:56:31+0800
+MixinConfigs: solaris_progress.mixins.json
+
