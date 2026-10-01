@@ -79,7 +79,7 @@ public class DialogueRoot extends FullScreenGroup {
         scriptId = script == null ? "" : script.scriptId();
 
         background = new ImageWidget(0, 0, 0, 0,
-                new ResourceBorderTexture("solaris_compat:textures/gui/sola_background.png", 16, 16, 5, 5));
+                new ResourceBorderTexture("solaris_rpg:textures/gui/sola_background.png", 16, 16, 5, 5));
 
         portrait = new ImageWidget(0, 0, 0, 0, IGuiTexture.EMPTY);
         portrait.setVisible(false);

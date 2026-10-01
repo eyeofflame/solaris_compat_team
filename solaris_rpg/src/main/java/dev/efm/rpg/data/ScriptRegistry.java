@@ -21,10 +21,10 @@ public class ScriptRegistry {
     /**
      * 奥利维亚的立绘。这是<b>完整资源路径</b>——Minecraft 的纹理 ResourceLocation 本身就含
      * {@code textures/} 前缀和 {@code .png} 后缀，不用再拼。
-     * 文件放在 {@code assets/solaris_compat/textures/gui/portrait/olivia.png}，
+     * 文件放在 {@code assets/solaris_rpg/textures/gui/portrait/olivia.png}，
      * 资源包对同一路径的覆盖会自动生效。
      */
-    private static final String PORTRAIT_OLIVIA = "solaris_compat:textures/gui/portrait/olivia.png";
+    private static final String PORTRAIT_OLIVIA = "solaris_rpg:textures/gui/portrait/olivia.png";
 
     private static final Map<String, Script> BUILTIN = new LinkedHashMap<>();
     private static final Map<String, Script> DATAPACK = new LinkedHashMap<>();

@@ -1,4 +1,4 @@
-package dev.efm.solaris_compat.kjs;
+package dev.efm.rpg.kjs;
 
 import dev.efm.rpg.SFactory;
 import dev.efm.rpg.SHolder;

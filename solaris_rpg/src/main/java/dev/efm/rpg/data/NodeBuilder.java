@@ -33,7 +33,7 @@ public class NodeBuilder {
     }
 
     /**
-     * 立绘路径（完整资源路径，形如 {@code solaris_compat:textures/gui/portrait/olivia.png}）。
+     * 立绘路径（完整资源路径，形如 {@code solaris_rpg:textures/gui/portrait/olivia.png}）。
      *
      * <p>缺省是 {@link Node#PORTRAIT_KEEP}，表示沿用上一个节点显示的那张；
      * 传 {@link Node#PORTRAIT_HIDE} 则收起立绘。

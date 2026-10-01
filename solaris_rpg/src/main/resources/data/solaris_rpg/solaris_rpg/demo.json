@@ -9,7 +9,7 @@
     {
       "id": "greet",
       "speaker": "奥利维亚",
-      "portrait": "solaris_compat:textures/gui/portrait/olivia.png",
+      "portrait": "solaris_rpg:textures/gui/portrait/olivia.png",
       "text": "文件在 data/solaris_compat/solaris_rpg/demo.json，剧本 id 是 solaris_compat:demo。",
       "next": "branch"
     },

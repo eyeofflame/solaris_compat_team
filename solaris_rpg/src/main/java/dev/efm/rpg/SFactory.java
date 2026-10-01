@@ -4,8 +4,7 @@ import com.lowdragmc.lowdraglib.gui.factory.UIFactory;
 import com.lowdragmc.lowdraglib.gui.modular.ModularUI;
 import dev.efm.rpg.data.Script;
 import dev.efm.rpg.widgets.DialogueRoot;
-import dev.efm.solaris_compat.SolarisCompat;
-import dev.efm.solaris_compat.api.SHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
@@ -21,7 +20,7 @@ public class SFactory extends UIFactory<SHolder> {
     public static final SFactory INSTANCE = new SFactory();
 
     public SFactory() {
-        super(SHelper.buildRes(SolarisCompat.MODID, "gui"));
+        super(ResourceLocation.fromNamespaceAndPath(SolarisRpg.MODID, "gui"));
     }
 
     @Override

@@ -27,7 +27,7 @@ public final class PortraitTextures {
 
     /**
      * @param location 纹理的完整资源路径，形如
-     *                 {@code solaris_compat:textures/gui/portrait/olivia.png}
+     *                 {@code solaris_rpg:textures/gui/portrait/olivia.png}
      *                 （Minecraft 的纹理 ResourceLocation 本身就含 {@code textures/} 前缀和
      *                 {@code .png} 后缀，不用再拼）
      * @return {@code {width, height}}；资源包没有提供这张图时返回 {@code null}

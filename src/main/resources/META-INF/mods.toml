@@ -45,6 +45,12 @@ mandatory = true
 versionRange = "[0,10000000)"
 ordering = "NONE"
 side = "BOTH"
+[[dependencies."${mod_id}"]]
+modId = "solaris_rpg"
+mandatory = true
+versionRange = "[0,)"
+ordering = "AFTER"
+side = "BOTH"
 
 [[dependencies.mekanism_agriculture]]
 modId = "mekanism"

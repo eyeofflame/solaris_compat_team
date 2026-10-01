@@ -1,4 +1,4 @@
-package dev.efm.solaris_compat.kjs;
+package dev.efm.rpg.kjs;
 
 import dev.efm.rpg.data.Script;
 import dev.efm.rpg.data.ScriptBuilder;

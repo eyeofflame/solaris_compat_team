@@ -1,7 +1,7 @@
 package dev.efm.rpg.network;
 
-import dev.efm.solaris_compat.SolarisCompat;
-import dev.efm.solaris_compat.api.SHelper;
+import dev.efm.rpg.SolarisRpg;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 
@@ -19,7 +19,7 @@ public final class RpgNetwork {
     private static final String VERSION = "1";
 
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-            SHelper.buildRes(SolarisCompat.MODID, "rpg"),
+            ResourceLocation.fromNamespaceAndPath(SolarisRpg.MODID, "rpg"),
             () -> VERSION,
             VERSION::equals,
             VERSION::equals);

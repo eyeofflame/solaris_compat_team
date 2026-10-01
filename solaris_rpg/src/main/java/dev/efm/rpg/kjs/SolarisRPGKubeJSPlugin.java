@@ -1,4 +1,4 @@
-package dev.efm.solaris_compat.kjs;
+package dev.efm.rpg.kjs;
 
 import dev.efm.rpg.DialogueHooks;
 import dev.efm.rpg.data.ScriptRegistry;
@@ -33,7 +33,7 @@ public class SolarisRPGKubeJSPlugin extends KubeJSPlugin {
         // 剧情 API 本身用不到这些（builder 是通过回调传进去的），
         // 但放开的话脚本里也能 Java.type 到，方便调试
         filter.allow("dev.efm.rpg");
-        filter.allow("dev.efm.solaris_compat.kjs");
+        filter.allow("dev.efm.rpg.kjs");
     }
 
     @Override
