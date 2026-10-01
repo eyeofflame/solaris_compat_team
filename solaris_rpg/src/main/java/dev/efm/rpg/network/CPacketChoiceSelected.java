@@ -1,8 +1,6 @@
 package dev.efm.rpg.network;
 
-import com.lowdragmc.lowdraglib.gui.modular.ModularUIContainer;
 import dev.efm.rpg.DialogueHooks;
-import dev.efm.rpg.SHolder;
 import dev.efm.rpg.data.Choice;
 import dev.efm.rpg.data.Node;
 import dev.efm.rpg.data.Script;
@@ -62,14 +60,7 @@ public class CPacketChoiceSelected {
 
     private boolean isValid(ServerPlayer player) {
         // 1. 玩家当前开着的是不是这个剧本的对话界面
-        if (!(player.containerMenu instanceof ModularUIContainer container)) {
-            return false;
-        }
-        var modularUI = container.getModularUI();
-        if (modularUI == null || !(modularUI.holder instanceof SHolder holder)) {
-            return false;
-        }
-        if (!holder.script().scriptId().equals(scriptId)) {
+        if (!RpgValidation.isDialogueOpen(player, scriptId)) {
             return false;
         }
 

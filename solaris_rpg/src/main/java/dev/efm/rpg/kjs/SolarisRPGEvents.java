@@ -31,6 +31,10 @@ import java.util.function.Consumer;
  * SolarisRPG.choice(event => {
  *   if (event.choiceId === 'yes') event.player.give('minecraft:diamond')
  * })
+ *
+ * SolarisRPG.end(event => {
+ *   event.player.tell('这段对话结束了')
+ * })
  * }</pre>
  */
 public interface SolarisRPGEvents {
@@ -48,6 +52,13 @@ public interface SolarisRPGEvents {
      * <p>这是<b>通知</b>语义，不能否决或改变对话走向——走向在客户端按下按钮那一刻就定了。
      */
     EventHandler CHOICE = GROUP.server("choice", () -> ChoiceEventJS.class);
+
+    /**
+     * 玩家把对话正常走到了结尾（中途 Esc / 断线不触发）。
+     *
+     * <p>同样是<b>通知</b>语义，不能改变走向——事件触发时对话已经结束。
+     */
+    EventHandler END = GROUP.server("end", () -> EndEventJS.class);
 
     class ScriptsEventJS extends EventJS {
 
@@ -90,6 +101,22 @@ public interface SolarisRPGEvents {
             this.scriptId = scriptId;
             this.nodeId = nodeId;
             this.choiceId = choiceId;
+        }
+    }
+
+    /**
+     * 对话正常走到结尾。{@code nodeId} 是结尾所在的节点。
+     */
+    class EndEventJS extends EventJS {
+
+        public final ServerPlayer player;
+        public final String scriptId;
+        public final String nodeId;
+
+        public EndEventJS(ServerPlayer player, String scriptId, String nodeId) {
+            this.player = player;
+            this.scriptId = scriptId;
+            this.nodeId = nodeId;
         }
     }
 }

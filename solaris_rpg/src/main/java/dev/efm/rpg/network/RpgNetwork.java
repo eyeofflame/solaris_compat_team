@@ -16,7 +16,7 @@ public final class RpgNetwork {
     /**
      * 协议版本。客户端和服务端对不上时 Forge 会直接拒绝连接，所以改动包结构时记得一起改。
      */
-    private static final String VERSION = "1";
+    private static final String VERSION = "2";
 
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             ResourceLocation.fromNamespaceAndPath(SolarisRpg.MODID, "rpg"),
@@ -36,6 +36,10 @@ public final class RpgNetwork {
                 CPacketChoiceSelected::encode,
                 CPacketChoiceSelected::decode,
                 CPacketChoiceSelected::handle);
+        CHANNEL.registerMessage(id++, CPacketDialogueEnded.class,
+                CPacketDialogueEnded::encode,
+                CPacketDialogueEnded::decode,
+                CPacketDialogueEnded::handle);
     }
 
     /**
@@ -43,5 +47,12 @@ public final class RpgNetwork {
      */
     public static void sendChoice(String scriptId, String nodeId, String choiceId) {
         CHANNEL.sendToServer(new CPacketChoiceSelected(scriptId, nodeId, choiceId));
+    }
+
+    /**
+     * 客户端 → 服务端：告诉服务端对话已正常走到结尾。
+     */
+    public static void sendDialogueEnd(String scriptId, String nodeId) {
+        CHANNEL.sendToServer(new CPacketDialogueEnded(scriptId, nodeId));
     }
 }

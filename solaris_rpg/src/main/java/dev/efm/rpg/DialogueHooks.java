@@ -27,6 +27,16 @@ public final class DialogueHooks {
 
     private static final List<ChoiceListener> CHOICE_LISTENERS = new ArrayList<>();
 
+    /**
+     * 玩家把对话正常走到了结尾。
+     */
+    @FunctionalInterface
+    public interface EndListener {
+        void onEnd(ServerPlayer player, String scriptId, String nodeId);
+    }
+
+    private static final List<EndListener> END_LISTENERS = new ArrayList<>();
+
     private DialogueHooks() {
     }
 
@@ -39,6 +49,18 @@ public final class DialogueHooks {
     public static void fireChoice(ServerPlayer player, String scriptId, String nodeId, String choiceId) {
         for (ChoiceListener listener : CHOICE_LISTENERS) {
             listener.onChoice(player, scriptId, nodeId, choiceId);
+        }
+    }
+
+    public static void addEndListener(EndListener listener) {
+        if (listener != null) {
+            END_LISTENERS.add(listener);
+        }
+    }
+
+    public static void fireDialogueEnd(ServerPlayer player, String scriptId, String nodeId) {
+        for (EndListener listener : END_LISTENERS) {
+            listener.onEnd(player, scriptId, nodeId);
         }
     }
 }

@@ -21,6 +21,9 @@ public class SolarisRPGKubeJSPlugin extends KubeJSPlugin {
         DialogueHooks.addChoiceListener((player, scriptId, nodeId, choiceId) ->
                 SolarisRPGEvents.CHOICE.post(
                         new SolarisRPGEvents.ChoiceEventJS(player, scriptId, nodeId, choiceId)));
+        DialogueHooks.addEndListener((player, scriptId, nodeId) ->
+                SolarisRPGEvents.END.post(
+                        new SolarisRPGEvents.EndEventJS(player, scriptId, nodeId)));
     }
 
     @Override

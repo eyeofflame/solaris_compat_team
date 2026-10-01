@@ -52,6 +52,10 @@ public class DialogueRoot extends FullScreenGroup {
     private final String scriptId;
     private int lastRevision = -1;
     private boolean pendingClose;
+    /**
+     * 是否已就"正常走到结尾"通知过服务端。一次对话只发一次。
+     */
+    private boolean endNotified;
 
     /**
      * 立绘高度占屏幕高度的比例。
@@ -285,6 +289,12 @@ public class DialogueRoot extends FullScreenGroup {
             return;
         }
         if (!engine.advance()) {
+            // 正常走到结尾：先通知服务端（触发 Forge / KubeJS 事件），再延到下一次 tick 关界面。
+            // 同一 TCP 连接保序，结束包先于容器关闭到达服务端，校验时容器仍开着。
+            if (!endNotified) {
+                endNotified = true;
+                RpgNetwork.sendDialogueEnd(scriptId, engine.currentNodeId());
+            }
             // 延到下一次 tick 再关：现在还在 mouseClicked / keyPressed 的调用栈里，
             // 直接 setScreen(null) 会在遍历控件的途中把界面拆掉
             pendingClose = true;
