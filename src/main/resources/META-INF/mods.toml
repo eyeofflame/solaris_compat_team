@@ -47,7 +47,7 @@ ordering = "NONE"
 side = "BOTH"
 [[dependencies."${mod_id}"]]
 modId = "solaris_rpg"
-mandatory = true
+mandatory = false
 versionRange = "[0,)"
 ordering = "AFTER"
 side = "BOTH"
