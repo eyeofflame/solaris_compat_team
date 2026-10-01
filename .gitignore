@@ -4,3 +4,17 @@
 /build/
 /run/
 /run-data/
+
+# 子工程生成目录
+/solaris_rpg/.gradle/
+/solaris_rpg/build/
+/solaris_rpg/run/
+/solaris_rpg/run-data/
+
+# 编辑器 / 系统
+/.vscode/
+**/.DS_Store
+Thumbs.db
+
+# superpowers 账本 scratch
+/.superpowers/

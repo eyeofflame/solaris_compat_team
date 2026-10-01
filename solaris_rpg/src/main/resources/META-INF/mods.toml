@@ -1,0 +1,38 @@
+modLoader = "javafml"
+loaderVersion = "${loader_version_range}"
+license = "${mod_license}"
+
+[[mods]]
+modId = "solaris_rpg"
+version = "${mod_version}"
+displayName = "Solaris RPG"
+authors = "${mod_authors}"
+description = '''Solaris RPG dialogue framework'''
+
+[[dependencies.solaris_rpg]]
+modId = "forge"
+mandatory = true
+versionRange = "${forge_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.solaris_rpg]]
+modId = "minecraft"
+mandatory = true
+versionRange = "${minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.solaris_rpg]]
+modId = "ldlib"
+mandatory = true
+versionRange = "[0,10000000)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.solaris_rpg]]
+modId = "kubejs"
+mandatory = false
+versionRange = "[0,)"
+ordering = "AFTER"
+side = "BOTH"
