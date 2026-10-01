@@ -1,13 +1,13 @@
-package dev.efm.solaris_compat.client;
+package dev.efm.rpg.client;
 
-import dev.efm.solaris_compat.SolarisCompat;
-import dev.efm.solaris_compat.common.entity.OliviaEntities;
+import dev.efm.rpg.SolarisRpg;
+import dev.efm.rpg.entity.OliviaEntities;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = SolarisCompat.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = SolarisRpg.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class OliviaClientEvents {
 
     @SubscribeEvent

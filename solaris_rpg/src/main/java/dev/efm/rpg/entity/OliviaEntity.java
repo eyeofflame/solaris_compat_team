@@ -1,4 +1,4 @@
-package dev.efm.solaris_compat.common.entity;
+package dev.efm.rpg.entity;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
