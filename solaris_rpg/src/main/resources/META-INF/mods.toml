@@ -36,3 +36,10 @@ mandatory = false
 versionRange = "[0,)"
 ordering = "AFTER"
 side = "BOTH"
+
+[[dependencies.solaris_rpg]]
+modId = "rhino"
+mandatory = false
+versionRange = "[0,)"
+ordering = "AFTER"
+side = "BOTH"
