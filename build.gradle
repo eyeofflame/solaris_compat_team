@@ -1,3 +1,6 @@
+import org.gradle.api.attributes.LibraryElements
+import org.gradle.api.attributes.Usage
+
 buildscript {
     repositories {
 
@@ -110,6 +113,23 @@ repositories {
     }
 }
 
+// ===== Solaris 跨工程编译期依赖（消费 named classes 变体）=====
+// 跨工程直接依赖产出的 jar 不可用：reobfJar 会原地覆盖成 SRG 名，编译不过。
+// 这里改为消费其 classes 变体（build/classes/java/main，named 映射）。
+// 用法：在 dependencies 里写   solarisCompile "dev.efm:solaris_core:1.1.6-hotfix"
+// 注意：依赖关系必须无环。
+configurations {
+    solarisCompile {
+        canBeConsumed = false
+        canBeResolved = true
+        transitive = false
+        attributes {
+            attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage, Usage.JAVA_RUNTIME))
+            attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements, LibraryElements.CLASSES))
+        }
+    }
+}
+
 dependencies {
 
 
@@ -120,9 +140,9 @@ dependencies {
         jarJar.ranged(it, "[0.4.1.0,)")
     }
 
-    implementation fg.deobf("libs:create:1.20.1-6.0.8")
-    implementation fg.deobf("libs:ThirstWasReclaimed:1.20.1-3.0.4")
-    implementation(fg.deobf("libs:ThirstCanteen:1.20.1-3.6"))
+    /*implementation fg.deobf("libs:create:1.20.1-6.0.8")
+    /implementation fg.deobf("libs:ThirstWasReclaimed:1.20.1-3.0.4")
+    implementation(fg.deobf("libs:ThirstCanteen:1.20.1-3.6"))*/
     implementation fg.deobf("libs:cloth-config:11.1.136-forge")
 
     implementation(
@@ -169,6 +189,9 @@ dependencies {
     implementation fg.deobf("com.blakebr0.mysticalagriculture:MysticalAgriculture:${mysticalagriculture_version}")
 
     implementation fg.deobf("libs:jei:1.20.1-forge-15.62.0.216")
+
+    // Solaris 跨工程编译期依赖统一走这里（见上方 solarisCompile 说明）
+    compileOnly files(configurations.solarisCompile)
 }
 
 
