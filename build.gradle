@@ -91,6 +91,7 @@ mixin {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    mavenCentral()
     flatDir {
         dirs 'libs', 'libs/rpg', 'libs/rpg/extra'
     }
@@ -152,6 +153,8 @@ dependencies {
     runtimeOnly fg.deobf("libs:create:1.20.1-6.0.8")
     runtimeOnly fg.deobf("libs:amendments:1.20-2.2.6")
 
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+
 }
 
 
@@ -187,4 +190,9 @@ tasks.named('jar', Jar).configure {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+tasks.named('test').configure {
+    useJUnitPlatform()
+    testLogging { events 'passed', 'failed', 'skipped' }
 }
