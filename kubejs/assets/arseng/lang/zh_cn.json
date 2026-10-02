@@ -1,0 +1,23 @@
+{
+  "arseng.page.source_acceptor": "ME 魔源转换器能将魔源转换为 AE 能量。将其连接到 ME 网络，并用中继器向其提供魔源，即可直接以魔源为整个网络供能。",
+  "arseng.page.source_acceptor_description": "魔源转换器有方块和线缆部件两种形态。",
+  "arseng.page.source_cell_housing": "ME 魔源存储元件可通过 ME 魔源元件外壳合成。它们能在 Applied Energistics 2 的 ME 系统中储存数罐量的魔源。",
+  "block.arseng.me_source_jar": "ME 魔源罐",
+  "block.arseng.source_acceptor": "ME 魔源转换器",
+  "item.arseng.cable_source_acceptor": "ME 魔源接收器",
+  "item.arseng.creative_source_cell": "创造 ME 魔源存储元件",
+  "item.arseng.portable_source_cell_16k": "16k 便携魔源元件",
+  "item.arseng.portable_source_cell_1k": "1k 便携魔源元件",
+  "item.arseng.portable_source_cell_256k": "256k 便携魔源元件",
+  "item.arseng.portable_source_cell_4k": "4k 便携魔源元件",
+  "item.arseng.portable_source_cell_64k": "64k 便携魔源元件",
+  "item.arseng.source_cell_housing": "ME 魔源元件外壳",
+  "item.arseng.source_p2p_tunnel": "ME 魔源 P2P 通道",
+  "item.arseng.source_storage_cell_16k": "16k ME 魔源存储元件",
+  "item.arseng.source_storage_cell_1k": "1k ME 魔源存储元件",
+  "item.arseng.source_storage_cell_256k": "256k ME 魔源存储元件",
+  "item.arseng.source_storage_cell_4k": "4k ME 魔源存储元件",
+  "item.arseng.source_storage_cell_64k": "64k ME 魔源存储元件",
+  "item.arseng.spell_p2p_tunnel": "ME 法术 P2P 通道",
+  "itemGroup.arseng": "Ars Énergistique"
+}

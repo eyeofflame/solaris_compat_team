@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "ES2015",
+        "lib": [
+            "ES2015",
+            "ES5"
+        ],
+        "checkJs": true,
+        "allowJs": true,
+        "rootDirs": [
+            "probe/generated",
+            "probe/user",
+            "server_scripts",
+            "startup_scripts",
+            "client_scripts"
+        ]
+    },
+    "include": [
+        "**/*.js",
+        "probe/**/*.d.ts"
+    ]
+}

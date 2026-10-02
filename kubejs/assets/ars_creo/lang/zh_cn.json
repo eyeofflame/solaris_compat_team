@@ -1,0 +1,16 @@
+{
+	"block.ars_creo.starbuncle_wheel": "星兽轮",
+	"ars_creo.page.starbuncle_wheel": "为机械动力产生旋转力。在轮子前方放置一个金块可以提高转速（RPM）。",
+	"ars_creo.page.behaviors": "Ars Creo 为 Ars Nouveau 中的方块（包括法术炮台和魔源罐）赋予了特殊的动态装置行为。基础法术炮台 - 被交互时在装置上施放法术。定时炮台 - 按设定间隔施放法术。附魔法术炮台 - 每经过一个新方块时施放法术。魔源罐 - 可被装置上的炮台消耗。",
+	"itemGroup.ars_creo.general": "Ars Creo",
+	"ars_creo.display_source.turret.not_enough_space": "空间不足 ",
+	"ars_creo.display_source.turret.for_turret_status": "（查看炮台状态）",
+	"ars_creo.display_source.turret.no_spell": "未设置法术。",
+	"ars_creo.display_source.turret.spell_name": "法术：%s",
+	"ars_creo.display_source.turret.spell": "%s",
+	"ars_creo.display_source.turret_target": "法术炮台",
+	"ars_creo.display_source.source_count": "魔源：%s",
+	"ars_creo.display_source.for_source_status": "（查看魔源状态）",
+	"ars_creo.display_source.source_jar": "魔源储量",
+	"ars_creo.display_source.turret": "法术"
+}

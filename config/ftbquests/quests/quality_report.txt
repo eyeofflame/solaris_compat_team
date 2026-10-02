@@ -1,0 +1,93 @@
+=== AutoFTBQ 生成质量报告 ===
+状态: 可发布
+章节: 22
+任务: 2073
+补全正文: 0
+移除重复目标: 81
+重命名重复标题: 0
+移除失效依赖: 57
+
+--- 建议检查 ---
+- 任务“实践·获取安山合金”没有有效目标，已改为确认任务
+- 任务“实践·获取安山漏斗”没有有效目标，已改为确认任务
+- 任务“实践·获取可调节链式传动箱”没有有效目标，已改为确认任务
+- 任务“实践·获取模拟拉杆”没有有效目标，已改为确认任务
+- 任务“实践·获取安山门”没有有效目标，已改为确认任务
+- 任务“实践·获取安山梯子”没有有效目标，已改为确认任务
+- 任务“支线·获取安山岩柱”没有有效目标，已改为确认任务
+- 任务“支线·获取金合欢木窗户”没有有效目标，已改为确认任务
+- 任务“支线·获取金合欢木窗户板”没有有效目标，已改为确认任务
+- 无法确认物品 ID：mekanism:steel_ingot（科技·Mekanism 冶金与矿石处理）
+- 无法确认物品 ID：mekanism:heat_generator（科技·Mekanism 能量与发电入门）
+- 无法确认物品 ID：thermal:rf_coil（科技·热力膨胀机器入门）
+- 无法确认物品 ID：thermal:fluid_cell（科技·热力膨胀流体与精炼）
+- 无法确认物品 ID：thermal:rf_coil（科技·热力膨胀工具与钻头）
+- 无法确认物品 ID：thermal_extra:lumium_ingot（科技·热力膨胀末影与流明装备）
+- 无法确认物品 ID：thermal:rf_coil（科技·热力膨胀能量与机器入门）
+- 无法确认物品 ID：thermal:fluid_cell（科技·热力膨胀物流与自动输出）
+- 无法确认物品 ID：thermal:rf_coil（科技·热力膨胀深渊装备入门）
+- 无法确认物品 ID：thermal:fluid_cell（科技·热力膨胀龙钢锻造）
+- 无法确认物品 ID：mekanism:steel_ingot（支线·旋转复合与涡轮传动）
+- 无法确认物品 ID：thermal:stirling_generator（实践·搭建第一台斯特林发电机）
+- 无法确认物品 ID：thermal:fluid_cell（实践·搭建流体导管网络）
+- 无法确认物品 ID：thermal:obsidian_glass（实践·制作硬化玻璃）
+- 无法确认物品 ID：xnet:logic_sensor（支线·制作XNet逻辑传感器）
+- 无法确认物品 ID：xnet:density_sensor（支线·制作XNet密度传感器）
+- 无法确认物品 ID：thermal:upgrade_augment_1（支线·热力升级组件）
+- 无法确认物品 ID：thermal:energy_cell（实践·热力能量单元与物流）
+- 无法确认物品 ID：thermal:energy_pipe（实践·热力能量单元与物流）
+- 无法确认物品 ID：aether:gems/zanite（探索·赞特水晶护甲）
+- 无法确认物品 ID：iceandfire:raw_dragon_meat（支线·冰火传说驯龙）
+- 无法确认物品 ID：biomesoplenty:cherry_sapling（支线·超多生物群系樱花林）
+- 无法确认物品 ID：biomesoplenty:cherry_sapling（探索·超多生物群系新世界）
+- 无法确认物品 ID：copycats:copycat_pressure_plate（支线·伪装方块压力板）
+- 无法确认物品 ID：copycats:copycat_pressure_plate（支线·伪装方块压力板）
+- 无法确认物品 ID：brewinandchewin:cheese_wedges（支线·末地干粮补给）
+- 无法确认物品 ID：brewinandchewin:cheese_wedges（支线·发酵的浓汤）
+- 无法确认物品 ID：brewinandchewin:cheese_wedges（支线·酿造发酵饮品）
+- 无法确认物品 ID：itemfilters:filters（支线·过滤器的与或非）
+- 无法确认物品 ID：itemfilters:filters（支线·过滤器全集）
+- 无法确认物品 ID：itemfilters:filters（支线·排除与异或）
+- 无法确认物品 ID：itemfilters:filters（主线·物品过滤器）
+- 无法确认物品 ID：mowziesmobs:solar_beam（主线·太阳鸟乌姆武提）
+- 无法确认物品 ID：mowziesmobs:grottol_shard（支线·岩壳居蟹的矿石）
+- 无法确认物品 ID：cataclysm:eye_of_guard（支线·守护之眼）
+- 无法确认物品 ID：cataclysm:eye_of_frost（支线·霜冻之眼）
+- 无法确认物品 ID：cataclysm:eye_of_sun（支线·金乌之眼）
+- 无法确认物品 ID：mekanism:steel_ingot（科技·Mekanism 冶金与矿石处理）
+- 无法确认物品 ID：mekanism:heat_generator（科技·Mekanism 能量与发电入门）
+- 无法确认物品 ID：thermal:rf_coil（科技·热力膨胀机器入门）
+- 无法确认物品 ID：thermal:fluid_cell（科技·热力膨胀流体与精炼）
+- 无法确认物品 ID：thermal:rf_coil（科技·热力膨胀工具与钻头）
+- 无法确认物品 ID：thermal_extra:lumium_ingot（科技·热力膨胀末影与流明装备）
+- 无法确认物品 ID：thermal:rf_coil（科技·热力膨胀能量与机器入门）
+- 无法确认物品 ID：thermal:fluid_cell（科技·热力膨胀物流与自动输出）
+- 无法确认物品 ID：thermal:rf_coil（科技·热力膨胀深渊装备入门）
+- 无法确认物品 ID：thermal:fluid_cell（科技·热力膨胀龙钢锻造）
+- 无法确认物品 ID：mekanism:steel_ingot（支线·旋转复合与涡轮传动）
+- 无法确认物品 ID：thermal:stirling_generator（实践·搭建第一台斯特林发电机）
+- 无法确认物品 ID：thermal:fluid_cell（实践·搭建流体导管网络）
+- 无法确认物品 ID：thermal:obsidian_glass（实践·制作硬化玻璃）
+- 无法确认物品 ID：xnet:logic_sensor（支线·制作XNet逻辑传感器）
+- 无法确认物品 ID：xnet:density_sensor（支线·制作XNet密度传感器）
+- 无法确认物品 ID：thermal:upgrade_augment_1（支线·热力升级组件）
+- 无法确认物品 ID：thermal:energy_cell（实践·热力能量单元与物流）
+- 无法确认物品 ID：thermal:energy_pipe（实践·热力能量单元与物流）
+- 无法确认物品 ID：aether:gems/zanite（探索·赞特水晶护甲）
+- 无法确认物品 ID：iceandfire:raw_dragon_meat（支线·冰火传说驯龙）
+- 无法确认物品 ID：biomesoplenty:cherry_sapling（支线·超多生物群系樱花林）
+- 无法确认物品 ID：biomesoplenty:cherry_sapling（探索·超多生物群系新世界）
+- 无法确认物品 ID：copycats:copycat_pressure_plate（支线·伪装方块压力板）
+- 无法确认物品 ID：copycats:copycat_pressure_plate（支线·伪装方块压力板）
+- 无法确认物品 ID：brewinandchewin:cheese_wedges（支线·末地干粮补给）
+- 无法确认物品 ID：brewinandchewin:cheese_wedges（支线·发酵的浓汤）
+- 无法确认物品 ID：brewinandchewin:cheese_wedges（支线·酿造发酵饮品）
+- 无法确认物品 ID：itemfilters:filters（支线·过滤器的与或非）
+- 无法确认物品 ID：itemfilters:filters（支线·过滤器全集）
+- 无法确认物品 ID：itemfilters:filters（支线·排除与异或）
+- 无法确认物品 ID：itemfilters:filters（主线·物品过滤器）
+- 无法确认物品 ID：mowziesmobs:solar_beam（主线·太阳鸟乌姆武提）
+- 无法确认物品 ID：mowziesmobs:grottol_shard（支线·岩壳居蟹的矿石）
+- 无法确认物品 ID：cataclysm:eye_of_guard（支线·守护之眼）
+- 无法确认物品 ID：cataclysm:eye_of_frost（支线·霜冻之眼）
+- 无法确认物品 ID：cataclysm:eye_of_sun（支线·金乌之眼）

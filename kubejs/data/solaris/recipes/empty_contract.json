@@ -1,0 +1,30 @@
+{
+    "type": "solaris_compat:solaris_shapeless",
+    "category": "misc",
+    "ingredients": [
+        {
+            "tag": "farmersdelight:tools/knives",
+            "damage": 3
+        },
+        {
+            "item": "minecraft:water_bucket",
+            "remainder": "minecraft:bucket"
+        },
+        {
+            "item": "minecraft:paper"
+        },
+        {
+            "item": "minecraft:paper"
+        },
+        {
+            "tag": "forge:leather"
+        },
+        {
+            "item":"minecraft:bone_meal"
+        }
+    ],
+    "result": {
+        "item": "solaris_compat:empty_contract",
+        "count": 2
+    }
+}

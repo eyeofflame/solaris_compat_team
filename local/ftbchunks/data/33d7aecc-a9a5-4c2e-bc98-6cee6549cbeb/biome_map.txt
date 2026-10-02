@@ -1,0 +1,3 @@
+#67B betterend:empty_smaragdant_cave
+#3DC minecraft:plains
+#400 minecraft:the_end

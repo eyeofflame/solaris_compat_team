@@ -1,0 +1,4 @@
+#674 minecraft:flower_forest
+#4F1 minecraft:ocean
+#3DC minecraft:plains
+#51A minecraft:stony_shore

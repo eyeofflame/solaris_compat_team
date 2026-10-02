@@ -1,0 +1,264 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "2649301A0E28F444"
+	group: "10563F4222377D1F"
+	hide_quest_until_deps_complete: true
+	icon: {
+		Count: 1
+		id: "minecraft:diamond_sword"
+		tag: {
+			Damage: 0
+		}
+	}
+	id: "2649301A0E28F444"
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["24CB0BD77F841BEA"]
+			description: [
+				"世界已被入侵者撕裂，黑暗正一点点吞噬一切。"
+				"你是被召唤而来的最后希望，降临在这世上仅存的城市——女神奥利维娅以残存神力庇护的最后一处净土。"
+				""
+				"可她的神力已近枯竭，庇护撑不了太久了。"
+				"接下她的委托：完成任务、重聚神力、守住这座城市；等力量足够的那天，你将逆转一切，让世界重归原貌。"
+				""
+				"· 生存：口渴与温度系统会持续影响你，记得及时补水、注意保暖。"
+				"· 战斗：更好的战斗带来全新的攻击手感与更丰富的武器选择。"
+				"· 科技：机械动力、Mekanism、Thermal、Just Dire Things 等多条科技线，都是你守护此城的力量。"
+				""
+				"基于 Minecraft 1.20.1 Forge。你的故事，从这里开始。"
+			]
+			hide_until_deps_complete: true
+			icon: {
+				Count: 1
+				id: "minecraft:netherite_sword"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "7CA44A998EE0AE7D"
+			rewards: [{
+				exclude_from_claim_all: true
+				id: "3F97E93F299AA42A"
+				table_id: 8868824342411356215L
+				type: "all_table"
+			}]
+			size: 3.0d
+			tasks: [
+				{
+					id: "690603E7D646CCCA"
+					title: "你醒了……"
+					type: "checkmark"
+				}
+				{
+					disable_toast: true
+					id: "7CA44A998EE0AE7C"
+					title: "穿过末地传送门"
+					type: "custom"
+				}
+			]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7CA44A998EE0AE7D"]
+			description: [
+				"庇护衰弱之后，城外的水土也在一点点失去生机——从今往后，口渴会实实在在地威胁你。"
+				"（本包启用了口渴系统：口渴值会随时间下降，记得及时补充水分。）"
+				"先从最基础的一步开始：烧一瓶纯净水。"
+				"提示：把装满水的水瓶加热煮沸，就能得到纯净水。"
+			]
+			hide_until_deps_complete: true
+			icon: {
+				Count: 1
+				id: "minecraft:potion"
+				tag: {
+					Potion: "minecraft:water"
+				}
+			}
+			id: "4AAA8CA1CC5ED72D"
+			rewards: [{
+				id: "4BFA67B4FDEF6A26"
+				item: {
+					Count: 1
+					id: "thirstcanteen:leather_canteen_full"
+					tag: {
+						Contain: 8
+						Purity: 3
+					}
+				}
+				type: "item"
+			}]
+			size: 2.0d
+			tasks: [{
+				id: "2FD4FE33C413B480"
+				type: "checkmark"
+			}]
+			title: "试炼·焦渴"
+			x: -2.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["7CA44A998EE0AE7D"]
+			description: [
+				"随着神力消退，城外的气候也变得极端无常。酷寒与炎暑同样致命——学会保暖与降温，才能活着走下去。"
+				"（本包启用了温度系统：环境过冷或过热都会影响你的身体状态。）"
+				"奥利维娅赐你一支温度计，让它替你看清周围的温度。"
+			]
+			hide_until_deps_complete: true
+			icon: "cold_sweat:thermometer"
+			id: "687C754BA5E80731"
+			rewards: [{
+				id: "0AE88A0F74D6A687"
+				item: "cold_sweat:thermometer"
+				type: "item"
+			}]
+			tasks: [{
+				id: "71ACBC9E48B0020A"
+				title: "了解温度系统"
+				type: "checkmark"
+			}]
+			title: "试炼·严寒"
+			x: 2.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7CA44A998EE0AE7D"]
+			description: [
+				"入侵者的余孽仍在城外游荡，这一战躲不掉——你得把剑握得更稳。"
+				"（本包加入了更好的战斗：武器拥有更丰富的攻击动作与更扎实的手感。）"
+			]
+			hide_until_deps_complete: true
+			icon: {
+				Count: 1
+				id: "simplyswords:iron_longsword"
+				tag: {
+					Damage: 0
+				}
+			}
+			id: "5CE31560B0FEAA3B"
+			rewards: [{
+				id: "25C9B203E0A88CBD"
+				item: {
+					Count: 1
+					id: "simplyswords:iron_longsword"
+					tag: {
+						Damage: 0
+					}
+				}
+				type: "item"
+			}]
+			tasks: [{
+				id: "2D48A0E2E77ED942"
+				title: "体验全新的战斗手感"
+				type: "checkmark"
+			}]
+			title: "试炼·利刃"
+			x: 0.0d
+			y: -2.5d
+		}
+		{
+			dependencies: ["7CA44A998EE0AE7D"]
+			description: [
+				"本包加入了机械动力以及大量附属模组。"
+				"提示：水车需要浸在河流或海洋中才能正常运转，风车则需要建在开阔、通风的地方。"
+				"你亲手转起第一组齿轮时才明白：每一下转动，都是在为城邦积蓄力量。"
+			]
+			hide_until_deps_complete: true
+			icon: "create:large_cogwheel"
+			id: "3CB90E0967D07EAB"
+			tasks: [{
+				id: "17DC8C6B2FCF9D85"
+				title: "开始你的机械动力之旅！"
+				type: "checkmark"
+			}]
+			title: "机械动力！"
+			x: -2.5d
+			y: 0.0d
+		}
+		{
+			dependencies: ["7CA44A998EE0AE7D"]
+			description: [
+				"本包加入了 Mekanism：从矿石多倍处理出发，一路走向核裂变与反物质。"
+				"你渐渐意识到，凡人的智慧本身也是一种神力。这些机器，终将成为守护城邦的底气。"
+			]
+			hide_until_deps_complete: true
+			icon: "mekanism:basic_smelting_factory"
+			id: "4DE9E672883FEBCC"
+			size: 2.0d
+			tasks: [{
+				id: "1C563CD2D22279A3"
+				title: "迈出 Mekanism 的第一步！"
+				type: "checkmark"
+			}]
+			title: "Mekanism！"
+			x: -2.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["7CA44A998EE0AE7D"]
+			description: [
+				"本包加入了 Thermal 系列：机器、管道与能源一应俱全。"
+				"你发现，把这些炉火交给机器，自己就能腾出手去做更重要的事——比如，拯救这个世界。"
+			]
+			hide_until_deps_complete: true
+			icon: {
+				Count: 1
+				id: "thermal:wrench"
+				tag: { }
+			}
+			id: "2662723959947715"
+			size: 2.0d
+			tasks: [{
+				id: "7151BBAD79966EEE"
+				title: "上手 Thermal 机器！"
+				type: "checkmark"
+			}]
+			title: "Thermal！"
+			x: 2.5d
+			y: -2.5d
+		}
+		{
+			dependencies: ["7CA44A998EE0AE7D"]
+			description: [
+				"本包加入了 Just Dire Things：一条以科技工具与自动化为主的进阶路线。"
+				"亲手让这些奇妙的装置运转起来后，你开始觉得：守护一座城，或许并没有想象中那么遥不可及。"
+			]
+			hide_until_deps_complete: true
+			icon: "justdirethings:gooblock_tier1"
+			id: "2CB9AF940D3CCF6D"
+			size: 2.0d
+			tasks: [{
+				id: "31B24555EA4961C1"
+				title: "探索 Just Dire Things！"
+				type: "checkmark"
+			}]
+			title: "Just Dire Things！"
+			x: 2.5d
+			y: 2.5d
+		}
+		{
+			dependencies: ["7CA44A998EE0AE7D"]
+			description: [
+				"城邦的物资终有耗尽的一天，奥利维娅需要有人替她看看城外的世界。"
+				"四处走走吧，找到一片平原——那里或许就是城邦未来的新家园。"
+				"（可选任务，不影响主线进度。）"
+			]
+			hide_until_deps_complete: true
+			id: "2E228DD0AB713D7B"
+			optional: true
+			size: 3.0d
+			tasks: [{
+				biome: "minecraft:plains"
+				id: "7E1D735AFF86D3F6"
+				title: "找到一片平原"
+				type: "biome"
+			}]
+			x: 0.0d
+			y: 5.0d
+		}
+	]
+	title: "启程"
+}

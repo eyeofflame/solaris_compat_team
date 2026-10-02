@@ -1,0 +1,109 @@
+=== 物品ID自动修正报告 ===
+成功修正: 32 个物品ID
+无法修正: 50 个物品ID
+说明: 原版 Minecraft ID 由游戏注册表决定，离线模式仅保留原值，不进行危险的近似替换。
+环境: Minecraft 1.20.1 / Forge / FTB Quests 2001.4.22
+
+--- 无法修正的物品ID ---
+  mekanism:steel_ingot — Task in '科技·Mekanism 冶金与矿石处理'
+    原因: 在 'mekanism' 中找不到相似物品，ID 可能不存在
+  mekanism:heat_generator — Task in '科技·Mekanism 能量与发电入门'
+    原因: 在 'mekanism' 中找不到相似物品，ID 可能不存在
+  thermal:rf_coil — Reward in '科技·热力膨胀机器入门'
+    原因: 在 'thermal' 中找不到相似物品，ID 可能不存在
+  thermal:fluid_cell — Reward in '科技·热力膨胀流体与精炼'
+    原因: 在 'thermal' 中找不到相似物品，ID 可能不存在
+  thermal:rf_coil — Reward in '科技·热力膨胀工具与钻头'
+    原因: 在 'thermal' 中找不到相似物品，ID 可能不存在
+  thermal_extra:lumium_ingot — Reward in '科技·热力膨胀末影与流明装备'
+    原因: 在 'thermal_extra' 中找不到相似物品，ID 可能不存在
+  thermal:rf_coil — Task in '科技·热力膨胀能量与机器入门'
+    原因: 在 'thermal' 中找不到相似物品，ID 可能不存在
+  thermal:fluid_cell — Task in '科技·热力膨胀物流与自动输出'
+    原因: 在 'thermal' 中找不到相似物品，ID 可能不存在
+  thermal:rf_coil — Reward in '科技·热力膨胀深渊装备入门'
+    原因: 在 'thermal' 中找不到相似物品，ID 可能不存在
+  thermal:fluid_cell — Reward in '科技·热力膨胀龙钢锻造'
+    原因: 在 'thermal' 中找不到相似物品，ID 可能不存在
+  mekanism:steel_ingot — Reward in '支线·旋转复合与涡轮传动'
+    原因: 在 'mekanism' 中找不到相似物品，ID 可能不存在
+  thermal:stirling_generator — Task in '实践·搭建第一台斯特林发电机'
+    原因: 在 'thermal' 中找不到相似物品，ID 可能不存在
+  thermal:rf_coil — Reward in '实践·组装红石熔炉'
+    原因: 在 'thermal' 中找不到相似物品，ID 可能不存在
+  thermal:fluid_cell — Reward in '实践·搭建流体导管网络'
+    原因: 在 'thermal' 中找不到相似物品，ID 可能不存在
+  thermal:obsidian_glass — Task in '实践·制作硬化玻璃'
+    原因: 在 'thermal' 中找不到相似物品，ID 可能不存在
+  thermal:rf_coil — Reward in '实践·组装热力机器框架'
+    原因: 在 'thermal' 中找不到相似物品，ID 可能不存在
+  xnet:logic_sensor — Task in '支线·制作XNet逻辑传感器'
+    原因: 在 'xnet' 中找不到相似物品，ID 可能不存在
+  xnet:density_sensor — Task in '支线·制作XNet密度传感器'
+    原因: 在 'xnet' 中找不到相似物品，ID 可能不存在
+  thermal:upgrade_augment_1 — Task in '支线·热力升级组件'
+    原因: 在 'thermal' 中找不到相似物品，ID 可能不存在
+  thermal:energy_cell — Task in '实践·热力能量单元与物流'
+    原因: 在 'thermal' 中找不到相似物品，ID 可能不存在
+  thermal:energy_pipe — Task in '实践·热力能量单元与物流'
+    原因: 在 'thermal' 中找不到相似物品，ID 可能不存在
+  astralsorcery:aquamarine — Task in '实践·获取Aquamarine'
+    原因: Mod 'astralsorcery' 不在已安装的 Mod 列表中，无法验证此 ID
+  astralsorcery:marble_raw — Task in '实践·获取Marble Raw'
+    原因: Mod 'astralsorcery' 不在已安装的 Mod 列表中，无法验证此 ID
+  astralsorcery:rock_crystal — Task in '实践·获取Rock Crystal'
+    原因: Mod 'astralsorcery' 不在已安装的 Mod 列表中，无法验证此 ID
+  astralsorcery:starmetal_ingot — Task in '实践·获取Starmetal Ingot'
+    原因: Mod 'astralsorcery' 不在已安装的 Mod 列表中，无法验证此 ID
+  bigreactors:cyanite_ingot — Task in '实践·获取Cyanite Ingot'
+    原因: Mod 'bigreactors' 不在已安装的 Mod 列表中，无法验证此 ID
+  bigreactors:yellorium_ingot — Task in '实践·获取Yellorium Ingot'
+    原因: Mod 'bigreactors' 不在已安装的 Mod 列表中，无法验证此 ID
+  chisel:basalt/raw — Task in '实践·获取Basalt/Raw'
+    原因: Mod 'chisel' 不在已安装的 Mod 列表中，无法验证此 ID
+  chisel:limestone/raw — Task in '实践·获取Limestone/Raw'
+    原因: Mod 'chisel' 不在已安装的 Mod 列表中，无法验证此 ID
+  chisel:marble/raw — Task in '实践·获取Marble/Raw'
+    原因: Mod 'chisel' 不在已安装的 Mod 列表中，无法验证此 ID
+  draconicevolution:draconium_ingot — Task in '实践·获取Draconium Ingot'
+    原因: Mod 'draconicevolution' 不在已安装的 Mod 列表中，无法验证此 ID
+  immersiveengineering:ingot_hop_graphite — Task in '实践·获取Ingot Hop Graphite'
+    原因: Mod 'immersiveengineering' 不在已安装的 Mod 列表中，无法验证此 ID
+  integrateddynamics:menril_berries — Task in '实践·获取Menril Berries'
+    原因: Mod 'integrateddynamics' 不在已安装的 Mod 列表中，无法验证此 ID
+  integrateddynamics:menril_log — Task in '实践·获取Menril Log'
+    原因: Mod 'integrateddynamics' 不在已安装的 Mod 列表中，无法验证此 ID
+  integrateddynamics:menril_sapling — Task in '实践·获取Menril Sapling'
+    原因: Mod 'integrateddynamics' 不在已安装的 Mod 列表中，无法验证此 ID
+  aether:gems/zanite — Reward in '探索·赞特水晶护甲'
+    原因: 在 'aether' 中找不到相似物品，ID 可能不存在
+  iceandfire:raw_dragon_meat — Reward in '支线·冰火传说驯龙'
+    原因: 在 'iceandfire' 中找不到相似物品，ID 可能不存在
+  biomesoplenty:cherry_sapling — Task in '支线·超多生物群系樱花林'
+    原因: 在 'biomesoplenty' 中找不到相似物品，ID 可能不存在
+  betternether:anchor_tree_log — Task in '探索·更好的下界新地形'
+    原因: Mod 'betternether' 不在已安装的 Mod 列表中，无法验证此 ID
+  betternether:nether_reed — Task in '探索·更好的下界新地形'
+    原因: Mod 'betternether' 不在已安装的 Mod 列表中，无法验证此 ID
+  biomesoplenty:cherry_sapling — Reward in '探索·超多生物群系新世界'
+    原因: 在 'biomesoplenty' 中找不到相似物品，ID 可能不存在
+  copycats:copycat_pressure_plate — Task in '支线·伪装方块压力板'
+    原因: 在 'copycats' 中找不到相似物品，ID 可能不存在
+  brewinandchewin:cheese_wedges — Reward in '支线·发酵的浓汤'
+    原因: 在 'brewinandchewin' 中找不到相似物品，ID 可能不存在
+  brewinandchewin:cheese_wedges — Task in '支线·酿造发酵饮品'
+    原因: 在 'brewinandchewin' 中找不到相似物品，ID 可能不存在
+  itemfilters:filters — Task in '主线·物品过滤器'
+    原因: 在 'itemfilters' 中找不到相似物品，ID 可能不存在
+  mowziesmobs:solar_beam — Task in '主线·太阳鸟乌姆武提'
+    原因: 在 'mowziesmobs' 中找不到相似物品，ID 可能不存在
+  mowziesmobs:grottol_shard — Task in '支线·岩壳居蟹的矿石'
+    原因: 在 'mowziesmobs' 中找不到相似物品，ID 可能不存在
+  cataclysm:eye_of_guard — Task in '支线·守护之眼'
+    原因: 在 'cataclysm' 中找不到相似物品，ID 可能不存在
+  cataclysm:eye_of_frost — Task in '支线·霜冻之眼'
+    原因: 在 'cataclysm' 中找不到相似物品，ID 可能不存在
+  cataclysm:eye_of_sun — Task in '支线·金乌之眼'
+    原因: 在 'cataclysm' 中找不到相似物品，ID 可能不存在
+
+  建议: 手动在SNBT文件中替换为正确的物品ID

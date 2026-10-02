@@ -1,0 +1,56 @@
+
+#Mekanism Optimizer General Settings
+["General Settings"]
+	#Enable caching of inventory acceptors to eliminate repeated chunk/capability lookups during item routing.
+	enableInventoryAcceptorCache = true
+	#Enable caching of transporter paths and destination lookups.
+	enableTransporterCache = true
+	#Enable O(1) fast Poisson distribution sampling to replace iterative loops.
+	enableFastPoissonSampler = true
+	#Enable adaptive tick backoff when ejectors or pipes encounter blocked targets.
+	enableAdaptiveBackoff = true
+	#Enable caching of skylight checks for Solar Neutron Activator and solar machines.
+	enableSolarLightCache = true
+	#Enable fast-path liquid fluid checks for Electric Pumps.
+	enableElectricPumpOptimization = true
+	#Enable dynamic emit cooldown for empty or stalled energy/chemical/fluid networks.
+	enableDynamicNetworkCooldown = true
+	#Enable fast simulated item insertion without full capability recreation.
+	enableFastSimulate = true
+	#Enable coalescing of tile entity update packets to reduce network bandwidth and client lag (MekDefender).
+	enablePacketCoalescing = true
+	#Enable sleeping anchor upgrades and dimensional stabilizers when the owner is offline (MekDefender).
+	enableOwnerChunkloadGating = true
+	#Enable ultra-fast, zero-allocation auto-sort item balancing for Mekanism and Addon (AME/Extras) factories.
+	enableFactoryAutoSortOptimization = true
+	#Enable adaptive tick caching for massive multiblocks (Turbine, Fusion Reactor, etc.) during steady states.
+	enableMultiblockOptimization = true
+	#Enable special performance optimizations for Mekanism Addons (Astral Mekanism, Evolved Mekanism, Mekanism Extras).
+	enableAddonOptimizations = true
+	#Enable O(1) instant bypass for living entity radiation calculations when world has no active radiation.
+	enableRadiationFastPath = true
+	#Enable adaptive backoff for universal cables and energy cubes when targets are fully charged.
+	enableCableBackoff = true
+	#Enable unit display and HUD tooltip formatting cache to eliminate repeated string allocations.
+	enableLookingAtCache = true
+	#Enable writing dedicated optimization and performance logs to logs/mekanism_optimizer.log.
+	enableDedicatedLogFile = true
+	#Tick delay between item auto-ejection cycles (0 = eject every tick, vanilla Mekanism default is 10).
+	#Range: 0 ~ 20
+	itemEjectTickDelay = 0
+
+#Advanced Tuning
+["Advanced Tuning"]
+	#Maximum ticks to back off when an ejection target is continuously blocked.
+	#Range: 1 ~ 100
+	maxBackoffTicks = 20
+	#Time-to-live in ticks for cached skylight visibility.
+	#Range: 5 ~ 200
+	solarLightCacheTtlTicks = 40
+	#Cooldown ticks before re-checking stalled networks.
+	#Range: 1 ~ 60
+	dynamicNetworkCooldownTicks = 10
+	#Interval in seconds for performance statistics logging (0 to disable).
+	#Range: 0 ~ 3600
+	logIntervalSeconds = 60
+

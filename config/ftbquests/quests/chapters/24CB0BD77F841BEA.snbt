@@ -1,0 +1,54 @@
+{
+	autofocus_id: "08CFB937B6EB2B4C"
+	default_hide_dependency_lines: false
+	default_quest_shape: ""
+	filename: "24CB0BD77F841BEA"
+	group: "10563F4222377D1F"
+	icon: "minecraft:dragon_head"
+	id: "24CB0BD77F841BEA"
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			id: "08CFB937B6EB2B4C"
+			rewards: [{
+				auto: "no_toast"
+				id: "1028BCB3F6BE3934"
+				tags: ["sola_init_0"]
+				team_reward: false
+				type: "custom"
+			}]
+			size: 8.0d
+			tasks: [{
+				entity: "minecraft:ender_dragon"
+				id: "57E1C1435FDE7766"
+				title: "击杀末影龙"
+				type: "kill"
+				value: 1L
+			}]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			can_repeat: true
+			id: "35CEDF3FEA9A34AA"
+			optional: true
+			rewards: [{
+				auto: "disabled"
+				exclude_from_claim_all: true
+				id: "59B8881A5F4AEED3"
+				tags: ["sola_init_kill"]
+				team_reward: true
+				type: "custom"
+			}]
+			tasks: [{
+				id: "1B46C2A9D2E398E2"
+				title: "太难打了？我来助你！"
+				type: "checkmark"
+			}]
+			x: 6.0d
+			y: 0.0d
+		}
+	]
+	title: "始"
+}

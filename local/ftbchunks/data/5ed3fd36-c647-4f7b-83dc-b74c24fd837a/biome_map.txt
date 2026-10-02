@@ -1,0 +1,11 @@
+#4DF biomesoplenty:aspen_glade
+#47F minecraft:birch_forest
+#010 minecraft:forest
+#1DF minecraft:old_growth_birch_forest
+#5A5 biomesoplenty:orchard
+#4C0 natures_spirit:prairie
+#28B biomesoplenty:pumpkin_patch
+#5FF minecraft:river
+#204 biomesoplenty:rocky_shrubland
+#108 biomesoplenty:seasonal_forest
+#2CF biomesoplenty:shrubland

@@ -1,0 +1,9 @@
+
+[general]
+	enableEat = true
+	enableRESPROC = true
+	#Range: 5 ~ 60
+	resproc_time = 10
+	#Range: 60 ~ 1800
+	clean_time = 1800
+

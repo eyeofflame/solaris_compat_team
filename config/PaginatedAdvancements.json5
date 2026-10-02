@@ -1,0 +1,12 @@
+{
+	"PinningEnabled": true,
+	"ShowAdvancementIDInDebugTooltip": true,
+	"ShowDebugInfo": "DEBUG_TOOLTIPS_ENABLED",
+	"MaxCriterionEntries": 2,
+	"FadeOutBackgroundOnAdvancementHover": true,
+	"SaveLastSelectedTab": true,
+	"PinnedTabs": [],
+	"LastSelectedTab": "tconstruct:tools/materials_and_you",
+	"SpacingBetweenHorizontalTabs": 4,
+	"SpacingBetweenPinnedTabs": 2
+}

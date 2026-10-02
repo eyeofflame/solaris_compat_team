@@ -1,0 +1,31 @@
+
+[detection]
+	#Master switch. Off = vanilla Champions behavior untouched.
+	enabled = true
+	#STRICT: only MONSTER category.
+	#BALANCED: MONSTER or has attack damage (default).
+	#PERMISSIVE: balanced + deep class scan.
+	#Allowed Values: STRICT, BALANCED, PERMISSIVE
+	mode = "STRICT"
+	#Instantiate each entity once to check instanceof Enemy/Mob. PERMISSIVE only.
+	deepScan = false
+	#Force-include these namespaces. '*' = all (careful, includes passive).
+	nsInclude = []
+	#Never touch these namespaces.
+	nsExclude = []
+	#Never make these champion.
+	mobExclude = ["minecraft:armor_stand", "minecraft:painting", "minecraft:item_frame", "minecraft:leash_knot"]
+	#Always make these champion, overriding detection.
+	mobInclude = []
+	#Respect the championsoptimization:deny_champions entity tag.
+	useDenyTag = true
+
+[boss]
+	#Cap boss tier so they don't roll 5 affixes.
+	bossCapEnabled = true
+	#Range: 0 ~ 5
+	bossCap = 2
+	#Boss entity ids. Also reads championsoptimization:bosses tag.
+	#e.g. ["cataclysm:ender_golem", "mowziesmobs:frostmaw"]
+	bossList = ["minecraft:ender_dragon", "minecraft:wither", "minecraft:elder_guardian", "minecraft:warden"]
+

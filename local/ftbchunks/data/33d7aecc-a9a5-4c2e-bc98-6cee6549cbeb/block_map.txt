@@ -1,0 +1,15 @@
+#52B53D minecraft:air
+#058353 minecraft:cobblestone
+#E9A8F5 minecraft:crying_obsidian
+#E7031D mysticalagradditions:end_inferium_ore
+#987FC1 mysticalagradditions:end_prosperity_ore
+#A8CFF4 minecraft:end_stone
+#C75C69 minecraft:end_stone_brick_slab
+#31FB79 minecraft:end_stone_brick_stairs
+#C905F9 minecraft:end_stone_brick_wall
+#0EF243 minecraft:end_stone_bricks
+#C4CD60 betterend:ender_ore
+#721F77 betterend:flavolite
+#3F84B7 minecraft:grass_block
+#4A5E4E minecraft:obsidian
+#1FFA5A betterend:thallasium_ore

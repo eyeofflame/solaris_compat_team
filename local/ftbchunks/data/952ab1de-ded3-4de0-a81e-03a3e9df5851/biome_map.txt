@@ -1,0 +1,6 @@
+#4DF biomesoplenty:aspen_glade
+#3D6 minecraft:cold_ocean
+#5A5 biomesoplenty:orchard
+#28B biomesoplenty:pumpkin_patch
+#5FF minecraft:river
+#108 biomesoplenty:seasonal_forest
