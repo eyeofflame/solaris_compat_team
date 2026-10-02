@@ -7,7 +7,8 @@
   "mixins": [
     "PlayerListMixin",
     "ChunkMapMixin",
-    "RandomStateAccessor"
+    "RandomStateAccessor",
+    "MultiNoiseBiomeSourceMixin"
   ],
   "client": [
   ],
