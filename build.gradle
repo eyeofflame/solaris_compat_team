@@ -97,7 +97,7 @@ repositories {
 
 
     flatDir {
-        dir 'libs'
+        dirs 'libs', 'libs/runtime'
     }
 }
 
@@ -132,6 +132,8 @@ dependencies {
             fg.deobf("libs:geckolib:forge-1.20.1-4.8.4"),
             fg.deobf("libs:Patchouli:1.20.1-85-FORGE")
     )
+
+    runtimeOnly fg.deobf("libs:Jade:1.20.1-Forge-11.13.3")
 
     // Solaris 跨工程编译期依赖统一走这里（见上方 solarisCompile 说明）
     compileOnly files(configurations.solarisCompile)

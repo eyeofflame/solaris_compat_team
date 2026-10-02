@@ -20,10 +20,12 @@ public class CreativeTabRegistries {
                     .displayItems((parameters, output) -> {
                         output.accept(ItemRegistries.CRYSTALLIZED_WATER.get());
                         output.accept(ItemRegistries.WATER_CONVERT_TOME.get());
+                        output.accept(ItemRegistries.WATER_DISSOLVE_TOME.get());
+                        output.accept(ItemRegistries.ATOM_ASSEMBLY_TOME.get());
+                        output.accept(ItemRegistries.ATOM_AGGREGATION_TOME.get());
 
                         ItemRegistries.items.forEach(atomItemRegistryObject -> output.accept(atomItemRegistryObject.get()));
 
-                        output.accept(ItemRegistries.WATER_DISSOLVE_TOME.get());
                     })
                     .build());
 

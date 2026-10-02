@@ -2,12 +2,21 @@
   "item.solaris_resources.crystallized_water": "Crystallized Water",
   "itemGroup.solaris_resources": "Solaris Resources",
   "item.solaris_resources.water_convert_tome": "Caster Tome: Water Convert",
-  "item.solaris_resources.water_dissolve_tome": "Caster Tome: Water Dissolve",
+  "item.solaris_resources.water_dissolve_tome": "Caster Tome: Unstably Water Dissolve",
   "solaris_resources.glyph_name.convert_water": "Convert Water",
   "solaris_resources.glyph_desc.convert_water": "Converts water sources within a 3x3x3 area centered on the target into Crystallized Water.",
   "item.solaris_resources.atom_hydrogen": "Hydrogen atom",
   "item.solaris_resources.atom_oxygen": "Oxygen atom",
+  "item.solaris_resources.atom_iron": "Iron atom",
+  "item.solaris_resources.atom_copper": "Copper atom",
+  "item.solaris_resources.atom_coal": "Coal atom",
   "item.solaris.magic": "(destabilized by magical forces)",
   "solaris_resources.glyph_name.dissolve_water": "Dissolve Water",
-  "solaris_resources.glyph_desc.dissolve_water": "Dissolves Crystallized Water within a 3x3x3 area above the target into unstable Hydrogen and Oxygen atoms: 16 Hydrogen and 8 Oxygen per unit."
+  "solaris_resources.glyph_desc.dissolve_water": "Dissolves Crystallized Water within a 3x3x3 area above the target into unstable Hydrogen and Oxygen atoms: 16 Hydrogen and 8 Oxygen per unit.",
+  "solaris_resources.glyph_name.assembly_atom": "Unstable Mana Atom Assembly Type I",
+  "solaris_resources.glyph_desc.assembly_atom": "Randomly assemble unstable hydrogen atoms within a 3×3×3 area above the target into unstable iron atoms, unstable carbon atoms, and unstable copper atoms.",
+  "solaris_resources.glyph_name.aggregation_atom": "Unstable Mana Atom Aggregation Type I",
+  "solaris_resources.glyph_desc.aggregation_atom": "Re-aggregate the unstable atoms within a 3×3×3 area above the target into elemental substances.",
+  "item.solaris_resources.atom_assembly_tome": "Caster Tome: Unstable Mana Atom Assembly Type I",
+  "item.solaris_resources.atom_aggregation_tome": "Caster Tome: Unstable Mana Atom Aggregation Type I"
 }

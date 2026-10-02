@@ -9,5 +9,14 @@
   "item.solaris.magic": "（受魔力影响而不稳定）",
   "solaris_resources.glyph_name.dissolve_water": "水分解",
   "solaris_resources.glyph_desc.dissolve_water": "将目标上方3*3*3范围内的晶化水分解为不稳定的氢原子与氧原子：每份晶化水产出16个氢原子和8个氧原子。",
-  "item.solaris_resources.water_dissolve_tome": "法术卷册：水分解"
+  "item.solaris_resources.water_dissolve_tome": "法术卷册：不稳定水分解",
+  "item.solaris_resources.atom_iron": "铁原子",
+  "item.solaris_resources.atom_copper": "铜原子",
+  "item.solaris_resources.atom_coal": "碳原子",
+  "solaris_resources.glyph_name.assembly_atom": "不稳魔力原子组装I型",
+  "solaris_resources.glyph_desc.assembly_atom": "将目标上方3*3*3范围内的的不稳氢原子随机组装为不稳铁原子、不稳碳原子、不稳铜原子",
+  "solaris_resources.glyph_name.aggregation_atom": "不稳魔力原子聚合I型",
+  "solaris_resources.glyph_desc.aggregation_atom": "将目标上方3*3*3范围内的不稳原子重新聚合为单质物质",
+  "item.solaris_resources.atom_assembly_tome": "法术卷册：不稳魔力原子组装I型",
+  "item.solaris_resources.atom_aggregation_tome": "法术卷册：不稳魔力原子聚合I型"
 }

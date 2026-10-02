@@ -14,11 +14,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
-/**
- * 渲染 AtomItemEntity：按物品模型以 GROUND 姿态绘制，带上下浮动和自转，
- * 逻辑对齐原版 {@link net.minecraft.client.renderer.entity.ItemEntityRenderer} 的核心部分。
- */
 public class AtomItemEntityRenderer extends EntityRenderer<AtomItemEntity> {
 
     private final ItemRenderer itemRenderer;
@@ -31,8 +28,8 @@ public class AtomItemEntityRenderer extends EntityRenderer<AtomItemEntity> {
     }
 
     @Override
-    public void render(AtomItemEntity entity, float entityYaw, float partialTicks, PoseStack pose,
-                       MultiBufferSource buffer, int packedLight) {
+    public void render(AtomItemEntity entity, float entityYaw, float partialTicks, @NotNull PoseStack pose,
+                       @NotNull MultiBufferSource buffer, int packedLight) {
         ItemStack stack = entity.getItem();
         if (stack.isEmpty()) {
             return;
@@ -52,7 +49,7 @@ public class AtomItemEntityRenderer extends EntityRenderer<AtomItemEntity> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(AtomItemEntity entity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull AtomItemEntity entity) {
         return TextureAtlas.LOCATION_BLOCKS;
     }
 }

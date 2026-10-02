@@ -1,0 +1,6 @@
+{
+  "parent": "ars_nouveau:item/caster_tome",
+  "textures": {
+    "layer0": "solaris_resources:item/atom_tome"
+  }
+}

@@ -12,12 +12,14 @@ public class AtomItem extends Item {
     public final String convertedItem;
     public final boolean isMagic;
     private final String path;
+    public final Integer ratio;
 
-    public AtomItem(String convertedItem, boolean isMagic, String path) {
+    public AtomItem(String convertedItem, boolean isMagic, String path, Integer ratio) {
         super(new Properties().stacksTo(64));
         this.convertedItem = convertedItem;
         this.isMagic = isMagic;
         this.path = path;
+        this.ratio = ratio;
     }
 
     @Override

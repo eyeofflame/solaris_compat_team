@@ -3,6 +3,7 @@ package dev.efm.solaris_resources.common.entity;
 import dev.efm.solaris_resources.common.registration.EntityTypeRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -223,5 +224,10 @@ public class AtomItemEntity extends Entity {
     @Override
     public boolean isAttackable() {
         return false;
+    }
+
+    @Override
+    public @NotNull Component getName() {
+        return Component.empty().append(this.getItem().getItem().getName(this.getItem())).append(" *").append(String.valueOf(this.getItem().getCount()));
     }
 }
