@@ -8,7 +8,9 @@
     "PlayerListMixin",
     "ChunkMapMixin",
     "RandomStateAccessor",
-    "MultiNoiseBiomeSourceMixin"
+    "MultiNoiseBiomeSourceMixin",
+    "StructureManagerAccessor",
+    "ChunkGeneratorMixin"
   ],
   "client": [
   ],

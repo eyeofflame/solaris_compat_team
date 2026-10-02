@@ -22,4 +22,11 @@ class InitPlacementMathTest {
         int x0 = InitPlacementMath.anchor(0, 239);
         assertTrue(x0 <= 0 && x0 + 239 - 1 >= 0);
     }
+
+    @Test void structure_blocking_covers_core_and_margin() {
+        assertTrue(InitPlacementMath.chunkIntersectsProtectedRegion(0, 0, 0, 0, 128, 128));
+        assertTrue(InitPlacementMath.chunkIntersectsProtectedRegion(16, 0, 0, 0, 128, 128));
+        assertFalse(InitPlacementMath.chunkIntersectsProtectedRegion(17, 0, 0, 0, 128, 128));
+        assertTrue(InitPlacementMath.chunkIntersectsProtectedRegion(-16, 0, 0, 0, 128, 128));
+    }
 }

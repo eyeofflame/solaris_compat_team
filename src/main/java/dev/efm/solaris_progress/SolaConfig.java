@@ -17,6 +17,7 @@ public final class SolaConfig {
     private static final ForgeConfigSpec.IntValue CENTER_Z;
     private static final ForgeConfigSpec.BooleanValue PLACE_INIT;
     private static final ForgeConfigSpec.IntValue INIT_Y_OFFSET;
+    private static final ForgeConfigSpec.IntValue STRUCTURE_BLOCK_MARGIN;
 
     public static volatile boolean enabled = true;
     public static volatile double flatY = 64.0;
@@ -26,6 +27,7 @@ public final class SolaConfig {
     public static volatile double centerZ = 0.0;
     public static volatile boolean placeInit = true;
     public static volatile int initYOffset = -1;
+    public static volatile int structureBlockMargin = 128;
 
     /** Worldgen 参数在首次加载后冻结：保证地形包裹与群系/出生点读到同一份快照，修改需重启。 */
     private static volatile boolean frozen = false;
@@ -49,6 +51,8 @@ public final class SolaConfig {
                 .define("placeInit", true);
         INIT_Y_OFFSET = b.comment("结构最底层(相对 Y=0) 的世界 Y = flatY + 该偏移（-1 → 63）")
                 .defineInRange("initYOffset", -1, -64, 128);
+        STRUCTURE_BLOCK_MARGIN = b.comment("结构生成屏蔽额外缓冲，避免结构从平坦区外侧伸入")
+                .defineInRange("structureBlockMargin", 128, 0, 256);
         b.pop();
         SPEC = b.build();
     }
@@ -65,6 +69,7 @@ public final class SolaConfig {
         centerZ = CENTER_Z.get();
         placeInit = PLACE_INIT.get();
         initYOffset = INIT_Y_OFFSET.get();
+        structureBlockMargin = STRUCTURE_BLOCK_MARGIN.get();
         frozen = true;
     }
 
