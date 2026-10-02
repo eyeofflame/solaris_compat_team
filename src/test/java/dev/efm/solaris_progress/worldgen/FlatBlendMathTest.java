@@ -52,4 +52,18 @@ class FlatBlendMathTest {
             }
         }
     }
+
+    @Test void resolve_outside_returns_vanilla() {
+        assertEquals(42.0, FlatBlendMath.resolve(1000.0, 128.0, 32.0, 64.0, 0.0, 42.0), 1e-9);
+    }
+
+    @Test void resolve_inside_returns_flat() {
+        // flatDensity(64, 50) = 15，t = 0
+        assertEquals(15.0, FlatBlendMath.resolve(0.0, 128.0, 32.0, 64.0, 50.0, 42.0), 1e-9);
+    }
+
+    @Test void resolve_midpoint_blends() {
+        // d = 144 → t = 0.5；flat = 15，vanilla = 42 → 28.5
+        assertEquals(28.5, FlatBlendMath.resolve(144.0, 128.0, 32.0, 64.0, 50.0, 42.0), 1e-9);
+    }
 }

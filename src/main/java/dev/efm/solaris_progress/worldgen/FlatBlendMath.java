@@ -40,6 +40,19 @@ public final class FlatBlendMath {
         return flat + (vanilla - flat) * t;
     }
 
+    /**
+     * 核心决策：区域外返回原版密度；区域内与目标平地密度按距离平滑混合。
+     * 抽成纯函数以便单元测试。
+     */
+    public static double resolve(double d, double halfExtent, double blendWidth,
+                                 double flatY, double blockY, double vanillaValue) {
+        if (outside(d, halfExtent, blendWidth)) {
+            return vanillaValue;
+        }
+        double t = blendFactor(d, halfExtent, blendWidth);
+        return blend(flatDensity(flatY, blockY), vanillaValue, t);
+    }
+
     /** 边界抖动，返回 [-2,2] 的确定性伪随机偏移，避免正方形硬边。 */
     public static double edgeDither(int x, int z) {
         int h = x * 374761393 + z * 668265263;
