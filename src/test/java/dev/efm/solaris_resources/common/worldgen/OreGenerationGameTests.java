@@ -26,10 +26,96 @@ import net.minecraftforge.gametest.GameTestHolder;
 import net.minecraftforge.gametest.PrefixGameTestTemplate;
 import java.util.ArrayList;
 import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.registries.ForgeRegistries;
+import dev.efm.solaris_resources.common.registration.ItemRegistries;
 
 @GameTestHolder("solaris_resources")
 @PrefixGameTestTemplate(false)
 public class OreGenerationGameTests {
+    @GameTest(template = "empty")
+    public static void taggedModOre(GameTestHelper helper) {
+        Block sample = ForgeRegistries.BLOCKS.getValue(ResourceLocation.parse("ars_nouveau:source_gem_block"));
+        helper.assertTrue(sample != null && sample != Blocks.AIR, "sample mod block exists");
+        helper.assertTrue(OreGenerationRules.isOre(sample.defaultBlockState()), "test datapack ore tag recognized");
+        WorldGenRegion region = region(helper);
+        BlockPos pos = new BlockPos(8, 16, 8);
+        helper.assertFalse(region.setBlock(pos, sample.defaultBlockState(), 2), "tagged mod block writes rejected");
+        var feature = helper.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE)
+                .get(ResourceLocation.parse("solaris_resources_test:tagged_ore"));
+        helper.assertTrue(feature != null, "test configured feature loaded");
+        feature.place(region, helper.getLevel().getChunkSource().getGenerator(), RandomSource.create(123), pos);
+        helper.assertTrue(count(region, sample) == 0, "tagged mod feature suppressed");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void commandReloadAndFailureIsolation(GameTestHelper helper) throws Exception {
+        Path dir = FMLPaths.CONFIGDIR.get().resolve("solaris_resources");
+        Path worldgen = dir.resolve("worldgen.json");
+        Path iron = dir.resolve("iron.json");
+        String savedWorldgen = Files.readString(worldgen);
+        String savedIron = Files.readString(iron);
+        var commands = helper.getLevel().getServer().getCommands();
+        var source = helper.getLevel().getServer().createCommandSourceStack();
+        var sharedIron = ItemRegistries.STABLE_ATOM.get("iron").get();
+        try {
+            Files.writeString(worldgen, "{\"additionalOreBlocks\":[\"minecraft:gold_block\"]}");
+            try {
+                commands.getDispatcher().execute("solaris_resources_reload", source.withPermission(0));
+                helper.fail("unprivileged reload must be rejected");
+            } catch (com.mojang.brigadier.exceptions.CommandSyntaxException expected) { }
+            helper.assertFalse(OreGenerationRules.isOre(Blocks.GOLD_BLOCK.defaultBlockState()), "denied command leaves config unchanged");
+            Files.writeString(iron, "{");
+            int result = commands.getDispatcher().execute("solaris_resources_reload", source.withPermission(2));
+            helper.assertTrue(result == 0, "partial failure reported");
+            helper.assertTrue(OreGenerationRules.isOre(Blocks.GOLD_BLOCK.defaultBlockState()), "atom failure must not block worldgen reload");
+            WorldGenRegion region = region(helper);
+            helper.assertFalse(region.setBlock(new BlockPos(8, 16, 8), Blocks.GOLD_BLOCK.defaultBlockState(), 2), "additional block immediately blocked");
+            Files.writeString(iron, "{\"convertedItem\":\"minecraft:iron_ingot\",\"ratio\":4}");
+            Files.writeString(worldgen, "{");
+            result = commands.getDispatcher().execute("solaris_resources_reload", source);
+            helper.assertTrue(result == 0, "worldgen failure reported");
+            helper.assertTrue(sharedIron.getConversionSettings().ratio() == 4, "worldgen failure must not block atom reload");
+            helper.assertTrue(ItemRegistries.UNSTABLE_ATOM.get("iron").get().getConversionSettings().ratio() == 4, "both atom variants update");
+            helper.assertTrue(OreGenerationRules.isOre(Blocks.GOLD_BLOCK.defaultBlockState()), "bad config retains last valid worldgen settings");
+            Files.writeString(worldgen, "{\"additionalOreBlocks\":[]}");
+            helper.assertTrue(commands.getDispatcher().execute("solaris_resources_reload", source) == 1, "console reload succeeds");
+            helper.assertFalse(OreGenerationRules.isOre(Blocks.GOLD_BLOCK.defaultBlockState()), "removed entry immediately allowed");
+            helper.assertTrue(region.setBlock(new BlockPos(8, 16, 8), Blocks.GOLD_BLOCK.defaultBlockState(), 2), "removed entry writes succeed");
+        } finally {
+            Files.writeString(worldgen, savedWorldgen);
+            Files.writeString(iron, savedIron);
+            commands.getDispatcher().execute("solaris_resources_reload", source);
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 1200)
+    public static void generatedNetherChunks(GameTestHelper helper) {
+        var nether = helper.getLevel().getServer().getLevel(Level.NETHER);
+        helper.assertTrue(nether != null, "nether exists");
+        int ordinary = 0;
+        for (int z = 200; z < 202; z++) {
+            for (int x = 200; x < 202; x++) {
+                var chunk = nether.getChunk(x, z);
+                for (var section : chunk.getSections()) {
+                    for (int ly = 0; ly < 16; ly++) for (int lx = 0; lx < 16; lx++) for (int lz = 0; lz < 16; lz++) {
+                        var state = section.getBlockState(lx, ly, lz);
+                        helper.assertFalse(OreGenerationRules.isOre(state), "naturally generated nether chunk contains ore");
+                        if (state.is(Blocks.NETHERRACK)) ordinary++;
+                    }
+                }
+            }
+        }
+        helper.assertTrue(ordinary > 0, "nether terrain is preserved");
+        helper.succeed();
+    }
+
     @GameTest(template = "empty")
     public static void worldgenWrites(GameTestHelper helper) {
         WorldGenRegion region = region(helper);
