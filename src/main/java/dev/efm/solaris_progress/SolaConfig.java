@@ -25,7 +25,7 @@ public final class SolaConfig {
     public static volatile double centerX = 0.0;
     public static volatile double centerZ = 0.0;
     public static volatile boolean placeInit = true;
-    public static volatile int initYOffset = 2;
+    public static volatile int initYOffset = 3;
 
     /** Worldgen 参数在首次加载后冻结：保证地形包裹与群系/出生点读到同一份快照，修改需重启。 */
     private static volatile boolean frozen = false;
