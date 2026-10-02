@@ -23,6 +23,9 @@ public final class SolaConfig {
     public static volatile double centerX = 0.0;
     public static volatile double centerZ = 0.0;
 
+    /** Worldgen 参数在首次加载后冻结：保证地形包裹与群系/出生点读到同一份快照，修改需重启。 */
+    private static volatile boolean frozen = false;
+
     static {
         ForgeConfigSpec.Builder b = new ForgeConfigSpec.Builder();
         b.push("spawn_flatland");
@@ -45,12 +48,14 @@ public final class SolaConfig {
     private SolaConfig() {}
 
     public static void refresh() {
+        if (frozen) return;
         enabled = ENABLED.get();
         flatY = FLAT_Y.get();
         halfExtent = HALF_EXTENT.get();
         blendWidth = BLEND_WIDTH.get();
         centerX = CENTER_X.get();
         centerZ = CENTER_Z.get();
+        frozen = true;
     }
 
     public static void onLoad(ModConfigEvent event) {

@@ -554,5 +554,5 @@ Expected：原点处第一条成功（平坦核心）；第二条应失败（区
 - **Spec coverage**：4.1→Task 1、4.2→Task 3、4.3→Task 4、4.4→Task 5、4.5→Task 6、4.6→Task 2、测试计划→Task 7。无遗漏。
 - **Step scan**：每个 Step 单一动作；实现步骤只给签名/算法，未转录整段程序。
 - **Type consistency**：`halfExtent`/`blendWidth`/`flatY`/`centerX`/`centerZ` 在 Config、DensityFunction、Biome mixin、Spawn handler 中命名一致；`wrapRouter`/`solaris$setRouter`/`solaris$getRouter` 一致。
-- **Review Focus**：#1/#2 由 Task 1 测试、#3 由 Task 3 测试、#4/#5 由 Task 2 校验 + Task 7 运行验证。
+- **Review Focus**：#1/#2 由 Task 1 测试、#3 由代码审查 + Task 7 运行验证（纯 JUnit 无法加载 MC 密度类，已 ledger 说明）、#4/#5 由 Task 2 校验 + Task 7 运行验证。
 - **Proportion**：计划短于规格体量，未搬运实现细节。
