@@ -1,5 +1,6 @@
 package dev.efm.solaris_progress;
 
+import dev.efm.solaris_progress.worldgen.InitPlacementMath;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
@@ -20,8 +21,6 @@ import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import dev.efm.solaris_progress.worldgen.InitPlacementMath;
-
 import java.util.Optional;
 
 public class ForgeEvents {
@@ -40,7 +39,7 @@ public class ForgeEvents {
                     .withEntity(player);
             System.getLogger("91EFM").log(System.Logger.Level.INFO, String.valueOf(player.getServer().getCommands().performPrefixedCommand(stack, "clear @s")));
 
-            SolaAPI.completeTaskForTeam(player,"7CA44A998EE0AE7C");
+            SolaAPI.completeTaskForTeam(player, "7CA44A998EE0AE7C");
 
             tag.putBoolean("sola:init_1", true);
             player.getPersistentData().put(Player.PERSISTED_NBT_TAG, tag);
@@ -52,7 +51,7 @@ public class ForgeEvents {
         if (!(event.getLevel() instanceof ServerLevel sl)) return;
         if (sl.dimension() != Level.OVERWORLD) return;
         if (!SolaConfig.enabled) return;
-        event.getSettings().setSpawn(new BlockPos(0, (int) SolaConfig.flatY + 1, 0), 0f);
+        event.getSettings().setSpawn(new BlockPos(80, (int) SolaConfig.flatY + 4, 96), 0f);
         event.setCanceled(true);
     }
 
@@ -89,7 +88,9 @@ public class ForgeEvents {
         log("placed init.nbt at " + pos + " size " + size);
     }
 
-    /** 村民 Brain 的空间记忆是绝对坐标，放置后清擦，让其重新认领新位置。 */
+    /**
+     * 村民 Brain 的空间记忆是绝对坐标，放置后清擦，让其重新认领新位置。
+     */
     private static void solaris$resetVillagerMemories(ServerLevel level, BlockPos pos, Vec3i size) {
         AABB box = new AABB(
                 pos.getX(), pos.getY(), pos.getZ(),
