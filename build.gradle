@@ -72,6 +72,10 @@ minecraft {
 
         gameTestServer {
             property 'forge.enabledGameTestNamespaces', mod_id
+            workingDirectory project.file('build/ore-gametest')
+            mods {
+                "${mod_id}" { source sourceSets.test }
+            }
         }
 
         data {
@@ -197,3 +201,5 @@ tasks.register('testOrePolicy', JavaExec) {
 }
 
 tasks.named('check') { dependsOn 'testOrePolicy' }
+
+tasks.matching { it.name == 'runGameTestServer' }.configureEach { dependsOn testClasses }

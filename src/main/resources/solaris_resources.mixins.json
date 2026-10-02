@@ -5,6 +5,10 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "solaris_resources.refmap.json",
   "mixins": [
+    "OreFeatureMixin",
+    "ScatteredOreFeatureMixin",
+    "OreVeinifierMixin",
+    "WorldGenRegionMixin"
   ],
   "client": [
   ],
