@@ -29,14 +29,47 @@ import java.util.List;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.level.storage.LevelResource;
 import dev.efm.solaris_resources.common.registration.ItemRegistries;
 
 @GameTestHolder("solaris_resources")
 @PrefixGameTestTemplate(false)
 public class OreGenerationGameTests {
+    @GameTest(template = "empty", batch = "tag_reload", timeoutTicks = 1200)
+    public static void datapackTagReload(GameTestHelper helper) throws Exception {
+        var server = helper.getLevel().getServer();
+        var repository = server.getPackRepository();
+        List<String> originalPacks = List.copyOf(repository.getSelectedIds());
+        Path pack = server.getWorldPath(LevelResource.DATAPACK_DIR).resolve("solaris_tag_reload_probe");
+        Path tagFile = pack.resolve("data/forge/tags/blocks/ores.json");
+        Block sample = ForgeRegistries.BLOCKS.getValue(ResourceLocation.parse("ars_nouveau:source_gem_block"));
+        try {
+            Files.createDirectories(tagFile.getParent());
+            Files.writeString(pack.resolve("pack.mcmeta"), "{\"pack\":{\"pack_format\":15,\"description\":\"Temporary ore tag reload test\"}}");
+            Files.writeString(tagFile, "{\"replace\":true,\"values\":[]}");
+            repository.reload();
+            var selected = new ArrayList<>(originalPacks);
+            selected.add("file/solaris_tag_reload_probe");
+            server.reloadResources(selected).join();
+            helper.assertFalse(OreGenerationRules.isOre(sample.defaultBlockState()), "tag removal after resource reload must take effect");
+            Files.writeString(tagFile, "{\"replace\":true,\"values\":[\"ars_nouveau:source_gem_block\"]}");
+            server.reloadResources(selected).join();
+            helper.assertTrue(OreGenerationRules.isOre(sample.defaultBlockState()), "tag addition after resource reload must take effect");
+        } finally {
+            server.reloadResources(originalPacks).join();
+            try (var paths = Files.walk(pack)) {
+                for (Path path : paths.sorted(java.util.Comparator.reverseOrder()).toList()) Files.delete(path);
+            }
+            repository.reload();
+        }
+        helper.assertTrue(OreGenerationRules.isOre(sample.defaultBlockState()), "original test tag restored");
+        helper.succeed();
+    }
+
     @GameTest(template = "empty")
     public static void taggedModOre(GameTestHelper helper) {
         Block sample = ForgeRegistries.BLOCKS.getValue(ResourceLocation.parse("ars_nouveau:source_gem_block"));
@@ -87,6 +120,9 @@ public class OreGenerationGameTests {
             helper.assertTrue(commands.getDispatcher().execute("solaris_resources_reload", source) == 1, "console reload succeeds");
             helper.assertFalse(OreGenerationRules.isOre(Blocks.GOLD_BLOCK.defaultBlockState()), "removed entry immediately allowed");
             helper.assertTrue(region.setBlock(new BlockPos(8, 16, 8), Blocks.GOLD_BLOCK.defaultBlockState(), 2), "removed entry writes succeed");
+            Files.writeString(worldgen, "{\"additionalOreBlocks\":[\":gold_block\"]}");
+            helper.assertTrue(commands.getDispatcher().execute("solaris_resources_reload", source) == 0,
+                    "empty namespace must be rejected, not report a successful ineffective reload");
         } finally {
             Files.writeString(worldgen, savedWorldgen);
             Files.writeString(iron, savedIron);
@@ -113,6 +149,31 @@ public class OreGenerationGameTests {
             }
         }
         helper.assertTrue(ordinary > 0, "nether terrain is preserved");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 1200)
+    public static void generatedNoiseOverworldChunks(GameTestHelper helper) {
+        var dimension = ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse("solaris_resources_test:noise_overworld"));
+        var level = helper.getLevel().getServer().getLevel(dimension);
+        helper.assertTrue(level != null, "test noise overworld dimension exists");
+        int substrate = 0;
+        int ordinaryRock = 0;
+        for (int z = 0; z < 2; z++) for (int x = 0; x < 2; x++) {
+            var chunk = level.getChunk(x, z);
+            for (var section : chunk.getSections()) {
+                for (int ly = 0; ly < 16; ly++) for (int lx = 0; lx < 16; lx++) for (int lz = 0; lz < 16; lz++) {
+                    var state = section.getBlockState(lx, ly, lz);
+                    helper.assertFalse(OreGenerationRules.isOre(state), "generated noise overworld contains ore");
+                    helper.assertFalse(state.is(Blocks.RAW_IRON_BLOCK) || state.is(Blocks.RAW_COPPER_BLOCK), "generated vein contains raw resource");
+                    if (state.is(Blocks.STONE) || state.is(Blocks.DEEPSLATE)) substrate++;
+                    if (state.is(Blocks.GRANITE) || state.is(Blocks.DIORITE) || state.is(Blocks.ANDESITE)
+                            || state.is(Blocks.TUFF) || state.is(Blocks.DIRT) || state.is(Blocks.GRAVEL)) ordinaryRock++;
+                }
+            }
+        }
+        helper.assertTrue(substrate > 0, "stone substrate preserved");
+        helper.assertTrue(ordinaryRock > 0, "ordinary geology preserved");
         helper.succeed();
     }
 

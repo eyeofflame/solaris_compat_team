@@ -18,7 +18,7 @@ public final class OreGenerationRules {
             FMLPaths.CONFIGDIR.get().resolve(SolarisResources.MODID).resolve("worldgen.json"),
             value -> {
                 ResourceLocation id = ResourceLocation.tryParse(value);
-                return value.contains(":") && id != null && ForgeRegistries.BLOCKS.containsKey(id);
+                return id != null && value.equals(id.toString()) && ForgeRegistries.BLOCKS.containsKey(id);
             },
             (file, error) -> LOGGER.error("Failed to load worldgen config {}; keeping previous settings", file, error));
 

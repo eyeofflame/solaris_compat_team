@@ -42,9 +42,14 @@
 
 配置文件缺失时自动生成；修改后执行 `/solaris_resources_reload`，后续生成检查立即使用新名单。
 配置项必须是已注册方块 ID 的字符串数组。错误文件保留上一次有效配置并写入日志。
+方块 ID 必须完整且规范，例如 `minecraft:gold_block`；不接受 `:gold_block` 或省略命名空间。
 
 此功能只影响新区块生成，不清理旧区块，也不阻止玩家正常放置矿石或运行时使用 Feature。
+结构装饰经受支持生成入口放置的矿石也会被阻止；结构宝箱里的物品不受影响。
+热重载不追溯已经完成的生成检查，在途区块可能含重载前规则的结果。
 未加入标签且未写入补充名单的自定义生成器，以及绕过受支持世界生成入口的特殊生成器，
 需要单独适配。
 
 独立验证命令：`gradle testWorldgenConfig testOrePolicy testAtomConfig test build runGameTestServer`。
+测试数据包将 Ars Nouveau 的源质宝石块人工标记为矿石，仅用于验证模组方块识别；
+这不代表 Ars Nouveau 自带该矿石生成，测试标签不会进入发布 JAR。
