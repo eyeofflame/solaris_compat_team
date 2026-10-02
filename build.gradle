@@ -1,6 +1,3 @@
-import org.gradle.api.attributes.LibraryElements
-import org.gradle.api.attributes.Usage
-
 buildscript {
     repositories {
 
@@ -95,7 +92,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
     flatDir {
-        dir 'libs'
+        dirs 'libs', 'libs/rpg', 'libs/rpg/extra'
     }
 }
 
@@ -137,9 +134,23 @@ dependencies {
         jarJar.ranged(it, "[0.4.1.0,)")
     }
 
+    implementation(
+            fg.deobf("libs:solaris_rpg:1.1.2.a"),
+            fg.deobf("libs:kubejs:forge-2001.6.5-build.26"),
+            fg.deobf("libs:ldlib:forge-1.20.1-1.0.52.a"),
+            fg.deobf("libs:rhino:forge-2001.2.3-build.10")
+    )
+
     // Solaris 跨工程编译期依赖统一走这里（见上方 solarisCompile 说明）
-    solarisCompile "dev.efm:solaris_compat:1.1.2.a"
+    //solarisCompile "dev.efm:solaris_compat:1.1.2.a"
     compileOnly files(configurations.solarisCompile)
+
+    // libs/rpg/extra 下的全部 jar：仅运行时加载，不参与编译
+    runtimeOnly fg.deobf("libs:supplementaries:1.20-3.1.43-forge")
+    runtimeOnly fg.deobf("libs:moonlight:1.20-2.16.35-forge")
+    runtimeOnly fg.deobf("libs:FarmersDelight:1.20.1-1.3.4")
+    runtimeOnly fg.deobf("libs:create:1.20.1-6.0.8")
+    runtimeOnly fg.deobf("libs:amendments:1.20-2.2.6")
 
 }
 
