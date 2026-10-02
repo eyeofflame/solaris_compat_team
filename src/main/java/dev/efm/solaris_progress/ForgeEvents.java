@@ -1,9 +1,13 @@
 package dev.efm.solaris_progress;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class ForgeEvents {
@@ -27,5 +31,14 @@ public class ForgeEvents {
             tag.putBoolean("sola:init_1", true);
             player.getPersistentData().put(Player.PERSISTED_NBT_TAG, tag);
         }
+    }
+
+    @SubscribeEvent
+    public static void onCreateSpawnPosition(LevelEvent.CreateSpawnPosition event) {
+        if (!(event.getLevel() instanceof ServerLevel sl)) return;
+        if (sl.dimension() != Level.OVERWORLD) return;
+        if (!SolaConfig.enabled) return;
+        event.getSettings().setSpawn(new BlockPos(0, (int) SolaConfig.flatY + 1, 0), 0f);
+        event.setCanceled(true);
     }
 }
