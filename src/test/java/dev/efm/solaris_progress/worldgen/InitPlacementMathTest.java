@@ -1,0 +1,25 @@
+package dev.efm.solaris_progress.worldgen;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+class InitPlacementMathTest {
+    @Test void anchor_centers_odd_size() {
+        assertEquals(-119, InitPlacementMath.anchor(0, 239));
+        assertEquals(-117, InitPlacementMath.anchor(0, 235));
+    }
+
+    @Test void anchor_respects_center() {
+        assertEquals(100 - 119, InitPlacementMath.anchor(100, 239));
+    }
+
+    @Test void anchor_y_uses_offset() {
+        assertEquals(66, InitPlacementMath.anchorY(64.0, 2));
+        assertEquals(64, InitPlacementMath.anchorY(64.0, 0));
+    }
+
+    @Test void anchor_span_covers_center() {
+        int x0 = InitPlacementMath.anchor(0, 239);
+        assertTrue(x0 <= 0 && x0 + 239 - 1 >= 0);
+    }
+}

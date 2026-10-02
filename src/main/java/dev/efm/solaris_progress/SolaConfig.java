@@ -15,6 +15,8 @@ public final class SolaConfig {
     private static final ForgeConfigSpec.IntValue BLEND_WIDTH;
     private static final ForgeConfigSpec.IntValue CENTER_X;
     private static final ForgeConfigSpec.IntValue CENTER_Z;
+    private static final ForgeConfigSpec.BooleanValue PLACE_INIT;
+    private static final ForgeConfigSpec.IntValue INIT_Y_OFFSET;
 
     public static volatile boolean enabled = true;
     public static volatile double flatY = 64.0;
@@ -22,6 +24,8 @@ public final class SolaConfig {
     public static volatile double blendWidth = 32.0;
     public static volatile double centerX = 0.0;
     public static volatile double centerZ = 0.0;
+    public static volatile boolean placeInit = true;
+    public static volatile int initYOffset = 2;
 
     /** Worldgen 参数在首次加载后冻结：保证地形包裹与群系/出生点读到同一份快照，修改需重启。 */
     private static volatile boolean frozen = false;
@@ -41,6 +45,10 @@ public final class SolaConfig {
                 .defineInRange("centerX", 0, -30_000_000, 30_000_000);
         CENTER_Z = b.comment("区域中心 Z")
                 .defineInRange("centerZ", 0, -30_000_000, 30_000_000);
+        PLACE_INIT = b.comment("新存档时把结构 solaris_progress:init 放到平坦核心正中")
+                .define("placeInit", true);
+        INIT_Y_OFFSET = b.comment("结构底面 Y = flatY + 该偏移")
+                .defineInRange("initYOffset", 2, -64, 128);
         b.pop();
         SPEC = b.build();
     }
@@ -55,6 +63,8 @@ public final class SolaConfig {
         blendWidth = BLEND_WIDTH.get();
         centerX = CENTER_X.get();
         centerZ = CENTER_Z.get();
+        placeInit = PLACE_INIT.get();
+        initYOffset = INIT_Y_OFFSET.get();
         frozen = true;
     }
 
