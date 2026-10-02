@@ -181,3 +181,11 @@ tasks.register('testAtomConfig', JavaExec) {
 }
 
 tasks.named('check') { dependsOn 'testAtomConfig' }
+
+tasks.register('testWorldgenConfig', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'dev.efm.solaris_resources.common.config.WorldgenConfigStoreTest'
+}
+
+tasks.named('check') { dependsOn 'testWorldgenConfig' }
