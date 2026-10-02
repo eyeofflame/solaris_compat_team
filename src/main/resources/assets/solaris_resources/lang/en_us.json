@@ -1,4 +1,5 @@
 {
+  "commands.solaris_resources.reload": "Atom configs reloaded: %s succeeded, %s failed. Failed entries retain previous settings; see the log for details.",
   "item.solaris_resources.crystallized_water": "Crystallized Water",
   "itemGroup.solaris_resources": "Solaris Resources",
   "item.solaris_resources.water_convert_tome": "Caster Tome: Water Convert",

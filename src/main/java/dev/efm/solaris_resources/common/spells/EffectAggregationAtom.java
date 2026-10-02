@@ -51,11 +51,13 @@ public class EffectAggregationAtom extends AbstractEffect {
 
         for (AtomItemEntity atom : atoms) {
             if (atom.getItem().getItem() instanceof AtomItem atomItem) {
-                if (atomItem.convertedItem.isEmpty() || atomItem.ratio <= 0) continue;
+                var settings = atomItem.getConversionSettings();
+                if (settings.convertedItem().isEmpty() || settings.ratio() <= 0) continue;
 
-                int ratio = atomItem.ratio;
+                int ratio = settings.ratio();
 
-                Item matter = ForgeRegistries.ITEMS.getValue(ResourceLocation.parse(atomItem.convertedItem));
+                Item matter = ForgeRegistries.ITEMS.getValue(ResourceLocation.parse(settings.convertedItem()));
+                if (matter == null) continue;
 
                 int count = atom.getItem().getCount() / ratio;
 

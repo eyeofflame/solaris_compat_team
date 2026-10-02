@@ -1,6 +1,7 @@
 package dev.efm.solaris_resources.common.item;
 
 import dev.efm.solaris_resources.common.entity.AtomItemEntity;
+import dev.efm.solaris_resources.common.config.AtomConfigStore;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
@@ -9,17 +10,19 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public class AtomItem extends Item {
-    public final String convertedItem;
+    private final AtomConfigStore.Entry config;
     public final boolean isMagic;
     private final String path;
-    public final Integer ratio;
 
-    public AtomItem(String convertedItem, boolean isMagic, String path, Integer ratio) {
+    public AtomItem(AtomConfigStore.Entry config, boolean isMagic, String path) {
         super(new Properties().stacksTo(64));
-        this.convertedItem = convertedItem;
+        this.config = config;
         this.isMagic = isMagic;
         this.path = path;
-        this.ratio = ratio;
+    }
+
+    public AtomConfigStore.Settings getConversionSettings() {
+        return config.settings();
     }
 
     @Override

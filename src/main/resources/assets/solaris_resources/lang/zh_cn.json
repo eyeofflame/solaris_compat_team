@@ -1,4 +1,5 @@
 {
+  "commands.solaris_resources.reload": "原子配置重载完成：成功 %s，失败 %s。失败项保留原值，详情请查看日志。",
   "item.solaris_resources.crystallized_water": "晶化水",
   "itemGroup.solaris_resources": "Solaris Resources",
   "item.solaris_resources.water_convert_tome": "法术卷册：水转化",

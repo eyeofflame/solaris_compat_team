@@ -2,6 +2,8 @@ package dev.efm.solaris_resources;
 
 import com.hollingsworth.arsnouveau.api.registry.GlyphRegistry;
 import dev.efm.solaris_resources.common.registration.CreativeTabRegistries;
+import dev.efm.solaris_resources.common.config.AtomConfigs;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import dev.efm.solaris_resources.common.registration.EntityTypeRegistries;
 import dev.efm.solaris_resources.common.registration.ItemRegistries;
 import dev.efm.solaris_resources.common.spells.EffectAggregationAtom;
@@ -28,10 +30,15 @@ public class SolarisResources {
         ItemRegistries.register(ibus);
         CreativeTabRegistries.register(ibus);
         EntityTypeRegistries.register(ibus);
+        ibus.addListener(this::commonSetup);
 
         fbus.addListener(ItemRegistries::itemTip);
 
         registerSpell();
+    }
+
+    private void commonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> AtomConfigs.STORE.reload());
     }
 
     private static void registerSpell() {

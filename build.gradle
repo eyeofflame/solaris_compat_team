@@ -173,3 +173,11 @@ tasks.named('jar', Jar).configure {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
+
+tasks.register('testAtomConfig', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'dev.efm.solaris_resources.common.config.AtomConfigStoreTest'
+}
+
+tasks.named('check') { dependsOn 'testAtomConfig' }

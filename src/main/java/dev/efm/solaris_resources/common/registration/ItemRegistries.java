@@ -4,6 +4,7 @@ import com.hollingsworth.arsnouveau.api.spell.Spell;
 import com.hollingsworth.arsnouveau.common.spell.method.MethodTouch;
 import dev.efm.solaris_resources.SolarisResources;
 import dev.efm.solaris_resources.common.item.AtomItem;
+import dev.efm.solaris_resources.common.config.AtomConfigs;
 import dev.efm.solaris_resources.common.item.PresetCasterTome;
 import dev.efm.solaris_resources.common.spells.EffectAggregationAtom;
 import dev.efm.solaris_resources.common.spells.EffectAssemblyAtom;
@@ -31,8 +32,9 @@ public class ItemRegistries {
     public static final HashMap<String, RegistryObject<AtomItem>> UNSTABLE_ATOM = new HashMap<>();
 
     public static void atomRegister(String path, String convertedItem, Integer ratio) {
-        var item = ITEMS.register("atom_" + path, () -> new AtomItem(convertedItem, false, path, ratio));
-        var item0 = ITEMS.register("unstable_magic_atom_" + path, () -> new AtomItem(convertedItem, true, path, ratio));
+        var config = AtomConfigs.STORE.register(path, convertedItem, ratio);
+        var item = ITEMS.register("atom_" + path, () -> new AtomItem(config, false, path));
+        var item0 = ITEMS.register("unstable_magic_atom_" + path, () -> new AtomItem(config, true, path));
 
         items.add(item);
         items.add(item0);
