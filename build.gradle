@@ -189,3 +189,11 @@ tasks.register('testWorldgenConfig', JavaExec) {
 }
 
 tasks.named('check') { dependsOn 'testWorldgenConfig' }
+
+tasks.register('testOrePolicy', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'dev.efm.solaris_resources.common.worldgen.OreGenerationPolicyTest'
+}
+
+tasks.named('check') { dependsOn 'testOrePolicy' }

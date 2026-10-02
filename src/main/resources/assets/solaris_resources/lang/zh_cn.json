@@ -1,4 +1,6 @@
 {
+  "commands.solaris_resources.worldgen_reload.success": "世界生成矿石配置已更新，后续生成检查立即使用新规则。",
+  "commands.solaris_resources.worldgen_reload.failed": "世界生成矿石配置加载失败，保留原值；详情请查看日志。",
   "commands.solaris_resources.reload": "原子配置重载完成：成功 %s，失败 %s。失败项保留原值，详情请查看日志。",
   "item.solaris_resources.crystallized_water": "晶化水",
   "itemGroup.solaris_resources": "Solaris Resources",

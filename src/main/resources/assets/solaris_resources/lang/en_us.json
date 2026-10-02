@@ -1,4 +1,6 @@
 {
+  "commands.solaris_resources.worldgen_reload.success": "Worldgen ore config updated. Subsequent generation checks use the new rules.",
+  "commands.solaris_resources.worldgen_reload.failed": "Worldgen ore config failed to load; previous settings retained. See the log for details.",
   "commands.solaris_resources.reload": "Atom configs reloaded: %s succeeded, %s failed. Failed entries retain previous settings; see the log for details.",
   "item.solaris_resources.crystallized_water": "Crystallized Water",
   "itemGroup.solaris_resources": "Solaris Resources",
