@@ -14,7 +14,7 @@ class InitPlacementMathTest {
     }
 
     @Test void anchor_y_uses_offset() {
-        assertEquals(66, InitPlacementMath.anchorY(64.0, 2));
+        assertEquals(62, InitPlacementMath.anchorY(64.0, -2));
         assertEquals(64, InitPlacementMath.anchorY(64.0, 0));
     }
 
