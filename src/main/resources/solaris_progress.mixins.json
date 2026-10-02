@@ -10,7 +10,8 @@
     "RandomStateAccessor",
     "MultiNoiseBiomeSourceMixin",
     "StructureManagerAccessor",
-    "ChunkGeneratorMixin"
+    "ChunkGeneratorMixin",
+    "EnderEyeItemMixin"
   ],
   "client": [
   ],
