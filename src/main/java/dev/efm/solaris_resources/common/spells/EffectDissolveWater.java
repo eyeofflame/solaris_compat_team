@@ -41,7 +41,6 @@ public class EffectDissolveWater extends AbstractEffect {
     public void onResolveBlock(BlockHitResult rayTraceResult, Level world, @NotNull LivingEntity shooter, SpellStats spellStats, SpellContext spellContext, SpellResolver resolver) {
         if (!world.isClientSide) {
             BlockPos origin = rayTraceResult.getBlockPos();
-            // 目标上方 3x3x3：x/z 为 origin±1，y 为 origin+1 ~ origin+3
             BlockPos min = origin.offset(-1, 1, -1);
             BlockPos max = origin.offset(1, 3, 1);
 

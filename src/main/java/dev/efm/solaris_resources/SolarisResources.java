@@ -8,6 +8,7 @@ import dev.efm.solaris_resources.common.spells.EffectAggregationAtom;
 import dev.efm.solaris_resources.common.spells.EffectAssemblyAtom;
 import dev.efm.solaris_resources.common.spells.EffectConvertWater;
 import dev.efm.solaris_resources.common.spells.EffectDissolveWater;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -22,11 +23,13 @@ public class SolarisResources {
     public static final Random RND = new Random();
 
     public SolarisResources(FMLJavaModLoadingContext context) {
-        IEventBus ibus = context.getModEventBus();
+        IEventBus ibus = context.getModEventBus(), fbus = MinecraftForge.EVENT_BUS;
 
         ItemRegistries.register(ibus);
         CreativeTabRegistries.register(ibus);
         EntityTypeRegistries.register(ibus);
+
+        fbus.addListener(ItemRegistries::itemTip);
 
         registerSpell();
     }

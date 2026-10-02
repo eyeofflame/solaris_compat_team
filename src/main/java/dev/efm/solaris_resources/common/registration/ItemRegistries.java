@@ -9,7 +9,10 @@ import dev.efm.solaris_resources.common.spells.EffectAggregationAtom;
 import dev.efm.solaris_resources.common.spells.EffectAssemblyAtom;
 import dev.efm.solaris_resources.common.spells.EffectConvertWater;
 import dev.efm.solaris_resources.common.spells.EffectDissolveWater;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -59,11 +62,26 @@ public class ItemRegistries {
     public static void register(IEventBus ibus) {
         atomRegister("hydrogen", "", 0);
         atomRegister("oxygen", "", 0);
-        atomRegister("iron", "minecraft:raw_iron", 56);
-        atomRegister("copper", "minecraft:raw_copper", 64);
-        atomRegister("coal", "minecraft:coal", 12);
+        atomRegister("iron", "minecraft:raw_iron", 8);
+        atomRegister("copper", "minecraft:raw_copper", 8);
+        atomRegister("coal", "minecraft:coal", 2);
 
         ITEMS.register(ibus);
 
+    }
+
+
+    //an event
+    public static void itemTip(ItemTooltipEvent evt) {
+        var item = evt.getItemStack().getItem();
+        if (item.equals(WATER_CONVERT_TOME.get())) {
+            evt.getToolTip().add(Component.translatable("solaris_resources.glyph_desc.convert_water").withStyle(ChatFormatting.GOLD));
+        } else if (item.equals(WATER_DISSOLVE_TOME.get())) {
+            evt.getToolTip().add(Component.translatable("solaris_resources.glyph_desc.dissolve_water").withStyle(ChatFormatting.GOLD));
+        } else if (item.equals(ATOM_ASSEMBLY_TOME.get())) {
+            evt.getToolTip().add(Component.translatable("solaris_resources.glyph_desc.assembly_atom").withStyle(ChatFormatting.GOLD));
+        } else if (item.equals(ATOM_AGGREGATION_TOME.get())) {
+            evt.getToolTip().add(Component.translatable("solaris_resources.glyph_desc.aggregation_atom").withStyle(ChatFormatting.GOLD));
+        }
     }
 }
