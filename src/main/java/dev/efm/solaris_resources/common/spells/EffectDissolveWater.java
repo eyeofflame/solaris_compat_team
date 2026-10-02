@@ -9,7 +9,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
@@ -41,10 +40,7 @@ public class EffectDissolveWater extends AbstractEffect {
     public void onResolveBlock(BlockHitResult rayTraceResult, Level world, @NotNull LivingEntity shooter, SpellStats spellStats, SpellContext spellContext, SpellResolver resolver) {
         if (!world.isClientSide) {
             BlockPos origin = rayTraceResult.getBlockPos();
-            BlockPos min = origin.offset(-1, 1, -1);
-            BlockPos max = origin.offset(1, 3, 1);
-
-            var atoms = world.getEntitiesOfClass(ItemEntity.class, new AABB(min, max.offset(1, 1, 1)));
+            var atoms = world.getEntitiesOfClass(ItemEntity.class, SpellEffectRange.ABOVE.area(origin));
 
             for (ItemEntity itemEntity : atoms) {
                 if (itemEntity.getItem().getItem().equals(ItemRegistries.CRYSTALLIZED_WATER.get())) {

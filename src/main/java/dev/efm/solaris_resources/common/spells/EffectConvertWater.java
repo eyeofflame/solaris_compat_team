@@ -39,8 +39,9 @@ public class EffectConvertWater extends AbstractEffect {
     public void onResolveBlock(BlockHitResult rayTraceResult, Level world, @NotNull LivingEntity shooter, SpellStats spellStats, SpellContext spellContext, SpellResolver resolver) {
         if (!world.isClientSide) {
             BlockPos pos = rayTraceResult.getBlockPos();
-            BlockPos pos0 = new BlockPos(pos.getX() - 1, pos.getY() - 1, pos.getZ() - 1);
-            BlockPos pos1 = new BlockPos(pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+            var bounds = SpellEffectRange.WATER.bounds(pos.getX(), pos.getY(), pos.getZ());
+            BlockPos pos0 = new BlockPos(bounds.minX(), bounds.minY(), bounds.minZ());
+            BlockPos pos1 = new BlockPos(bounds.maxX() - 1, bounds.maxY() - 1, bounds.maxZ() - 1);
 
             for (BlockPos position : BlockPos.betweenClosed(pos0, pos1)) {
                 if (world.getBlockState(position).getBlock().equals(Blocks.WATER)) {

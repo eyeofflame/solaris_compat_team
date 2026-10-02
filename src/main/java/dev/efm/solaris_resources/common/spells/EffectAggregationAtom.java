@@ -11,7 +11,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
@@ -44,10 +43,7 @@ public class EffectAggregationAtom extends AbstractEffect {
         if (world.isClientSide) return;
 
         BlockPos origin = rayTraceResult.getBlockPos();
-        BlockPos min = origin.offset(-1, 1, -1);
-        BlockPos max = origin.offset(1, 3, 1);
-
-        List<AtomItemEntity> atoms = world.getEntitiesOfClass(AtomItemEntity.class, new AABB(min, max.offset(1, 1, 1)));
+        List<AtomItemEntity> atoms = world.getEntitiesOfClass(AtomItemEntity.class, SpellEffectRange.ABOVE.area(origin));
 
         for (AtomItemEntity atom : atoms) {
             if (atom.getItem().getItem() instanceof AtomItem atomItem) {

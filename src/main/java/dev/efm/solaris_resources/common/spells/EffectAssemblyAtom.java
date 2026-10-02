@@ -9,7 +9,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,10 +41,7 @@ public class EffectAssemblyAtom extends AbstractEffect {
         if (world.isClientSide) return;
 
         BlockPos origin = rayTraceResult.getBlockPos();
-        BlockPos min = origin.offset(-1, 1, -1);
-        BlockPos max = origin.offset(1, 3, 1);
-
-        List<AtomItemEntity> atoms = world.getEntitiesOfClass(AtomItemEntity.class, new AABB(min, max.offset(1, 1, 1)));
+        List<AtomItemEntity> atoms = world.getEntitiesOfClass(AtomItemEntity.class, SpellEffectRange.ABOVE.area(origin));
 
         for (AtomItemEntity atom : atoms) {
             if (!atom.getItem().getItem().equals(ItemRegistries.UNSTABLE_ATOM.get("hydrogen").get())) continue;

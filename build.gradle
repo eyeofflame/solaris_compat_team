@@ -203,3 +203,11 @@ tasks.register('testOrePolicy', JavaExec) {
 tasks.named('check') { dependsOn 'testOrePolicy' }
 
 tasks.matching { it.name == 'runGameTestServer' }.configureEach { dependsOn testClasses }
+
+tasks.register('testSpellEffectRange', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'dev.efm.solaris_resources.common.spells.SpellEffectRangeTest'
+}
+
+tasks.named('check') { dependsOn 'testSpellEffectRange' }
