@@ -5,12 +5,17 @@
         "minecraft:crafting": {
             "hammerlib:gears/wooden": true,
             "hammerlib:gears/stone": true,
-            "hammerlib:gears/copper": true,
-            "hammerlib:gears/iron": true,
-            "hammerlib:gears/gold": true,
-            "hammerlib:gears/diamond": true,
-            "hammerlib:wrench": true
+            "hammerlib:wrench": true,
+            "hammerlib:thermal/copper_gear": true,
+            "hammerlib:gtceu/iron_gear": true,
+            "hammerlib:thermal/gold_gear": true,
+            "hammerlib:gtceu/diamond_gear": true
         }
     },
-    "unregistered": {}
+    "unregistered": {"minecraft:crafting": {
+        "hammerlib:gears/copper": true,
+        "hammerlib:gears/iron": true,
+        "hammerlib:gears/gold": true,
+        "hammerlib:gears/diamond": true
+    }}
 }

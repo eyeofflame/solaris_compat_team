@@ -1,0 +1,9 @@
+[
+  {"matchItems": ["gtceu:oil_bucket", "thermal:crude_oil_bucket"], "resultItems": "createdieselgenerators:crude_oil_bucket"},
+  {"matchItems": ["gtceu:diesel_bucket", "thermal_extra:diesel_bucket"], "resultItems": "createdieselgenerators:diesel_bucket"},
+  {"matchItems": ["gtceu:gasoline_bucket", "thermal_extra:gasoline_bucket"], "resultItems": "createdieselgenerators:gasoline_bucket"},
+  {"matchItems": ["createaddition:seed_oil_bucket", "gtceu:seed_oil_bucket"], "resultItems": "createdieselgenerators:plant_oil_bucket"},
+  {"matchItems": ["gtceu:bio_diesel_bucket"], "resultItems": "createdieselgenerators:biodiesel_bucket"},
+  {"matchItems": ["createaddition:bioethanol_bucket", "gtceu:ethanol_bucket", "mekanismgenerators:bioethanol_bucket"], "resultItems": "createdieselgenerators:ethanol_bucket"},
+  {"matchItems": ["productivebees:honey_bucket", "the_bumblezone:honey_bucket"], "resultItems": "create:honey_bucket"}
+]

@@ -1,0 +1,4 @@
+[
+  {"matchItems": ["mekanism:dust_emerald", "thermal:emerald_dust"], "resultItems": "gtceu:emerald_dust"},
+  {"matchItems": ["thermal_extra:emerald_rod"], "resultItems": "gtceu:emerald_rod"}
+]

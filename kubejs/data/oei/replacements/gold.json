@@ -1,0 +1,8 @@
+[
+  {"matchItems": ["enderio:powdered_gold", "mekanism:dust_gold", "thermal:gold_dust"], "resultItems": "gtceu:gold_dust"},
+  {"matchItems": ["hammerlib:gears/gold"], "resultItems": "thermal:gold_gear"},
+  {"matchItems": ["create:golden_sheet", "thermal:gold_plate"], "resultItems": "gtceu:gold_plate"},
+  {"matchItems": ["createaddition:gold_rod", "thermal_extra:gold_rod"], "resultItems": "gtceu:gold_rod"},
+  {"matchItems": ["gtceu:gold_ore", "mythicbotany:gold_ore"], "resultItems": "minecraft:gold_ore"},
+  {"matchItems": ["gtceu:deepslate_gold_ore"], "resultItems": "minecraft:deepslate_gold_ore"}
+]

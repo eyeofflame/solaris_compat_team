@@ -1,0 +1,7 @@
+[
+  {"matchItems": ["thermal:rose_gold_dust"], "resultItems": "gtceu:rose_gold_dust"},
+  {"matchItems": ["thermal:rose_gold_gear"], "resultItems": "gtceu:rose_gold_gear"},
+  {"matchItems": ["thermal:rose_gold_ingot"], "resultItems": "gtceu:rose_gold_ingot"},
+  {"matchItems": ["thermal:rose_gold_nugget"], "resultItems": "gtceu:rose_gold_nugget"},
+  {"matchItems": ["thermal:rose_gold_plate"], "resultItems": "gtceu:rose_gold_plate"}
+]

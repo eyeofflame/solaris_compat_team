@@ -5,9 +5,9 @@ gtceu
 ldlib
 logs
 modernfix
-oeb
-oei
-oef
+/oeb/
+/oei/
+/oef/
 screenshots
 PCL
 authlib-injector.log
@@ -20,3 +20,4 @@ usernamecache.json
 rhino.local.properties
 patchouli_data.json
 probe
+/local/

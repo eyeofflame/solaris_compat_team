@@ -1,0 +1,6 @@
+[
+  {"matchItems": ["create:brass_ingot"], "resultItems": "gtceu:brass_ingot"},
+  {"matchItems": ["create:brass_nugget"], "resultItems": "gtceu:brass_nugget"},
+  {"matchItems": ["create:brass_sheet"], "resultItems": "gtceu:brass_plate"},
+  {"matchItems": ["createaddition:brass_rod"], "resultItems": "gtceu:brass_rod"}
+]

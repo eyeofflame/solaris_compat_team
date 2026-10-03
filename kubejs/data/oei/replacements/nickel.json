@@ -1,0 +1,9 @@
+[
+  {"matchItems": ["thermal:nickel_dust"], "resultItems": "gtceu:nickel_dust"},
+  {"matchItems": ["thermal:nickel_ingot"], "resultItems": "gtceu:nickel_ingot"},
+  {"matchItems": ["thermal:nickel_nugget"], "resultItems": "gtceu:nickel_nugget"},
+  {"matchItems": ["thermal:nickel_plate"], "resultItems": "gtceu:nickel_plate"},
+  {"matchItems": ["thermal:raw_nickel"], "resultItems": "gtceu:raw_nickel"},
+  {"matchItems": ["thermal:nickel_ore"], "resultItems": "gtceu:nickel_ore"},
+  {"matchItems": ["thermal:deepslate_nickel_ore"], "resultItems": "gtceu:deepslate_nickel_ore"}
+]

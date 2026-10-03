@@ -1,0 +1,7 @@
+[
+  {"matchItems": ["mekanism:dust_steel", "thermal:steel_dust"], "resultItems": "gtceu:steel_dust"},
+  {"matchItems": ["thermal:steel_gear"], "resultItems": "gtceu:steel_gear"},
+  {"matchItems": ["mekanism:ingot_steel", "thermal:steel_ingot"], "resultItems": "gtceu:steel_ingot"},
+  {"matchItems": ["mekanism:nugget_steel", "thermal:steel_nugget"], "resultItems": "gtceu:steel_nugget"},
+  {"matchItems": ["thermal:steel_plate"], "resultItems": "gtceu:steel_plate"}
+]

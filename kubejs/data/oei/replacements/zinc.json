@@ -1,0 +1,6 @@
+[
+  {"matchItems": ["thermal_extra:zinc_dust"], "resultItems": "gtceu:zinc_dust"},
+  {"matchItems": ["create:zinc_ingot"], "resultItems": "gtceu:zinc_ingot"},
+  {"matchItems": ["create:zinc_nugget"], "resultItems": "gtceu:zinc_nugget"},
+  {"matchItems": ["createaddition:zinc_sheet"], "resultItems": "gtceu:zinc_plate"}
+]

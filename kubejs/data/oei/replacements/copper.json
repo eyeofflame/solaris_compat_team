@@ -1,0 +1,9 @@
+[
+  {"matchItems": ["enderio:powdered_copper", "mekanism:dust_copper", "thermal:copper_dust"], "resultItems": "gtceu:copper_dust"},
+  {"matchItems": ["hammerlib:gears/copper"], "resultItems": "thermal:copper_gear"},
+  {"matchItems": ["create:copper_nugget", "thermal:copper_nugget"], "resultItems": "gtceu:copper_nugget"},
+  {"matchItems": ["create:copper_sheet", "thermal:copper_plate"], "resultItems": "gtceu:copper_plate"},
+  {"matchItems": ["createaddition:copper_rod", "thermal_extra:copper_rod"], "resultItems": "gtceu:copper_rod"},
+  {"matchItems": ["gtceu:copper_ore"], "resultItems": "minecraft:copper_ore"},
+  {"matchItems": ["gtceu:deepslate_copper_ore"], "resultItems": "minecraft:deepslate_copper_ore"}
+]

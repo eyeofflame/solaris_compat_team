@@ -1,0 +1,10 @@
+[
+  {"matchItems": ["thermal:silver_dust"], "resultItems": "gtceu:silver_dust"},
+  {"matchItems": ["eidolon:silver_ingot", "iceandfire:silver_ingot", "thermal:silver_ingot"], "resultItems": "gtceu:silver_ingot"},
+  {"matchItems": ["eidolon:silver_nugget", "thermal:silver_nugget"], "resultItems": "gtceu:silver_nugget"},
+  {"matchItems": ["thermal:silver_plate"], "resultItems": "gtceu:silver_plate"},
+  {"matchItems": ["eidolon:raw_silver", "thermal:raw_silver"], "resultItems": "gtceu:raw_silver"},
+  {"matchItems": ["thermal_extra:silver_rod"], "resultItems": "gtceu:silver_rod"},
+  {"matchItems": ["eidolon:silver_ore", "thermal:silver_ore"], "resultItems": "gtceu:silver_ore"},
+  {"matchItems": ["eidolon:deep_silver_ore", "thermal:deepslate_silver_ore"], "resultItems": "gtceu:deepslate_silver_ore"}
+]

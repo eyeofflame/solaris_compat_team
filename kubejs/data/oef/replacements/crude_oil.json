@@ -1,0 +1,3 @@
+[
+  {"matchFluids": ["gtceu:oil", "thermal:crude_oil"], "resultFluids": "createdieselgenerators:crude_oil"}
+]

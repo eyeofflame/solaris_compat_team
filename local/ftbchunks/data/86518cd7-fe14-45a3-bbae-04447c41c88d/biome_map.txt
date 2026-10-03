@@ -1,3 +1,0 @@
-#58F betterend:empty_aurora_cave
-#3DC minecraft:plains
-#400 minecraft:the_end

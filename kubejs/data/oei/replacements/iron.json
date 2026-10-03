@@ -1,0 +1,8 @@
+[
+  {"matchItems": ["enderio:powdered_iron", "mekanism:dust_iron", "thermal:iron_dust"], "resultItems": "gtceu:iron_dust"},
+  {"matchItems": ["enderio:iron_gear", "hammerlib:gears/iron", "thermal:iron_gear"], "resultItems": "gtceu:iron_gear"},
+  {"matchItems": ["create:iron_sheet", "thermal:iron_plate"], "resultItems": "gtceu:iron_plate"},
+  {"matchItems": ["createaddition:iron_rod", "thermal_extra:iron_rod"], "resultItems": "gtceu:iron_rod"},
+  {"matchItems": ["gtceu:iron_ore"], "resultItems": "minecraft:iron_ore"},
+  {"matchItems": ["gtceu:deepslate_iron_ore"], "resultItems": "minecraft:deepslate_iron_ore"}
+]

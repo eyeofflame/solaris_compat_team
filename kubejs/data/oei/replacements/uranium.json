@@ -1,0 +1,5 @@
+[
+  {"matchItems": ["mekanism:dust_uranium"], "resultItems": "gtceu:uranium_dust"},
+  {"matchItems": ["mekanism:ingot_uranium"], "resultItems": "gtceu:uranium_ingot"},
+  {"matchItems": ["alexscaves:uranium_shard", "mekanism:nugget_uranium"], "resultItems": "gtceu:uranium_nugget"}
+]

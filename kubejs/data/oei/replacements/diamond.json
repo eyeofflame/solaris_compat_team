@@ -1,0 +1,5 @@
+[
+  {"matchItems": ["createaddition:diamond_grit", "mekanism:dust_diamond", "thermal:diamond_dust"], "resultItems": "gtceu:diamond_dust"},
+  {"matchItems": ["hammerlib:gears/diamond", "thermal:diamond_gear"], "resultItems": "gtceu:diamond_gear"},
+  {"matchItems": ["thermal_extra:diamond_rod"], "resultItems": "gtceu:diamond_rod"}
+]

@@ -42,7 +42,7 @@
 	BiomeBasedLocalCalendar = false
 
 [Weather]
-	#Enable localized weather patterns where rain or sun is determined per-biome.
+	#Weather changes in many ways with the solar terms  (seasons) .
 	UseSolarWeather = true
 	#Disable rain/snow in biomes with no natural precipitation (e.g., Deserts).
 	NoRainInDeserts = false
@@ -64,6 +64,9 @@
 	SnowMeltSpeedMultiplier = 1.0
 	#Automatically reset weather to clear after the player wakes up from a bed.
 	ClearAfterSleep = false
+	#Clear and rainy periods alternate, preventing endless rain or perpetual clear skies.
+	#Ignored if UseSolarWeather is disabled.
+	AlternatingWeatherModel = true
 
 #This module governs how seasonal temperature shifts affect the physical world and the player.
 [Temperature]
@@ -82,7 +85,7 @@
 	#Restrict plant growth based on their compatible seasons.
 	EnableSeasonalCrop = true
 	#Restrict plant growth based on local environmental humidity.
-	EnableCropHumidityControl = true
+	EnableCropHumidityControl = false
 	#Smooths out humidity changes between different areas or time periods.
 	CropHumidityTransition = true
 	#Bone meal may fail under unsuitable growing conditions.

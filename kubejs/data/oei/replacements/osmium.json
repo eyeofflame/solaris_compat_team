@@ -1,0 +1,5 @@
+[
+  {"matchItems": ["mekanism:dust_osmium"], "resultItems": "gtceu:osmium_dust"},
+  {"matchItems": ["mekanism:ingot_osmium"], "resultItems": "gtceu:osmium_ingot"},
+  {"matchItems": ["mekanism:nugget_osmium"], "resultItems": "gtceu:osmium_nugget"}
+]

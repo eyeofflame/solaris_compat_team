@@ -1,0 +1,25 @@
+
+[spawn_flatland]
+	#启用原点平坦平原 worldgen（仅对新存档/新区块生效）
+	enabled = true
+	#平定后地表固体顶面 Y，必须 > 海平面 63，否则会出现水面
+	#Range: 64 ~ 300
+	flatY = 64
+	#正方形平坦核心半边长（256 表示 256x256）
+	#Range: 16 ~ 1024
+	halfExtent = 128
+	#核心外向原版地形过渡的带宽
+	#Range: 0 ~ 512
+	blendWidth = 32
+	#区域中心 X
+	#Range: -30000000 ~ 30000000
+	centerX = 0
+	#区域中心 Z
+	#Range: -30000000 ~ 30000000
+	centerZ = 0
+	#新存档时把结构 solaris_progress:init 放到平坦核心正中
+	placeInit = true
+	#结构最底层(相对 Y=0) 的世界 Y = flatY + 该偏移（-1 → 63）
+	#Range: -64 ~ 128
+	initYOffset = -1
+

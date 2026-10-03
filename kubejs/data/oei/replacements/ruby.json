@@ -1,0 +1,4 @@
+[
+  {"matchItems": ["thermal:ruby"], "resultItems": "gtceu:ruby_gem"},
+  {"matchItems": ["thermal:ruby_dust"], "resultItems": "gtceu:ruby_dust"}
+]

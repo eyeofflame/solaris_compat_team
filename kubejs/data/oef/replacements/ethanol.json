@@ -1,0 +1,3 @@
+[
+  {"matchFluids": ["createaddition:bioethanol", "gtceu:ethanol", "mekanismgenerators:bioethanol"], "resultFluids": "createdieselgenerators:ethanol"}
+]

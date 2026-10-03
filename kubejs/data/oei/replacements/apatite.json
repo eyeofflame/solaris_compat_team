@@ -1,0 +1,4 @@
+[
+  {"matchItems": ["thermal:apatite"], "resultItems": "gtceu:apatite_gem"},
+  {"matchItems": ["thermal:apatite_dust"], "resultItems": "gtceu:apatite_dust"}
+]

@@ -1,0 +1,10 @@
+[
+  {"matchItems": ["enderio:powdered_tin", "mekanism:dust_tin", "thermal:tin_dust"], "resultItems": "gtceu:tin_dust"},
+  {"matchItems": ["mekanism:ingot_tin", "thermal:tin_ingot"], "resultItems": "gtceu:tin_ingot"},
+  {"matchItems": ["mekanism:nugget_tin", "thermal:tin_nugget"], "resultItems": "gtceu:tin_nugget"},
+  {"matchItems": ["thermal:tin_plate"], "resultItems": "gtceu:tin_plate"},
+  {"matchItems": ["mekanism:raw_tin", "thermal:raw_tin"], "resultItems": "gtceu:raw_tin"},
+  {"matchItems": ["thermal_extra:tin_rod"], "resultItems": "gtceu:tin_rod"},
+  {"matchItems": ["mekanism:tin_ore", "thermal:tin_ore"], "resultItems": "gtceu:tin_ore"},
+  {"matchItems": ["mekanism:deepslate_tin_ore", "thermal:deepslate_tin_ore"], "resultItems": "gtceu:deepslate_tin_ore"}
+]

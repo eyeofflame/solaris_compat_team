@@ -1,0 +1,8 @@
+[
+  {"matchItems": ["thermal:invar_dust"], "resultItems": "gtceu:invar_dust"},
+  {"matchItems": ["thermal:invar_gear"], "resultItems": "gtceu:invar_gear"},
+  {"matchItems": ["thermal:invar_ingot"], "resultItems": "gtceu:invar_ingot"},
+  {"matchItems": ["thermal:invar_nugget"], "resultItems": "gtceu:invar_nugget"},
+  {"matchItems": ["thermal:invar_plate"], "resultItems": "gtceu:invar_plate"},
+  {"matchItems": ["thermal_extra:invar_rod"], "resultItems": "gtceu:invar_rod"}
+]

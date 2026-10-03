@@ -1,0 +1,20 @@
+[
+  {"matchItems": ["create:brass_block"], "resultItems": "gtceu:brass_block"},
+  {"matchItems": ["mekanism:block_bronze", "thermal:bronze_block"], "resultItems": "gtceu:bronze_block"},
+  {"matchItems": ["createaddition:electrum_block", "thermal:electrum_block"], "resultItems": "gtceu:electrum_block"},
+  {"matchItems": ["thermal:invar_block"], "resultItems": "gtceu:invar_block"},
+  {"matchItems": ["eidolon:lead_block", "mekanism:block_lead", "thermal:lead_block"], "resultItems": "gtceu:lead_block"},
+  {"matchItems": ["thermal:nickel_block"], "resultItems": "gtceu:nickel_block"},
+  {"matchItems": ["mekanism:block_osmium"], "resultItems": "gtceu:osmium_block"},
+  {"matchItems": ["eidolon:raw_lead_block", "mekanism:block_raw_lead", "thermal:raw_lead_block"], "resultItems": "gtceu:raw_lead_block"},
+  {"matchItems": ["thermal:raw_nickel_block"], "resultItems": "gtceu:raw_nickel_block"},
+  {"matchItems": ["eidolon:raw_silver_block", "thermal:raw_silver_block"], "resultItems": "gtceu:raw_silver_block"},
+  {"matchItems": ["mekanism:block_raw_tin", "thermal:raw_tin_block"], "resultItems": "gtceu:raw_tin_block"},
+  {"matchItems": ["thermal:rose_gold_block"], "resultItems": "gtceu:rose_gold_block"},
+  {"matchItems": ["expatternprovider:silicon_block"], "resultItems": "gtceu:silicon_block"},
+  {"matchItems": ["eidolon:silver_block", "thermal:silver_block"], "resultItems": "gtceu:silver_block"},
+  {"matchItems": ["mekanism:block_steel", "thermal:steel_block"], "resultItems": "gtceu:steel_block"},
+  {"matchItems": ["mekanism:block_tin", "thermal:tin_block"], "resultItems": "gtceu:tin_block"},
+  {"matchItems": ["alexscaves:block_of_uranium", "mekanism:block_uranium"], "resultItems": "gtceu:uranium_block"},
+  {"matchItems": ["create:zinc_block"], "resultItems": "gtceu:zinc_block"}
+]

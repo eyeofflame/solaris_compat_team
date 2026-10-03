@@ -1,0 +1,7 @@
+[
+  {"matchItems": ["thermal:electrum_dust"], "resultItems": "gtceu:electrum_dust"},
+  {"matchItems": ["createaddition:electrum_ingot", "thermal:electrum_ingot"], "resultItems": "gtceu:electrum_ingot"},
+  {"matchItems": ["createaddition:electrum_nugget", "thermal:electrum_nugget"], "resultItems": "gtceu:electrum_nugget"},
+  {"matchItems": ["createaddition:electrum_sheet", "thermal:electrum_plate"], "resultItems": "gtceu:electrum_plate"},
+  {"matchItems": ["createaddition:electrum_rod", "thermal_extra:electrum_rod"], "resultItems": "gtceu:electrum_rod"}
+]

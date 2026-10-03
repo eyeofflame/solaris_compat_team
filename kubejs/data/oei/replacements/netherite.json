@@ -1,0 +1,5 @@
+[
+  {"matchItems": ["mekanism:dust_netherite", "thermal:netherite_dust"], "resultItems": "gtceu:netherite_dust"},
+  {"matchItems": ["hammerlib:gears/netherite"], "resultItems": "thermal:netherite_gear"},
+  {"matchItems": ["thermal:netherite_nugget"], "resultItems": "gtceu:netherite_nugget"}
+]

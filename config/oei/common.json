@@ -1,0 +1,13 @@
+{
+  "Clear_Food_Properties": false,
+  "Default_Rules_data": {
+    "recipes": "retain",
+    "advancements": "retain"
+  },
+  "Default_Rules_tag": {
+    "items": "retain"
+  },
+  "Deeper_Replace": true,
+  "Enable_Lite": false,
+  "__cfg_version": 1
+}
