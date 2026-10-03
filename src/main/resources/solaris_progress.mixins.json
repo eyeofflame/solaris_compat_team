@@ -13,7 +13,8 @@
     "StructureTemplateAccessor",
     "LookControlMixin",
     "ChunkGeneratorMixin",
-    "EnderEyeItemMixin"
+    "EnderEyeItemMixin",
+    "ClaimedChunkManagerMixin"
   ],
   "client": [
     "RenderMapImageTaskMixin"

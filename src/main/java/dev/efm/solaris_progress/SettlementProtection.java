@@ -5,6 +5,8 @@ import dev.ftb.mods.ftbchunks.api.ClaimedChunkManager;
 import dev.ftb.mods.ftbchunks.api.FTBChunksAPI;
 import dev.ftb.mods.ftblibrary.math.ChunkDimPos;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -87,6 +89,20 @@ public final class SettlementProtection {
         if (shouldProtect(player, player.level(), event.getPos())) {
             event.setCanceled(true);
         }
+    }
+
+    /** 目标实体类型是否在配置的交互白名单中（{@code settlement.allowedInteractionEntities}）。 */
+    public static boolean isAllowedInteraction(Entity target) {
+        if (target == null) return false;
+        ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(target.getType());
+        return id != null && SolaConfig.allowedInteractionEntities.contains(id.toString());
+    }
+
+    /** pos 是否位于聚落领地内（服务端；FTB Chunks 管理器未就绪时返回 false）。 */
+    public static boolean isInSettlementClaim(Level level, BlockPos pos) {
+        if (!FTBChunksAPI.api().isManagerLoaded()) return false;
+        ClaimedChunk claim = FTBChunksAPI.api().getManager().getChunk(new ChunkDimPos(level, pos));
+        return claim != null && SettlementClaims.isSettlementTeam(claim.getTeamData().getTeam());
     }
 
     /**

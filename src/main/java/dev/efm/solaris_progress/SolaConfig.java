@@ -3,6 +3,11 @@ package dev.efm.solaris_progress;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+
 /**
  * 原点平坦平原 worldgen 的配置。加载后把值快照到静态字段，供 worldgen 热路径读取。
  */
@@ -20,6 +25,7 @@ public final class SolaConfig {
     private static final ForgeConfigSpec.IntValue STRUCTURE_BLOCK_MARGIN;
     private static final ForgeConfigSpec.BooleanValue BLOCK_END_PORTAL;
     private static final ForgeConfigSpec.BooleanValue PROTECT_SETTLEMENT;
+    private static final ForgeConfigSpec.ConfigValue<List<? extends String>> ALLOWED_INTERACTION_ENTITIES;
 
     public static volatile boolean enabled = true;
     public static volatile double flatY = 64.0;
@@ -32,6 +38,8 @@ public final class SolaConfig {
     public static volatile int structureBlockMargin = 128;
     public static volatile boolean blockEndPortalActivation = true;
     public static volatile boolean protectSettlement = true;
+    /** 领地内允许交互的实体类型 ID（小写），由 {@link #ALLOWED_INTERACTION_ENTITIES} 归一化而来。 */
+    public static volatile Set<String> allowedInteractionEntities = Set.of();
 
     /** Worldgen 参数在首次加载后冻结：保证地形包裹与群系/出生点读到同一份快照，修改需重启。 */
     private static volatile boolean frozen = false;
@@ -70,6 +78,11 @@ public final class SolaConfig {
                 圈定为 FTB Teams 服务器团队 efm_server 的领地：非成员禁止破坏/交互方块、使用物品、伤害无害生物。
                 PvP 不受影响；领地范围跟随 spawn_flatland 配置，修改后需重启，旧领地不会自动迁移。""")
                 .define("protectSettlement", true);
+        ALLOWED_INTERACTION_ENTITIES = b.comment("""
+                领地内允许玩家右键交互的实体类型 ID 白名单（可多个），例如：
+                ["minecraft:villager", "minecraft:horse"]
+                白名单内的实体在聚落领地内可正常交互（交易/骑乘/喂食/拴绳等），其余实体交互仍被禁止。""")
+                .defineListAllowEmpty("allowedInteractionEntities", List.of(), o -> o instanceof String);
         b.pop();
         SPEC = b.build();
     }
@@ -89,7 +102,21 @@ public final class SolaConfig {
         structureBlockMargin = STRUCTURE_BLOCK_MARGIN.get();
         blockEndPortalActivation = BLOCK_END_PORTAL.get();
         protectSettlement = PROTECT_SETTLEMENT.get();
+        allowedInteractionEntities = normalizeIds(ALLOWED_INTERACTION_ENTITIES.get());
         frozen = true;
+    }
+
+    /** 归一化实体 ID：去空白、转小写、剔除空项。匹配时用注册表键的字符串形式比对。 */
+    private static Set<String> normalizeIds(List<? extends String> raw) {
+        Set<String> ids = new HashSet<>();
+        for (String s : raw) {
+            if (s == null) continue;
+            String id = s.trim().toLowerCase(Locale.ROOT);
+            if (!id.isEmpty()) {
+                ids.add(id);
+            }
+        }
+        return Set.copyOf(ids);
     }
 
     public static void onLoad(ModConfigEvent event) {
