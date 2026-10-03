@@ -16,6 +16,7 @@
     "EnderEyeItemMixin"
   ],
   "client": [
+    "RenderMapImageTaskMixin"
   ],
   "injectors": {
     "defaultRequire": 1

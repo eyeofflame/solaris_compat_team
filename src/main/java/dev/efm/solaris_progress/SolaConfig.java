@@ -19,6 +19,7 @@ public final class SolaConfig {
     private static final ForgeConfigSpec.IntValue INIT_Y_OFFSET;
     private static final ForgeConfigSpec.IntValue STRUCTURE_BLOCK_MARGIN;
     private static final ForgeConfigSpec.BooleanValue BLOCK_END_PORTAL;
+    private static final ForgeConfigSpec.BooleanValue PROTECT_SETTLEMENT;
 
     public static volatile boolean enabled = true;
     public static volatile double flatY = 64.0;
@@ -30,6 +31,7 @@ public final class SolaConfig {
     public static volatile int initYOffset = -1;
     public static volatile int structureBlockMargin = 128;
     public static volatile boolean blockEndPortalActivation = true;
+    public static volatile boolean protectSettlement = true;
 
     /** Worldgen 参数在首次加载后冻结：保证地形包裹与群系/出生点读到同一份快照，修改需重启。 */
     private static volatile boolean frozen = false;
@@ -61,6 +63,14 @@ public final class SolaConfig {
         BLOCK_END_PORTAL = b.comment("阻止玩家在主世界激活末地传送门（新玩家的末地开局流程不由此开关控制）")
                 .define("blockEndPortalActivation", true);
         b.pop();
+
+        b.push("settlement");
+        PROTECT_SETTLEMENT = b.comment("""
+                启动时自动把主世界 spawn_flatland 区域（中心 centerX/centerZ，边长 2*halfExtent）
+                圈定为 FTB Teams 服务器团队 efm_server 的领地：非成员禁止破坏/交互方块、使用物品、伤害无害生物。
+                PvP 不受影响；领地范围跟随 spawn_flatland 配置，修改后需重启，旧领地不会自动迁移。""")
+                .define("protectSettlement", true);
+        b.pop();
         SPEC = b.build();
     }
 
@@ -78,6 +88,7 @@ public final class SolaConfig {
         initYOffset = INIT_Y_OFFSET.get();
         structureBlockMargin = STRUCTURE_BLOCK_MARGIN.get();
         blockEndPortalActivation = BLOCK_END_PORTAL.get();
+        protectSettlement = PROTECT_SETTLEMENT.get();
         frozen = true;
     }
 

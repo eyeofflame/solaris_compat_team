@@ -11,6 +11,7 @@ public class SolaProgress {
 
     public SolaProgress(FMLJavaModLoadingContext context) {
         MinecraftForge.EVENT_BUS.register(ForgeEvents.class);
+        MinecraftForge.EVENT_BUS.register(SettlementProtection.class);
         FTBEvents.init();
         context.registerConfig(ModConfig.Type.COMMON, SolaConfig.SPEC);
         context.getModEventBus().addListener(SolaConfig::onLoad);
