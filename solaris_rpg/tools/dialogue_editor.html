@@ -1,0 +1,2469 @@
+<!DOCTYPE html>
+<!--
+  Solaris RPG 对话编辑器（单文件 · 零依赖 · 离线可用 · 适配手机）
+  ------------------------------------------------------------------
+  用途：可视化编写 solaris_rpg 的对话剧本（KubeJS / 数据包两种产物）。
+
+  打开方式：浏览器直接打开本文件（手机浏览器也可以）。
+  放在仓库里的位置：solaris_rpg/tools/dialogue_editor.html
+  （试玩背景会尝试从 ../src/main/resources/assets/... 读取，读不到走渐变兜底）
+
+  产物：
+  1. KubeJS 脚本  → kubejs/server_scripts/xxx.js          （SolarisRPG.scripts 事件）
+  2. 资源包 ZIP   → resourcepacks/xxx.zip                  （立绘贴图 + pack.mcmeta）
+  3. 数据包 ZIP   → datapacks/xxx.zip / 单文件 JSON        （data/<ns>/solaris_rpg/xxx.json）
+  4. 项目文件     → xxx.solaris.json                       （编辑器存档，含立绘，可再导入）
+
+  数据格式以仓库中的 Java 源码为准：
+  - ScriptBuilder / NodeBuilder / ChoiceBuilder（KubeJS 链式 API）
+  - ScriptJson（数据包 schema；portrait 缺省=沿用，"-"=收起；next 空=结束）
+  - 立绘路径 = 完整资源路径，如 solaris_rpg:textures/gui/portrait/olivia.png
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Solaris RPG 对话编辑器</title>
+<style>
+/* ============================== 主题 ============================== */
+:root{
+  --bg:#12151b; --panel:#171b23; --panel2:#1d222c; --panel3:#232936;
+  --line:#2c3340; --line2:#3a4354;
+  --text:#d7dde8; --muted:#8b94a5; --dim:#5f6879;
+  --accent:#d9a441; --accent-dim:#8a6a2c;
+  --blue:#7fb2ff; --orange:#ffb86b; --green:#7fd8a0; --red:#ff7b72;
+  --radius:10px;
+  --shadow:0 6px 24px rgba(0,0,0,.45);
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--bg); color:var(--text); overflow:hidden;
+  font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;
+  -webkit-tap-highlight-color:transparent;
+  overscroll-behavior:none;
+}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+input,textarea,select{font:inherit;color:var(--text);background:var(--panel2);border:1px solid var(--line);border-radius:7px;padding:6px 8px;outline:none;width:100%}
+input:focus,textarea:focus,select:focus{border-color:var(--accent-dim)}
+textarea{resize:vertical;min-height:64px;line-height:1.5}
+label{display:block;font-size:12px;color:var(--muted);margin:10px 0 4px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:8px;border:1px solid var(--line2);background:var(--panel3);white-space:nowrap}
+.btn:hover{border-color:var(--accent-dim);background:#2a3140}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#241b06;font-weight:600}
+.btn.primary:hover{background:#e5b355}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--muted)}
+.btn.ghost:hover{color:var(--text);background:var(--panel3)}
+.btn.danger{color:var(--red);border-color:#4a2b2b}
+.btn.danger:hover{background:#3a2020}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.sm{padding:3px 8px;font-size:12px}
+.hint{color:var(--dim);font-size:12px;line-height:1.6}
+
+/* ============================== 布局 ============================== */
+#app{display:flex;flex-direction:column;height:100%}
+#topbar{
+  display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--panel);
+  border-bottom:1px solid var(--line);z-index:40;flex-wrap:nowrap;
+}
+.brand{font-weight:700;letter-spacing:.5px;white-space:nowrap}
+.brand .sub{color:var(--muted);font-weight:400;font-size:12px;margin-left:6px}
+.tb-fields{display:flex;align-items:center;gap:6px;margin-left:6px}
+.tb-fields input{width:150px;padding:4px 8px}
+.tb-actions{display:flex;align-items:center;gap:6px;margin-left:auto}
+.tb-mobile{display:none;margin-left:auto;gap:6px}
+#workspace{flex:1;display:flex;min-height:0;position:relative}
+
+#left{
+  width:236px;flex:none;background:var(--panel);border-right:1px solid var(--line);
+  overflow-y:auto;padding:10px;z-index:20;
+}
+#inspector{
+  width:308px;flex:none;background:var(--panel);border-left:1px solid var(--line);
+  overflow-y:auto;padding:12px;z-index:20;
+}
+.panel-sec{margin-bottom:16px}
+.panel-sec h3{
+  margin:0 0 8px;font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.5px;
+  display:flex;align-items:center;gap:8px;
+}
+.panel-sec h3 .sp{margin-left:auto}
+
+/* ============================== 画布 ============================== */
+#canvas-wrap{
+  flex:1;position:relative;overflow:hidden;min-width:0;cursor:grab;
+  background-color:var(--bg);
+  background-image:radial-gradient(circle,#242b38 1px,transparent 1px);
+  background-size:24px 24px;
+  touch-action:none;user-select:none;
+}
+#canvas-wrap.grabbing{cursor:grabbing}
+#canvas{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform}
+#nodes,#links{position:absolute;left:0;top:0;width:0;height:0;overflow:visible}
+#links{pointer-events:none}
+#links path.wire{fill:none;stroke:var(--line2);stroke-width:2}
+#links path.wire.choice{stroke:var(--orange);opacity:.75}
+#links path.hit{fill:none;stroke:transparent;stroke-width:16;pointer-events:stroke;cursor:pointer}
+#links path.temp{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:6 5}
+
+.node{
+  position:absolute;width:252px;background:var(--panel2);border:1px solid var(--line2);
+  border-radius:var(--radius);box-shadow:var(--shadow);cursor:grab;user-select:none;
+  transition:border-color .12s, box-shadow .12s;
+}
+.node.sel{border-color:var(--accent);box-shadow:0 0 0 2px rgba(217,164,65,.28),var(--shadow)}
+.node.is-start{border-color:var(--green)}
+.node.is-start.sel{border-color:var(--accent)}
+.node-head{display:flex;align-items:center;gap:6px;padding:6px 10px;border-bottom:1px solid var(--line);font-size:12px}
+.node-head .nicon{font-size:13px}
+.node-head .nid{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.start-badge{font-size:10px;color:#0e2417;background:var(--green);border-radius:5px;padding:1px 5px;font-weight:700}
+.node-body{padding:7px 10px 4px}
+.nspeaker{color:var(--accent);font-size:12px;font-weight:600;margin-bottom:2px}
+.ntext{color:#c3ccd9;font-size:12.5px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word;white-space:pre-wrap;min-height:18px}
+.ntext i{color:var(--dim)}
+.node-foot{padding:0 0 6px}
+.crow{display:flex;align-items:center;gap:6px;padding:3px 10px 3px 12px;min-height:24px}
+.crow .clabel{flex:1;font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crow .clabel.muted{color:var(--dim)}
+.port{
+  width:12px;height:12px;border-radius:50%;background:var(--panel3);
+  border:2px solid var(--line2);flex:none;cursor:crosshair;position:relative;z-index:2;
+}
+.port:hover{background:var(--accent)}
+.port.in{position:absolute;left:-7px;top:16px;border-color:var(--green);background:#1c2b23}
+.port.out.next{border-color:var(--blue);background:#16222f}
+.port.out.choice{border-color:var(--orange);background:#2b2115}
+.nthumb{
+  position:absolute;right:8px;top:34px;width:34px;height:34px;object-fit:cover;
+  border-radius:6px;border:1px solid var(--line2);opacity:.9;pointer-events:none;
+}
+.node .warn-dot{position:absolute;left:-9px;bottom:6px;width:8px;height:8px;border-radius:50%;background:var(--red)}
+
+/* 浮动小工具 */
+.fab{position:absolute;display:flex;gap:8px;z-index:30}
+#fab-add{left:12px;bottom:calc(14px + var(--safe-b))}
+#fab-zoom{right:12px;bottom:calc(14px + var(--safe-b));align-items:center}
+.fab .btn{background:rgba(29,34,44,.92);backdrop-filter:blur(4px)}
+#zoomLabel{min-width:44px;text-align:center;font-size:12px;color:var(--muted)}
+#empty-tip{
+  position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);text-align:center;
+  color:var(--dim);pointer-events:none;font-size:13px;line-height:2;
+}
+#empty-tip b{color:var(--muted)}
+
+/* 浮动菜单 / 弹层 */
+#popup-layer{position:fixed;inset:0;z-index:90;pointer-events:none}
+.popup{
+  position:absolute;pointer-events:auto;background:var(--panel2);border:1px solid var(--line2);
+  border-radius:10px;box-shadow:var(--shadow);padding:8px;min-width:150px;
+}
+.popup .pop-title{font-size:11px;color:var(--muted);padding:2px 6px 6px}
+.popup button.pop-item{display:block;width:100%;text-align:left;padding:7px 9px;border-radius:7px;font-size:13px}
+.popup button.pop-item:hover{background:var(--panel3)}
+.popup .pop-row{display:flex;gap:6px;padding:2px 6px}
+
+/* ============================== 弹窗 ============================== */
+#modal-layer{position:fixed;inset:0;z-index:100;display:none;background:rgba(6,8,12,.62);align-items:center;justify-content:center;padding:16px}
+#modal-layer.open{display:flex}
+.modal{
+  background:var(--panel);border:1px solid var(--line2);border-radius:14px;box-shadow:var(--shadow);
+  width:min(760px,100%);max-height:min(86vh,900px);display:flex;flex-direction:column;
+}
+.modal-head{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.modal-head .mtitle{font-weight:700;flex:1}
+.modal-body{padding:14px 16px;overflow:auto}
+.modal-foot{padding:12px 16px;border-top:1px solid var(--line);display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.modal pre.out{background:#0d1015;border:1px solid var(--line);border-radius:8px;padding:10px;overflow:auto;max-height:44vh;font:12px/1.55 Consolas,"Courier New",monospace;color:#bcd0e0;margin:0;white-space:pre-wrap;word-break:break-word}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row>*{flex:1;min-width:180px}
+.check{display:flex;align-items:center;gap:8px;margin:8px 0;color:var(--text);font-size:13px}
+.check input{width:auto}
+.issue{display:flex;gap:8px;align-items:flex-start;padding:8px 10px;border-radius:8px;background:var(--panel2);border:1px solid var(--line);margin-bottom:6px;cursor:pointer}
+.issue:hover{border-color:var(--line2)}
+.issue .sev{flex:none;font-size:11px;font-weight:700;border-radius:5px;padding:1px 6px;margin-top:1px}
+.issue.err .sev{background:#3a1d1d;color:var(--red);border:1px solid #5c2a2a}
+.issue.warn .sev{background:#322814;color:var(--accent);border:1px solid #5c4a24}
+.issue .imsg{flex:1;font-size:13px}
+.issue .iloc{color:var(--dim);font-size:11px}
+
+/* ============================== 素材库 ============================== */
+#assets{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.asset{
+  background:var(--panel2);border:1px solid var(--line);border-radius:9px;overflow:hidden;
+  position:relative;cursor:pointer;
+}
+.asset:hover{border-color:var(--line2)}
+.asset img{width:100%;height:72px;object-fit:cover;display:block;background:#0d1015}
+.asset .aname{font-size:11px;padding:4px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--muted)}
+.asset .aref{position:absolute;top:4px;right:4px;font-size:10px;background:rgba(0,0,0,.6);border-radius:5px;padding:1px 5px;color:var(--text)}
+.asset .abtns{position:absolute;top:4px;left:4px;display:none;gap:3px}
+.asset:hover .abtns{display:flex}
+.asset .abtns button{background:rgba(0,0,0,.65);border-radius:5px;font-size:11px;padding:1px 5px}
+.drop-hint{border:1px dashed var(--line2);border-radius:9px;padding:10px;text-align:center;color:var(--dim);font-size:12px;margin-top:8px}
+
+/* ============================== 试玩 ============================== */
+#preview{position:fixed;inset:0;z-index:120;display:none;background:#000}
+#preview.open{display:block}
+#pv-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.95}
+#pv-bg-fallback{position:absolute;inset:0;background:linear-gradient(160deg,#1b2130 0%,#0e1118 55%,#1a1410 100%)}
+#pv-portrait{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(14px + max(72px, 28vh));height:62%;max-width:96vw;object-fit:contain;filter:drop-shadow(0 8px 22px rgba(0,0,0,.5))}
+#pv-box{
+  position:absolute;left:50%;transform:translateX(-50%);bottom:14px;
+  width:min(86vw, 177.78vh);max-width:min(86vw,177.78vh);height:max(72px,28vh);
+  background:rgba(16,16,24,.784);border:1px solid #6a7a9a;border-radius:2px;
+  padding:10px 14px;cursor:pointer;box-shadow:0 4px 30px rgba(0,0,0,.5);
+}
+#pv-speaker{color:#d9a441;font-weight:700;text-shadow:1px 1px 0 rgba(0,0,0,.8);min-height:20px;font-size:clamp(13px,2.4vh,17px)}
+#pv-text{color:#eef2f8;text-shadow:1px 1px 0 rgba(0,0,0,.8);font-size:clamp(13px,2.6vh,18px);line-height:1.6;white-space:pre-wrap}
+#pv-choices{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(14px + max(72px,28vh) + 10px);width:min(40vw,320px);display:flex;flex-direction:column;gap:6px}
+#pv-choices button{
+  background:rgba(16,16,24,.82);border:1px solid #6a7a9a;color:#eef2f8;padding:7px 12px;
+  border-radius:2px;text-align:left;font-size:clamp(12px,2.2vh,15px);
+}
+#pv-choices button:hover{border-color:var(--accent);color:#ffd9a4}
+#pv-top{position:absolute;top:calc(8px + env(safe-area-inset-top,0px));right:10px;display:flex;gap:6px;z-index:5}
+#pv-top button{background:rgba(16,16,24,.7);border:1px solid #6a7a9a;color:#cfd8e6;border-radius:7px;padding:5px 10px;font-size:12px}
+#pv-debug{position:absolute;bottom:4px;right:8px;color:rgba(255,255,255,.4);font-size:11px}
+#pv-skip{position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.5);z-index:10}
+#pv-skip.open{display:flex}
+#pv-skip .panel{background:#151520;border:1px solid #6a7a9a;padding:18px 22px;border-radius:4px;text-align:center;min-width:260px}
+#pv-skip .panel p{margin:0 0 14px}
+#pv-skip .panel .row{justify-content:center}
+
+/* ============================== Toast / 遮罩 ============================== */
+#toasts{position:fixed;right:12px;top:56px;z-index:200;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:min(360px,86vw)}
+.toast{background:var(--panel3);border:1px solid var(--line2);border-left:3px solid var(--accent);border-radius:8px;padding:8px 12px;font-size:13px;box-shadow:var(--shadow);animation:tin .18s ease-out}
+.toast.err{border-left-color:var(--red)}
+.toast.ok{border-left-color:var(--green)}
+@keyframes tin{from{opacity:0;transform:translateY(-6px)}to{opacity:1}}
+#sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:55;display:none}
+#sheet-backdrop.open{display:block}
+
+/* ============================== 手机端 ============================== */
+@media (max-width: 920px){
+  .tb-fields,.tb-actions{display:none}
+  .tb-mobile{display:flex}
+  .brand .sub{display:none}
+  #left{
+    position:fixed;left:0;right:0;bottom:0;top:auto;width:auto;max-height:56vh;
+    border-right:none;border-top:1px solid var(--line2);border-radius:14px 14px 0 0;
+    padding-bottom:calc(12px + var(--safe-b));z-index:70;
+    transform:translateY(108%);transition:transform .22s ease;box-shadow:0 -8px 30px rgba(0,0,0,.5);
+  }
+  #left.open{transform:none}
+  #inspector{
+    position:fixed;left:0;right:0;bottom:0;top:auto;width:auto;max-height:62vh;
+    border-left:none;border-top:1px solid var(--line2);border-radius:14px 14px 0 0;
+    padding-bottom:calc(14px + var(--safe-b));z-index:72;
+    transform:translateY(108%);transition:transform .22s ease;box-shadow:0 -8px 30px rgba(0,0,0,.5);
+  }
+  #inspector.open{transform:none}
+  .btn{padding:8px 12px}
+  .btn.sm{padding:6px 9px}
+  #toasts{top:auto;bottom:calc(70px + var(--safe-b));left:12px;right:12px;max-width:none}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <div class="brand">🎭 对话编辑器<span class="sub">Solaris RPG</span></div>
+    <div class="tb-fields">
+      <span class="hint">剧本 ID</span>
+      <input id="scriptId" spellcheck="false" placeholder="my_script">
+    </div>
+    <div class="tb-actions">
+      <button class="btn" data-act="preview">▶ 试玩</button>
+      <button class="btn" data-act="import">导入</button>
+      <button class="btn" data-act="export-menu">导出 ▾</button>
+      <button class="btn" data-act="project-save">保存项目</button>
+      <button class="btn" data-act="validate">检查 <span id="val-badge"></span></button>
+      <button class="btn ghost" data-act="undo" title="撤销 (Ctrl+Z)">↩</button>
+      <button class="btn ghost" data-act="help" title="帮助">?</button>
+    </div>
+    <div class="tb-mobile">
+      <button class="btn" data-act="preview">▶</button>
+      <button class="btn" data-act="menu">☰</button>
+    </div>
+  </header>
+
+  <div id="workspace">
+    <aside id="left">
+      <div class="panel-sec">
+        <h3>添加节点</h3>
+        <div class="row" style="flex-direction:column">
+          <button class="btn" data-act="add-line">💬 对话节点</button>
+          <button class="btn" data-act="add-choice">⑂ 分支节点</button>
+        </div>
+        <p class="hint" style="margin-top:8px">双击画布空白处 / 长按也能新建；从节点右侧圆点拖到空白处会自动建一个新节点并连上。</p>
+      </div>
+      <div class="panel-sec">
+        <h3>立绘素材 <span class="sp"><button class="btn sm" data-act="asset-add">＋ 添加</button></span></h3>
+        <input type="file" id="asset-file" accept="image/*" multiple hidden>
+        <div id="assets"></div>
+        <div class="drop-hint">把 PNG / JPG 拖进浏览器窗口即可添加<br>（非 PNG 会自动转成 PNG）</div>
+      </div>
+      <div class="panel-sec">
+        <h3>快捷键</h3>
+        <p class="hint">
+          滚轮 = 缩放 · 拖空白 = 平移<br>
+          拖节点头部 = 移动 · 点连线 = 断开<br>
+          Ctrl+Z = 撤销 · 试玩里 ESC = 跳过确认
+        </p>
+      </div>
+    </aside>
+
+    <div id="canvas-wrap">
+      <div id="canvas">
+        <svg id="links" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div id="nodes"></div>
+      </div>
+      <div id="empty-tip">双击画布添加第一个节点<br><b>或者先点左侧「导入」</b></div>
+      <div class="fab" id="fab-add">
+        <button class="btn" data-act="add-line" title="对话节点">💬</button>
+        <button class="btn" data-act="add-choice" title="分支节点">⑂</button>
+      </div>
+      <div class="fab" id="fab-zoom">
+        <button class="btn" data-act="zoom-out">−</button>
+        <span id="zoomLabel">100%</span>
+        <button class="btn" data-act="zoom-in">＋</button>
+        <button class="btn" data-act="zoom-fit" title="适应视图">⤢</button>
+      </div>
+    </div>
+
+    <aside id="inspector"></aside>
+  </div>
+</div>
+
+<div id="sheet-backdrop"></div>
+<div id="popup-layer"></div>
+<div id="modal-layer"><div class="modal" id="modal"></div></div>
+<div id="toasts"></div>
+
+<div id="preview">
+  <div id="pv-bg-fallback"></div>
+  <img id="pv-bg" alt="" style="display:none">
+  <img id="pv-portrait" alt="" style="display:none">
+  <div id="pv-choices"></div>
+  <div id="pv-box">
+    <div id="pv-speaker"></div>
+    <div id="pv-text"></div>
+  </div>
+  <div id="pv-top">
+    <button id="pv-restart">↺ 重来</button>
+    <button id="pv-close">✕ 关闭</button>
+  </div>
+  <div id="pv-debug"></div>
+  <div id="pv-skip"><div class="panel">
+    <p>跳过这段对话?</p>
+    <div class="row">
+      <button class="btn" id="pv-skip-no">继续</button>
+      <button class="btn primary" id="pv-skip-yes">跳过</button>
+    </div>
+  </div></div>
+</div>
+
+<script>
+(() => {
+'use strict';
+
+/* ============================================================
+ * #region pure-utils  纯工具（无 DOM 依赖）
+ * ============================================================ */
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const uid = () => Math.random().toString(36).slice(2, 10);
+const deepCopy = o => JSON.parse(JSON.stringify(o));
+
+function esc(s){
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => (
+    { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]
+  ));
+}
+/** JS 单引号字符串转义（导出 KubeJS 用） */
+function jsesc(s){
+  return String(s == null ? '' : s)
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'")
+    .replace(/\r/g, '\\r')
+    .replace(/\n/g, '\\n')
+    .replace(/\t/g, '\\t');
+}
+/** 资源路径合法化：Minecraft 资源定位符只认小写 [a-z0-9_.-] */
+function sanitizeName(name){
+  return String(name || '').toLowerCase().replace(/[^a-z0-9_.\-]/g, '_') || 'image.png';
+}
+function sanitizeNs(ns){
+  return String(ns || '').toLowerCase().replace(/[^a-z0-9_.\-]/g, '_') || 'solaris_rpg';
+}
+function stripExt(f){ return String(f).replace(/\.[a-z0-9]+$/i, ''); }
+/* #endregion pure-utils */
+
+/* ============================================================
+ * #region parser  KubeJS 剧本 → 节点（词法 + 受限语法解析）
+ * 只识别 SolarisRPG builder API 的子集；解析不了的地方记 warning，
+ * 不会静默吞掉：导入后弹窗列出。
+ * ============================================================ */
+function tokenizeJS(src){
+  const tokens = [];
+  const n = src.length;
+  let i = 0;
+  const isIdStart = c => /[A-Za-z_$一-鿿]/.test(c);
+  const isIdPart  = c => /[A-Za-z0-9_$一-鿿]/.test(c);
+  while (i < n){
+    const c = src[i];
+    if (c === ' ' || c === '\t' || c === '\r' || c === '\n'){ i++; continue; }
+    // 注释
+    if (c === '/' && src[i+1] === '/'){ while (i < n && src[i] !== '\n') i++; continue; }
+    if (c === '/' && src[i+1] === '*'){ i += 2; while (i < n && !(src[i] === '*' && src[i+1] === '/')) i++; i += 2; continue; }
+    // 字符串
+    if (c === "'" || c === '"'){
+      const q = c; i++; let v = '';
+      while (i < n){
+        const ch = src[i];
+        if (ch === '\\'){ const r = readEscape(src, i); v += r.out; i = r.next; continue; }
+        if (ch === q){ i++; break; }
+        v += ch; i++;
+      }
+      tokens.push({ t:'str', v }); continue;
+    }
+    // 模板字符串（不解释 ${} 表达式）
+    if (c === '`'){
+      i++; let v = ''; let hasExpr = false;
+      while (i < n){
+        const ch = src[i];
+        if (ch === '\\'){ const r = readEscape(src, i); v += r.out; i = r.next; continue; }
+        if (ch === '`'){ i++; break; }
+        if (ch === '$' && src[i+1] === '{') hasExpr = true;
+        v += ch; i++;
+      }
+      tokens.push({ t:'tpl', v, hasExpr }); continue;
+    }
+    // 标识符 / 数字 / 标点
+    if (isIdStart(c)){
+      let j = i + 1;
+      while (j < n && isIdPart(src[j])) j++;
+      tokens.push({ t:'id', v: src.slice(i, j) }); i = j; continue;
+    }
+    if (/[0-9]/.test(c)){
+      let j = i + 1;
+      while (j < n && /[0-9.eE+\-]/.test(src[j])) j++;
+      tokens.push({ t:'num', v: src.slice(i, j) }); i = j; continue;
+    }
+    tokens.push({ t:'punc', v: c }); i++;
+  }
+  return tokens;
+}
+function readEscape(src, i){ // src[i] === '\\'
+  const e = src[i+1];
+  const map = { n:'\n', t:'\t', r:'\r', b:'\b', f:'\f', v:'\v', '0':'\0', '\n':'' };
+  if (e in map) return { out: map[e], next: i + 2 };
+  if (e === 'x') return { out: String.fromCharCode(parseInt(src.substr(i+2,2),16) || 0), next: i + 4 };
+  if (e === 'u'){
+    if (src[i+2] === '{'){
+      const end = src.indexOf('}', i + 3);
+      const h = src.slice(i + 3, end < 0 ? i + 7 : end);
+      return { out: String.fromCodePoint(parseInt(h,16) || 0), next: (end < 0 ? i + 7 : end + 1) };
+    }
+    return { out: String.fromCharCode(parseInt(src.substr(i+2,4),16) || 0), next: i + 6 };
+  }
+  return { out: e == null ? '' : e, next: i + 2 };
+}
+
+/** 从 tokens[openIdx]=='(' 开始切参数；返回 {args:[[tok,...],...], end} */
+function splitArgs(tokens, openIdx){
+  const args = []; let cur = []; let depth = 0;
+  let i = openIdx;
+  for (; i < tokens.length; i++){
+    const t = tokens[i];
+    if (t.t !== 'punc'){ cur.push(t); continue; }
+    const v = t.v;
+    if (v === '(' || v === '[' || v === '{'){
+      depth++;
+      if (depth === 1 && v === '(' && cur.length === 0 && args.length === 0 && i === openIdx) continue;
+      cur.push(t);
+    } else if (v === ')' || v === ']' || v === '}'){
+      depth--;
+      if (depth === 0){ args.push(cur); return { args, end: i + 1 }; }
+      cur.push(t);
+    } else if (v === ',' && depth === 1){
+      args.push(cur); cur = [];
+    } else cur.push(t);
+  }
+  args.push(cur);
+  return { args, end: i };
+}
+/** 参数是单个字符串字面量时取它的值，否则 null */
+function strArg(arg, warnings, what){
+  if (!arg || !arg.length) return null;
+  if (arg.length === 1 && (arg[0].t === 'str' || arg[0].t === 'tpl')){
+    if (arg[0].t === 'tpl' && arg[0].hasExpr && warnings){
+      warnings.push(what + ' 使用了模板字符串插值 ${...}，编辑器按字面值处理，请检查');
+    }
+    return arg[0].v;
+  }
+  if (warnings) warnings.push(what + ' 不是字符串字面量（可能是变量表达式），已按空串处理');
+  return null;
+}
+/** 立绘参数：支持 'ns:path' 与 SolarisDialogue.HIDE_PORTRAIT */
+function portraitArg(arg, warnings){
+  if (!arg || !arg.length) return null;
+  if (arg.length === 1 && (arg[0].t === 'str' || arg[0].t === 'tpl')) return arg[0].v;
+  const names = arg.filter(t => t.t === 'id').map(t => t.v);
+  if (names.includes('HIDE_PORTRAIT')) return '-';
+  if (warnings) warnings.push('立绘参数无法解析（既不是字符串也不是 HIDE_PORTRAIT），已按“沿用”处理');
+  return null;
+}
+/** 从（函数参数的）token 序列里提取块状函数体；返回 body tokens 或 null */
+function extractFunctionBody(ts){
+  let start = -1;
+  for (let i = 0; i < ts.length; i++){
+    if (ts[i].t === 'punc' && ts[i].v === '{'){ start = i; break; }
+    if (ts[i].t === 'punc' && ts[i].v === ')') break; // 表达式体 / 其它
+  }
+  if (start < 0) return null;
+  let depth = 0;
+  for (let i = start; i < ts.length; i++){
+    const t = ts[i];
+    if (t.t === 'punc'){
+      if (t.v === '{') depth++;
+      else if (t.v === '}'){ depth--; if (depth === 0) return ts.slice(start + 1, i); }
+    }
+  }
+  return null;
+}
+/** 扫描一个函数体，处理 script.start/line/say/choose 与链式 .portrait 等 */
+function parseScriptBody(tokens, warnings){
+  const nodes = [];
+  let startId = '';
+  let lastName = null; // 最近创建的节点名（实际是节点 id）
+  let lastNode = null;
+  let i = 0;
+  while (i < tokens.length){
+    const t = tokens[i];
+    if (t.t === 'punc' && t.v === '.' && tokens[i+1] && tokens[i+1].t === 'id'
+        && tokens[i+2] && tokens[i+2].t === 'punc' && tokens[i+2].v === '('){
+      const name = tokens[i+1].v;
+      const { args, end } = splitArgs(tokens, i + 2);
+      let handled = true;
+      switch (name){
+        case 'start': {
+          const v = strArg(args[0], warnings, 'start()');
+          if (v != null) startId = v;
+          break;
+        }
+        case 'line': case 'say': {
+          const id = strArg(args[0], warnings, name + '() 的节点 id') || '';
+          const speaker = name === 'line' ? '' : (strArg(args[1], warnings, name + '() 的说话人') || '');
+          const text = (name === 'line' ? strArg(args[1], warnings, name + '() 的正文')
+                                        : strArg(args[2], warnings, name + '() 的正文')) || '';
+          const next = (name === 'line' ? strArg(args[2], warnings, name + '() 的 next')
+                                        : strArg(args[3], warnings, name + '() 的 next')) || '';
+          const node = { id, type:'line', speaker, text, portrait:'', next, choices:[] };
+          nodes.push(node); lastNode = node;
+          break;
+        }
+        case 'choose': {
+          const id = strArg(args[0], warnings, 'choose() 的节点 id') || '';
+          const speaker = strArg(args[1], warnings, 'choose() 的说话人') || '';
+          const text = strArg(args[2], warnings, 'choose() 的正文') || '';
+          const node = { id, type:'choice', speaker, text, portrait:'', next:'', choices:[] };
+          const cbBody = args[3] ? extractFunctionBody(args[3]) : null;
+          if (cbBody){
+            let j = 0;
+            while (j < cbBody.length){
+              if (cbBody[j].t === 'punc' && cbBody[j].v === '.'
+                  && cbBody[j+1] && cbBody[j+1].t === 'id' && cbBody[j+1].v === 'option'
+                  && cbBody[j+2] && cbBody[j+2].t === 'punc' && cbBody[j+2].v === '('){
+                const r = splitArgs(cbBody, j + 2);
+                node.choices.push({
+                  id:    strArg(r.args[0], warnings, 'option() 的 id') || '',
+                  text:  strArg(r.args[1], warnings, 'option() 的文字') || '',
+                  next:  strArg(r.args[2], warnings, 'option() 的 next') || '',
+                });
+                j = r.end; continue;
+              }
+              j++;
+            }
+          } else if (args[3] && args[3].length){
+            warnings.push('choose() 的选项回调不是块状函数体，选项可能丢失');
+          }
+          nodes.push(node); lastNode = node;
+          break;
+        }
+        case 'portrait': {
+          if (lastNode){
+            const v = portraitArg(args[0], warnings);
+            if (v != null) lastNode.portrait = v;
+          } else warnings.push('出现了没有对应节点的 .portrait(...)，已忽略');
+          break;
+        }
+        case 'speaker': case 'text': case 'next': {
+          if (lastNode){
+            const v = strArg(args[0], warnings, '.' + name + '()');
+            if (v != null){
+              if (name === 'speaker') lastNode.speaker = v;
+              else if (name === 'text') lastNode.text = v;
+              else lastNode.next = v;
+            }
+          }
+          break;
+        }
+        default: handled = false;
+      }
+      if (handled){ i = end; continue; }
+    }
+    i++;
+  }
+  return { nodes, startId };
+}
+/** 入口：从一整份 KubeJS 文本里抽出所有 event.create(...) */
+function parseKubeJSScripts(src){
+  const warnings = [];
+  const scripts = [];
+  const tokens = tokenizeJS(src);
+  let i = 0;
+  while (i < tokens.length){
+    const t = tokens[i];
+    if (t.t === 'punc' && t.v === '.' && tokens[i+1] && tokens[i+1].t === 'id' && tokens[i+1].v === 'create'
+        && tokens[i+2] && tokens[i+2].t === 'punc' && tokens[i+2].v === '('){
+      const { args, end } = splitArgs(tokens, i + 2);
+      const id = strArg(args[0], warnings, 'create() 的剧本 id');
+      const body = args[1] ? extractFunctionBody(args[1]) : null;
+      if (id == null){
+        warnings.push('event.create(...) 的第一个参数不是字符串，已跳过这个剧本');
+      } else if (!body){
+        warnings.push("剧本「" + id + "」的 create 回调不是块状函数体（应为 script => { ... }），已跳过");
+      } else {
+        const parsed = parseScriptBody(body, warnings);
+        scripts.push({ id, nodes: parsed.nodes, startId: parsed.startId });
+      }
+      i = end; continue;
+    }
+    i++;
+  }
+  if (!scripts.length) warnings.push('没有找到 event.create(…) 调用；确认导入的是 SolarisRPG.scripts 脚本');
+  return { scripts, warnings };
+}
+/* #endregion parser */
+
+/* ============================================================
+ * #region zip  极简 ZIP 打包（store，无压缩；PNG 本身已压缩）
+ * ============================================================ */
+let CRC_TABLE = null;
+function crc32(bytes){
+  if (!CRC_TABLE){
+    CRC_TABLE = new Uint32Array(256);
+    for (let n = 0; n < 256; n++){
+      let c = n;
+      for (let k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+      CRC_TABLE[n] = c >>> 0;
+    }
+  }
+  let c = 0xFFFFFFFF;
+  for (let i = 0; i < bytes.length; i++) c = CRC_TABLE[(c ^ bytes[i]) & 0xFF] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+function makeZip(entries){ // [{name, data:Uint8Array}]
+  const enc = new TextEncoder();
+  const chunks = [], central = [];
+  let offset = 0;
+  const now = new Date();
+  const dosTime = ((now.getHours() << 11) | (now.getMinutes() << 5) | (now.getSeconds() >> 1)) & 0xFFFF;
+  const dosDate = (((now.getFullYear() - 1980) << 9) | ((now.getMonth() + 1) << 5) | now.getDate()) & 0xFFFF;
+  for (const e of entries){
+    const nameBytes = enc.encode(e.name);
+    const crc = crc32(e.data);
+    const lh = new Uint8Array(30 + nameBytes.length);
+    const dv = new DataView(lh.buffer);
+    dv.setUint32(0, 0x04034B50, true); dv.setUint16(4, 20, true); dv.setUint16(6, 0x0800, true);
+    dv.setUint16(8, 0, true); dv.setUint16(10, dosTime, true); dv.setUint16(12, dosDate, true);
+    dv.setUint32(14, crc, true); dv.setUint32(18, e.data.length, true); dv.setUint32(22, e.data.length, true);
+    dv.setUint16(26, nameBytes.length, true); dv.setUint16(28, 0, true);
+    lh.set(nameBytes, 30);
+    chunks.push(lh, e.data);
+
+    const ch = new Uint8Array(46 + nameBytes.length);
+    const cv = new DataView(ch.buffer);
+    cv.setUint32(0, 0x02014B50, true); cv.setUint16(4, 20, true); cv.setUint16(6, 20, true);
+    cv.setUint16(8, 0x0800, true); cv.setUint16(10, 0, true);
+    cv.setUint16(12, dosTime, true); cv.setUint16(14, dosDate, true);
+    cv.setUint32(16, crc, true); cv.setUint32(20, e.data.length, true); cv.setUint32(24, e.data.length, true);
+    cv.setUint16(28, nameBytes.length, true);
+    cv.setUint32(42, offset, true);
+    ch.set(nameBytes, 46);
+    central.push(ch);
+    offset += lh.length + e.data.length;
+  }
+  const cdSize = central.reduce((s, c) => s + c.length, 0);
+  const eocd = new Uint8Array(22);
+  const ev = new DataView(eocd.buffer);
+  ev.setUint32(0, 0x06054B50, true); ev.setUint16(4, 0, true); ev.setUint16(6, 0, true);
+  ev.setUint16(8, entries.length, true); ev.setUint16(10, entries.length, true);
+  ev.setUint32(12, cdSize, true); ev.setUint32(16, offset, true); ev.setUint16(20, 0, true);
+  return new Blob([...chunks, ...central, eocd], { type:'application/zip' });
+}
+function dataUrlBytes(dataUrl){
+  const idx = dataUrl.indexOf(',');
+  const bin = atob(dataUrl.slice(idx + 1));
+  const u = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i);
+  return u;
+}
+function textBytes(s){ return new TextEncoder().encode(s); }
+/* #endregion zip */
+
+/* ============================================================
+ * #region state  编辑器状态
+ * ============================================================ */
+const LS_KEY = 'solaris-rpg-dialogue-editor-v1';
+const state = {
+  scriptId: 'my_script',
+  namespace: 'solaris_rpg',
+  packDesc: 'Solaris RPG 立绘资源包',
+  startId: 'start',
+  nodes: [],
+  assets: [],
+  selection: null,
+  view: { x: 60, y: 40, scale: 1 },
+};
+const history = [];
+const view = state.view;
+
+const byId = id => state.nodes.find(n => n.id === id) || null;
+const nodeIndex = id => state.nodes.findIndex(n => n.id === id);
+function uniqueId(base){
+  let i = 1, id = base || 'node';
+  while (state.nodes.some(n => n.id === id)) id = (base || 'node') + '_' + (++i);
+  return id;
+}
+function outgoingTargets(n){
+  if (n.type === 'choice' && n.choices.length) return n.choices.map(c => c.next).filter(Boolean);
+  return n.next ? [n.next] : [];
+}
+function getOutputs(n){
+  if (n.type === 'choice'){
+    return n.choices.map((c, i) => ({
+      kind:'choice', index:i, target:c.next,
+      label:(c.text || c.id || ('选项 ' + (i + 1))) + (c.next ? (' → ' + c.next) : ' → 结束'),
+    }));
+  }
+  return [{ kind:'next', index:0, target:n.next, label: n.next ? ('下一步 → ' + n.next) : '下一步 → 结束' }];
+}
+function setOutput(nodeId, kind, index, target){
+  const n = byId(nodeId); if (!n) return;
+  pushHistory();
+  if (kind === 'choice' && n.choices[index]) n.choices[index].next = target;
+  else n.next = target;
+}
+function portraitSrc(path){
+  if (!path || path === '-') return null;
+  const a = state.assets.find(a => a.path === path);
+  if (a) return a.data;
+  const m = /^([a-z0-9_.\-]+):(.+)$/i.exec(path);
+  if (m) return '../src/main/resources/assets/' + m[1] + '/' + m[2]; // 开发环境相对路径兜底
+  return null;
+}
+function pushHistory(){
+  history.push(JSON.stringify({ scriptId:state.scriptId, namespace:state.namespace,
+    packDesc:state.packDesc, startId:state.startId, nodes:state.nodes }));
+  if (history.length > 80) history.shift();
+}
+function undo(){
+  const s = history.pop();
+  if (!s) return toast('没有可撤销的操作');
+  const d = JSON.parse(s);
+  state.scriptId = d.scriptId; state.namespace = d.namespace; state.packDesc = d.packDesc;
+  state.startId = d.startId; state.nodes = d.nodes;
+  if (state.selection && !byId(state.selection)) state.selection = null;
+  renderAll(); scheduleSave();
+}
+/* #endregion state */
+
+/* ============================================================
+ * #region dom-utils  DOM 小工具：toast / modal / popup / 下载
+ * ============================================================ */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+
+function toast(msg, type){
+  const el = document.createElement('div');
+  el.className = 'toast' + (type ? ' ' + type : '');
+  el.textContent = msg;
+  $('#toasts').appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity .3s'; }, 2600);
+  setTimeout(() => el.remove(), 3000);
+}
+let toastOnceFlags = new Set();
+function toastOnce(key, msg, type){
+  if (toastOnceFlags.has(key)) return;
+  toastOnceFlags.add(key); toast(msg, type);
+}
+
+function openModal(title, bodyEl, footEl){
+  const m = $('#modal');
+  m.innerHTML = '';
+  const head = document.createElement('div');
+  head.className = 'modal-head';
+  head.innerHTML = '<div class="mtitle">' + esc(title) + '</div>';
+  const x = document.createElement('button');
+  x.className = 'btn ghost'; x.textContent = '✕';
+  x.onclick = closeModal;
+  head.appendChild(x);
+  const body = document.createElement('div');
+  body.className = 'modal-body';
+  if (bodyEl) body.appendChild(bodyEl);
+  m.append(head, body);
+  if (footEl){ const f = document.createElement('div'); f.className = 'modal-foot'; f.appendChild(footEl); m.appendChild(f); }
+  $('#modal-layer').classList.add('open');
+}
+function closeModal(){ $('#modal-layer').classList.remove('open'); }
+$('#modal-layer').addEventListener('click', e => { if (e.target.id === 'modal-layer') closeModal(); });
+
+function clearPopups(){ $('#popup-layer').innerHTML = ''; }
+function showPopup(clientX, clientY, build){
+  clearPopups();
+  const layer = $('#popup-layer');
+  const el = document.createElement('div');
+  el.className = 'popup';
+  build(el);
+  layer.appendChild(el);
+  const r = el.getBoundingClientRect();
+  el.style.left = clamp(clientX, 6, innerWidth - r.width - 6) + 'px';
+  el.style.top = clamp(clientY, 6, innerHeight - r.height - 6) + 'px';
+  el.dataset.keep = '1';
+}
+$('#popup-layer').addEventListener('pointerdown', e => {
+  if (!e.target.closest('.popup')) clearPopups();
+});
+
+function download(name, blob){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 400);
+}
+function downloadText(name, text, mime){ download(name, new Blob([text], { type: mime || 'text/plain;charset=utf-8' })); }
+
+async function copyText(text){
+  try { await navigator.clipboard.writeText(text); toast('已复制到剪贴板', 'ok'); }
+  catch {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); toast('已复制到剪贴板', 'ok'); }
+    catch { toast('复制失败，请手动选择文本', 'err'); }
+    ta.remove();
+  }
+}
+function readFileText(file){
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result); r.onerror = rej;
+    r.readAsText(file);
+  });
+}
+function readFileDataURL(file){
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result); r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+function loadImage(src){
+  return new Promise((res, rej) => {
+    const im = new Image();
+    im.onload = () => res(im); im.onerror = rej; im.src = src;
+  });
+}
+/* #endregion dom-utils */
+
+/* ============================================================
+ * #region validate  校验
+ * ============================================================ */
+function validate(){
+  const out = [];
+  const err = (msg, id) => out.push({ level:'err', msg, id });
+  const warn = (msg, id) => out.push({ level:'warn', msg, id });
+  const ids = new Set(state.nodes.map(n => n.id));
+
+  if (!state.nodes.length) err('剧本没有任何节点', null);
+  state.nodes.forEach(n => { if (!n.id) err('存在空 id 的节点', null); });
+  const count = new Map();
+  state.nodes.forEach(n => count.set(n.id, (count.get(n.id) || 0) + 1));
+  count.forEach((c, id) => { if (c > 1) err('节点 id 重复：「' + id + '」，运行时只会命中第一个', id); });
+
+  if (state.startId && !ids.has(state.startId)) err('起点「' + state.startId + '」不存在', state.startId);
+  if (!state.startId) warn('未设置起点：KubeJS 导出会取第一个节点；数据包导出会自动写入第一个节点', null);
+
+  for (const n of state.nodes){
+    if (n.type === 'choice'){
+      if (!n.choices.length) err('分支节点「' + n.id + '」没有任何选项', n.id);
+      const cids = new Set();
+      n.choices.forEach(c => {
+        if (!c.id) err('「' + n.id + '」里有选项没填 id', n.id);
+        if (cids.has(c.id)) err('「' + n.id + '」里选项 id 重复：「' + c.id + '」', n.id);
+        cids.add(c.id);
+        if (!c.text) warn('「' + n.id + '」选项「' + c.id + '」文字为空', n.id);
+        if (c.next && !ids.has(c.next)) warn('「' + n.id + '」选项「' + c.id + '」指向不存在的节点「' + c.next + '」，运行时会直接结束对话', n.id);
+      });
+    } else {
+      if (!n.text) warn('节点「' + n.id + '」正文为空', n.id);
+      if (n.next && !ids.has(n.next)) warn('节点「' + n.id + '」的下一节点「' + n.next + '」不存在，运行时会直接结束对话', n.id);
+    }
+    if (n.portrait && n.portrait !== '-'){
+      if (!/^[a-z0-9_.\-]+:.+$/.test(n.portrait)) warn('节点「' + n.id + '」立绘路径不是「命名空间:路径」格式：' + n.portrait, n.id);
+      else if (!state.assets.some(a => a.path === n.portrait)) warn('节点「' + n.id + '」的立绘不在素材库里（可能来自其它资源包）：' + n.portrait, n.id);
+    }
+  }
+  // 可达性
+  const seen = new Set();
+  const q = [state.startId || (state.nodes[0] && state.nodes[0].id)];
+  while (q.length){
+    const id = q.shift();
+    if (!id || seen.has(id)) continue;
+    seen.add(id);
+    const n = byId(id); if (!n) continue;
+    outgoingTargets(n).forEach(t => q.push(t));
+  }
+  state.nodes.forEach(n => { if (!seen.has(n.id)) warn('节点「' + n.id + '」从起点走不到（孤儿节点）', n.id); });
+  return out;
+}
+function updateValBadge(){
+  const issues = validate();
+  const e = issues.filter(i => i.level === 'err').length;
+  const w = issues.length - e;
+  const b = $('#val-badge');
+  if (!e && !w){ b.textContent = ''; return; }
+  b.innerHTML = (e ? '<span style="color:var(--red)">' + e + '</span>' : '')
+              + (e && w ? '/' : '')
+              + (w ? '<span style="color:var(--accent)">' + w + '</span>' : '');
+}
+function openValidateModal(){
+  const issues = validate();
+  const body = document.createElement('div');
+  if (!issues.length){
+    body.innerHTML = '<p class="hint">没发现问题，可以直接导出。</p>';
+  } else {
+    for (const it of issues){
+      const row = document.createElement('div');
+      row.className = 'issue ' + (it.level === 'err' ? 'err' : 'warn');
+      row.innerHTML = '<span class="sev">' + (it.level === 'err' ? '错误' : '提示') + '</span>'
+        + '<div class="imsg">' + esc(it.msg) + '</div>'
+        + (it.id ? '<div class="iloc">' + esc(it.id) + '</div>' : '');
+      if (it.id && byId(it.id)) row.onclick = () => { closeModal(); selectNode(it.id); centerNode(it.id); };
+      body.appendChild(row);
+    }
+  }
+  openModal('检查 (' + issues.length + ')', body);
+}
+/* #endregion validate */
+
+/* ============================================================
+ * #region render-canvas  画布渲染
+ * ============================================================ */
+const wrap = $('#canvas-wrap');
+const canvas = $('#canvas');
+const svg = $('#links');
+const nodesLayer = $('#nodes');
+let nodeEls = new Map();
+let linksRaf = 0;
+
+function applyView(){
+  canvas.style.transform = 'translate(' + view.x + 'px,' + view.y + 'px) scale(' + view.scale + ')';
+  wrap.style.backgroundSize = (24 * view.scale) + 'px ' + (24 * view.scale) + 'px';
+  wrap.style.backgroundPosition = view.x + 'px ' + view.y + 'px';
+  $('#zoomLabel').textContent = Math.round(view.scale * 100) + '%';
+}
+function toCanvas(clientX, clientY){
+  const r = wrap.getBoundingClientRect();
+  return { x:(clientX - r.left - view.x) / view.scale, y:(clientY - r.top - view.y) / view.scale };
+}
+function zoomAt(clientX, clientY, factor){
+  const r = wrap.getBoundingClientRect();
+  const px = clientX - r.left, py = clientY - r.top;
+  const ns = clamp(view.scale * factor, 0.25, 2.5);
+  view.x = px - (px - view.x) * (ns / view.scale);
+  view.y = py - (py - view.y) * (ns / view.scale);
+  view.scale = ns;
+  applyView();
+}
+function fitView(){
+  if (!state.nodes.length){ view.x = 60; view.y = 40; view.scale = 1; applyView(); return; }
+  const xs = state.nodes.map(n => n.x), ys = state.nodes.map(n => n.y);
+  const minX = Math.min(...xs) - 40, minY = Math.min(...ys) - 40;
+  const maxX = Math.max(...xs) + 300, maxY = Math.max(...ys) + 220;
+  const r = wrap.getBoundingClientRect();
+  const s = clamp(Math.min(r.width / (maxX - minX), r.height / (maxY - minY)), 0.25, 1.4);
+  view.scale = s;
+  view.x = (r.width - (maxX - minX) * s) / 2 - minX * s;
+  view.y = (r.height - (maxY - minY) * s) / 2 - minY * s;
+  applyView();
+}
+function centerNode(id){
+  const n = byId(id); if (!n) return;
+  const r = wrap.getBoundingClientRect();
+  view.x = r.width / 2 - (n.x + 126) * view.scale;
+  view.y = r.height / 2 - (n.y + 60) * view.scale;
+  applyView();
+}
+
+function nodeCardHtml(n, issuesByNode){
+  const isStart = n.id === state.startId;
+  const outs = getOutputs(n);
+  const hasErr = issuesByNode && issuesByNode.get(n.id) === 'err';
+  const thumb = (n.portrait && n.portrait !== '-')
+    ? '<img class="nthumb" src="' + esc(portraitSrc(n.portrait) || '') + '" onerror="this.style.display=\'none\'" alt="">'
+    : '';
+  const foot = outs.length
+    ? outs.map((o, i) => '<div class="crow"><span class="clabel">' + esc(o.label) + '</span>'
+        + '<span class="port out ' + o.kind + '" data-kind="' + o.kind + '" data-index="' + i + '" title="拖到别的节点上连线"></span></div>').join('')
+    : '<div class="crow"><span class="clabel muted">（没有出口）</span></div>';
+  return '<div class="node ' + (n.type === 'choice' ? 'choice' : 'line')
+      + (state.selection === n.id ? ' sel' : '') + (isStart ? ' is-start' : '') + '" data-id="' + esc(n.id) + '"'
+      + ' style="left:' + n.x + 'px;top:' + n.y + 'px">'
+    + '<span class="port in" title="往下拖可断开连入的线"></span>'
+    + (hasErr ? '<span class="warn-dot" title="有校验错误"></span>' : '')
+    + '<div class="node-head"><span class="nicon">' + (n.type === 'choice' ? '⑂' : '💬') + '</span>'
+    + '<span class="nid">' + esc(n.id || '(空 id)') + '</span>'
+    + (isStart ? '<span class="start-badge">起点</span>' : '') + '</div>'
+    + '<div class="node-body">'
+    + (n.speaker ? '<div class="nspeaker">' + esc(n.speaker) + '</div>' : '')
+    + '<div class="ntext">' + (esc(n.text) || '<i>（空）</i>') + '</div>'
+    + '</div>'
+    + '<div class="node-foot">' + foot + '</div>'
+    + thumb
+    + '</div>';
+}
+function renderNodes(){
+  const issuesByNode = new Map();
+  validate().forEach(i => { if (i.id) issuesByNode.set(i.id, issuesByNode.get(i.id) === 'err' ? 'err' : i.level); });
+  nodesLayer.innerHTML = state.nodes.map(n => nodeCardHtml(n, issuesByNode)).join('');
+  nodeEls = new Map();
+  $$('.node', nodesLayer).forEach(el => nodeEls.set(el.dataset.id, el));
+  $('#empty-tip').style.display = state.nodes.length ? 'none' : 'block';
+}
+function portCenter(nodeId, kind, index){
+  const el = nodeEls.get(nodeId);
+  const n = byId(nodeId);
+  if (!el || !n) return { x:n ? n.x : 0, y:n ? n.y : 0 };
+  const p = kind === 'in' ? el.querySelector('.port.in') : el.querySelectorAll('.port.out')[index];
+  if (!p) return { x:n.x + 126, y:n.y + 16 };
+  const pr = p.getBoundingClientRect(), nr = el.getBoundingClientRect();
+  return {
+    x: n.x + (pr.left + pr.width / 2 - nr.left) / view.scale,
+    y: n.y + (pr.top + pr.height / 2 - nr.top) / view.scale,
+  };
+}
+function wirePath(p1, p2){
+  const dx = Math.max(40, Math.abs(p2.x - p1.x) * 0.45);
+  return 'M ' + p1.x + ' ' + p1.y + ' C ' + (p1.x + dx) + ' ' + p1.y + ', '
+       + (p2.x - dx) + ' ' + p2.y + ', ' + p2.x + ' ' + p2.y;
+}
+function renderLinks(){
+  const parts = [];
+  for (const n of state.nodes){
+    getOutputs(n).forEach(o => {
+      if (!o.target || !byId(o.target)) return;
+      const p1 = portCenter(n.id, 'out', o.index);
+      const p2 = portCenter(o.target, 'in');
+      const d = wirePath(p1, p2);
+      const ref = n.id + '|' + o.kind + '|' + o.index;
+      parts.push('<path class="wire ' + (o.kind === 'choice' ? 'choice' : 'next') + '" d="' + d + '"></path>');
+      parts.push('<path class="hit" data-link="' + esc(ref) + '" d="' + d + '"></path>');
+    });
+  }
+  if (drag && drag.mode === 'link' && drag.tempD){
+    parts.push('<path class="temp" d="' + drag.tempD + '"></path>');
+  }
+  svg.innerHTML = parts.join('');
+}
+function requestLinks(){
+  if (linksRaf) return;
+  linksRaf = requestAnimationFrame(() => { linksRaf = 0; renderLinks(); });
+}
+/* #endregion render-canvas */
+
+/* ============================================================
+ * #region interact  画布交互：平移 / 缩放 / 拖节点 / 连线
+ * ============================================================ */
+const pointers = new Map();
+let drag = null;       // {mode:'pan'|'node'|'link'|'inDetach', ...}
+let pinch = null;
+let suppressClick = false; // 拖动后吞掉一次 click
+
+wrap.addEventListener('contextmenu', e => e.preventDefault());
+
+wrap.addEventListener('pointerdown', e => {
+  if (e.pointerType === 'mouse' && e.button !== 0) return;
+  if (e.target.closest('.popup')) return;
+  pointers.set(e.pointerId, { x:e.clientX, y:e.clientY, sx:e.clientX, sy:e.clientY });
+  try { wrap.setPointerCapture(e.pointerId); } catch (_) {}
+
+  if (pointers.size === 2){ startPinch(); return; }
+
+  const portOut = e.target.closest('.port.out');
+  const portIn = e.target.closest('.port.in');
+  const nodeEl = e.target.closest('.node');
+
+  if (portOut && nodeEl){
+    drag = { mode:'link', srcNodeId:nodeEl.dataset.id, kind:portOut.dataset.kind, index:+portOut.dataset.index, pointerId:e.pointerId };
+    const p1 = portCenter(drag.srcNodeId, 'out', drag.index);
+    const c = toCanvas(e.clientX, e.clientY);
+    drag.tempD = wirePath(p1, c);
+    renderLinks();
+    return;
+  }
+  if (portIn && nodeEl){
+    drag = { mode:'inDetach', nodeId:nodeEl.dataset.id, sx:e.clientX, sy:e.clientY };
+    return;
+  }
+  if (nodeEl){
+    const n = byId(nodeEl.dataset.id);
+    if (!n) return;
+    const c = toCanvas(e.clientX, e.clientY);
+    drag = { mode:'node', id:n.id, ox:c.x - n.x, oy:c.y - n.y };
+    selectNode(n.id, false);
+    wrap.classList.add('grabbing');
+    return;
+  }
+  // 空白 → 平移（带长按）
+  drag = { mode:'pan', sx:e.clientX, sy:e.clientY, vx:view.x, vy:view.y, moved:false,
+           lp: setTimeout(() => {
+             if (drag && drag.mode === 'pan' && !drag.moved){
+               const c = toCanvas(drag.lpX != null ? drag.lpX : drag.sx, drag.lpY != null ? drag.lpY : drag.sy);
+               showAddMenu(c.x, c.y, drag.sx, drag.sy);
+               drag = null;
+             }
+           }, 550) };
+  drag.lpX = e.clientX; drag.lpY = e.clientY;
+  wrap.classList.add('grabbing');
+});
+
+wrap.addEventListener('pointermove', e => {
+  const p = pointers.get(e.pointerId);
+  if (p){ p.x = e.clientX; p.y = e.clientY; }
+  if (pointers.size >= 2 && pinch){ updatePinch(); return; }
+  if (!drag) return;
+  const dist = Math.hypot(e.clientX - (drag.sx != null ? drag.sx : e.clientX), e.clientY - (drag.sy != null ? drag.sy : e.clientY));
+
+  if (drag.mode === 'pan'){
+    if (dist > 8){
+      drag.moved = true;
+      if (drag.lp) { clearTimeout(drag.lp); drag.lp = null; }
+    }
+    if (!drag.moved) return;
+    view.x = drag.vx + (e.clientX - drag.sx);
+    view.y = drag.vy + (e.clientY - drag.sy);
+    applyView();
+  } else if (drag.mode === 'node'){
+    suppressClick = true;
+    const c = toCanvas(e.clientX, e.clientY);
+    const n = byId(drag.id); if (!n) return;
+    n.x = Math.round(c.x - drag.ox);
+    n.y = Math.round(c.y - drag.oy);
+    const el = nodeEls.get(n.id);
+    if (el){ el.style.left = n.x + 'px'; el.style.top = n.y + 'px'; }
+    requestLinks();
+  } else if (drag.mode === 'link'){
+    const p1 = portCenter(drag.srcNodeId, 'out', drag.index);
+    const c = toCanvas(e.clientX, e.clientY);
+    drag.tempD = wirePath(p1, c);
+    requestLinks();
+  } else if (drag.mode === 'inDetach'){
+    if (dist > 10){ detachInput(drag.nodeId); drag = null; }
+  }
+});
+
+function endPointer(e){
+  pointers.delete(e.pointerId);
+  if (pinch && pointers.size < 2) pinch = null;
+  if (!drag){ wrap.classList.remove('grabbing'); return; }
+  if (drag.lp) clearTimeout(drag.lp);
+  if (drag.mode === 'link'){
+    finishLinkDrag(e);
+  } else if (drag.mode === 'node'){
+    scheduleSave();
+    setTimeout(() => { suppressClick = false; }, 0);
+  } else if (drag.mode === 'pan' && !drag.moved){
+    if (!suppressClick) { selectNode(null); clearPopups(); }
+  }
+  drag = null;
+  wrap.classList.remove('grabbing');
+}
+wrap.addEventListener('pointerup', endPointer);
+wrap.addEventListener('pointercancel', endPointer);
+
+wrap.addEventListener('click', e => {
+  if (suppressClick){ suppressClick = false; return; }
+  const hit = e.target.closest('path.hit');
+  if (hit){
+    const [nodeId, kind, index] = hit.dataset.link.split('|');
+    const n = byId(nodeId); if (!n) return;
+    const out = getOutputs(n)[+index];
+    showPopup(e.clientX, e.clientY, el => {
+      el.innerHTML = '<div class="pop-title">' + esc(out ? out.label : '') + '</div>';
+      const b = document.createElement('button');
+      b.className = 'pop-item'; b.textContent = '✂ 断开这条连线';
+      b.onclick = () => {
+        setOutput(nodeId, kind, +index, '');
+        clearPopups(); renderNodes(); renderLinks(); renderInspector();
+      };
+      el.appendChild(b);
+    });
+    return;
+  }
+  const nodeEl = e.target.closest('.node');
+  if (nodeEl){ selectNode(nodeEl.dataset.id); return; }
+  if (e.target === wrap){ clearPopups(); }
+});
+
+// 双击 / 长按空白 → 快速添加
+wrap.addEventListener('dblclick', e => {
+  if (e.target.closest('.node')) return;
+  const c = toCanvas(e.clientX, e.clientY);
+  showAddMenu(c.x, c.y, e.clientX, e.clientY);
+});
+
+function showAddMenu(cx, cy, clientX, clientY){
+  showPopup(clientX, clientY, el => {
+    el.innerHTML = '<div class="pop-title">在此处添加节点</div>';
+    const mk = (label, type) => {
+      const b = document.createElement('button');
+      b.className = 'pop-item'; b.textContent = label;
+      b.onclick = () => {
+        clearPopups();
+        addNode(type, cx, cy);
+      };
+      el.appendChild(b);
+    };
+    mk('💬 对话节点', 'line');
+    mk('⑂ 分支节点', 'choice');
+  });
+}
+
+// 连线拖拽收尾
+function finishLinkDrag(e){
+  if (drag) drag.tempD = null;
+  renderLinks();
+  const el = document.elementFromPoint(e.clientX, e.clientY);
+  const nodeEl = el && el.closest ? el.closest('.node') : null;
+  if (nodeEl){
+    const tid = nodeEl.dataset.id;
+    if (tid !== drag.srcNodeId){
+      setOutput(drag.srcNodeId, drag.kind, drag.index, tid);
+      renderNodes(); renderLinks(); renderInspector(); scheduleSave();
+    } else {
+      renderLinks();
+    }
+    return;
+  }
+  // 落在空白 → 建新节点并接上（ComfyUI 手感）
+  const c = toCanvas(e.clientX, e.clientY);
+  const n = createNode('line', c.x - 126, c.y - 24);
+  setOutput(drag.srcNodeId, drag.kind, drag.index, n.id);
+  renderAll(); selectNode(n.id);
+}
+function detachInput(nodeId){
+  pushHistory();
+  let cleared = 0;
+  for (const n of state.nodes){
+    if (n.type === 'choice'){
+      n.choices.forEach(c => { if (c.next === nodeId){ c.next = ''; cleared++; } });
+    } else if (n.next === nodeId){ n.next = ''; cleared++; }
+  }
+  if (cleared){ renderNodes(); renderLinks(); renderInspector(); scheduleSave(); toast('已断开 ' + cleared + ' 条连线'); }
+  else toast('这个节点没有连入的线');
+}
+
+function startPinch(){
+  const pts = [...pointers.values()];
+  if (pts.length < 2) return;
+  if (drag && drag.lp) clearTimeout(drag.lp);
+  drag = null;
+  renderLinks(); // 清掉可能残留的临时连线
+  const [a, b] = pts;
+  pinch = {
+    d: Math.hypot(a.x - b.x, a.y - b.y),
+    mid: { x:(a.x + b.x) / 2, y:(a.y + b.y) / 2 },
+    scale: view.scale, vx:view.x, vy:view.y,
+  };
+}
+function updatePinch(){
+  const pts = [...pointers.values()];
+  if (pts.length < 2) return;
+  const [a, b] = pts;
+  const d = Math.hypot(a.x - b.x, a.y - b.y);
+  const mid = { x:(a.x + b.x) / 2, y:(a.y + b.y) / 2 };
+  const r = wrap.getBoundingClientRect();
+  const ns = clamp(pinch.scale * (d / pinch.d), 0.25, 2.5);
+  const ax = pinch.mid.x - r.left, ay = pinch.mid.y - r.top;
+  view.x = ax - (ax - pinch.vx) * (ns / pinch.scale) + (mid.x - pinch.mid.x);
+  view.y = ay - (ay - pinch.vy) * (ns / pinch.scale) + (mid.y - pinch.mid.y);
+  view.scale = ns;
+  applyView();
+}
+
+wrap.addEventListener('wheel', e => {
+  e.preventDefault();
+  zoomAt(e.clientX, e.clientY, e.deltaY < 0 ? 1.12 : 1 / 1.12);
+}, { passive:false });
+
+// 拖图片到画布 = 添加素材；拖到节点上 = 直接设为立绘
+wrap.addEventListener('dragover', e => { e.preventDefault(); });
+wrap.addEventListener('drop', async e => {
+  e.preventDefault();
+  const files = [...(e.dataTransfer.files || [])].filter(f => f.type.startsWith('image/'));
+  if (!files.length) return;
+  const nodeEl = e.target.closest && e.target.closest('.node');
+  const targetId = nodeEl ? nodeEl.dataset.id : null;
+  for (const f of files){
+    const a = await addAssetFromFile(f);
+    if (a && targetId){
+      pushHistory();
+      const n = byId(targetId);
+      if (n){ n.portrait = a.path; renderAll(); }
+    }
+  }
+  if (targetId) toast('已设为该节点的立绘', 'ok');
+});
+/* #endregion interact */
+
+/* ============================================================
+ * #region nodes  节点增删改
+ * ============================================================ */
+function createNode(type, x, y){
+  pushHistory();
+  const n = {
+    id: uniqueId(type === 'choice' ? 'branch' : 'node'),
+    type, speaker:'', text:'', portrait:'', next:'',
+    choices: type === 'choice' ? [ { id:'opt1', text:'选项一', next:'' } ] : [],
+    x: Math.round(x || 0), y: Math.round(y || 0),
+  };
+  state.nodes.push(n);
+  return n;
+}
+function addNode(type, x, y, linkFrom){
+  const n = createNode(type, x, y);
+  if (linkFrom){
+    if (linkFrom.kind === 'choice' && byId(linkFrom.srcNodeId)){
+      const src = byId(linkFrom.srcNodeId);
+      if (src.choices[linkFrom.index]) src.choices[linkFrom.index].next = n.id;
+    } else if (byId(linkFrom.srcNodeId)){
+      byId(linkFrom.srcNodeId).next = n.id;
+    }
+  }
+  if (!state.startId) state.startId = n.id;
+  renderAll(); selectNode(n.id); scheduleSave();
+  return n;
+}
+function deleteNode(id){
+  const n = byId(id); if (!n) return;
+  pushHistory();
+  state.nodes = state.nodes.filter(x => x.id !== id);
+  let cleared = 0;
+  for (const other of state.nodes){
+    if (other.type === 'choice') other.choices.forEach(c => { if (c.next === id){ c.next = ''; cleared++; } });
+    else if (other.next === id){ other.next = ''; cleared++; }
+  }
+  if (state.startId === id) state.startId = state.nodes[0] ? state.nodes[0].id : '';
+  state.selection = null;
+  renderAll(); scheduleSave();
+  toast('已删除节点「' + id + '」' + (cleared ? '，并断开了 ' + cleared + ' 条指向它的连线' : ''));
+}
+function duplicateNode(id){
+  const n = byId(id); if (!n) return;
+  pushHistory();
+  const copy = deepCopy(n);
+  copy.id = uniqueId(n.id + '_copy');
+  copy.x = n.x + 36; copy.y = n.y + 40;
+  state.nodes.push(copy);
+  renderAll(); selectNode(copy.id); scheduleSave();
+}
+function renameNode(oldId, newId){
+  if (oldId === newId) return;
+  pushHistory();
+  const n = byId(oldId); if (!n) return;
+  n.id = newId;
+  for (const other of state.nodes){
+    if (other.type === 'choice') other.choices.forEach(c => { if (c.next === oldId) c.next = newId; });
+    else if (other.next === oldId) other.next = newId;
+  }
+  if (state.startId === oldId) state.startId = newId;
+  if (state.selection === oldId) state.selection = newId;
+  // 不重建检查器：用户可能正在 id 输入框里打字，重建会丢焦点
+  renderNodes(); renderLinks(); updateValBadge(); scheduleSave();
+}
+function selectNode(id, openSheet = true){
+  state.selection = id;
+  renderNodes(); renderLinks(); renderInspector();
+  if (id && openSheet && isMobile()) openSheetEl($('#inspector'));
+}
+/* #endregion nodes */
+
+/* ============================================================
+ * #region inspector  右侧 / 底部检查器
+ * ============================================================ */
+const inspector = $('#inspector');
+const isMobile = () => window.matchMedia('(max-width: 920px)').matches;
+
+function fieldRow(labelText, inputEl){
+  const l = document.createElement('label');
+  l.textContent = labelText;
+  const w = document.createElement('div');
+  w.appendChild(l); w.appendChild(inputEl);
+  return w;
+}
+function mkInput(field, value, placeholder){
+  const i = document.createElement('input');
+  i.dataset.field = field; i.value = value == null ? '' : value;
+  if (placeholder) i.placeholder = placeholder;
+  i.spellcheck = false;
+  return i;
+}
+function mkTextarea(field, value, rows){
+  const t = document.createElement('textarea');
+  t.dataset.field = field; t.value = value == null ? '' : value;
+  t.rows = rows || 3;
+  return t;
+}
+function mkSelect(field, value, options){
+  const s = document.createElement('select');
+  s.dataset.field = field;
+  for (const o of options){
+    const op = document.createElement('option');
+    op.value = o.v; op.textContent = o.label;
+    if (o.v === value) op.selected = true;
+    if (o.disabled) op.disabled = true;
+    s.appendChild(op);
+  }
+  // 值不在列表里（悬空引用）→ 补一个
+  if (!options.some(o => o.v === value)){
+    const op = document.createElement('option');
+    op.value = value; op.textContent = '⚠ ' + (value || '(空)');
+    op.selected = true;
+    s.appendChild(op);
+  }
+  return s;
+}
+function nodeIdOptions(includeEmpty, emptyLabel){
+  const opts = [];
+  if (includeEmpty) opts.push({ v:'', label: emptyLabel || '（结束对话）' });
+  for (const n of state.nodes) opts.push({ v:n.id, label:n.id + (n.type === 'choice' ? ' ⑂' : '') });
+  return opts;
+}
+
+function renderInspector(){
+  inspector.innerHTML = '';
+  const id = state.selection;
+  const n = id ? byId(id) : null;
+  if (!n){ renderProjectPanel(); return; }
+
+  const head = document.createElement('div');
+  head.innerHTML = '<h3 style="margin:0 0 4px;font-size:14px">' + (n.type === 'choice' ? '⑂ 分支节点' : '💬 对话节点')
+    + (n.id === state.startId ? ' <span class="start-badge">起点</span>' : '') + '</h3>';
+  inspector.appendChild(head);
+
+  inspector.appendChild(fieldRow('节点 ID（改 id 会自动更新所有指向它的连线）', mkInput('node.id', n.id)));
+
+  // 立绘
+  const portraitWrap = document.createElement('div');
+  const label = document.createElement('label');
+  label.textContent = '立绘';
+  portraitWrap.appendChild(label);
+  const pv = document.createElement('div');
+  pv.style.cssText = 'display:flex;gap:8px;align-items:center';
+  const thumb = document.createElement('img');
+  thumb.style.cssText = 'width:44px;height:44px;object-fit:cover;border-radius:7px;border:1px solid var(--line2);background:#0d1015;flex:none';
+  const src = portraitSrc(n.portrait);
+  if (src) thumb.src = src; else thumb.style.opacity = '.25';
+  const sel = mkSelect('node.portrait', n.portrait, [
+    { v:'', label:'沿用上一个节点' },
+    { v:'-', label:'收起立绘（-）' },
+    ...state.assets.map(a => ({ v:a.path, label:(a.name || a.file) + '  ·  ' + a.path })),
+    { v:'__custom__', label:'自定义路径…' },
+  ]);
+  pv.append(sel, thumb);
+  portraitWrap.appendChild(pv);
+  const isCustom = !!(n.portrait && n.portrait !== '-' && !state.assets.some(a => a.path === n.portrait));
+  const custom = mkInput('node.portraitCustom', isCustom ? n.portrait : '', 'namespace:textures/gui/portrait/xxx.png');
+  custom.style.display = isCustom ? 'block' : 'none';
+  custom.style.marginTop = '6px';
+  portraitWrap.appendChild(custom);
+  inspector.appendChild(portraitWrap);
+
+  inspector.appendChild(fieldRow('说话人（留空 = 旁白）', mkInput('node.speaker', n.speaker, '奥利维亚')));
+
+  const l = document.createElement('label'); l.textContent = '正文';
+  inspector.appendChild(l);
+  const ta = document.createElement('textarea');
+  ta.dataset.field = 'node.text'; ta.value = n.text; ta.rows = 5; ta.placeholder = '他说了什么……';
+  inspector.appendChild(ta);
+
+  if (n.type === 'choice'){
+    const l2 = document.createElement('label'); l2.textContent = '选项'; inspector.appendChild(l2);
+    const list = document.createElement('div');
+    n.choices.forEach((c, i) => {
+      const box = document.createElement('div');
+      box.style.cssText = 'border:1px solid var(--line);border-radius:8px;padding:8px;margin-bottom:8px;background:var(--panel2)';
+      const row1 = document.createElement('div');
+      row1.style.cssText = 'display:flex;gap:6px;align-items:center;margin-bottom:6px';
+      const order = document.createElement('span');
+      order.className = 'hint'; order.textContent = '#' + (i + 1);
+      row1.appendChild(order);
+      const up = document.createElement('button'); up.className = 'btn sm'; up.textContent = '↑';
+      up.onclick = () => { if (i > 0){ pushHistory(); const [x] = n.choices.splice(i, 1); n.choices.splice(i - 1, 0, x); renderAll(); renderInspector(); } };
+      const dn = document.createElement('button'); dn.className = 'btn sm'; dn.textContent = '↓';
+      dn.onclick = () => { if (i < n.choices.length - 1){ pushHistory(); const [x] = n.choices.splice(i, 1); n.choices.splice(i + 1, 0, x); renderAll(); renderInspector(); } };
+      const del = document.createElement('button'); del.className = 'btn sm danger'; del.textContent = '✕';
+      del.onclick = () => { pushHistory(); n.choices.splice(i, 1); renderAll(); renderInspector(); scheduleSave(); };
+      row1.append(up, dn, del);
+      box.appendChild(row1);
+      box.appendChild(fieldRow('选项 id（KubeJS 事件里按它判断）', mkInput('choice.id:' + i, c.id)));
+      box.appendChild(fieldRow('选项文字', mkInput('choice.text:' + i, c.text)));
+      box.appendChild(fieldRow('跳转到', mkSelect('choice.next:' + i, c.next, nodeIdOptions(true))));
+      list.appendChild(box);
+    });
+    inspector.appendChild(list);
+    const add = document.createElement('button');
+    add.className = 'btn'; add.textContent = '＋ 添加选项';
+    add.onclick = () => {
+      pushHistory();
+      let k = n.choices.length + 1;
+      while (n.choices.some(c => c.id === 'opt' + k)) k++;
+      n.choices.push({ id:'opt' + k, text:'选项 ' + k, next:'' });
+      renderAll(); renderInspector(); scheduleSave();
+    };
+    inspector.appendChild(add);
+  } else {
+    inspector.appendChild(fieldRow('下一节点', mkSelect('node.next', n.next, nodeIdOptions(true))));
+  }
+
+  const spacer = document.createElement('div'); spacer.style.height = '10px'; inspector.appendChild(spacer);
+  const btns = document.createElement('div');
+  btns.style.cssText = 'display:flex;gap:6px;flex-wrap:wrap';
+  const bStart = document.createElement('button'); bStart.className = 'btn sm'; bStart.textContent = '★ 设为起点';
+  bStart.onclick = () => { pushHistory(); state.startId = n.id; renderAll(); renderInspector(); scheduleSave(); toast('起点已设为「' + n.id + '」', 'ok'); };
+  const bCopy = document.createElement('button'); bCopy.className = 'btn sm'; bCopy.textContent = '⧉ 复制';
+  bCopy.onclick = () => duplicateNode(n.id);
+  const bPlay = document.createElement('button'); bPlay.className = 'btn sm'; bPlay.textContent = '▶ 从此试玩';
+  bPlay.onclick = () => openPreview(n.id);
+  const bCenter = document.createElement('button'); bCenter.className = 'btn sm'; bCenter.textContent = '⊙ 居中';
+  bCenter.onclick = () => centerNode(n.id);
+  const bDel = document.createElement('button'); bDel.className = 'btn sm danger'; bDel.textContent = '🗑 删除';
+  bDel.onclick = () => { if (confirm('删除节点「' + n.id + '」？指向它的连线会断开。')) deleteNode(n.id); };
+  btns.append(bStart, bCopy, bPlay, bCenter, bDel);
+  inspector.appendChild(btns);
+
+  const hint = document.createElement('p');
+  hint.className = 'hint'; hint.style.marginTop = '12px';
+  hint.textContent = '提示：正文里换行会原样显示；选项 id 建议用英文，KubeJS 的 choice 事件里用它判断条件。';
+  inspector.appendChild(hint);
+}
+
+function renderProjectPanel(){
+  const head = document.createElement('h3');
+  head.textContent = '项目设置';
+  head.style.cssText = 'margin:0 0 4px;font-size:14px';
+  inspector.appendChild(head);
+  inspector.appendChild(fieldRow('命名空间（资源包 / 数据包用）', mkInput('project.namespace', state.namespace)));
+  inspector.appendChild(fieldRow('资源包描述', mkInput('project.packDesc', state.packDesc)));
+  const info = document.createElement('p');
+  info.className = 'hint'; info.style.marginTop = '10px';
+  info.innerHTML = '节点数：' + state.nodes.length + ' · 立绘素材：' + state.assets.length
+    + '<br>起点：' + esc(state.startId || '（未设置）')
+    + '<br><br>点画布里的节点开始编辑；没选节点时显示本面板。';
+  inspector.appendChild(info);
+  const tips = document.createElement('p');
+  tips.className = 'hint'; tips.style.marginTop = '14px';
+  tips.innerHTML = '导出目标：<br>· KubeJS → <b>kubejs/server_scripts/</b><br>· 资源包 → <b>resourcepacks/</b><br>· 数据包 → 存档的 <b>datapacks/</b>';
+  inspector.appendChild(tips);
+}
+
+// 检查器输入（事件委托）
+inspector.addEventListener('focusin', e => {
+  if (e.target.matches('input,textarea,select')) pushHistory();
+});
+inspector.addEventListener('input', onInspectorEdit);
+inspector.addEventListener('change', onInspectorEdit);
+
+function onInspectorEdit(e){
+  const el = e.target;
+  const f = el.dataset.field;
+  if (!f) return;
+  const n = state.selection ? byId(state.selection) : null;
+
+  if (f.startsWith('project.')){
+    if (f === 'project.namespace'){
+      const oldNs = state.namespace;
+      const ns = sanitizeNs(el.value);
+      if (ns === oldNs) return;
+      // 更新素材路径与引用
+      for (const a of state.assets){
+        const oldPath = a.path;
+        a.path = ns + ':textures/gui/portrait/' + a.file;
+        for (const node of state.nodes) if (node.portrait === oldPath) node.portrait = a.path;
+      }
+      state.namespace = ns;
+      renderAll(); renderInspector();
+    } else if (f === 'project.packDesc'){
+      state.packDesc = el.value;
+    }
+    scheduleSave();
+    return;
+  }
+  if (!n) return;
+
+  if (f === 'node.id'){
+    const nv = el.value.trim();
+    if (!nv){ el.style.borderColor = 'var(--red)'; return; }
+    el.style.borderColor = '';
+    if (nv !== n.id && !byId(nv)) renameNode(n.id, nv);
+    return;
+  }
+  if (f === 'node.speaker'){ n.speaker = el.value; touchNode(); return; }
+  if (f === 'node.text'){ n.text = el.value; touchNode(); return; }
+  if (f === 'node.portrait'){
+    if (el.value === '__custom__'){
+      const inp = inspector.querySelector('[data-field="node.portraitCustom"]');
+      if (inp){ inp.style.display = 'block'; inp.value = (n.portrait && n.portrait !== '-') ? n.portrait : ''; inp.focus(); }
+      return;
+    }
+    n.portrait = el.value;
+    const inp = inspector.querySelector('[data-field="node.portraitCustom"]');
+    if (inp) inp.style.display = 'none';
+    touchNode(); renderInspector();
+    return;
+  }
+  if (f === 'node.portraitCustom'){
+    n.portrait = el.value.trim();
+    touchNode();
+    return;
+  }
+  if (f === 'node.next'){ n.next = el.value; touchNode(); return; }
+  if (f.startsWith('choice.')){
+    const m = /^choice\.(id|text|next):(\d+)$/.exec(f);
+    if (!m) return;
+    const c = n.choices[+m[2]]; if (!c) return;
+    c[m[1]] = el.value;
+    touchNode(true);
+    return;
+  }
+}
+function touchNode(full){
+  renderNodes(); renderLinks(); updateValBadge(); scheduleSave();
+  if (full){ /* 选项文字影响连线标签 */ }
+}
+/* #endregion inspector */
+
+/* ============================================================
+ * #region assets  立绘素材库
+ * ============================================================ */
+function assetRefCount(path){
+  let c = 0;
+  for (const n of state.nodes) if (n.portrait === path) c++;
+  return c;
+}
+function renderAssets(){
+  const box = $('#assets');
+  box.innerHTML = '';
+  for (const a of state.assets){
+    const el = document.createElement('div');
+    el.className = 'asset';
+    const refs = assetRefCount(a.path);
+    el.innerHTML = '<img src="' + esc(a.data) + '" alt="">'
+      + '<div class="aname" title="' + esc(a.path) + '">' + esc(a.name || a.file) + '</div>'
+      + (refs ? '<div class="aref">×' + refs + '</div>' : '')
+      + '<div class="abtns"><button data-a="rename" title="重命名">✎</button><button data-a="del" title="删除">✕</button></div>';
+    el.onclick = e => {
+      const act = e.target.dataset ? e.target.dataset.a : null;
+      if (act === 'rename'){ e.stopPropagation(); renameAsset(a); return; }
+      if (act === 'del'){ e.stopPropagation(); deleteAsset(a); return; }
+      if (state.selection && byId(state.selection)){
+        pushHistory();
+        byId(state.selection).portrait = a.path;
+        renderAll(); renderInspector();
+        toast('已把「' + (a.name || a.file) + '」设为节点「' + state.selection + '」的立绘', 'ok');
+      } else {
+        toast('先选中一个节点，再点素材即可设为立绘');
+      }
+    };
+    box.appendChild(el);
+  }
+  if (!state.assets.length){
+    box.innerHTML = '<p class="hint">还没有素材。点「＋ 添加」或把图片拖进来。</p>';
+  }
+}
+async function addAssetFromFile(file){
+  try {
+    let dataUrl = await readFileDataURL(file);
+    let im;
+    try { im = await loadImage(dataUrl); }
+    catch { toast('无法读取图片：' + file.name, 'err'); return null; }
+    let file2 = sanitizeName(file.name);
+    // 非 PNG 统一转 PNG —— Minecraft 资源包只认 PNG
+    if (!/\.png$/i.test(file2) || (file.type && file.type !== 'image/png')){
+      const cv = document.createElement('canvas');
+      cv.width = im.naturalWidth; cv.height = im.naturalHeight;
+      cv.getContext('2d').drawImage(im, 0, 0);
+      dataUrl = cv.toDataURL('image/png');
+      file2 = stripExt(file2) + '.png';
+    }
+    let base = stripExt(file2), k = 1, f2 = file2;
+    while (state.assets.some(a => a.file === f2)){ f2 = base + '_' + (++k) + '.png'; }
+    const asset = {
+      id: uid(), file: f2, name: stripExt(f2), data: dataUrl,
+      w: im.naturalWidth, h: im.naturalHeight,
+      path: sanitizeNs(state.namespace) + ':textures/gui/portrait/' + f2,
+    };
+    pushHistory();
+    state.assets.push(asset);
+    renderAssets(); renderInspector(); scheduleSave();
+    return asset;
+  } catch (err){
+    toast('读取失败：' + file.name, 'err');
+    return null;
+  }
+}
+function renameAsset(a){
+  const nv = prompt('文件名（只用小写字母/数字/下划线/连字符，自动补 .png）', a.file);
+  if (!nv) return;
+  let f = sanitizeName(stripExt(nv) + '.png');
+  if (state.assets.some(x => x !== a && x.file === f)){ toast('已存在同名素材', 'err'); return; }
+  pushHistory();
+  const oldPath = a.path;
+  a.file = f; a.name = stripExt(f);
+  a.path = sanitizeNs(state.namespace) + ':textures/gui/portrait/' + f;
+  for (const n of state.nodes) if (n.portrait === oldPath) n.portrait = a.path;
+  renderAll(); renderInspector(); scheduleSave();
+}
+function deleteAsset(a){
+  const refs = assetRefCount(a.path);
+  if (!confirm('删除素材「' + (a.name || a.file) + '」？' + (refs ? '\n有 ' + refs + ' 个节点在用它，会退回“沿用上一个立绘”。' : ''))) return;
+  pushHistory();
+  state.assets = state.assets.filter(x => x !== a);
+  for (const n of state.nodes) if (n.portrait === a.path) n.portrait = '';
+  renderAll(); renderInspector(); scheduleSave();
+}
+$('#asset-file').addEventListener('change', async e => {
+  for (const f of e.target.files) await addAssetFromFile(f);
+  e.target.value = '';
+  renderAssets();
+});
+/* #endregion assets */
+
+/* ============================================================
+ * #region import  导入（KubeJS / 数据包 JSON / 项目文件 / 图片）
+ * ============================================================ */
+function autoLayout(){
+  if (!state.nodes.length) return;
+  const start = byId(state.startId) || state.nodes[0];
+  const depth = new Map();
+  const q = [[start.id, 0]];
+  depth.set(start.id, 0);
+  while (q.length){
+    const [id, d] = q.shift();
+    const n = byId(id); if (!n) continue;
+    for (const t of outgoingTargets(n)){
+      if (t && byId(t) && !depth.has(t)){ depth.set(t, d + 1); q.push([t, d + 1]); }
+    }
+  }
+  const cols = new Map();
+  let maxD = 0;
+  for (const n of state.nodes){
+    if (!depth.has(n.id)) continue;
+    const d = depth.get(n.id); maxD = Math.max(maxD, d);
+    const k = cols.get(d) || 0; cols.set(d, k + 1);
+    n.x = 70 + d * 300; n.y = 70 + k * 190;
+  }
+  let k = 0;
+  for (const n of state.nodes){
+    if (depth.has(n.id)) continue;
+    n.x = 70 + (maxD + 1) * 300; n.y = 70 + k++ * 190;
+  }
+}
+function setData(parsed, opts){
+  pushHistory();
+  if (parsed.scriptId != null && parsed.scriptId !== '') state.scriptId = parsed.scriptId;
+  state.nodes = parsed.nodes.map(n => ({
+    id: n.id || '', type:(n.choices && n.choices.length) ? 'choice' : (n.type || 'line'),
+    speaker: n.speaker || '', text: n.text || '', portrait: n.portrait || '',
+    next: n.next || '', choices: (n.choices || []).map(c => ({ id:c.id || '', text:c.text || '', next:c.next || '' })),
+    x: n.x != null ? n.x : 0, y: n.y != null ? n.y : 0,
+  }));
+  state.startId = parsed.startId || (state.nodes[0] ? state.nodes[0].id : '');
+  if (opts && opts.layout) autoLayout();
+  state.selection = null;
+  renderAll(); fitView(); scheduleSave();
+}
+function importText(text, name){
+  const s = text.trim();
+  if (!s) { toast('内容是空的', 'err'); return false; }
+  if (s.startsWith('{')){
+    let json;
+    try { json = JSON.parse(s); }
+    catch (e){ toast('JSON 解析失败：' + e.message, 'err'); return false; }
+    if (json.format === 'solaris-rpg-editor'){
+      // 项目文件
+      pushHistory();
+      state.scriptId = json.scriptId || state.scriptId;
+      state.namespace = json.namespace || state.namespace;
+      state.packDesc = json.packDesc || state.packDesc;
+      state.assets = (json.assets || []).map(a => ({ ...a }));
+      setData({
+        scriptId: json.scriptId,
+        startId: json.startId,
+        nodes: (json.nodes || []).map(n => ({ ...n })),
+      }, { layout: !(json.nodes || []).every(n => n.x != null) });
+      syncTopbar(); toast('已导入项目（含 ' + state.assets.length + ' 个立绘素材）', 'ok');
+      return true;
+    }
+    if (Array.isArray(json.nodes)){
+      setData({
+        scriptId: stripExt(name || 'imported'),
+        startId: json.start || '',
+        nodes: json.nodes.map(n => ({
+          id:n.id, speaker:n.speaker, text:n.text, portrait:n.portrait,
+          next:n.next, choices:n.choices,
+        })),
+      }, { layout:true });
+      syncTopbar();
+      toast('已导入数据包剧本 JSON（记得核对剧本 ID）', 'ok');
+      return true;
+    }
+    toast('认不出这个 JSON：既不是编辑器项目，也没有 nodes 数组', 'err');
+    return false;
+  }
+  // KubeJS
+  const { scripts, warnings } = parseKubeJSScripts(s);
+  if (!scripts.length){
+    showImportWarnings(warnings, '没有解析出任何剧本');
+    return false;
+  }
+  const used = scripts[0];
+  setData({ scriptId: used.id, startId: used.startId, nodes: used.nodes }, { layout:true });
+  syncTopbar();
+  if (scripts.length > 1) warnings.push('文件里有 ' + scripts.length + ' 个 event.create(…)，编辑器一次只编辑一个剧本，已导入第一个：「' + used.id + '」');
+  if (used.nodes.some(n => n.choices.some(c => !c.next && !byId(c.id)))) { /* noop, validation covers */ }
+  if (warnings.length) showImportWarnings(warnings, '导入完成，但有 ' + warnings.length + ' 条提示');
+  else toast('已导入 KubeJS 剧本「' + used.id + '」，共 ' + used.nodes.length + ' 个节点', 'ok');
+  return true;
+}
+function showImportWarnings(warnings, title){
+  const body = document.createElement('div');
+  body.innerHTML = '<p class="hint">' + esc(title || '导入提示') + '</p>';
+  const ul = document.createElement('div');
+  warnings.forEach(w => {
+    const d = document.createElement('div');
+    d.className = 'issue warn';
+    d.innerHTML = '<span class="sev">提示</span><div class="imsg">' + esc(w) + '</div>';
+    ul.appendChild(d);
+  });
+  body.appendChild(ul);
+  openModal('导入结果', body);
+}
+function openImportModal(){
+  const body = document.createElement('div');
+  body.innerHTML = '<p class="hint">支持：KubeJS 脚本（.js）· 数据包剧本 JSON · 编辑器项目（.solaris.json）· 立绘图片（可多选）。导入会替换当前画布，请先保存需要的内容。</p>';
+
+  const zone = document.createElement('div');
+  zone.className = 'drop-hint';
+  zone.style.padding = '26px 10px';
+  zone.textContent = '点击选择文件，或把文件拖到这里';
+  const fileInput = document.createElement('input');
+  fileInput.type = 'file'; fileInput.multiple = true;
+  fileInput.accept = '.js,.json,.txt,image/*';
+  fileInput.style.display = 'none';
+  zone.onclick = () => fileInput.click();
+  zone.addEventListener('dragover', e => e.preventDefault());
+  zone.addEventListener('drop', async e => {
+    e.preventDefault();
+    await importFiles([...e.dataTransfer.files]);
+  });
+  fileInput.addEventListener('change', async () => {
+    await importFiles([...fileInput.files]);
+  });
+  body.append(zone, fileInput);
+
+  const l = document.createElement('label'); l.textContent = '或直接粘贴文本（JS / JSON）';
+  body.appendChild(l);
+  const ta = document.createElement('textarea');
+  ta.rows = 6; ta.placeholder = "SolarisRPG.scripts(event => { event.create('demo', script => { ... }) })";
+  body.appendChild(ta);
+
+  const foot = document.createElement('div');
+  const bCancel = document.createElement('button'); bCancel.className = 'btn'; bCancel.textContent = '取消'; bCancel.onclick = closeModal;
+  const bPaste = document.createElement('button'); bPaste.className = 'btn primary'; bPaste.textContent = '解析文本';
+  bPaste.onclick = () => { if (importText(ta.value, 'pasted')) closeModal(); };
+  foot.append(bCancel, bPaste);
+  openModal('导入', body, foot);
+}
+async function importFiles(files){
+  for (const f of files){
+    if (f.type.startsWith('image/')){ await addAssetFromFile(f); continue; }
+    const text = await readFileText(f);
+    const ok = importText(text, f.name);
+    if (ok) closeModal();
+    else return;
+  }
+  renderAssets();
+}
+function syncTopbar(){
+  $('#scriptId').value = state.scriptId;
+}
+$('#scriptId').addEventListener('input', e => {
+  state.scriptId = e.target.value.trim() || state.scriptId;
+  scheduleSave();
+});
+/* #endregion import */
+
+/* ============================================================
+ * #region export  导出：KubeJS / 资源包 / 数据包 / 项目文件
+ * ============================================================ */
+function mkBtn(text, fn, cls){
+  const b = document.createElement('button');
+  b.className = 'btn' + (cls ? ' ' + cls : '');
+  b.textContent = text;
+  b.onclick = fn;
+  return b;
+}
+function fileSafe(s){
+  return String(s == null ? '' : s).replace(/[^A-Za-z0-9_\-.]/g, '_').replace(/^_+$/, '') || 'script';
+}
+const jq = s => "'" + jsesc(s) + "'";
+
+function bfsOrder(){
+  const seen = new Set(); const out = []; const q = [];
+  const start = byId(state.startId) || state.nodes[0];
+  if (start){ q.push(start); seen.add(start.id); }
+  while (q.length){
+    const n = q.shift(); out.push(n);
+    for (const t of outgoingTargets(n)){
+      const m = byId(t);
+      if (m && !seen.has(m.id)){ seen.add(m.id); q.push(m); }
+    }
+  }
+  for (const n of state.nodes) if (!seen.has(n.id)) out.push(n);
+  return out;
+}
+function portraitChain(n){
+  if (!n.portrait) return '';
+  const v = n.portrait === '-' ? 'SolarisDialogue.HIDE_PORTRAIT' : jq(n.portrait);
+  return '\n      .portrait(' + v + ')';
+}
+function emitNodeJS(n){
+  const chain = portraitChain(n);
+  if (n.type === 'choice' && n.choices.length){
+    const rows = ['    script.choose(' + jq(n.id) + ', ' + jq(n.speaker) + ', ' + jq(n.text) + ', c => {'];
+    for (const c of n.choices) rows.push('      c.option(' + jq(c.id) + ', ' + jq(c.text) + ', ' + jq(c.next) + ')');
+    rows.push('    })' + chain);
+    return rows;
+  }
+  if (n.speaker){
+    return ['    script.say(' + jq(n.id) + ', ' + jq(n.speaker) + ', ' + jq(n.text) + ', ' + jq(n.next) + ')' + chain];
+  }
+  return ['    script.line(' + jq(n.id) + ', ' + jq(n.text) + ', ' + jq(n.next) + ')' + chain];
+}
+function genKubeJS(){
+  const id = (state.scriptId || '').trim() || 'my_script';
+  const startId = (state.startId && byId(state.startId)) ? state.startId
+    : (state.nodes[0] ? state.nodes[0].id : 'start');
+  const L = [];
+  L.push('// ===== Solaris RPG 剧本：' + id + ' =====');
+  L.push('// 由对话编辑器生成 · 放进 kubejs/server_scripts/ · /reload 后生效');
+  L.push('// 打开：SolarisDialogue.open(player, ' + jq(id) + ')   或   /std_create "' + id + '"');
+  L.push('');
+  L.push('SolarisRPG.scripts(event => {');
+  L.push('  event.create(' + jq(id) + ', script => {');
+  L.push('    script.start(' + jq(startId) + ')');
+  for (const n of bfsOrder()){
+    L.push('');
+    L.push(...emitNodeJS(n));
+  }
+  L.push('  })');
+  L.push('})');
+  return L.join('\n') + '\n';
+}
+function scriptIdParts(){
+  const raw = (state.scriptId || '').trim() || 'my_script';
+  const i = raw.indexOf(':');
+  const ns = sanitizeNs(i >= 0 ? raw.slice(0, i) : state.namespace);
+  const name = (i >= 0 ? raw.slice(i + 1) : raw).replace(/\.json$/i, '').replace(/[^A-Za-z0-9_.\-]/g, '_') || 'script';
+  return { ns, name, id: ns + ':' + name };
+}
+function genDatapackJson(){
+  const startId = (state.startId && byId(state.startId)) ? state.startId
+    : (state.nodes[0] ? state.nodes[0].id : '');
+  const obj = {
+    start: startId,
+    nodes: bfsOrder().map(n => {
+      const o = { id: n.id };
+      if (n.speaker) o.speaker = n.speaker;
+      if (n.text) o.text = n.text;
+      if (n.portrait) o.portrait = n.portrait;
+      if (n.type === 'choice' && n.choices.length){
+        o.choices = n.choices.map(c => ({ id: c.id, text: c.text, next: c.next }));
+      } else if (n.next) o.next = n.next;
+      return o;
+    }),
+  };
+  return JSON.stringify(obj, null, 2) + '\n';
+}
+function usedAssetPaths(){
+  const s = new Set();
+  for (const n of state.nodes) if (n.portrait && n.portrait !== '-') s.add(n.portrait);
+  return s;
+}
+
+function openExportJsModal(){
+  const code = genKubeJS();
+  const body = document.createElement('div');
+  body.innerHTML = '<p class="hint">放到 <b>kubejs/server_scripts/</b> 下，<b>/reload</b> 生效。'
+    + '剧本 id：<b>' + esc(state.scriptId) + '</b></p>';
+  const pre = document.createElement('pre');
+  pre.className = 'out'; pre.textContent = code;
+  body.appendChild(pre);
+  const foot = document.createElement('div');
+  foot.append(
+    mkBtn('关闭', closeModal),
+    mkBtn('复制', () => copyText(code)),
+    mkBtn('下载 .js', () => downloadText(fileSafe(state.scriptId) + '.js', code, 'text/javascript;charset=utf-8'), 'primary'),
+  );
+  openModal('导出 KubeJS 脚本', body, foot);
+}
+
+function openExportRpModal(){
+  const body = document.createElement('div');
+  body.innerHTML = '<p class="hint">资源包内容：pack.mcmeta + <b>assets/&lt;命名空间&gt;/textures/gui/portrait/*.png</b>。'
+    + '放进 <b>resourcepacks/</b>（整合包实例目录）即可，服主客户端都要装。</p>';
+  const l = document.createElement('label'); l.textContent = '资源包描述';
+  const descIn = document.createElement('input'); descIn.value = state.packDesc;
+  body.append(l, descIn);
+  const chk = document.createElement('label'); chk.className = 'check';
+  const cb = document.createElement('input'); cb.type = 'checkbox';
+  chk.append(cb, document.createTextNode('包含素材库里所有立绘（默认只打包被节点引用的）'));
+  body.appendChild(chk);
+  const list = document.createElement('pre'); list.className = 'out';
+  const collect = () => {
+    const used = usedAssetPaths();
+    return state.assets.filter(a => cb.checked || used.has(a.path));
+  };
+  const paint = () => {
+    const inc = collect();
+    const lines = ['pack.mcmeta'].concat(inc.map(a => 'assets/' + a.path.replace(':', '/')));
+    list.textContent = lines.join('\n') + (inc.length ? '' : '\n（没有可打包的立绘素材）');
+  };
+  cb.onchange = paint; paint();
+  body.appendChild(list);
+  const foot = document.createElement('div');
+  foot.append(
+    mkBtn('关闭', closeModal),
+    mkBtn('导出 ZIP', () => {
+      const inc = collect();
+      if (!inc.length){ toast('没有可打包的立绘素材', 'err'); return; }
+      state.packDesc = descIn.value || state.packDesc;
+      const entries = [{
+        name: 'pack.mcmeta',
+        data: textBytes(JSON.stringify({ pack: { pack_format: 15, description: state.packDesc } }, null, 2)),
+      }];
+      const byNs = new Map();
+      for (const a of inc){
+        const p = /^([a-z0-9_.\-]+):(.+)$/.exec(a.path);
+        const ans = p ? p[1] : sanitizeNs(state.namespace);
+        const rest = p ? p[2] : ('textures/gui/portrait/' + a.file);
+        if (!byNs.has(ans)) byNs.set(ans, []);
+        byNs.get(ans).push({ name: 'assets/' + ans + '/' + rest, data: dataUrlBytes(a.data) });
+      }
+      for (const arr of byNs.values()) entries.push(...arr);
+      download(fileSafe(state.scriptId) + '-portraits.zip', makeZip(entries));
+      toast('资源包已导出（' + inc.length + ' 张立绘）', 'ok');
+      scheduleSave();
+    }, 'primary'),
+  );
+  openModal('导出资源包（立绘）', body, foot);
+}
+
+function openExportDpModal(){
+  const { ns, name } = scriptIdParts();
+  const body = document.createElement('div');
+  body.innerHTML = '<p class="hint">数据包文件：<b>data/' + esc(ns) + '/solaris_rpg/' + esc(name) + '.json</b>，'
+    + '剧本 id 为 <b>' + esc(ns + ':' + name) + '</b>。放进存档或整合包的 <b>datapacks/</b>，<b>/reload</b> 生效；'
+    + '与 KubeJS 版本同 id 时以 KubeJS 为准。</p>';
+  const pre = document.createElement('pre');
+  pre.className = 'out'; pre.textContent = genDatapackJson();
+  body.appendChild(pre);
+  const foot = document.createElement('div');
+  foot.append(
+    mkBtn('关闭', closeModal),
+    mkBtn('复制 JSON', () => copyText(genDatapackJson())),
+    mkBtn('下载 .json', () => downloadText(name + '.json', genDatapackJson(), 'application/json;charset=utf-8')),
+    mkBtn('导出数据包 ZIP', () => {
+      const p = scriptIdParts();
+      const entries = [
+        { name: 'pack.mcmeta', data: textBytes(JSON.stringify({ pack: { pack_format: 15, description: state.packDesc } }, null, 2)) },
+        { name: 'data/' + p.ns + '/solaris_rpg/' + p.name + '.json', data: textBytes(genDatapackJson()) },
+      ];
+      download(fileSafe(state.scriptId) + '-datapack.zip', makeZip(entries));
+      toast('数据包已导出', 'ok');
+    }, 'primary'),
+  );
+  openModal('导出数据包（替代方案）', body, foot);
+}
+
+function serializeProject(includeAssets){
+  return {
+    format: 'solaris-rpg-editor', version: 1,
+    scriptId: state.scriptId, namespace: state.namespace, packDesc: state.packDesc,
+    startId: state.startId, view: { x: view.x, y: view.y, scale: view.scale },
+    nodes: state.nodes,
+    assets: includeAssets ? state.assets : [],
+  };
+}
+function saveProjectFile(){
+  downloadText(fileSafe(state.scriptId) + '.solaris.json',
+    JSON.stringify(serializeProject(true), null, 2), 'application/json;charset=utf-8');
+  toast('项目已导出（含立绘素材）', 'ok');
+}
+/* #endregion export */
+
+/* ============================================================
+ * #region preview  试玩：按客户端 DialogueRoot / StateEngine 的行为模拟
+ * ============================================================ */
+const pv = { open:false, startId:'', nodeMap:new Map(), cur:null, finished:false, portrait:'', revealed:true, timer:0, typedNode:null };
+
+function openPreview(startId){
+  pv.open = true;
+  $('#preview').classList.add('open');
+  $('#pv-skip').classList.remove('open');
+  const bg = $('#pv-bg');
+  if (!bg.dataset.tried){
+    bg.dataset.tried = '1';
+    bg.onerror = () => { bg.style.display = 'none'; };
+    bg.onload = () => { bg.style.display = 'block'; };
+    bg.src = '../src/main/resources/assets/solaris_rpg/textures/gui/sola_background.png';
+  }
+  pv.startId = startId || state.startId || (state.nodes[0] && state.nodes[0].id) || '';
+  engineStart(pv.startId);
+}
+function closePreview(){
+  pv.open = false;
+  clearInterval(pv.timer);
+  $('#preview').classList.remove('open');
+  $('#pv-skip').classList.remove('open');
+}
+function engineStart(startId){
+  pv.nodeMap = new Map(state.nodes.map(n => [n.id, n]));
+  pv.cur = null; pv.finished = false; pv.portrait = ''; pv.typedNode = null;
+  engineGoto(startId);
+}
+function engineGoto(id){
+  const n = id ? pv.nodeMap.get(id) : null;
+  if (!n){ pv.finished = true; pvReflect(); return; }
+  pv.cur = n;
+  const req = n.portrait || '';
+  if (req === '-') pv.portrait = '';
+  else if (req) pv.portrait = req;
+  pvReflect();
+}
+function pvAdvance(){
+  if (!pv.revealed){ pvRevealAll(); return; }
+  if (pv.finished){ closePreview(); return; }
+  if (pv.cur && pv.cur.type === 'choice' && pv.cur.choices.length) return;
+  engineGoto(pv.cur ? pv.cur.next : '');
+}
+function pvChoose(i){
+  if (!pv.cur || pv.finished) return;
+  const c = pv.cur.choices[i];
+  if (!c) return;
+  engineGoto(c.next);
+}
+function pvType(text){
+  clearInterval(pv.timer);
+  pv.revealed = false;
+  const el = $('#pv-text');
+  el.textContent = '';
+  let i = 0;
+  pv.timer = setInterval(() => {
+    i += 1;
+    el.textContent = text.slice(0, i);
+    if (i >= text.length){ clearInterval(pv.timer); pv.revealed = true; }
+  }, 28);
+}
+function pvRevealAll(){
+  clearInterval(pv.timer);
+  $('#pv-text').textContent = pv.cur ? pv.cur.text : '';
+  pv.revealed = true;
+}
+function pvReflect(){
+  $('#pv-speaker').textContent = (!pv.finished && pv.cur) ? (pv.cur.speaker || '') : '';
+  if (pv.cur){
+    // 只在节点真的换了时重新逐字（走到结尾时保留最后一屏，不重打）
+    if (pv.cur !== pv.typedNode){ pv.typedNode = pv.cur; pvType(pv.cur.text || ''); }
+  } else { $('#pv-text').textContent = '（剧本是空的）'; pv.revealed = true; }
+
+  const choices = $('#pv-choices');
+  choices.innerHTML = '';
+  if (!pv.finished && pv.cur && pv.cur.type === 'choice' && pv.cur.choices.length){
+    pv.cur.choices.forEach((c, i) => {
+      const b = document.createElement('button');
+      b.textContent = c.text || c.id || ('选项 ' + (i + 1));
+      b.onclick = ev => { ev.stopPropagation(); pvChoose(i); };
+      choices.appendChild(b);
+    });
+  }
+  const pi = $('#pv-portrait');
+  const src = pv.portrait ? portraitSrc(pv.portrait) : null;
+  if (src){
+    if (pi.dataset.src !== src){ pi.dataset.src = src; pi.src = src; }
+    pi.style.display = 'block';
+  } else {
+    pi.style.display = 'none'; pi.dataset.src = '';
+  }
+  $('#pv-debug').textContent = pv.finished
+    ? '剧情结束 · 点击关闭'
+    : (pv.cur ? pv.cur.id : '');
+}
+// 试玩交互
+$('#preview').addEventListener('click', e => {
+  if (!pv.open) return;
+  if (e.target.closest('#pv-top,#pv-choices,#pv-skip')) return;
+  if ($('#pv-skip').classList.contains('open')) return; // 弹窗期间模态
+  pvAdvance();
+});
+$('#pv-restart').onclick = e => { e.stopPropagation(); engineStart(pv.startId); };
+$('#pv-close').onclick = e => { e.stopPropagation(); closePreview(); };
+$('#pv-skip-no').onclick = e => { e.stopPropagation(); $('#pv-skip').classList.remove('open'); };
+$('#pv-skip-yes').onclick = e => { e.stopPropagation(); closePreview(); toast('已跳过（正式环境会触发 KubeJS end 事件，skipped=true）'); };
+/* #endregion preview */
+
+/* ============================================================
+ * #region persist  自动保存 / 新建 / 示例
+ * ============================================================ */
+let saveTimer = 0;
+function scheduleSave(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveNow, 700);
+}
+function saveNow(){
+  try {
+    localStorage.setItem(LS_KEY, JSON.stringify(serializeProject(true)));
+  } catch (e){
+    try {
+      localStorage.setItem(LS_KEY, JSON.stringify(serializeProject(false)));
+      toastOnce('ls-quota', '立绘素材太大，浏览器自动保存已跳过素材数据（请用「保存项目」导出文件）', 'err');
+    } catch (e2){ /* 放弃自动保存 */ }
+  }
+}
+function loadLocal(){
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return false;
+    const j = JSON.parse(raw);
+    if (!j || j.format !== 'solaris-rpg-editor' || !Array.isArray(j.nodes)) return false;
+    state.scriptId = j.scriptId || state.scriptId;
+    state.namespace = j.namespace || state.namespace;
+    state.packDesc = j.packDesc || state.packDesc;
+    state.assets = Array.isArray(j.assets) ? j.assets : [];
+    state.nodes = j.nodes;
+    state.startId = j.startId || (state.nodes[0] ? state.nodes[0].id : '');
+    if (j.view){ view.x = j.view.x; view.y = j.view.y; view.scale = j.view.scale; }
+    return true;
+  } catch (e){ return false; }
+}
+function seedDemo(){
+  const np = 'solaris_rpg:textures/gui/portrait/olivia.png';
+  state.scriptId = 'test';
+  state.nodes = [
+    { id:'start', type:'line', speaker:'', portrait:'', next:'greet',
+      text:'你推开酒馆的门，木地板在脚下吱呀作响。', choices:[], x:70, y:70 },
+    { id:'greet', type:'line', speaker:'奥利维亚', portrait:np, next:'branch',
+      text:'哟，稀客。这么晚了还来我这儿——是有事，还是单纯想喝酒？', choices:[], x:370, y:70 },
+    { id:'branch', type:'choice', speaker:'奥利维亚', portrait:'', next:'',
+      text:'……说吧，我听着。', choices:[
+        { id:'ask', text:'我想打听点事。', next:'answer_ask' },
+        { id:'drink', text:'先来一杯吧。', next:'answer_drink' },
+      ], x:670, y:70 },
+    { id:'answer_ask', type:'line', speaker:'奥利维亚', portrait:'', next:'join',
+      text:'打听消息可不便宜。不过看在你大半夜跑一趟的份上，这次算你免费。', choices:[], x:970, y:30 },
+    { id:'answer_drink', type:'line', speaker:'奥利维亚', portrait:'', next:'join',
+      text:'爽快，我就喜欢你这种人。给你倒满，别客气。', choices:[], x:970, y:180 },
+    { id:'join', type:'line', speaker:'奥利维亚', portrait:'', next:'end',
+      text:'不过说真的，最近那些委托有点不对劲，你最好小心点。', choices:[], x:1270, y:100 },
+    { id:'end', type:'line', speaker:'', portrait:'-', next:'',
+      text:'她把杯子推回吧台，转身去招呼别的客人。', choices:[], x:1570, y:100 },
+  ];
+  state.startId = 'start';
+}
+function newProject(){
+  if (state.nodes.length && !confirm('新建会清空当前画布（立绘素材保留、可撤销）。继续？')) return;
+  pushHistory();
+  state.scriptId = 'my_script';
+  state.selection = null;
+  state.nodes = [{
+    id:'start', type:'line', speaker:'', portrait:'', next:'',
+    text:'你推开酒馆的门。', choices:[], x:120, y:120,
+  }];
+  state.startId = 'start';
+  renderAll(); fitView(); scheduleSave();
+  toast('已新建空白剧本', 'ok');
+}
+/* #endregion persist */
+
+/* ============================================================
+ * #region bootstrap  总渲染 + 事件接线 + 启动
+ * ============================================================ */
+function renderAll(){
+  renderNodes();
+  renderLinks();
+  renderAssets();
+  renderInspector();
+  updateValBadge();
+  syncTopbar();
+}
+function zoomCenter(f){
+  const r = wrap.getBoundingClientRect();
+  zoomAt(r.left + r.width / 2, r.top + r.height / 2, f);
+}
+function addNodeAtCenter(type){
+  const r = wrap.getBoundingClientRect();
+  const c = toCanvas(r.left + r.width / 2, r.top + r.height / 2);
+  addNode(type, c.x - 126, c.y - 40);
+}
+function openSheetEl(el){ el.classList.add('open'); $('#sheet-backdrop').classList.add('open'); }
+function closeSheets(){
+  $$('#left,#inspector').forEach(e => e.classList.remove('open'));
+  $('#sheet-backdrop').classList.remove('open');
+}
+$('#sheet-backdrop').addEventListener('click', closeSheets);
+
+function openHelpModal(){
+  const body = document.createElement('div');
+  body.innerHTML = ''
+    + '<p class="hint">给 <b>solaris_rpg</b> 对话框架写剧本的可视化工具。数据格式与 mod 源码一一对应。</p>'
+    + '<h4 style="margin:14px 0 6px">画布</h4>'
+    + '<p class="hint">拖空白平移 · 滚轮/双指缩放 · 双击空白加节点 · 从节点右侧圆点拖到别的节点连线，拖到空白会自动建新节点并接上 · 点连线可断开 · 拖节点左侧绿点断开连入线。</p>'
+    + '<h4 style="margin:14px 0 6px">立绘</h4>'
+    + '<p class="hint">立绘 = 完整资源路径（<code>命名空间:textures/gui/portrait/xxx.png</code>）。在素材库里加图（自动转 PNG、自动转小写合法路径），节点上选「沿用 / 收起 / 具体立绘」。留空 = 沿用上一个节点，<code>-</code> = 收起——和游戏内一致。</p>'
+    + '<h4 style="margin:14px 0 6px">导入 / 导出</h4>'
+    + '<p class="hint">可导入 KubeJS 脚本、数据包 JSON、编辑器项目文件、图片。<br>'
+    + '· KubeJS → <b>kubejs/server_scripts/</b>，<b>/reload</b> 生效；<br>'
+    + '· 资源包 ZIP → <b>resourcepacks/</b>；<br>'
+    + '· 数据包 ZIP → 存档或整合包的 <b>datapacks/</b>（与 KubeJS 同 id 时 KubeJS 优先）。</p>'
+    + '<h4 style="margin:14px 0 6px">试玩</h4>'
+    + '<p class="hint">按客户端真实行为模拟：打字机、点击跳过打字、分支必须先选、ESC 弹跳过确认、结束后再点一下关闭。</p>'
+    + '<h4 style="margin:14px 0 6px">快捷键</h4>'
+    + '<p class="hint">Ctrl+Z 撤销 · ESC 关弹窗/试玩里弹跳过 · 编辑自动存浏览器（素材过大时请手动保存项目文件）。</p>';
+  openModal('帮助', body);
+}
+function openMenuSheet(){
+  const items = [
+    ['▶ 试玩', 'preview'],
+    ['📥 导入 / 打开', 'import'],
+    ['📄 导出 KubeJS', 'export-js'],
+    ['🖼 导出资源包', 'export-rp'],
+    ['📦 导出数据包', 'export-dp'],
+    ['💾 保存项目文件', 'project-save'],
+    ['🎨 立绘素材', 'assets-sheet'],
+    ['🧹 检查', 'validate'],
+    ['🆕 新建', 'new'],
+    ['? 帮助', 'help'],
+  ];
+  const body = document.createElement('div');
+  for (const [label, act] of items){
+    const b = document.createElement('button');
+    b.className = 'btn'; b.style.cssText = 'display:block;width:100%;text-align:left;margin-bottom:8px';
+    b.textContent = label;
+    b.onclick = () => { closeModal(); handleAct(act); };
+    body.appendChild(b);
+  }
+  openModal('菜单', body);
+}
+function showExportMenu(anchor){
+  const r = anchor.getBoundingClientRect();
+  showPopup(r.left, r.bottom + 6, el => {
+    const items = [
+      ['📄 KubeJS 脚本…', 'export-js'],
+      ['🖼 资源包 ZIP（立绘）…', 'export-rp'],
+      ['📦 数据包 ZIP / JSON…', 'export-dp'],
+      ['💾 保存项目文件（含素材）', 'project-save'],
+      ['📥 导入 / 打开…', 'import'],
+    ];
+    for (const [label, act] of items){
+      const b = document.createElement('button');
+      b.className = 'pop-item'; b.textContent = label;
+      b.onclick = () => { clearPopups(); handleAct(act); };
+      el.appendChild(b);
+    }
+  });
+}
+function handleAct(act){
+  switch (act){
+    case 'add-line': addNodeAtCenter('line'); break;
+    case 'add-choice': addNodeAtCenter('choice'); break;
+    case 'preview': openPreview(state.startId); break;
+    case 'import': openImportModal(); break;
+    case 'export-menu': showExportMenu($('[data-act="export-menu"]')); break;
+    case 'export-js': openExportJsModal(); break;
+    case 'export-rp': openExportRpModal(); break;
+    case 'export-dp': openExportDpModal(); break;
+    case 'project-save': saveProjectFile(); break;
+    case 'new': newProject(); break;
+    case 'validate': openValidateModal(); break;
+    case 'undo': undo(); break;
+    case 'help': openHelpModal(); break;
+    case 'menu': openMenuSheet(); break;
+    case 'asset-add': $('#asset-file').click(); break;
+    case 'assets-sheet': openSheetEl($('#left')); break;
+    case 'zoom-in': zoomCenter(1.2); break;
+    case 'zoom-out': zoomCenter(1 / 1.2); break;
+    case 'zoom-fit': fitView(); break;
+    default: break;
+  }
+}
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]');
+  if (!el) return;
+  if (el.closest('#popup-layer')) return; // 弹层内自己处理
+  handleAct(el.dataset.act);
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape'){
+    if (pv.open){
+      if ($('#pv-skip').classList.contains('open')) $('#pv-skip').classList.remove('open');
+      else $('#pv-skip').classList.add('open');
+      e.preventDefault();
+      return;
+    }
+    if ($('#modal-layer').classList.contains('open')){ closeModal(); return; }
+    clearPopups(); closeSheets();
+    return;
+  }
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z'){
+    const t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    e.preventDefault();
+    undo();
+  }
+});
+
+// 启动
+(function init(){
+  applyView();
+  const loaded = loadLocal();
+  if (!loaded) seedDemo();
+  $('#pv-portrait').addEventListener('error', () => { $('#pv-portrait').style.display = 'none'; });
+  renderAll();
+  if (loaded) applyView();
+  else requestAnimationFrame(fitView);
+})();
+/* #endregion bootstrap */
+})();
+</script>
+</body>
+</html>
+</body>
+</html>

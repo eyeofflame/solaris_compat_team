@@ -1,6 +1,3 @@
-import org.gradle.api.attributes.LibraryElements
-import org.gradle.api.attributes.Usage
-
 buildscript {
     repositories {
 
@@ -109,15 +106,11 @@ repositories {
         url 'https://maven.blakesmods.com'
     }
     flatDir {
-        dir 'libs'
+        dirs 'libs', 'libs/coin'
     }
 }
 
-// ===== Solaris 跨工程编译期依赖（消费 named classes 变体）=====
-// 跨工程直接依赖产出的 jar 不可用：reobfJar 会原地覆盖成 SRG 名，编译不过。
-// 这里改为消费其 classes 变体（build/classes/java/main，named 映射）。
-// 用法：在 dependencies 里写   solarisCompile "dev.efm:solaris_core:1.1.6-hotfix"
-// 注意：依赖关系必须无环。
+
 configurations {
     solarisCompile {
         canBeConsumed = false
@@ -140,9 +133,7 @@ dependencies {
         jarJar.ranged(it, "[0.4.1.0,)")
     }
 
-    /*implementation fg.deobf("libs:create:1.20.1-6.0.8")
-    /implementation fg.deobf("libs:ThirstWasReclaimed:1.20.1-3.0.4")
-    implementation(fg.deobf("libs:ThirstCanteen:1.20.1-3.6"))*/
+
     implementation fg.deobf("libs:cloth-config:11.1.136-forge")
 
     implementation(
@@ -179,10 +170,6 @@ dependencies {
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
 
 
-    /*compileOnly fg.deobf("libs:kubejs-forge:${kubejs_version}")
-    compileOnly fg.deobf("libs:rhino-forge:${rhino_version}")
-    runtimeOnly fg.deobf("libs:kubejs-forge:${kubejs_version}")
-    runtimeOnly fg.deobf("libs:rhino-forge:${rhino_version}")*/
     implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
 
     implementation fg.deobf("com.blakebr0.cucumber:Cucumber:${cucumber_version}")
@@ -190,7 +177,12 @@ dependencies {
 
     implementation fg.deobf("libs:jei:1.20.1-forge-15.62.0.216")
 
-    // Solaris 跨工程编译期依赖统一走这里（见上方 solarisCompile 说明）
+    runtimeOnly(
+            fg.deobf("libs:Bookshelf:Forge-1.20.1-20.2.15"),
+            fg.deobf("libs:Coins:Forge-1.20.1-13.0.4")
+    )
+
+
     compileOnly files(configurations.solarisCompile)
 }
 
