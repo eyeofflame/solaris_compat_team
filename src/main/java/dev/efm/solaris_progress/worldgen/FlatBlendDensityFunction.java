@@ -1,5 +1,7 @@
 package dev.efm.solaris_progress.worldgen;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.efm.solaris_progress.SolaConfig;
 import net.minecraft.util.KeyDispatchDataCodec;
 import net.minecraft.world.level.levelgen.DensityFunction;
@@ -8,9 +10,28 @@ import net.minecraft.world.level.levelgen.NoiseRouter;
 /**
  * 把原版 {@link DensityFunction} 包裹成"区域内平地、边缘平滑过渡"的函数。
  * 只在主世界通过 {@link #wrapRouter(NoiseRouter)} 替换 finalDensity /
- * initialDensityWithoutJaggedness 使用；运行时对象，不参与序列化。
+ * initialDensityWithoutJaggedness 使用。
+ *
+ * <p>虽然只在运行期包裹，这里仍提供一个真正的 codec（类型注册在
+ * {@code solaris_progress:flat_blend}，见 {@code SolaRegistry}）：
+ * 任何对 NoiseRouter 做序列化的路径都应正常编解码，而不是抛异常。</p>
  */
 public final class FlatBlendDensityFunction implements DensityFunction {
+
+    /** 1.20.1 主世界的方块 Y 范围，用于保守估计平地密度的上下界。 */
+    private static final int MIN_BLOCK_Y = -64;
+    private static final int MAX_BLOCK_Y = 319;
+
+    public static final KeyDispatchDataCodec<FlatBlendDensityFunction> CODEC = KeyDispatchDataCodec.of(
+            RecordCodecBuilder.mapCodec(inst -> inst.group(
+                    DensityFunction.HOLDER_HELPER_CODEC.fieldOf("vanilla").forGetter(f -> f.vanilla),
+                    Codec.DOUBLE.fieldOf("center_x").forGetter(f -> f.centerX),
+                    Codec.DOUBLE.fieldOf("center_z").forGetter(f -> f.centerZ),
+                    Codec.DOUBLE.fieldOf("flat_y").forGetter(f -> f.flatY),
+                    Codec.DOUBLE.fieldOf("half_extent").forGetter(f -> f.halfExtent),
+                    Codec.DOUBLE.fieldOf("blend_width").forGetter(f -> f.blendWidth)
+            ).apply(inst, FlatBlendDensityFunction::new)));
+
     private final DensityFunction vanilla;
     private final double centerX;
     private final double centerZ;
@@ -31,7 +52,16 @@ public final class FlatBlendDensityFunction implements DensityFunction {
     @Override
     public double compute(FunctionContext ctx) {
         double d = FlatBlendMath.chebyshev(ctx.blockX() - centerX, ctx.blockZ() - centerZ);
-        return FlatBlendMath.resolve(d, halfExtent, blendWidth, flatY, ctx.blockY(), vanilla.compute(ctx));
+        if (FlatBlendMath.outside(d, halfExtent, blendWidth)) {
+            return vanilla.compute(ctx);
+        }
+        double t = FlatBlendMath.blendFactor(d, halfExtent, blendWidth);
+        double flat = FlatBlendMath.flatDensity(flatY, ctx.blockY());
+        if (t <= 0.0) {
+            // 核心区是纯平地：不要为了丢弃结果去计算整条原版噪声（热点行）。
+            return flat;
+        }
+        return FlatBlendMath.blend(flat, vanilla.compute(ctx), t);
     }
 
     @Override
@@ -51,17 +81,17 @@ public final class FlatBlendDensityFunction implements DensityFunction {
 
     @Override
     public double minValue() {
-        return Math.min(vanilla.minValue(), flatY + 1.0 - 320.0);
+        return Math.min(vanilla.minValue(), flatY + 1.0 - MAX_BLOCK_Y);
     }
 
     @Override
     public double maxValue() {
-        return Math.max(vanilla.maxValue(), flatY + 1.0 + 64.0);
+        return Math.max(vanilla.maxValue(), flatY + 1.0 - MIN_BLOCK_Y);
     }
 
     @Override
     public KeyDispatchDataCodec<? extends DensityFunction> codec() {
-        throw new UnsupportedOperationException("runtime-only density function");
+        return CODEC;
     }
 
     /** 用当前配置包裹主世界 router 的 initialDensityWithoutJaggedness 与 finalDensity。 */

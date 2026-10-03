@@ -31,19 +31,19 @@ public abstract class PlayerListMixin {
 
     @Inject(method = "placeNewPlayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerPlayer;setServerLevel(Lnet/minecraft/server/level/ServerLevel;)V", shift = At.Shift.AFTER))
     private void solaris$spawnInEnd(Connection pNetManager, ServerPlayer pPlayer, CallbackInfo ci, @Local(ordinal = 0) CompoundTag savedData) {
-        MinecraftServer server = pPlayer.server;
-        ServerLevel end = pPlayer.server.getLevel(Level.END);
-        var root = pPlayer.getPersistentData();
-        var per = root.getCompound(ForgeEvents.NBT);
-        if (!per.getBoolean("sola:init_0")) {
-            if (savedData != null) return;
-            BlockPos pos = new BlockPos(100, 50, 0);
-            pPlayer.moveTo(pos, 0f, 0f);
-            pPlayer.setRespawnPosition(Level.END, pos, 0f, true, false);
-            ServerLevel.makeObsidianPlatform(end);
+        if (savedData != null) return; // 只有首次进入的新玩家才走末地开局
+        CompoundTag per = pPlayer.getPersistentData().getCompound(ForgeEvents.NBT);
+        if (per.getBoolean("sola:init_0")) return;
 
-            per.putBoolean("sola:init_0", true);
-            root.put(ForgeEvents.NBT, per);
-        }
+        ServerLevel end = pPlayer.server.getLevel(Level.END);
+        if (end == null) return; // 没有末地维度时保持原版流程，避免 makeObsidianPlatform(null) 崩溃
+
+        BlockPos pos = new BlockPos(100, 50, 0);
+        pPlayer.moveTo(pos, 0f, 0f);
+        pPlayer.setRespawnPosition(Level.END, pos, 0f, true, false);
+        ServerLevel.makeObsidianPlatform(end);
+
+        per.putBoolean("sola:init_0", true);
+        pPlayer.getPersistentData().put(ForgeEvents.NBT, per);
     }
 }

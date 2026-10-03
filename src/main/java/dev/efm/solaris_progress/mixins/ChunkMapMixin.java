@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ChunkMap.class)
 public abstract class ChunkMapMixin {
+    @Final
     @Mutable
     @Shadow
     private RandomState randomState;
@@ -29,6 +30,8 @@ public abstract class ChunkMapMixin {
         if (!SolaConfig.enabled) return;
         if (level.dimension() != Level.OVERWORLD) return;
         RandomStateAccessor acc = (RandomStateAccessor) (Object) this.randomState;
-        acc.solaris$setRouter(FlatBlendDensityFunction.wrapRouter(acc.solaris$getRouter()));
+        if (acc != null) {
+            acc.solaris$setRouter(FlatBlendDensityFunction.wrapRouter(acc.solaris$getRouter()));
+        }
     }
 }

@@ -18,6 +18,7 @@ public final class SolaConfig {
     private static final ForgeConfigSpec.BooleanValue PLACE_INIT;
     private static final ForgeConfigSpec.IntValue INIT_Y_OFFSET;
     private static final ForgeConfigSpec.IntValue STRUCTURE_BLOCK_MARGIN;
+    private static final ForgeConfigSpec.BooleanValue BLOCK_END_PORTAL;
 
     public static volatile boolean enabled = true;
     public static volatile double flatY = 64.0;
@@ -28,6 +29,7 @@ public final class SolaConfig {
     public static volatile boolean placeInit = true;
     public static volatile int initYOffset = -1;
     public static volatile int structureBlockMargin = 128;
+    public static volatile boolean blockEndPortalActivation = true;
 
     /** Worldgen 参数在首次加载后冻结：保证地形包裹与群系/出生点读到同一份快照，修改需重启。 */
     private static volatile boolean frozen = false;
@@ -54,6 +56,11 @@ public final class SolaConfig {
         STRUCTURE_BLOCK_MARGIN = b.comment("结构生成屏蔽额外缓冲，避免结构从平坦区外侧伸入")
                 .defineInRange("structureBlockMargin", 128, 0, 256);
         b.pop();
+
+        b.push("progression");
+        BLOCK_END_PORTAL = b.comment("阻止玩家在主世界激活末地传送门（新玩家的末地开局流程不由此开关控制）")
+                .define("blockEndPortalActivation", true);
+        b.pop();
         SPEC = b.build();
     }
 
@@ -70,6 +77,7 @@ public final class SolaConfig {
         placeInit = PLACE_INIT.get();
         initYOffset = INIT_Y_OFFSET.get();
         structureBlockMargin = STRUCTURE_BLOCK_MARGIN.get();
+        blockEndPortalActivation = BLOCK_END_PORTAL.get();
         frozen = true;
     }
 

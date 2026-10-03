@@ -26,7 +26,7 @@ public abstract class ChunkGeneratorMixin {
             StructureTemplateManager structureTemplateManager,
             CallbackInfo ci) {
         if (!SolaConfig.enabled) return;
-        if (!(StructureManagerAccessor.class.cast(structureManager).solaris$getLevel() instanceof ServerLevel level)) return;
+        if (!(((StructureManagerAccessor) structureManager).solaris$getLevel() instanceof ServerLevel level)) return;
         if (level.dimension() != Level.OVERWORLD) return;
 
         var chunkPos = chunk.getPos();

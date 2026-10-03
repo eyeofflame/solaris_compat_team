@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class MultiNoiseBiomeSourceMixin {
 
     @Unique
-    private static Holder<Biome> solaris$plains;
+    private Holder<Biome> solaris$plains;
 
     @Inject(
             method = "getNoiseBiome(IIILnet/minecraft/world/level/biome/Climate$Sampler;)Lnet/minecraft/core/Holder;",
