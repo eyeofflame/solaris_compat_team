@@ -1,5 +1,7 @@
 package dev.efm.solaris_progress;
 
+import dev.efm.rpg.entity.OliviaEntities;
+import dev.efm.rpg.entity.OliviaEntity;
 import dev.efm.solaris_progress.mixins.StructureTemplateAccessor;
 import dev.efm.solaris_progress.worldgen.InitEntityPlacement;
 import dev.efm.solaris_progress.worldgen.InitPlacementMath;
@@ -35,6 +37,24 @@ import java.util.Optional;
 
 public class ForgeEvents {
     public static final String NBT = Player.PERSISTED_NBT_TAG;
+
+    /**
+     * 出生/重生的默认朝向：面向 +Z。
+     *
+     * <p>Minecraft 的 yaw 约定是 0 = 南（+Z）、90 = 西（-X）、180 = 北（-Z）、270 = 东（+X），
+     * 见 {@code Direction.fromYRot} 的注释与 {@code Direction.SOUTH} 的法向量 {@code (0, 0, 1)}。</p>
+     */
+    public static final float SPAWN_YAW_POSITIVE_Z = 0.0F;
+
+    /**
+     * Olivia 的固定朝向：面向 -Z（北）、俯视 30°。
+     *
+     * <p>MC 中 yaw 0 = +Z、180 = -Z；pitch 正值为向下，
+     * {@code Vec3.directionFromRotation(30, 180)} = {@code (0, -0.5, -0.866)}。</p>
+     */
+    public static final float OLIVIA_YAW_FACING_NEGATIVE_Z = 180.0F;
+    public static final float OLIVIA_PITCH_DOWN = 30.0F;
+
     private static final Logger LOGGER = LoggerFactory.getLogger("solaris_progress");
 
     @SubscribeEvent
@@ -62,7 +82,7 @@ public class ForgeEvents {
         if (!(event.getLevel() instanceof ServerLevel sl)) return;
         if (sl.dimension() != Level.OVERWORLD) return;
         if (!SolaConfig.enabled) return;
-        event.getSettings().setSpawn(new BlockPos(80, (int) SolaConfig.flatY + 3, 91), 0f);
+        event.getSettings().setSpawn(new BlockPos(80, (int) SolaConfig.flatY + 3, 91), SPAWN_YAW_POSITIVE_Z);
         event.setCanceled(true);
     }
 
@@ -71,6 +91,10 @@ public class ForgeEvents {
         if (!SolaConfig.enabled || !SolaConfig.placeInit) return;
         MinecraftServer server = event.getServer();
         ServerLevel overworld = server.overworld();
+
+        // 老存档里已经存在的 Olivia 也要纠正姿势（她的旧 pitch 已经被原版归零了）
+        solaris$pinOliviaPose(overworld);
+
         SolaWorldData data = SolaWorldData.get(overworld);
         if (data.isInitPlaced()) return;
 
@@ -104,9 +128,46 @@ public class ForgeEvents {
         log("placed init.nbt at " + pos + " size " + size
                 + " entities(placed=" + entityStats[0] + ", skipped=" + entityStats[1] + ", failed=" + entityStats[2] + ")"
                 + " in " + (Util.getMillis() - startedAt) + "ms");
+
+        OliviaEntity olivia = OliviaEntities.OLIVIA.create(overworld);
+        if (olivia != null) {
+            olivia.moveTo(new BlockPos(80, (int) SolaConfig.flatY + 4, 96),
+                    OLIVIA_YAW_FACING_NEGATIVE_Z, OLIVIA_PITCH_DOWN);
+            solaris$applyOliviaPose(olivia);
+            overworld.addFreshEntity(olivia);
+            log("spawned olivia at " + olivia.blockPosition());
+        }
+
     }
 
-    /** 结构放置会覆盖整个足迹，先清掉区域内非玩家实体，保证重复放置是幂等的。 */
+    /**
+     * Olivia 的固定姿势：面向 -Z、俯视 30°，并要求持久化（免得走远后被原版 despawn）。
+     * pitch 能保持住依赖 {@code LookControlMixin} 对 Olivia 关闭每 tick 的 xRot 归零。
+     */
+    private static void solaris$applyOliviaPose(OliviaEntity olivia) {
+        olivia.setPersistenceRequired();
+        olivia.setYRot(OLIVIA_YAW_FACING_NEGATIVE_Z);
+        olivia.setXRot(OLIVIA_PITCH_DOWN);
+        olivia.setYHeadRot(OLIVIA_YAW_FACING_NEGATIVE_Z);
+        olivia.setYBodyRot(OLIVIA_YAW_FACING_NEGATIVE_Z);
+    }
+
+    /** 基地附近已存在的 Olivia 统一纠正姿势（服务端启动时跑一次，幂等）。 */
+    private static void solaris$pinOliviaPose(ServerLevel overworld) {
+        AABB box = new AABB(48.0, 0.0, 64.0, 112.0, 256.0, 128.0);
+        int pinned = 0;
+        for (OliviaEntity olivia : overworld.getEntitiesOfClass(OliviaEntity.class, box)) {
+            solaris$applyOliviaPose(olivia);
+            pinned++;
+        }
+        if (pinned > 0) {
+            log("pinned olivia pose for " + pinned + " entity/entities");
+        }
+    }
+
+    /**
+     * 结构放置会覆盖整个足迹，先清掉区域内非玩家实体，保证重复放置是幂等的。
+     */
     private static void discardEntitiesInStructureArea(ServerLevel level, BlockPos pos, Vec3i size) {
         AABB box = new AABB(
                 pos.getX(), pos.getY(), pos.getZ(),

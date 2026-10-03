@@ -39,8 +39,8 @@ public abstract class PlayerListMixin {
         if (end == null) return; // 没有末地维度时保持原版流程，避免 makeObsidianPlatform(null) 崩溃
 
         BlockPos pos = new BlockPos(100, 50, 0);
-        pPlayer.moveTo(pos, 0f, 0f);
-        pPlayer.setRespawnPosition(Level.END, pos, 0f, true, false);
+        pPlayer.moveTo(pos, ForgeEvents.SPAWN_YAW_POSITIVE_Z, 0f);
+        pPlayer.setRespawnPosition(Level.END, pos, ForgeEvents.SPAWN_YAW_POSITIVE_Z, true, false);
         ServerLevel.makeObsidianPlatform(end);
 
         per.putBoolean("sola:init_0", true);

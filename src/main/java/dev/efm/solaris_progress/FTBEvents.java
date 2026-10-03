@@ -15,7 +15,10 @@ public class FTBEvents {
                 }
             });
         } else if (event.getReward().getTags().contains("sola_init_0")) {
-            player.setRespawnPosition(player.server.overworld().dimension(), player.server.overworld().getSharedSpawnPos(), player.getRespawnAngle(), true, false);
+            // 固定面向 +Z：不沿用玩家当前角度，避免睡过床/其它流程把重生朝向带偏
+            player.setRespawnPosition(player.server.overworld().dimension(),
+                    player.server.overworld().getSharedSpawnPos(),
+                    ForgeEvents.SPAWN_YAW_POSITIVE_Z, true, false);
         }
         return EventResult.pass();
     }
