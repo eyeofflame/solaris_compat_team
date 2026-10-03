@@ -1,8 +1,0 @@
-#Enable even-split for ROUND ROBIN output
-enableEvenSplit = true
-#Ticks a full/empty slot sleeps before re-checking
-#Range: 0 ~ 2000
-sleepCooldownTicks = 20
-#Remember last successful slot to reduce scanning
-enableSlotMemory = true
-

@@ -1,4 +1,0 @@
-#Whether to allow processing the entire stack on the cutting board when using a tool.
-#If false, only one item will be processed at a time.
-processStack = true
-
