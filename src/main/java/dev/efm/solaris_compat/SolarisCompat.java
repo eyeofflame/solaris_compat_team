@@ -13,16 +13,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 @Mod(SolarisCompat.MODID)
 public class SolarisCompat {
     public static final String MODID = "solaris_compat";
-
-    public static final List<Integer> randomListHundred = new ArrayList<>();
-    public static final Random random = new Random();
 
     public SolarisCompat(FMLJavaModLoadingContext context) {
         context.registerConfig(ModConfig.Type.COMMON, SolarisConfig.SPEC);
@@ -40,10 +33,6 @@ public class SolarisCompat {
         ibus.addListener(DataRegistry::GatherDataEvent);
 
         SRegistry.register(ibus);
-
-        for (int i = 0; i < 100; i++) {
-            randomListHundred.add(i);
-        }
 
         fbus.addListener(this::onVillagerProUpdate);
     }
