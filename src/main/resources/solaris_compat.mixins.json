@@ -7,6 +7,7 @@
   "mixins": [
     "corpseFix.DeathEventsMixin",
     "functional_storage.FluidDrawerTileMixin",
+    "sola_eventhandler.VillagerMixin",
     "thermal.AugmentableBlockEntityInvoker",
     "thermal.BlockItemAugmentableMixin",
     "thermal.MachineBlockEntityMixin",
