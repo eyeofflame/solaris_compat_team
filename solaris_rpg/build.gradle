@@ -48,7 +48,7 @@ mixin {
 }
 
 repositories {
-    flatDir { dir rootProject.file('libs') }
+    flatDir { dirs rootProject.files('libs','libs/rpg') }
     maven {
         url = "https://maven.architectury.dev"
         content { includeGroup "dev.architectury" }
