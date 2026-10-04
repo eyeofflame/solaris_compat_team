@@ -1,0 +1,236 @@
+{
+  "profession": "productivebees:beekeeper",
+  "trades": {
+    "novice": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:campfire",
+          "count": 1
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 6,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64913/0x000001bb10ccd0d8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:glass_bottle",
+          "count": 4
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 32,
+        "villager_experience": 3,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64914/0x000001bb10ccd2f0，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:shears",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 3,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64915/0x000001bb10ccd508，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "apprentice": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:honey_bottle",
+          "count": 2
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 10,
+        "villager_experience": 6,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64916/0x000001bb10ccd720，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "productivebees:bee_cage",
+          "count": 4
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 64,
+        "villager_experience": 6,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64917/0x000001bb10ccd938，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "productivebees:sugarbag_honeycomb",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 32,
+        "villager_experience": 3,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64918/0x000001bb10ccdb50，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "productivebees:treat_on_a_stick",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 3,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64919/0x000001bb10ccdd68，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "productivebees:honey_treat",
+          "count": 4
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 50,
+        "villager_experience": 3,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64920/0x000001bb10ccdf80，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "journeyman": [
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:beehive",
+          "count": 1
+        },
+        "input_b": {
+          "item": "minecraft:emerald",
+          "count": 6
+        },
+        "sell": {
+          "item": "productivebees:advanced_birch_beehive",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 6,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64921/0x000001bb10ccebd8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "productivebees:expansion_box_birch",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 6,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64922/0x000001bb10ccedf8，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "expert": [
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 12
+        },
+        "input_b": {
+          "item": "productivebees:bee_cage",
+          "count": 1
+        },
+        "sell": {
+          "item": "productivebees:sturdy_bee_cage",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 6,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64923/0x000001bb10ccf018，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "productivebees:jar_oak",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 6
+        },
+        "max_uses": 12,
+        "villager_experience": 8,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64924/0x000001bb10ccf230，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "master": [
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:bee_nest",
+          "count": 1,
+          "nbt": "{BlockEntityTag:{Bees:[{EntityData:{id:\"minecraft:bee\"},MinOccupationTicks:0,TicksInHive:0}]}}"
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 32
+        },
+        "max_uses": 3,
+        "villager_experience": 16,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64925/0x000001bb10ccf448，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "productivebees:spawn_egg_cupid_bee",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 24
+        },
+        "max_uses": 12,
+        "villager_experience": 6,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64926/0x000001bb10ccf660，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ]
+  }
+}

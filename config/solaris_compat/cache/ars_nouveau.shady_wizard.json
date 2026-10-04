@@ -1,0 +1,660 @@
+{
+  "profession": "ars_nouveau:shady_wizard",
+  "trades": {
+    "novice": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "ars_nouveau:sourceberry_bush",
+          "count": 16
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64899/0x000001bb10cc7018，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "ars_nouveau:magebloom_fiber",
+          "count": 16
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64900/0x000001bb10cc7230，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "ars_nouveau:bombegranate_pod",
+          "count": 6
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64901/0x000001bb10cc76b8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "ars_nouveau:bastion_pod",
+          "count": 6
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64901/0x000001bb10cc76b8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "ars_nouveau:frostaya_pod",
+          "count": 6
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64901/0x000001bb10cc76b8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "ars_nouveau:mendosteen_pod",
+          "count": 6
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64901/0x000001bb10cc76b8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:amethyst_shard",
+          "count": 32
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64902/0x000001bb10cc78d8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:source_berry_roll",
+          "count": 16
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64903/0x000001bb10cc7af0，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "apprentice": [
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ghostweave",
+          "count": 8
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64904/0x000001bb10cc7d08，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:mirrorweave",
+          "count": 8
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64905/0x000001bb10ccc000，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:falseweave",
+          "count": 8
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64906/0x000001bb10ccc218，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:warp_scroll",
+          "count": 8
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64907/0x000001bb10ccc430，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "ars_nouveau:wilden_horn",
+          "count": 4
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64908/0x000001bb10ccc648，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "ars_nouveau:wilden_spike",
+          "count": 4
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64908/0x000001bb10ccc648，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "ars_nouveau:wilden_wing",
+          "count": 4
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64908/0x000001bb10ccc648，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "journeyman": [
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_burrowing",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_challenge",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_binding",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_awakening",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_disintegration",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_sunrise",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_cloudshaping",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_flight",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_conjure_island_plains",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_restoration",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_animal_summon",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_forestation",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_warping",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_moonfall",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_containment",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_scrying",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_gravity",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_flowering",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_sanctuary",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_fertility",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_overgrowth",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_conjure_island_desert",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_harvest",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:ritual_wilden_summon",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_additions:ritual_locate_structure",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64909/0x000001bb10ccc868，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "expert": [
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:drygmy_shard",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 12,
+        "villager_experience": 20,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64910/0x000001bb10ccca88，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:starbuncle_shards",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 12,
+        "villager_experience": 20,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64910/0x000001bb10ccca88，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:wixie_shards",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 12,
+        "villager_experience": 20,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64910/0x000001bb10ccca88，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:whirlisprig_shards",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 12,
+        "villager_experience": 20,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64910/0x000001bb10ccca88，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "master": [
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:source_berry_pie",
+          "count": 8
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64911/0x000001bb10cccca8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "ars_nouveau:music_disc_aria_biblio",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 48
+        },
+        "max_uses": 1,
+        "villager_experience": 20,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64912/0x000001bb10cccec0，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ]
+  }
+}

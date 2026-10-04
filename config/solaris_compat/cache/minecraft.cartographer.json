@@ -1,0 +1,682 @@
+{
+  "profession": "minecraft:cartographer",
+  "trades": {
+    "novice": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:paper",
+          "count": 24
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:map",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 7
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.craisinlord.integrated_api.misc.maptrades.StructureSpecificMaps$TreasureMapForEmeralds —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      }
+    ],
+    "apprentice": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:glass_pane",
+          "count": 11
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：net.minecraft.world.entity.npc.VillagerTrades$TreasureMapForEmeralds —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"trader\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：net.mehvahdjukaar.supplementaries.common.entities.trades.RandomAdventurerMapListing —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.craisinlord.integrated_api.misc.maptrades.StructureSpecificMaps$TreasureMapForEmeralds —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.craisinlord.integrated_api.misc.maptrades.StructureSpecificMaps$TreasureMapForEmeralds —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.craisinlord.integrated_api.misc.maptrades.StructureSpecificMaps$TreasureMapForEmeralds —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.craisinlord.integrated_api.misc.maptrades.StructureSpecificMaps$TreasureMapForEmeralds —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.craisinlord.integrated_api.misc.maptrades.StructureSpecificMaps$TreasureMapForEmeralds —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.craisinlord.integrated_api.misc.maptrades.StructureSpecificMaps$TreasureMapForEmeralds —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.github.alexmodguy.alexscaves.server.entity.util.VillagerUndergroundCabinMapTrade —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      }
+    ],
+    "journeyman": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:compass",
+          "count": 1
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 20,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：net.minecraft.world.entity.npc.VillagerTrades$TreasureMapForEmeralds —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"trader\" is null"
+      }
+    ],
+    "expert": [
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:item_frame",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 7
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:white_banner",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:blue_banner",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:light_blue_banner",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:red_banner",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:pink_banner",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:green_banner",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:lime_banner",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:gray_banner",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:black_banner",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:purple_banner",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:magenta_banner",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:cyan_banner",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:brown_banner",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:yellow_banner",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:orange_banner",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:light_gray_banner",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 10
+        },
+        "input_b": {
+          "item": "minecraft:compass",
+          "count": 1
+        },
+        "sell": {
+          "item": "quark:pathfinders_quill",
+          "count": 1,
+          "nbt": "{targetBiome:\"minecraft:snowy_plains\",targetBiomeColor:8381695,targetBiomeUnderground:0b}"
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 PathfinderQuillTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 9
+        },
+        "input_b": {
+          "item": "minecraft:compass",
+          "count": 1
+        },
+        "sell": {
+          "item": "quark:pathfinders_quill",
+          "count": 1,
+          "nbt": "{targetBiome:\"minecraft:windswept_hills\",targetBiomeColor:9079434,targetBiomeUnderground:0b}"
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 PathfinderQuillTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 8
+        },
+        "input_b": {
+          "item": "minecraft:compass",
+          "count": 1
+        },
+        "sell": {
+          "item": "quark:pathfinders_quill",
+          "count": 1,
+          "nbt": "{targetBiome:\"minecraft:dark_forest\",targetBiomeColor:22794,targetBiomeUnderground:0b}"
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 PathfinderQuillTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 9
+        },
+        "input_b": {
+          "item": "minecraft:compass",
+          "count": 1
+        },
+        "sell": {
+          "item": "quark:pathfinders_quill",
+          "count": 1,
+          "nbt": "{targetBiome:\"minecraft:desert\",targetBiomeColor:13416782,targetBiomeUnderground:0b}"
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 PathfinderQuillTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 13
+        },
+        "input_b": {
+          "item": "minecraft:compass",
+          "count": 1
+        },
+        "sell": {
+          "item": "quark:pathfinders_quill",
+          "count": 1,
+          "nbt": "{targetBiome:\"minecraft:savanna\",targetBiomeColor:10200418,targetBiomeUnderground:0b}"
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 PathfinderQuillTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 13
+        },
+        "input_b": {
+          "item": "minecraft:compass",
+          "count": 1
+        },
+        "sell": {
+          "item": "quark:pathfinders_quill",
+          "count": 1,
+          "nbt": "{targetBiome:\"minecraft:swamp\",targetBiomeColor:2242319,targetBiomeUnderground:0b}"
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 PathfinderQuillTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 17
+        },
+        "input_b": {
+          "item": "minecraft:compass",
+          "count": 1
+        },
+        "sell": {
+          "item": "quark:pathfinders_quill",
+          "count": 1,
+          "nbt": "{targetBiome:\"minecraft:mangrove_swamp\",targetBiomeColor:2242319,targetBiomeUnderground:0b}"
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 PathfinderQuillTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 14
+        },
+        "input_b": {
+          "item": "minecraft:compass",
+          "count": 1
+        },
+        "sell": {
+          "item": "quark:pathfinders_quill",
+          "count": 1,
+          "nbt": "{targetBiome:\"minecraft:old_growth_pine_taiga\",targetBiomeColor:5980703,targetBiomeUnderground:0b}"
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 PathfinderQuillTrade，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "master": [
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:globe_banner_pattern",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 8
+        },
+        "max_uses": 12,
+        "villager_experience": 30,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "supplementaries:antique_ink",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 8
+        },
+        "max_uses": 12,
+        "villager_experience": 20,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 SimpleItemListing，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 16
+        },
+        "input_b": {
+          "item": "minecraft:compass",
+          "count": 1
+        },
+        "sell": {
+          "item": "quark:pathfinders_quill",
+          "count": 1,
+          "nbt": "{targetBiome:\"minecraft:flower_forest\",targetBiomeColor:13518562,targetBiomeUnderground:0b}"
+        },
+        "max_uses": 12,
+        "villager_experience": 20,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 PathfinderQuillTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 19
+        },
+        "input_b": {
+          "item": "minecraft:compass",
+          "count": 1
+        },
+        "sell": {
+          "item": "quark:pathfinders_quill",
+          "count": 1,
+          "nbt": "{targetBiome:\"minecraft:jungle\",targetBiomeColor:2274816,targetBiomeUnderground:0b}"
+        },
+        "max_uses": 12,
+        "villager_experience": 20,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 PathfinderQuillTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 17
+        },
+        "input_b": {
+          "item": "minecraft:compass",
+          "count": 1
+        },
+        "sell": {
+          "item": "quark:pathfinders_quill",
+          "count": 1,
+          "nbt": "{targetBiome:\"minecraft:bamboo_jungle\",targetBiomeColor:4055575,targetBiomeUnderground:0b}"
+        },
+        "max_uses": 12,
+        "villager_experience": 20,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 PathfinderQuillTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 19
+        },
+        "input_b": {
+          "item": "minecraft:compass",
+          "count": 1
+        },
+        "sell": {
+          "item": "quark:pathfinders_quill",
+          "count": 1,
+          "nbt": "{targetBiome:\"minecraft:badlands\",targetBiomeColor:13008674,targetBiomeUnderground:0b}"
+        },
+        "max_uses": 12,
+        "villager_experience": 20,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 PathfinderQuillTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "input_b": {
+          "item": "minecraft:compass",
+          "count": 1
+        },
+        "sell": {
+          "item": "quark:pathfinders_quill",
+          "count": 1,
+          "nbt": "{targetBiome:\"minecraft:mushroom_fields\",targetBiomeColor:5063283,targetBiomeUnderground:0b}"
+        },
+        "max_uses": 12,
+        "villager_experience": 20,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 PathfinderQuillTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 26
+        },
+        "input_b": {
+          "item": "minecraft:compass",
+          "count": 1
+        },
+        "sell": {
+          "item": "quark:pathfinders_quill",
+          "count": 1,
+          "nbt": "{targetBiome:\"minecraft:ice_spikes\",targetBiomeColor:2015433,targetBiomeUnderground:0b}"
+        },
+        "max_uses": 12,
+        "villager_experience": 20,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 PathfinderQuillTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 24
+        },
+        "input_b": {
+          "item": "minecraft:compass",
+          "count": 1
+        },
+        "sell": {
+          "item": "quark:pathfinders_quill",
+          "count": 1,
+          "nbt": "{targetBiome:\"minecraft:cherry_grove\",targetBiomeColor:15313384,targetBiomeUnderground:0b}"
+        },
+        "max_uses": 12,
+        "villager_experience": 20,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 PathfinderQuillTrade，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ]
+  }
+}

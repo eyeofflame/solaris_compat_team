@@ -22,4 +22,17 @@
 	#结构最底层(相对 Y=0) 的世界 Y = flatY + 该偏移（-1 → 63）
 	#Range: -64 ~ 128
 	initYOffset = -1
+	#结构生成屏蔽额外缓冲，避免结构从平坦区外侧伸入
+	#Range: 0 ~ 256
+	structureBlockMargin = 128
+
+[progression]
+	#阻止玩家在主世界激活末地传送门（新玩家的末地开局流程不由此开关控制）
+	blockEndPortalActivation = true
+
+[settlement]
+	#启动时自动把主世界 spawn_flatland 区域（中心 centerX/centerZ，边长 2*halfExtent）
+	#圈定为 FTB Teams 服务器团队 efm_server 的领地：非成员禁止破坏/交互方块、使用物品、伤害无害生物。
+	#PvP 不受影响；领地范围跟随 spawn_flatland 配置，修改后需重启，旧领地不会自动迁移。
+	protectSettlement = true
 

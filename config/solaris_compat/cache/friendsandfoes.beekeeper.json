@@ -1,0 +1,332 @@
+{
+  "profession": "friendsandfoes:beekeeper",
+  "trades": {
+    "novice": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "friendsandfoes:buttercup",
+          "count": 10
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 BasicTradeOffer，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:dandelion",
+          "count": 10
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 BasicTradeOffer，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:sunflower",
+          "count": 10
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 BasicTradeOffer，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "apprentice": [
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:sticky_honey_residue",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 10,
+        "villager_experience": 8,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "the_bumblezone:pollen_puff",
+          "count": 2
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 7,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:pollen_puff",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 14,
+        "villager_experience": 5,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:glass_bottle",
+          "count": 9
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 BasicTradeOffer，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:honey_bottle",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 5,
+        "_comment": "采样值：原工厂 BasicTradeOffer，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "journeyman": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "the_bumblezone:honey_crystal_shards",
+          "count": 3
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 25,
+        "villager_experience": 12,
+        "price_multiplier": 0.1,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "the_bumblezone:bee_bread",
+          "count": 3
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 6
+        },
+        "max_uses": 12,
+        "villager_experience": 17,
+        "price_multiplier": 0.1,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:shears",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 20,
+        "_comment": "采样值：原工厂 BasicTradeOffer，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:honey_block",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 10
+        },
+        "max_uses": 12,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 BasicTradeOffer，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "expert": [
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:honey_crystal",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 10,
+        "villager_experience": 22,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:bee_bread",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 10
+        },
+        "max_uses": 10,
+        "villager_experience": 22,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:honeycomb",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 BasicTradeOffer，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:honeycomb_block",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 12
+        },
+        "max_uses": 12,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 BasicTradeOffer，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "master": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "create:honey_bucket",
+          "count": 1
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 6
+        },
+        "max_uses": 3,
+        "villager_experience": 25,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:honeycomb_brood_block",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 25
+        },
+        "max_uses": 2,
+        "villager_experience": 30,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:honey_cocoon",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 15
+        },
+        "max_uses": 3,
+        "villager_experience": 30,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "create:honey_bucket",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 2,
+        "villager_experience": 30,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:beehive",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 10
+        },
+        "max_uses": 3,
+        "villager_experience": 30,
+        "_comment": "采样值：原工厂 BasicTradeOffer，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:bee_nest",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 3,
+        "villager_experience": 30,
+        "_comment": "采样值：原工厂 BasicTradeOffer，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ]
+  }
+}

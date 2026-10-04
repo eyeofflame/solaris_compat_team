@@ -1,0 +1,623 @@
+{
+  "profession": "butchercraft:slaughter_profession",
+  "trades": {
+    "novice": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:mask",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 5,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:gloves",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 5,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:boots",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 5,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:apron",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 5,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:beak",
+          "count": 4
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:eyeball",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:fat",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:horn",
+          "count": 4
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:wattle",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:soap",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 6
+        },
+        "max_uses": 8,
+        "villager_experience": 3,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "apprentice": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:mask",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 5,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:gloves",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 5,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:boots",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 5,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:apron",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 5,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:beak",
+          "count": 4
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:eyeball",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:fat",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:horn",
+          "count": 4
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:wattle",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:soap",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 6
+        },
+        "max_uses": 8,
+        "villager_experience": 3,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "journeyman": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:butcher_knife",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:gut_knife",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:skinning_knife",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:bone_saw",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:apron",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 12
+        },
+        "max_uses": 16,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:mask",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 12
+        },
+        "max_uses": 16,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:gloves",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 12
+        },
+        "max_uses": 16,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:boots",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 12
+        },
+        "max_uses": 16,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "expert": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:chicken_carcass",
+          "count": 8
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 5,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:cow_carcass",
+          "count": 24
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 4,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:goat_carcass",
+          "count": 16
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 4,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:sheep_carcass",
+          "count": 16
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 4,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "butchercraft:pig_carcass",
+          "count": 16
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 4,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:butcher_knife",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 24
+        },
+        "max_uses": 16,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:gut_knife",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 24
+        },
+        "max_uses": 16,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:skinning_knife",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 24
+        },
+        "max_uses": 16,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:bone_saw",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 24
+        },
+        "max_uses": 16,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "master": [
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:chicken_carcass",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 8
+        },
+        "max_uses": 8,
+        "villager_experience": 5,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:cow_carcass",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 24
+        },
+        "max_uses": 4,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:goat_carcass",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 16
+        },
+        "max_uses": 4,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:sheep_carcass",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 16
+        },
+        "max_uses": 4,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "butchercraft:pig_carcass",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 16
+        },
+        "max_uses": 4,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ]
+  }
+}

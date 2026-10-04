@@ -1,0 +1,196 @@
+{
+  "profession": "minecraft:fletcher",
+  "trades": {
+    "novice": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:stick",
+          "count": 32
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:arrow",
+          "count": 16
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "input_b": {
+          "item": "minecraft:gravel",
+          "count": 10
+        },
+        "sell": {
+          "item": "minecraft:flint",
+          "count": 10
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsAndEmeraldsToItems，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "apprentice": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:flint",
+          "count": 26
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:bow",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 12,
+        "villager_experience": 5,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "journeyman": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:string",
+          "count": 14
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 20,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:crossbow",
+          "count": 1,
+          "nbt": "{Damage:0}"
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "expert": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:feather",
+          "count": 24
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 30,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:bow",
+          "count": 1,
+          "nbt": "{Damage:0,Enchantments:[{id:\"enderio:xp_boost\",lvl:1s},{id:\"minecraft:power\",lvl:2s},{id:\"enderio:withering\",lvl:1s}]}"
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 14
+        },
+        "max_uses": 3,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 EnchantedItemForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "master": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:tripwire_hook",
+          "count": 8
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 30,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:crossbow",
+          "count": 1,
+          "nbt": "{Damage:0,Enchantments:[{id:\"enderio:withering\",lvl:1s}]}"
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 10
+        },
+        "max_uses": 3,
+        "villager_experience": 15,
+        "_comment": "采样值：原工厂 EnchantedItemForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "input_b": {
+          "item": "minecraft:arrow",
+          "count": 5
+        },
+        "sell": {
+          "item": "minecraft:tipped_arrow",
+          "count": 5,
+          "nbt": "{Potion:\"betterend:end_veil\"}"
+        },
+        "max_uses": 12,
+        "villager_experience": 30,
+        "_comment": "采样值：原工厂 TippedArrowForItemsAndEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ]
+  }
+}

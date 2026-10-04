@@ -1,0 +1,197 @@
+{
+  "profession": "minecraft:fisherman",
+  "trades": {
+    "novice": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:string",
+          "count": 20
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:coal",
+          "count": 10
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 2,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "input_b": {
+          "item": "minecraft:cod",
+          "count": 6
+        },
+        "sell": {
+          "item": "minecraft:cooked_cod",
+          "count": 6
+        },
+        "max_uses": 16,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsAndEmeraldsToItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:cod_bucket",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 16,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "apprentice": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:cod",
+          "count": 15
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 10,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:multi_input",
+        "input_a": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "input_b": {
+          "item": "minecraft:salmon",
+          "count": 6
+        },
+        "sell": {
+          "item": "minecraft:cooked_salmon",
+          "count": 6
+        },
+        "max_uses": 16,
+        "villager_experience": 5,
+        "_comment": "采样值：原工厂 ItemsAndEmeraldsToItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:campfire",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 12,
+        "villager_experience": 5,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "journeyman": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:salmon",
+          "count": 13
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 16,
+        "villager_experience": 20,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:fishing_rod",
+          "count": 1,
+          "nbt": "{Damage:0,Enchantments:[{id:\"minecraft:unbreaking\",lvl:1s}]}"
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 14
+        },
+        "max_uses": 3,
+        "villager_experience": 10,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EnchantedItemForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "expert": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:tropical_fish",
+          "count": 6
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 30,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "quark:crab_leg",
+          "count": 4
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 30,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "master": [
+      {
+        "type": "villagertradingplus:buy_item",
+        "buy": {
+          "item": "minecraft:pufferfish",
+          "count": 4
+        },
+        "reward": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 30,
+        "_comment": "采样值：原工厂 EmeraldForItems，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：net.minecraft.world.entity.npc.VillagerTrades$EmeraldsForVillagerTypeItem —— getOffer 在无村民上下文时返回 null（读不到字段 trades）"
+      }
+    ]
+  }
+}

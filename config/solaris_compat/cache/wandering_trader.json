@@ -1,0 +1,3257 @@
+{
+  "replace": false,
+  "trades": {
+    "common": [
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:sea_pickle",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 5,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:slime_ball",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 5,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:glowstone",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 5,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:nautilus_shell",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 5,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:fern",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:sugar_cane",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:pumpkin",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 4,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:kelp",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:cactus",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:dandelion",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:poppy",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:blue_orchid",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:allium",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:azure_bluet",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:red_tulip",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:orange_tulip",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:white_tulip",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:pink_tulip",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:oxeye_daisy",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:cornflower",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:lily_of_the_valley",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 7,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:wheat_seeds",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:beetroot_seeds",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:pumpkin_seeds",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:melon_seeds",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:acacia_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:birch_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:dark_oak_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:jungle_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:oak_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:spruce_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:cherry_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:mangrove_propagule",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:red_dye",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:white_dye",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:blue_dye",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:pink_dye",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:black_dye",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:green_dye",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:light_gray_dye",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:magenta_dye",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:yellow_dye",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:gray_dye",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:purple_dye",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:light_blue_dye",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:lime_dye",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:orange_dye",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:brown_dye",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:cyan_dye",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:brain_coral_block",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:bubble_coral_block",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:fire_coral_block",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:horn_coral_block",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:tube_coral_block",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:vine",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:brown_mushroom",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:red_mushroom",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:lily_pad",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 5,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:small_dripleaf",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 5,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:sand",
+          "count": 8
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:red_sand",
+          "count": 4
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 6,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:pointed_dripstone",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 5,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:rooted_dirt",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 5,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:moss_block",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 5,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "supplementaries:globe",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 10
+        },
+        "max_uses": 3,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 SimpleItemListing，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "supplementaries:flax_seeds",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 6
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 SimpleItemListing，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "supplementaries:globe_sepia",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 12
+        },
+        "max_uses": 3,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 SimpleItemListing，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:flowering_oak_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:cypress_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:snowblossom_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:fir_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:pine_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:red_maple_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:orange_maple_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:yellow_maple_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:redwood_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:mahogany_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:jacaranda_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:palm_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:willow_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:dead_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:violet",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:lavender",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:white_lavender",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:wildflower",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:white_petals",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:orange_cosmos",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:pink_daffodil",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:pink_hibiscus",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:waterlily",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:wilted_lily",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:tall_lavender",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:tall_white_lavender",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:blue_hydrangea",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:goldenrod",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:clover",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:toadstool",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:glowshroom",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 6,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:glowing_moss_block",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 5,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:willow_vine",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:spanish_moss",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:hanging_cobweb",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:high_grass",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:dune_grass",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:desert_grass",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:dead_grass",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:tundra_shrub",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:huge_clover_petal",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 4,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:huge_lily_pad",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:cattail",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:sea_oats",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:reed",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:watergrass",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:tiny_cactus",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:white_sand",
+          "count": 4
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 6,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:orange_sand",
+          "count": 4
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 6,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:black_sand",
+          "count": 4
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 6,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:dried_salt",
+          "count": 6
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:thermal_calcite",
+          "count": 6
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:red_moss_block",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 5,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64840/0x000001bb10cbde90，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:hibiscus",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64841/0x000001bb10cbe0a8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:blue_iris",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64842/0x000001bb10cbe2c0，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:black_iris",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64843/0x000001bb10cbe4d8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:anemone",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64844/0x000001bb10cbe6f0，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:lotus_flower",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64845/0x000001bb10cbe908，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:redwood_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64846/0x000001bb10cbeb20，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:sugi_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64847/0x000001bb10cbed38，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:purple_wisteria_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64848/0x000001bb10cbef50，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:white_wisteria_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64849/0x000001bb10cbf168，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:blue_wisteria_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64850/0x000001bb10cbf380，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:pink_wisteria_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64851/0x000001bb10cbf598，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:fir_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64852/0x000001bb10cbf7b0，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:willow_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64853/0x000001bb10cbf9c8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:aspen_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64854/0x000001bb10cbfbe0，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:red_maple_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64855/0x000001bb10cc0000，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:orange_maple_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64856/0x000001bb10cc0218，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:yellow_maple_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64857/0x000001bb10cc0430，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:cypress_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64858/0x000001bb10cc0648，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:olive_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64859/0x000001bb10cc0860，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:joshua_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64860/0x000001bb10cc0a78，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:ghaf_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64861/0x000001bb10cc0c90，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:palo_verde_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64862/0x000001bb10cc0ea8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:cedar_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64863/0x000001bb10cc10c0，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:larch_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64864/0x000001bb10cc12d8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:mahogany_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64865/0x000001bb10cc14f0，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:saxaul_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64866/0x000001bb10cc1708，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:red_moss_block",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 5,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64840/0x000001bb10cbde90，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:hibiscus",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64841/0x000001bb10cbe0a8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:blue_iris",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64842/0x000001bb10cbe2c0，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:black_iris",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64843/0x000001bb10cbe4d8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:anemone",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64844/0x000001bb10cbe6f0，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:lotus_flower",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 12,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64845/0x000001bb10cbe908，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:redwood_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64846/0x000001bb10cbeb20，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:sugi_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64847/0x000001bb10cbed38，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:purple_wisteria_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64848/0x000001bb10cbef50，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:white_wisteria_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64849/0x000001bb10cbf168，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:blue_wisteria_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64850/0x000001bb10cbf380，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:pink_wisteria_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64851/0x000001bb10cbf598，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:fir_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64852/0x000001bb10cbf7b0，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:willow_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64853/0x000001bb10cbf9c8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:aspen_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64854/0x000001bb10cbfbe0，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:red_maple_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64855/0x000001bb10cc0000，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:orange_maple_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64856/0x000001bb10cc0218，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:yellow_maple_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64857/0x000001bb10cc0430，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:cypress_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64858/0x000001bb10cc0648，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:olive_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64859/0x000001bb10cc0860，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:joshua_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64860/0x000001bb10cc0a78，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:ghaf_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64861/0x000001bb10cc0c90，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:palo_verde_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64862/0x000001bb10cc0ea8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:cedar_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64863/0x000001bb10cc10c0，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:larch_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64864/0x000001bb10cc12d8，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:mahogany_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64865/0x000001bb10cc14f0，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "natures_spirit:saxaul_sapling",
+          "count": 5
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 NatureSpirit$$Lambda$64866/0x000001bb10cc1708，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "farmersdelight:cabbage_seeds",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 1,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 BasicItemListing，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "farmersdelight:tomato_seeds",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 1,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 BasicItemListing，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "farmersdelight:rice",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 1,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 BasicItemListing，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "farmersdelight:onion",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 1,
+        "villager_experience": 12,
+        "_comment": "采样值：原工厂 BasicItemListing，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "productivebees:sturdy_bee_cage",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 10
+        },
+        "max_uses": 12,
+        "villager_experience": 6,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64867/0x000001bb10cc1920，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "productivebees:spawn_egg_bumble_bee",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 24
+        },
+        "max_uses": 12,
+        "villager_experience": 6,
+        "price_multiplier": 0.2,
+        "_comment": "采样值：原工厂 EventHandler$$Lambda$64868/0x000001bb10cc1b38，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.github.alexmodguy.alexscaves.server.entity.util.VillagerUndergroundCabinMapTrade —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "forbidden_arcanus:fungyss",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 5,
+        "villager_experience": 1,
+        "price_multiplier": 1.0,
+        "_comment": "采样值：原工厂 BasicItemListing，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "forbidden_arcanus:aurum_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 1.0,
+        "_comment": "采样值：原工厂 BasicItemListing，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "forbidden_arcanus:growing_edelwood",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 6
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "price_multiplier": 1.0,
+        "_comment": "采样值：原工厂 BasicItemListing，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "forbidden_arcanus:yellow_orchid",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 6,
+        "villager_experience": 1,
+        "price_multiplier": 1.0,
+        "_comment": "采样值：原工厂 BasicItemListing，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "forbidden_arcanus:artisan_relic",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 18
+        },
+        "max_uses": 2,
+        "villager_experience": 1,
+        "price_multiplier": 1.0,
+        "_comment": "采样值：原工厂 BasicItemListing，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "delightful:salmonberry_pips",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 5,
+        "villager_experience": 1,
+        "price_multiplier": 1.0,
+        "_comment": "采样值：原工厂 ForgeEvents$$Lambda$64872/0x000001bb10cc2828，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "delightful:cantaloupe_slice",
+          "count": 8
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 5,
+        "villager_experience": 1,
+        "price_multiplier": 1.0,
+        "_comment": "采样值：原工厂 ForgeEvents$$Lambda$64873/0x000001bb10cc2a40，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "delightful:stuffed_cantaloupe_block",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 3,
+        "villager_experience": 1,
+        "price_multiplier": 1.0,
+        "_comment": "采样值：原工厂 ForgeEvents$$Lambda$64874/0x000001bb10cc2c58，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ],
+    "rare": [
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:tropical_fish_bucket",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 4,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:pufferfish_bucket",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 4,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:packed_ice",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 6,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:blue_ice",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 6
+        },
+        "max_uses": 6,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:gunpowder",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "minecraft:podzol",
+          "count": 3
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 3
+        },
+        "max_uses": 6,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.craisinlord.integrated_api.misc.maptrades.StructureSpecificMaps$TreasureMapForEmeralds —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.craisinlord.integrated_api.misc.maptrades.StructureSpecificMaps$TreasureMapForEmeralds —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.craisinlord.integrated_api.misc.maptrades.StructureSpecificMaps$TreasureMapForEmeralds —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.craisinlord.integrated_api.misc.maptrades.StructureSpecificMaps$TreasureMapForEmeralds —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.craisinlord.integrated_api.misc.maptrades.StructureSpecificMaps$TreasureMapForEmeralds —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.craisinlord.integrated_api.misc.maptrades.StructureSpecificMaps$TreasureMapForEmeralds —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.craisinlord.integrated_api.misc.maptrades.StructureSpecificMaps$TreasureMapForEmeralds —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"entity\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:origin_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 4,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:rainbow_birch_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 4,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:magic_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 4,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:umbran_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 4,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:hellbark_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 4,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:empyreal_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 5
+        },
+        "max_uses": 4,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:origin_grass_block",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 4,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:rose",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 6,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:glowflower",
+          "count": 2
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 5,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:burning_blossom",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 6,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:icy_iris",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 4,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:brimstone",
+          "count": 4
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 2
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:bramble",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 1
+        },
+        "max_uses": 4,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:glowworm_silk",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 6
+        },
+        "max_uses": 2,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "biomesoplenty:spider_egg",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 6
+        },
+        "max_uses": 1,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 ItemsForEmeralds，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "thermal:rubberwood_sapling",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 8
+        },
+        "max_uses": 8,
+        "villager_experience": 1,
+        "_comment": "采样值：原工厂 BasicItemListing，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.teamtea.eclipticseasons.api.data.quest.SeasonQuest$SeasonTrade —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"trader\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.teamtea.eclipticseasons.api.data.quest.SeasonQuest$SeasonTrade —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"trader\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.teamtea.eclipticseasons.api.data.quest.SeasonQuest$SeasonTrade —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"trader\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "_comment": "导出失败（请手工处理或删除本条）：com.teamtea.eclipticseasons.api.data.quest.SeasonQuest$SeasonTrade —— getOffer 抛异常：java.lang.NullPointerException: Cannot invoke \"net.minecraft.world.entity.Entity.m_9236_()\" because \"trader\" is null"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "cold_sweat:goat_fur",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 99999999,
+        "villager_experience": 15,
+        "price_multiplier": 1.0,
+        "_comment": "采样值：原工厂 BasicItemListing，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "cold_sweat:hoglin_hide",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 4
+        },
+        "max_uses": 99999999,
+        "villager_experience": 15,
+        "price_multiplier": 1.0,
+        "_comment": "采样值：原工厂 BasicItemListing，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:music_disc_flight_of_the_bumblebee_rimsky_korsakov",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 1,
+        "villager_experience": 10,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:music_disc_honey_bee_rat_faced_boy",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 1,
+        "villager_experience": 10,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:music_disc_rivers_of_honey_moserao",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 1,
+        "villager_experience": 10,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:music_disc_la_bee_da_loca",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 1,
+        "villager_experience": 10,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:music_disc_bee_laxing_with_the_hom_bees",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 1,
+        "villager_experience": 10,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:music_disc_bee_ware_of_the_temple",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 1,
+        "villager_experience": 10,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:music_disc_knowing_renren",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 1,
+        "villager_experience": 10,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:music_disc_radiance_renren",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 1,
+        "villager_experience": 10,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:music_disc_life_renren",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 1,
+        "villager_experience": 10,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:music_disc_a_last_first_last",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 1,
+        "villager_experience": 10,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:music_disc_drowning_in_despair",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 1,
+        "villager_experience": 10,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      },
+      {
+        "type": "villagertradingplus:sell_item",
+        "sell": {
+          "item": "the_bumblezone:music_disc_beenna_box",
+          "count": 1
+        },
+        "priceIn": {
+          "item": "minecraft:emerald",
+          "count": 20
+        },
+        "max_uses": 1,
+        "villager_experience": 10,
+        "price_multiplier": 0.5,
+        "_comment": "采样值：原工厂 BasicItemTrade，这里只记录了随机结果的一次样本，请手工核对"
+      }
+    ]
+  }
+}
