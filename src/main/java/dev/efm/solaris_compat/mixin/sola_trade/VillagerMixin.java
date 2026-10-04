@@ -1,4 +1,4 @@
-package dev.efm.solaris_compat.mixin.sola_eventhandler;
+package dev.efm.solaris_compat.mixin.sola_trade;
 
 import dev.efm.solaris_compat.events.sola_events.VillagerProfessionUpdateEvent;
 import net.minecraft.world.entity.npc.Villager;
@@ -16,6 +16,6 @@ public abstract class VillagerMixin {
         Villager villager = (Villager) (Object) this;
         var old = villager.getVillagerData();
 
-        MinecraftForge.EVENT_BUS.post(new VillagerProfessionUpdateEvent(old.getProfession(), newData.getProfession(), villager.level()));
+        MinecraftForge.EVENT_BUS.post(new VillagerProfessionUpdateEvent(old.getProfession(), newData.getProfession(), villager.level(), villager));
     }
 }

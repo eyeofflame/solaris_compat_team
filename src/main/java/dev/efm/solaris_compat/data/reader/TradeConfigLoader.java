@@ -3,7 +3,9 @@ package dev.efm.solaris_compat.data.reader;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import com.mojang.logging.LogUtils;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import dev.efm.solaris_compat.SolarisCompat;
 import dev.efm.solaris_compat.data.TradeData;
@@ -68,6 +70,10 @@ public class TradeConfigLoader implements ResourceManagerReloadListener {
         Path dir = FMLPaths.CONFIGDIR.get().resolve(TRADE_DIR);
         Map<ResourceLocation, TradeData> parsed = new HashMap<>();
 
+        // 诊断：确认注册表物品 codec 在当前 ops 下能解出普通物品
+        LOGGER.info("诊断: 物品 codec 探测(minecraft:iron) = {}",
+                ForgeRegistries.ITEMS.getCodec().parse(JsonOps.INSTANCE, new JsonPrimitive("minecraft:iron")));
+
         if (Files.isDirectory(dir)) {
             try (Stream<Path> files = Files.walk(dir)) {
                 files.filter(Files::isRegularFile)
@@ -99,6 +105,21 @@ public class TradeConfigLoader implements ResourceManagerReloadListener {
                 LOGGER.warn("交易配置 {} 的职业 {} 未注册，跳过", file, profession);
                 return;
             }
+
+            // optionalFieldOf 会把「字段存在但解码失败」静默吞成默认值：
+            // 如果原文的 trades 非空但解出来是空的，把被吞掉的错误单独解一遍打出来
+            if (json.isJsonObject()) {
+                JsonElement rawTrades = json.getAsJsonObject().get("trades");
+                if (rawTrades != null && rawTrades.isJsonObject() && rawTrades.getAsJsonObject().size() > 0
+                        && data.getTrades().isEmpty()) {
+                    Codec.unboundedMap(Codec.STRING, TradeData.Level.CODEC)
+                            .parse(JsonOps.INSTANCE, rawTrades)
+                            .resultOrPartial(error -> LOGGER.error("trades 字段解码失败（被 optionalFieldOf 吞掉） {}: {}",
+                                    file, error));
+                }
+            }
+            LOGGER.info("交易配置 {}: profession={}, 等级数={}", file.getFileName(), profession, data.getTrades().size());
+
             if (out.put(profession, data) != null) {
                 LOGGER.warn("职业 {} 有重复的交易配置，{} 覆盖了前一份", profession, file);
             }
