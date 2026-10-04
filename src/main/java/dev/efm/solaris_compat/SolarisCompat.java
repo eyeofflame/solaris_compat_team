@@ -1,5 +1,6 @@
 package dev.efm.solaris_compat;
 
+import dev.efm.solaris_compat.command.SolaExportCommand;
 import dev.efm.solaris_compat.common.SRegistry;
 import dev.efm.solaris_compat.config.ConfigScreen;
 import dev.efm.solaris_compat.config.SolarisConfig;
@@ -35,6 +36,7 @@ public class SolarisCompat {
         SRegistry.register(ibus);
 
         fbus.addListener(this::onVillagerProUpdate);
+        fbus.addListener(SolaExportCommand::register);
     }
 
 
