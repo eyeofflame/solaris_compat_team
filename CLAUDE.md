@@ -54,6 +54,8 @@ gradle :solaris_rpg:runServer
 
 其余：`common/SRegistry` 注册物品/创造页签/`solaris_shapeless` 配方序列化器；`data/` + `events/BountyCache` 是悬赏数据池管线（datapack registry → 静态缓存，**目前无消费端**）。
 
+村民交易配置：`/sola_export`（`command/SolaExportCommand`，OP 权限）把全部已注册职业导出为 `config/solaris_compat/trade/<命名空间>/<path>.json` 模板（内容只有 `{"profession": id}`）；`data/reader/TradeConfigLoader` 在开服与 `/reload` 时扫描该目录，按 `TradeData.CODEC`（`data/TradeData`，schema 参考 `src/main/resources/data/solaris_compat/example_trade/example.json`）解析并按职业缓存，用 `TradeConfigLoader.get(职业id)` 读取。目录常量 `TradeConfigLoader.TRADE_DIR` 由导出与读取两端共用。**交易生成/替换逻辑尚未接线**（缓存无消费端）。
+
 ### 同 jar 第二 modid：`mekanism_agriculture` 注魔机
 
 `common/registration/TileEntityMekInfusioner`（约 427 行）是核心，几个刻意的设计约束：
@@ -81,9 +83,10 @@ gradle :solaris_rpg:runServer
 4. 灌注器升级的校验有两条路（机器内运行时 + 工匠台给机器物品装），改动要两条都覆盖（`MachineBlockEntityMixin` + `BlockItemAugmentableMixin`）。
 5. `docs/` 与 `.claude/` 被 gitignore；`libs/`、`src/generated/`、`agriculture_infusioner.bbmodel`（Blockbench 模型源文件）是**有意入库**，不要加忽略。
 6. 所有 `JavaCompile` 强制 UTF-8（源码含中文注释/字符串），保持文件编码一致。
+7. `config/` 不是资源包根：往 config 目录里放自定义 json 后，读取端只能自己走文件系统扫描（参考 `TradeConfigLoader` 的 `ResourceManagerReloadListener` + `AddReloadListenerEvent` 接法，开服与 `/reload` 都会触发）；`SimpleJsonResourceReloadListener` 这类加载器只能读 `data/` 下的文件。
 
 ## 快速定位与详细文档
 
-关键入口：主 mod `SolarisCompat.java`；注魔机 `TileEntityMekInfusioner.java`；对话 `SolarisRpg.java` + `StateEngine.java` + `widgets/DialogueRoot.java`；剧本格式 `data/ScriptJson.java` + `solaris_rpg/src/main/resources/data/solaris_rpg/solaris_rpg/demo.json`。
+关键入口：主 mod `SolarisCompat.java`；注魔机 `TileEntityMekInfusioner.java`；对话 `SolarisRpg.java` + `StateEngine.java` + `widgets/DialogueRoot.java`；剧本格式 `data/ScriptJson.java` + `solaris_rpg/src/main/resources/data/solaris_rpg/solaris_rpg/demo.json`；交易配置 `command/SolaExportCommand.java`（导出）+ `data/reader/TradeConfigLoader.java`（读取）+ `data/TradeData.java`（模型）。
 
 `docs/PROJECT_INDEX.md`（被 gitignore，仅本地存在）是按文件的全仓库索引，含完整调用链与"未接线/半成品"清单，需要深入某个子系统时先查它。`docs/superpowers/specs/` 与 `docs/superpowers/plans/` 是 RPG 子工程拆分设计与实现计划（部分结论已过时，如 `solaris_rpg` 前置已改为可选）。

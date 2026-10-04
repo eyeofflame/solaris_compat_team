@@ -66,6 +66,7 @@ dependencies {
     compileOnly fg.deobf("libs:rhino-forge:${rhino_version}")
     runtimeOnly fg.deobf("libs:kubejs-forge:${kubejs_version}")
     runtimeOnly fg.deobf("libs:rhino-forge:${rhino_version}")
+    implementation fg.deobf("libs:EclipticSeasons:1.80.1-forge-0.18.10-hotfix-8-all")
 }
 
 tasks.named('processResources', ProcessResources).configure {
