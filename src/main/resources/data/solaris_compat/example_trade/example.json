@@ -1,0 +1,27 @@
+{
+  "profession": "id",
+  "trades": {
+    "level1": {
+      "pool": [
+        {
+          "need": [
+            {
+              "item": "id",
+              "count": 1,
+              "nbt": {}
+            }
+          ],
+          "sell": {
+            "item": "id",
+            "count": 1,
+            "nbt": {}
+          },
+          "desc": "desc.solaris.id",
+          "xp": 5
+        }
+      ],
+      "pick": 2
+    },
+    "level2": {/*一直到level5*/}
+  }
+}

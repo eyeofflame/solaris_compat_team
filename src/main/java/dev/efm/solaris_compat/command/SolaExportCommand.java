@@ -2,6 +2,7 @@ package dev.efm.solaris_compat.command;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import dev.efm.solaris_compat.data.reader.TradeConfigLoader;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -27,7 +28,6 @@ import java.nio.file.Path;
 public final class SolaExportCommand {
 
     private static final Gson GSON = new Gson();
-    private static final String TRADE_DIR = "solaris_compat/trade";
 
     private SolaExportCommand() {
     }
@@ -41,7 +41,8 @@ public final class SolaExportCommand {
     }
 
     private static int export(CommandSourceStack source) {
-        Path dir = FMLPaths.CONFIGDIR.get().resolve(TRADE_DIR);
+        // 和 TradeConfigLoader 共用同一个目录，避免两边写岔
+        Path dir = FMLPaths.CONFIGDIR.get().resolve(TradeConfigLoader.TRADE_DIR);
         try {
             Files.createDirectories(dir);
         } catch (IOException e) {
