@@ -24,5 +24,18 @@
   "item.solaris_compat.goo1_upgrade": "Primogel Upgrade",
   "item.solaris_compat.goo2_upgrade": "Blazebloom Upgrade",
   "item.solaris_compat.goo3_upgrade": "VoidShimmer Upgrade",
-  "item.solaris_compat.goo4_upgrade": "Shadoepulse Upgrade"
+  "item.solaris_compat.goo4_upgrade": "Shadoepulse Upgrade",
+  "item.solaris_compat.coin_pouch": "Coin Pouch",
+  "curios.identifier.coin_pouch": "Coin Pouch",
+  "key.solaris_compat.open_coin_pouch": "Open Coin Pouch",
+  "key.categories.solaris_compat": "Solaris Compat",
+  "solaris_compat.coin_pouch.title": "Coin Pouch",
+  "solaris_compat.coin_pouch.withdraw_all": "Withdraw",
+  "tooltip.solaris.coin_pouch.desc": "Stores coins and coin piles; a pile converts to 9 coins",
+  "solaris_compat.coin_pouch.tier.copper": "Copper Coin",
+  "solaris_compat.coin_pouch.tier.iron": "Iron Coin",
+  "solaris_compat.coin_pouch.tier.gold": "Gold Coin",
+  "solaris_compat.coin_pouch.tier.diamond": "Diamond Coin",
+  "solaris_compat.coin_pouch.tier.netherite": "Netherite Coin",
+  "option.solaris_compat.coin_pouch.auto_collect": "Auto-collect coins while the pouch is equipped"
 }

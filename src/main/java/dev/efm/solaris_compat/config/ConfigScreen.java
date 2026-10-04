@@ -23,6 +23,13 @@ public class ConfigScreen {
                         .build()
         );
 
+        category.addEntry(
+                entryBuilder.startBooleanToggle(Component.translatable("option.solaris_compat.coin_pouch.auto_collect"), SolarisConfig.CoinPouchAutoCollect.get())
+                        .setSaveConsumer(SolarisConfig.CoinPouchAutoCollect::set)
+                        .setDefaultValue(true)
+                        .build()
+        );
+
         return builder.build();
     }
 }

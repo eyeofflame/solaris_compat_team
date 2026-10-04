@@ -1,6 +1,7 @@
 package dev.efm.solaris_compat.common;
 
 import dev.efm.solaris_compat.SolarisCompat;
+import dev.efm.solaris_compat.common.items.CoinPouchItem;
 import dev.efm.solaris_compat.common.items.InsolatorSpeedUpgradeItem;
 import dev.efm.solaris_compat.common.items.WaterUpgradeItem;
 import dev.efm.solaris_compat.common.recipeType.SolarisRecipe;
@@ -35,6 +36,8 @@ public class SRegistry {
     public static final RegistryObject<Item> GOO3_UPGRADE = ITEMS.register("goo3_upgrade", () -> new InsolatorSpeedUpgradeItem(8f, 0.30f, 3f));
     public static final RegistryObject<Item> GOO4_UPGRADE = ITEMS.register("goo4_upgrade", () -> new InsolatorSpeedUpgradeItem(16f, 0.50f, 4f));
 
+    public static final RegistryObject<Item> COIN_POUCH = ITEMS.register("coin_pouch", CoinPouchItem::new);
+
     public static final CreativeModeTab S_TAB = CreativeModeTab.builder().title(Component.translatable("title.solaris_compat.tab")).icon(() -> GOO1_UPGRADE.get().getDefaultInstance()).withTabsBefore(CreativeModeTabs.SPAWN_EGGS).build();
     public static final RegistryObject<CreativeModeTab> SOLARIS_TAB = TABS.register("solaris", () -> S_TAB);
 
@@ -51,6 +54,7 @@ public class SRegistry {
             evt.accept(GOO2_UPGRADE.get());
             evt.accept(GOO3_UPGRADE.get());
             evt.accept(GOO4_UPGRADE.get());
+            evt.accept(COIN_POUCH.get());
         }
     }
 }

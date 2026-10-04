@@ -24,5 +24,18 @@
   "item.solaris_compat.goo1_upgrade": "原初浆升级",
   "item.solaris_compat.goo2_upgrade": "烈焰蕾升级",
   "item.solaris_compat.goo3_upgrade": "虚空辉升级",
-  "item.solaris_compat.goo4_upgrade": "暗影脉升级"
+  "item.solaris_compat.goo4_upgrade": "暗影脉升级",
+  "item.solaris_compat.coin_pouch": "硬币袋",
+  "curios.identifier.coin_pouch": "硬币袋",
+  "key.solaris_compat.open_coin_pouch": "打开硬币袋",
+  "key.categories.solaris_compat": "Solaris Compat",
+  "solaris_compat.coin_pouch.title": "硬币袋",
+  "solaris_compat.coin_pouch.withdraw_all": "全部取出",
+  "tooltip.solaris.coin_pouch.desc": "可存入硬币与硬币堆，硬币堆自动拆为 9 枚硬币",
+  "solaris_compat.coin_pouch.tier.copper": "铜币",
+  "solaris_compat.coin_pouch.tier.iron": "铁币",
+  "solaris_compat.coin_pouch.tier.gold": "金币",
+  "solaris_compat.coin_pouch.tier.diamond": "钻石币",
+  "solaris_compat.coin_pouch.tier.netherite": "下界合金币",
+  "option.solaris_compat.coin_pouch.auto_collect": "装备硬币袋时自动收入硬币"
 }

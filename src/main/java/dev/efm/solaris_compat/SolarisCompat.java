@@ -8,9 +8,12 @@ import dev.efm.solaris_compat.config.SolarisConfig;
 import dev.efm.solaris_compat.data.DataRegistry;
 import dev.efm.solaris_compat.data.TradeData;
 import dev.efm.solaris_compat.data.reader.TradeConfigLoader;
+import dev.efm.solaris_compat.events.CoinAutoCollectHandler;
 import dev.efm.solaris_compat.events.sola_events.VillagerProfessionUpdateEvent;
+import dev.efm.solaris_compat.ldlib.CoinPouchFactory;
 import dev.efm.solaris_compat.ldlib.SolaTradeFactory;
 import dev.efm.solaris_compat.ldlib.SolaTradeHolder;
+import dev.efm.solaris_compat.network.SolaNetwork;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.npc.Villager;
@@ -22,6 +25,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -43,15 +47,23 @@ public class SolarisCompat {
 
         ibus.addListener(DataRegistry::DataRegistryEvent);
         ibus.addListener(DataRegistry::GatherDataEvent);
+        ibus.addListener(this::commonSetup);
 
         SRegistry.register(ibus);
 
         fbus.addListener(this::onVillagerProUpdate);
         fbus.addListener(SolaExportCommand::register);
         fbus.addListener(this::onClickVillager);
+        fbus.addListener(CoinAutoCollectHandler::onPlayerTick);
+        fbus.addListener(CoinAutoCollectHandler::onPlayerLoggedOut);
 
         UIFactory.register(SolaTradeFactory.INSTANCE);
+        UIFactory.register(CoinPouchFactory.INSTANCE);
 
+    }
+
+    public void commonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(SolaNetwork::register);
     }
 
 

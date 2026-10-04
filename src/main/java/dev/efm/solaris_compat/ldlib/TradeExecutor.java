@@ -1,15 +1,21 @@
 package dev.efm.solaris_compat.ldlib;
 
+import dev.efm.solaris_compat.coin.CoinPouchService;
+import dev.efm.solaris_compat.coin.CoinTier;
 import dev.efm.solaris_compat.data.TradeData;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 服务端结算：玩家在交易界面点“交易”按钮时，从背包扣 need、发放 sell。
@@ -46,15 +52,39 @@ public final class TradeExecutor {
 
     private static boolean tradeOnce(ServerPlayer player, TradeData.Trade trade) {
         Inventory inventory = player.getInventory();
+        // 同一物品可能有多条需求：先合并再校验/扣除，否则每条都会对着同一份余额重复放行、扣款时静默少扣
+        Map<NeedKey, Integer> required = new LinkedHashMap<>();
+        Map<NeedKey, TradeData.TradeItem> samples = new LinkedHashMap<>();
         for (TradeData.TradeItem need : trade.getNeed()) {
-            if (count(inventory, need) < need.getCount()) {
+            NeedKey key = new NeedKey(need.getItem(), need.getNbt());
+            required.merge(key, need.getCount(), Integer::sum);
+            samples.putIfAbsent(key, need);
+        }
+
+        for (Map.Entry<NeedKey, Integer> entry : required.entrySet()) {
+            TradeData.TradeItem need = samples.get(entry.getKey());
+            int owned = count(inventory, need);
+            CoinTier tier = pouchTierOf(need);
+            if (tier != null) {
+                owned += CoinPouchService.balance(player, tier);
+            }
+            if (owned < entry.getValue()) {
                 player.displayClientMessage(Component.literal("材料不足"), true);
                 return false;
             }
         }
 
-        for (TradeData.TradeItem need : trade.getNeed()) {
-            consume(inventory, need);
+        for (Map.Entry<NeedKey, Integer> entry : required.entrySet()) {
+            TradeData.TradeItem need = samples.get(entry.getKey());
+            // 硬币需求优先从硬币袋扣，不够的部分再从背包扣
+            int remaining = entry.getValue();
+            CoinTier tier = pouchTierOf(need);
+            if (tier != null) {
+                remaining -= CoinPouchService.spend(player, tier, remaining);
+            }
+            if (remaining > 0) {
+                consume(inventory, need, remaining);
+            }
         }
 
         ItemStack result = trade.getSell().toStack();
@@ -63,6 +93,26 @@ public final class TradeExecutor {
         }
         grantXp(player, trade.getXp());
         return true;
+    }
+
+    /** 合并同物品需求用的键：物品 + NBT（NBT 留空 = 不挑 NBT）。 */
+    private record NeedKey(Item item, CompoundTag nbt) {
+    }
+
+    /**
+     * 该需求能不能走硬币袋：是「纯粹的硬币」（本档位硬币、没指定 NBT）才走，返回档位；否则 null。
+     * 硬币堆不折算——袋子存的是计数，堆另有烧炼/升档用途，按整物品交易更可预期。
+     */
+    private static CoinTier pouchTierOf(TradeData.TradeItem need) {
+        if (!need.getNbt().isEmpty()) {
+            return null;
+        }
+        ItemStack sample = need.toStack();
+        int tier = CoinTier.tierOf(sample);
+        if (tier < 0 || !CoinTier.byIndex(tier).isCoin(sample)) {
+            return null;
+        }
+        return CoinTier.byIndex(tier);
     }
 
     /**
@@ -110,8 +160,8 @@ public final class TradeExecutor {
         return total;
     }
 
-    private static void consume(Inventory inventory, TradeData.TradeItem need) {
-        int remaining = need.getCount();
+    private static void consume(Inventory inventory, TradeData.TradeItem need, int amount) {
+        int remaining = amount;
         for (ItemStack stack : inventory.items) {
             if (remaining <= 0) {
                 return;
