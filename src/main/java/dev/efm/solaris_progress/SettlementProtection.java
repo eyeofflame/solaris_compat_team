@@ -7,15 +7,20 @@ import dev.ftb.mods.ftblibrary.math.ChunkDimPos;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.entity.EntityEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 /**
@@ -31,6 +36,49 @@ public final class SettlementProtection {
     @SubscribeEvent
     public static void onServerStarted(ServerStartedEvent event) {
         SettlementClaims.ensure(event.getServer());
+    }
+
+    /**
+     * 阻止自然刷怪与刷怪笼在领地内生成敌对生物。
+     * {@code MobSpawnEvent.PositionCheck} 是 HasResult，必须用 {@code setResult(DENY)}。
+     */
+    @SubscribeEvent
+    public static void onHostileSpawn(MobSpawnEvent.PositionCheck event) {
+        if (!SolaConfig.blockHostileMobs) return;
+        if (!(event.getLevel() instanceof ServerLevel level) || level.dimension() != Level.OVERWORLD) return;
+        if (!isBlockedMob(event.getEntity())) return;
+        BlockPos pos = BlockPos.containing(event.getX(), event.getY(), event.getZ());
+        if (isInSettlementClaim(level, pos)) {
+            event.setResult(Event.Result.DENY);
+        }
+    }
+
+    /**
+     * 兜底：任何来源（刷怪蛋/命令/结构/从磁盘读回等）在领地内加入世界的敌对生物都直接阻止。
+     */
+    @SubscribeEvent
+    public static void onEntityJoinLevel(EntityJoinLevelEvent event) {
+        if (!SolaConfig.blockHostileMobs) return;
+        Level level = event.getLevel();
+        if (level.isClientSide || level.dimension() != Level.OVERWORLD) return;
+        if (!isBlockedMob(event.getEntity())) return;
+        if (isInSettlementClaim(level, event.getEntity().blockPosition())) {
+            event.setCanceled(true);
+        }
+    }
+
+    /**
+     * 阻止敌对生物从领地外走进来：跨区块段进入领地时清除。
+     */
+    @SubscribeEvent
+    public static void onEntityEnteringSection(EntityEvent.EnteringSection event) {
+        if (!SolaConfig.blockHostileMobs) return;
+        Entity entity = event.getEntity();
+        if (entity.level().isClientSide || entity.level().dimension() != Level.OVERWORLD) return;
+        if (!isBlockedMob(entity)) return;
+        if (isInSettlementClaim(entity.level(), entity.blockPosition())) {
+            entity.discard();
+        }
     }
 
     /**
@@ -96,6 +144,15 @@ public final class SettlementProtection {
         if (target == null) return false;
         ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(target.getType());
         return id != null && SolaConfig.allowedInteractionEntities.contains(id.toString());
+    }
+
+    /** 是否按敌对生物处理：Enemy，或配置里额外列入 {@code blockedAdditionalEntities} 的类型。 */
+    public static boolean isBlockedMob(Entity entity) {
+        if (entity == null) return false;
+        if (entity instanceof Enemy) return true;
+        if (SolaConfig.blockedAdditionalEntities.isEmpty()) return false;
+        ResourceLocation id = BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType());
+        return id != null && SolaConfig.blockedAdditionalEntities.contains(id.toString());
     }
 
     /** pos 是否位于聚落领地内（服务端；FTB Chunks 管理器未就绪时返回 false）。 */

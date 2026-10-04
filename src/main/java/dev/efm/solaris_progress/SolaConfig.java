@@ -26,6 +26,8 @@ public final class SolaConfig {
     private static final ForgeConfigSpec.BooleanValue BLOCK_END_PORTAL;
     private static final ForgeConfigSpec.BooleanValue PROTECT_SETTLEMENT;
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> ALLOWED_INTERACTION_ENTITIES;
+    private static final ForgeConfigSpec.BooleanValue BLOCK_HOSTILE_MOBS;
+    private static final ForgeConfigSpec.ConfigValue<List<? extends String>> BLOCKED_ADDITIONAL_ENTITIES;
 
     public static volatile boolean enabled = true;
     public static volatile double flatY = 64.0;
@@ -40,6 +42,10 @@ public final class SolaConfig {
     public static volatile boolean protectSettlement = true;
     /** 领地内允许交互的实体类型 ID（小写），由 {@link #ALLOWED_INTERACTION_ENTITIES} 归一化而来。 */
     public static volatile Set<String> allowedInteractionEntities = Set.of();
+    /** 聚落领地内是否完全屏蔽敌对生物（{@code Enemy}）。 */
+    public static volatile boolean blockHostileMobs = true;
+    /** 除 Enemy 外，在领地内也按敌对生物屏蔽的实体类型 ID（小写）。 */
+    public static volatile Set<String> blockedAdditionalEntities = Set.of();
 
     /** Worldgen 参数在首次加载后冻结：保证地形包裹与群系/出生点读到同一份快照，修改需重启。 */
     private static volatile boolean frozen = false;
@@ -83,6 +89,15 @@ public final class SolaConfig {
                 ["minecraft:villager", "minecraft:horse"]
                 白名单内的实体在聚落领地内可正常交互（交易/骑乘/喂食/拴绳等），其余实体交互仍被禁止。""")
                 .defineListAllowEmpty("allowedInteractionEntities", List.of(), o -> o instanceof String);
+        BLOCK_HOSTILE_MOBS = b.comment("聚落领地内完全屏蔽敌对生物（Enemy）：阻止生成、阻止进入、清除已进入者")
+                .define("blockHostileMobs", true);
+        BLOCKED_ADDITIONAL_ENTITIES = b.comment("""
+                除 Enemy 外，在领地内也按敌对生物屏蔽的实体类型 ID 白名单（可多个），例如：
+                ["minecraft:wolf", "minecraft:bee", "minecraft:polar_bear", "minecraft:panda",
+                 "minecraft:iron_golem", "minecraft:goat", "minecraft:llama", "minecraft:trader_llama",
+                 "minecraft:pufferfish"]
+                留空则只屏蔽 Enemy。""")
+                .defineListAllowEmpty("blockedAdditionalEntities", List.of(), o -> o instanceof String);
         b.pop();
         SPEC = b.build();
     }
@@ -103,6 +118,8 @@ public final class SolaConfig {
         blockEndPortalActivation = BLOCK_END_PORTAL.get();
         protectSettlement = PROTECT_SETTLEMENT.get();
         allowedInteractionEntities = normalizeIds(ALLOWED_INTERACTION_ENTITIES.get());
+        blockHostileMobs = BLOCK_HOSTILE_MOBS.get();
+        blockedAdditionalEntities = normalizeIds(BLOCKED_ADDITIONAL_ENTITIES.get());
         frozen = true;
     }
 
