@@ -5,13 +5,14 @@ import com.simibubi.create.content.kinetics.base.KineticBlock;
 import dev.efm.solaris_resources.SolarisResources;
 import dev.efm.solaris_resources.common.block.MagicGenMachine;
 import dev.efm.solaris_resources.common.blockentity.MagicGenEntity;
+import dev.efm.solaris_resources.common.item.MagicGenItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -35,17 +36,19 @@ public final class BlockRegistries {
     private static boolean registered;
     private static boolean stressInitialized;
 
-    public static final RegistryObject<MagicGenMachine> MAGIC_GEN_MACHINE = registerBlock("test0",
-            () -> new MagicGenMachine(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+    public static final RegistryObject<MagicGenMachine> MAGIC_GEN_MACHINE = registerBlock("unstable_machanical_core",
+            () -> new MagicGenMachine(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
     public static final RegistryObject<BlockEntityType<MagicGenEntity>> MAGIC_GEN_ENTITY = registerBlockEntity(
-            "test0", MagicGenEntity::new, MAGIC_GEN_MACHINE);
-    public static final RegistryObject<BlockItem> TEST2 = registerBlockItem(MAGIC_GEN_MACHINE, Item.Properties::new);
+            "unstable_machanical_core", MagicGenEntity::new, MAGIC_GEN_MACHINE);
+    public static final RegistryObject<BlockItem> TEST2 = registerBlockItem(MAGIC_GEN_MACHINE,
+            block -> new MagicGenItem(block, new Item.Properties().stacksTo(64)));
 
     static {
         registerStressImpact(MAGIC_GEN_MACHINE, 8d);
     }
 
-    private BlockRegistries() { }
+    private BlockRegistries() {
+    }
 
     public static <B extends Block> RegistryObject<B> registerBlock(String name, Supplier<? extends B> factory) {
         return BLOCKS.register(name, Objects.requireNonNull(factory, "block factory"));

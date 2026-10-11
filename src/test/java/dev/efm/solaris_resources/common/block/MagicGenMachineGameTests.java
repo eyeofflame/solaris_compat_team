@@ -23,15 +23,15 @@ public class MagicGenMachineGameTests {
     public static void placedMachineIsWired(GameTestHelper helper) {
         BlockPos pos = new BlockPos(2, 1, 2);
         MagicGenMachine block = BlockRegistries.MAGIC_GEN_MACHINE.get();
-        helper.assertTrue(ResourceLocation.parse("solaris_resources:test0").equals(ForgeRegistries.BLOCKS.getKey(block)),
-                "machine block ID must remain compatible with existing worlds");
-        helper.assertTrue(ResourceLocation.parse("solaris_resources:test0").equals(BlockRegistries.MAGIC_GEN_ENTITY.getId()),
-                "machine entity ID must remain compatible with existing worlds");
+        helper.assertTrue(ResourceLocation.parse("solaris_resources:unstable_machanical_core").equals(ForgeRegistries.BLOCKS.getKey(block)),
+                "machine block ID must match its model resources");
+        helper.assertTrue(ResourceLocation.parse("solaris_resources:unstable_machanical_core").equals(BlockRegistries.MAGIC_GEN_ENTITY.getId()),
+                "machine entity ID must match the current registration");
         helper.setBlock(pos, block);
         BlockPos absolute = helper.absolutePos(pos);
 
         BlockState state = helper.getLevel().getBlockState(absolute);
-        helper.assertTrue(state.getBlock() == block, "test0 must be placed");
+        helper.assertTrue(state.getBlock() == block, "unstable mechanical core must be placed");
         helper.assertTrue(state.hasProperty(BlockStateProperties.AXIS)
                 && state.getValue(BlockStateProperties.AXIS) == Direction.Axis.Y, "axis property defaults to Y");
         helper.assertTrue(helper.getLevel().getBlockEntity(absolute) instanceof MagicGenEntity,

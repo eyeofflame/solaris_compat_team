@@ -1,0 +1,7 @@
+{
+	"variants": {
+		"axis=x": { "model": "solaris_resources:block/unstable_machanical_core" },
+		"axis=y": { "model": "solaris_resources:block/unstable_machanical_core" },
+		"axis=z": { "model": "solaris_resources:block/unstable_machanical_core" }
+	}
+}
