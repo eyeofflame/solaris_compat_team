@@ -46,7 +46,8 @@ public class EffectAggregationAtom extends AbstractEffect {
         List<AtomItemEntity> atoms = world.getEntitiesOfClass(AtomItemEntity.class, SpellEffectRange.ABOVE.area(origin));
 
         for (AtomItemEntity atom : atoms) {
-            if (atom.getItem().getItem() instanceof AtomItem atomItem) {
+            ItemStack stack = atom.getItem();
+            if (stack.getItem() instanceof AtomItem atomItem) {
                 var settings = atomItem.getConversionSettings();
                 if (settings.convertedItem().isEmpty() || settings.ratio() <= 0) continue;
 
@@ -55,16 +56,22 @@ public class EffectAggregationAtom extends AbstractEffect {
                 Item matter = ForgeRegistries.ITEMS.getValue(ResourceLocation.parse(settings.convertedItem()));
                 if (matter == null) continue;
 
-                int count = atom.getItem().getCount() / ratio;
+                int count = stack.getCount() / ratio;
 
                 if (count > 0) {
-                    ItemEntity matterE = new ItemEntity(world, atom.getX(), atom.getY(), atom.getZ(), new ItemStack(matter, count));
-                    world.addFreshEntity(matterE);
+                    ItemStack output = new ItemStack(matter);
+                    for (int remaining = count; remaining > 0; ) {
+                        int stackSize = Math.min(remaining, output.getMaxStackSize());
+                        ItemEntity matterE = new ItemEntity(world, atom.getX(), atom.getY(), atom.getZ(),
+                                output.copyWithCount(stackSize));
+                        world.addFreshEntity(matterE);
+                        remaining -= stackSize;
+                    }
                 }
-                if (atom.getItem().getCount() - count * ratio <= 0) {
+                if (stack.getCount() - count * ratio <= 0) {
                     atom.discard();
                 } else {
-                    atom.setItem(atom.getItem().copyWithCount(atom.getItem().getCount() - count * ratio));
+                    atom.setItem(stack.copyWithCount(stack.getCount() - count * ratio));
                 }
             }
         }

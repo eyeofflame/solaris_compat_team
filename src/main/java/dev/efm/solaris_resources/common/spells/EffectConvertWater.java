@@ -44,8 +44,9 @@ public class EffectConvertWater extends AbstractEffect {
             BlockPos pos1 = new BlockPos(bounds.maxX() - 1, bounds.maxY() - 1, bounds.maxZ() - 1);
 
             for (BlockPos position : BlockPos.betweenClosed(pos0, pos1)) {
-                if (world.getBlockState(position).getBlock().equals(Blocks.WATER)) {
-                    world.setBlock(position, Blocks.AIR.defaultBlockState(), 2);
+                var state = world.getBlockState(position);
+                if (state.is(Blocks.WATER) && state.getFluidState().isSource()
+                        && world.setBlock(position, Blocks.AIR.defaultBlockState(), 2)) {
                     ItemEntity entity = new ItemEntity(world, position.getX() * 1d, position.getY() * 1d, position.getZ() * 1d, new ItemStack(ItemRegistries.CRYSTALLIZED_WATER.get(), 4));
                     world.addFreshEntity(entity);
                 }

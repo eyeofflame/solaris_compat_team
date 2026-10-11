@@ -3,6 +3,7 @@ package dev.efm.solaris_resources.common.entity;
 import dev.efm.solaris_resources.common.registration.EntityTypeRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -23,6 +24,8 @@ public class AtomItemEntity extends Entity {
 
     private static final EntityDataAccessor<ItemStack> DATA_ITEM =
             SynchedEntityData.defineId(AtomItemEntity.class, EntityDataSerializers.ITEM_STACK);
+    private static final EntityDataAccessor<Integer> DATA_COUNT =
+            SynchedEntityData.defineId(AtomItemEntity.class, EntityDataSerializers.INT);
 
     private static final int DEFAULT_LIFESPAN = 6000;
     private static final double MERGE_RANGE = 0.5D;
@@ -47,14 +50,24 @@ public class AtomItemEntity extends Entity {
     @Override
     protected void defineSynchedData() {
         this.getEntityData().define(DATA_ITEM, ItemStack.EMPTY);
+        this.getEntityData().define(DATA_COUNT, 0);
     }
 
+    // A detached view for spell processing. Publish changes through setItem, not by mutating this stack.
     public ItemStack getItem() {
-        return this.getEntityData().get(DATA_ITEM);
+        ItemStack template = this.getEntityData().get(DATA_ITEM);
+        int count = this.getEntityData().get(DATA_COUNT);
+        return template.isEmpty() || count <= 0 ? ItemStack.EMPTY : template.copyWithCount(count);
     }
 
     public void setItem(ItemStack stack) {
-        this.getEntityData().set(DATA_ITEM, stack);
+        // ItemStack NBT and metadata encode Count as a byte. Keep only a one-item template there.
+        this.getEntityData().set(DATA_ITEM, stack.isEmpty() ? ItemStack.EMPTY : stack.copyWithCount(1));
+        this.getEntityData().set(DATA_COUNT, stack.isEmpty() ? 0 : stack.getCount());
+    }
+
+    private boolean hasItem() {
+        return this.getEntityData().get(DATA_COUNT) > 0 && !this.getEntityData().get(DATA_ITEM).isEmpty();
     }
 
     public int getAge() {
@@ -67,7 +80,7 @@ public class AtomItemEntity extends Entity {
 
     @Override
     public void tick() {
-        if (this.getItem().isEmpty()) {
+        if (!this.hasItem()) {
             this.discard();
             return;
         }
@@ -144,7 +157,7 @@ public class AtomItemEntity extends Entity {
             this.discard();
         }
 
-        if (this.getItem().isEmpty() && !this.isRemoved()) {
+        if (!this.hasItem() && !this.isRemoved()) {
             this.discard();
         }
     }
@@ -164,8 +177,9 @@ public class AtomItemEntity extends Entity {
     }
 
     private boolean isMergable() {
-        ItemStack stack = this.getItem();
-        return this.isAlive() && !stack.isEmpty() && stack.getCount() < stack.getMaxStackSize();
+        ItemStack template = this.getEntityData().get(DATA_ITEM);
+        int count = this.getEntityData().get(DATA_COUNT);
+        return this.isAlive() && !template.isEmpty() && count > 0 && count < template.getMaxStackSize();
     }
 
     private void mergeWithNeighbours() {
@@ -205,8 +219,10 @@ public class AtomItemEntity extends Entity {
     protected void addAdditionalSaveData(@NotNull CompoundTag tag) {
         tag.putInt("Age", this.age);
         tag.putInt("Lifespan", this.lifespan);
-        if (!this.getItem().isEmpty()) {
-            tag.put("Item", this.getItem().save(new CompoundTag()));
+        ItemStack template = this.getEntityData().get(DATA_ITEM);
+        if (this.hasItem()) {
+            tag.put("Item", template.save(new CompoundTag()));
+            tag.putInt("AtomCount", this.getEntityData().get(DATA_COUNT));
         }
     }
 
@@ -217,7 +233,12 @@ public class AtomItemEntity extends Entity {
             this.lifespan = tag.getInt("Lifespan");
         }
         if (tag.contains("Item")) {
-            this.setItem(ItemStack.of(tag.getCompound("Item")));
+            ItemStack stack = ItemStack.of(tag.getCompound("Item"));
+            // Old valid stacks have no AtomCount; their byte Count is still readable.
+            if (tag.contains("AtomCount", Tag.TAG_INT)) {
+                stack.setCount(Math.max(0, tag.getInt("AtomCount")));
+            }
+            this.setItem(stack);
         }
     }
 
@@ -228,6 +249,7 @@ public class AtomItemEntity extends Entity {
 
     @Override
     public @NotNull Component getName() {
-        return Component.empty().append(this.getItem().getItem().getName(this.getItem())).append(" *").append(String.valueOf(this.getItem().getCount()));
+        ItemStack stack = this.getItem();
+        return Component.empty().append(stack.getItem().getName(stack)).append(" *").append(String.valueOf(stack.getCount()));
     }
 }

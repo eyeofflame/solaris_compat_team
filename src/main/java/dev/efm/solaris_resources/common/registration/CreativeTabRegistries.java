@@ -4,12 +4,17 @@ import dev.efm.solaris_resources.SolarisResources;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CreativeTabRegistries {
+    private static final List<RegistryObject<? extends Item>> AUTO_ITEMS = new ArrayList<>();
     public static final DeferredRegister<CreativeModeTab> TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, SolarisResources.MODID);
 
@@ -25,6 +30,7 @@ public class CreativeTabRegistries {
                         output.accept(ItemRegistries.ATOM_AGGREGATION_TOME.get());
 
                         ItemRegistries.items.forEach(atomItemRegistryObject -> output.accept(atomItemRegistryObject.get()));
+                        AUTO_ITEMS.forEach(item -> output.accept(item.get()));
 
                     })
                     .build());
@@ -32,4 +38,11 @@ public class CreativeTabRegistries {
     public static void register(IEventBus bus) {
         TABS.register(bus);
     }
+
+    public static void addItem(RegistryObject<? extends Item> item) {
+        if (!AUTO_ITEMS.contains(item)) {
+            AUTO_ITEMS.add(item);
+        }
+    }
+
 }

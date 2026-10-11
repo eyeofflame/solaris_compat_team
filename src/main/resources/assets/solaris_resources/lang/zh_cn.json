@@ -6,7 +6,7 @@
   "itemGroup.solaris_resources": "Solaris Resources",
   "item.solaris_resources.water_convert_tome": "法术卷册：水转化",
   "solaris_resources.glyph_name.convert_water": "水转化",
-  "solaris_resources.glyph_desc.convert_water": "将以目标为中心的3*3*3范围内的水源转化为晶化水。",
+  "solaris_resources.glyph_desc.convert_water": "将以目标为中心的3×3×3范围内的独立水源方块转化为晶化水，每个水源产出4份。不消耗流水或含水方块。",
   "item.solaris_resources.atom_hydrogen": "氢原子",
   "item.solaris_resources.atom_oxygen": "氧原子",
   "item.solaris.magic": "（受魔力影响而不稳定）",
@@ -19,7 +19,7 @@
   "solaris_resources.glyph_name.assembly_atom": "不稳魔力原子组装I型",
   "solaris_resources.glyph_desc.assembly_atom": "将目标上方3*3*3范围内的的不稳氢原子随机组装为不稳铁原子、不稳碳原子、不稳铜原子",
   "solaris_resources.glyph_name.aggregation_atom": "不稳魔力原子聚合I型",
-  "solaris_resources.glyph_desc.aggregation_atom": "将目标上方3*3*3范围内的不稳原子重新聚合为单质物质",
+  "solaris_resources.glyph_desc.aggregation_atom": "将目标上方3×3×3范围内的原子按配置聚合为物品，产物按最大堆叠数量拆分掉落。",
   "item.solaris_resources.atom_assembly_tome": "法术卷册：不稳魔力原子组装I型",
   "item.solaris_resources.atom_aggregation_tome": "法术卷册：不稳魔力原子聚合I型"
 }

@@ -6,4 +6,7 @@ run-data
 /.agents/
 /.worktrees/
 /.superpowers/
+/.claude/
 /docs/
+/CLAUDE.md
+/AGENTS.md

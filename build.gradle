@@ -1,6 +1,3 @@
-import org.gradle.api.attributes.LibraryElements
-import org.gradle.api.attributes.Usage
-
 buildscript {
     repositories {
 
@@ -23,6 +20,13 @@ apply plugin: 'org.spongepowered.mixin'
 
 group = mod_group_id
 version = mod_version
+
+// Gradle 按 ISO-8859-1 解析 gradle.properties，裸写中文在属性层就是乱码；
+// 需要中文的元数据统一从按 UTF-8 重读的文件取值，因此 gradle.properties 里可直接写中文
+// （\uXXXX 转义也兼容）。注意：不要改回 project.property('mod_authors')，那会重新变乱码。
+def utf8GradleProperties = new Properties()
+file('gradle.properties').withInputStream { utf8GradleProperties.load(it.newReader('UTF-8')) }
+def modAuthors = utf8GradleProperties.getProperty('mod_authors')
 
 base {
     archivesName = mod_id
@@ -105,23 +109,6 @@ repositories {
     }
 }
 
-// ===== Solaris 跨工程编译期依赖（消费 named classes 变体）=====
-// 跨工程直接依赖产出的 jar 不可用：reobfJar 会原地覆盖成 SRG 名，编译不过。
-// 这里改为消费其 classes 变体（build/classes/java/main，named 映射）。
-// 用法：在 dependencies 里写   solarisCompile "dev.efm:solaris_core:1.1.6-hotfix"
-// 注意：依赖关系必须无环。
-configurations {
-    solarisCompile {
-        canBeConsumed = false
-        canBeResolved = true
-        transitive = false
-        attributes {
-            attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage, Usage.JAVA_RUNTIME))
-            attribute(LibraryElements.LIBRARY_ELEMENTS_ATTRIBUTE, objects.named(LibraryElements, LibraryElements.CLASSES))
-        }
-    }
-}
-
 dependencies {
 
 
@@ -137,10 +124,15 @@ dependencies {
             fg.deobf("libs:Patchouli:1.20.1-85-FORGE")
     )
 
-    runtimeOnly fg.deobf("libs:Jade:1.20.1-Forge-11.13.3")
+    implementation(
+            fg.deobf("libs:create:1.20.1-6.0.8")
+    )
 
-    // Solaris 跨工程编译期依赖统一走这里（见上方 solarisCompile 说明）
-    compileOnly files(configurations.solarisCompile)
+    // Ponder 由 Create jar 以 jarjar 内嵌提供,运行期由 Forge jarjar 加载;
+    // javac 看不到嵌套 jar,这里按同一版本单独引入编译期依赖。
+    compileOnly fg.deobf("libs:Ponder-Forge-1.20.1:1.0.91")
+
+    runtimeOnly fg.deobf("libs:Jade:1.20.1-Forge-11.13.3")
 }
 
 
@@ -149,9 +141,11 @@ tasks.named('processResources', ProcessResources).configure {
                              forge_version       : forge_version, forge_version_range: forge_version_range,
                              loader_version_range: loader_version_range,
                              mod_id              : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
-                             mod_authors         : mod_authors, mod_description: '''A mod that generate resources through magic in Solaris modpack''',]
+                             mod_authors         : modAuthors, mod_description: '''A mod that generate resources through magic in Solaris modpack''',]
 
     inputs.properties replaceProperties
+
+    filteringCharset = 'UTF-8'
 
     filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
         expand replaceProperties + [project: project]
@@ -162,11 +156,11 @@ tasks.named('processResources', ProcessResources).configure {
 tasks.named('jar', Jar).configure {
     manifest {
         attributes(["Specification-Title"     : mod_id,
-                    "Specification-Vendor"    : mod_authors,
+                    "Specification-Vendor"    : modAuthors,
                     "Specification-Version"   : "1",
                     "Implementation-Title"    : project.name,
                     "Implementation-Version"  : project.jar.archiveVersion,
-                    "Implementation-Vendor"   : mod_authors,
+                    "Implementation-Vendor"   : modAuthors,
                     "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")])
     }
 

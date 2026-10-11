@@ -1,19 +1,20 @@
 package dev.efm.solaris_resources;
 
 import com.hollingsworth.arsnouveau.api.registry.GlyphRegistry;
-import dev.efm.solaris_resources.common.registration.CreativeTabRegistries;
 import dev.efm.solaris_resources.common.config.AtomConfigs;
-import dev.efm.solaris_resources.common.worldgen.OreGenerationRules;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import dev.efm.solaris_resources.common.registration.BlockRegistries;
+import dev.efm.solaris_resources.common.registration.CreativeTabRegistries;
 import dev.efm.solaris_resources.common.registration.EntityTypeRegistries;
 import dev.efm.solaris_resources.common.registration.ItemRegistries;
 import dev.efm.solaris_resources.common.spells.EffectAggregationAtom;
 import dev.efm.solaris_resources.common.spells.EffectAssemblyAtom;
 import dev.efm.solaris_resources.common.spells.EffectConvertWater;
 import dev.efm.solaris_resources.common.spells.EffectDissolveWater;
+import dev.efm.solaris_resources.common.worldgen.OreGenerationRules;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.Random;
@@ -34,6 +35,7 @@ public class SolarisResources {
         ibus.addListener(this::commonSetup);
 
         fbus.addListener(ItemRegistries::itemTip);
+        BlockRegistries.register(ibus);
 
         registerSpell();
     }
