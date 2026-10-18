@@ -2,6 +2,7 @@ package dev.efm.solaris_resources.common.command;
 
 import dev.efm.solaris_resources.SolarisResources;
 import dev.efm.solaris_resources.common.config.AtomConfigs;
+import dev.efm.solaris_resources.common.config.MachineConfigs;
 import dev.efm.solaris_resources.common.worldgen.OreGenerationRules;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -18,12 +19,16 @@ public class ReloadAtomConfigCommand {
                 .executes(context -> {
                     var result = AtomConfigs.STORE.reload();
                     boolean worldgenLoaded = OreGenerationRules.reload();
+                    boolean machinesLoaded = MachineConfigs.MAGIC_CORE.reload();
                     context.getSource().sendSuccess(() -> Component.translatable(
                             "commands.solaris_resources.reload", result.loaded(), result.failed()), true);
                     context.getSource().sendSuccess(() -> Component.translatable(worldgenLoaded
                             ? "commands.solaris_resources.worldgen_reload.success"
                             : "commands.solaris_resources.worldgen_reload.failed"), true);
-                    return result.failed() == 0 && worldgenLoaded ? 1 : 0;
+                    context.getSource().sendSuccess(() -> Component.translatable(machinesLoaded
+                            ? "commands.solaris_resources.machine_reload.success"
+                            : "commands.solaris_resources.machine_reload.failed"), true);
+                    return result.failed() == 0 && worldgenLoaded && machinesLoaded ? 1 : 0;
                 }));
     }
 }

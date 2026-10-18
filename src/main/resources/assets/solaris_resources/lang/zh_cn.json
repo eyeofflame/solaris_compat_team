@@ -22,5 +22,13 @@
   "solaris_resources.glyph_name.aggregation_atom": "不稳魔力原子聚合I型",
   "solaris_resources.glyph_desc.aggregation_atom": "将目标上方3×3×3范围内的原子按配置聚合为物品，产物按最大堆叠数量拆分掉落。",
   "item.solaris_resources.atom_assembly_tome": "法术卷册：不稳魔力原子组装I型",
-  "item.solaris_resources.atom_aggregation_tome": "法术卷册：不稳魔力原子聚合I型"
+  "item.solaris_resources.atom_aggregation_tome": "法术卷册：不稳魔力原子聚合I型",
+  "ldlib.gui.editor.register.widget.container.source_slot": "魔源槽",
+  "tooltip.solaris_resources.source_slot": "魔源：%s / %s",
+  "tip.solaris.magic_core_I": "自动吸取玩家身上魔力",
+  "message.solaris_resources.source_absorb.on": "魔源吸取：已开启",
+  "message.solaris_resources.source_absorb.off": "魔源吸取：已关闭",
+  "goggles.solaris_resources.stress_too_low": "应力不足：需要至少 %s RPM",
+  "commands.solaris_resources.machine_reload.success": "机械产出配置已更新，后续处理立即使用新规则。",
+  "commands.solaris_resources.machine_reload.failed": "机械产出配置加载失败，保留原值；详情请查看日志。"
 }

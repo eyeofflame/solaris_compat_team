@@ -37,7 +37,9 @@ public final class BlockRegistries {
     private static boolean stressInitialized;
 
     public static final RegistryObject<MagicGenMachine> MAGIC_GEN_MACHINE = registerBlock("unstable_machanical_core",
-            () -> new MagicGenMachine(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
+            () -> new MagicGenMachine(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()));
     public static final RegistryObject<BlockEntityType<MagicGenEntity>> MAGIC_GEN_ENTITY = registerBlockEntity(
             "unstable_machanical_core", MagicGenEntity::new, MAGIC_GEN_MACHINE);
     public static final RegistryObject<BlockItem> TEST2 = registerBlockItem(MAGIC_GEN_MACHINE,

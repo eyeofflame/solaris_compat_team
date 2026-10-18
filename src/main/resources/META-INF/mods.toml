@@ -38,3 +38,9 @@ mandatory = true
 versionRange = "[4.8.4,5)"
 ordering = "AFTER"
 side = "BOTH"
+[[dependencies.solaris_resources]]
+modId = "ldlib"
+mandatory = true
+versionRange = "[1.0.52,2)"
+ordering = "AFTER"
+side = "BOTH"
