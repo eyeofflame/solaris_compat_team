@@ -12,7 +12,8 @@
     "thermal.AugmentableBlockEntityInvoker",
     "thermal.BlockItemAugmentableMixin",
     "thermal.MachineBlockEntityMixin",
-    "thermal.Reconfigurable4WayBlockEntityInvoker"
+    "thermal.Reconfigurable4WayBlockEntityInvoker",
+    "mekanism.EnergyCubeDecayMixin"
   ],
   "client": [
     "sola_trade.MinecraftMixin"
