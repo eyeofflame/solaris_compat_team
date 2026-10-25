@@ -1,0 +1,8 @@
+{
+  "block.solaris_core.part": "多方块部件",
+  "config.solaris_core.title": "Solaris 核心",
+  "config.solaris_core.multiblock": "多方块",
+  "config.solaris_core.trigger_items": "触发物品",
+  "config.solaris_core.trigger_items.add": "添加触发物品",
+  "config.solaris_core.trigger_items.tooltip": "可以触发多方块成型的物品 ResourceLocation。点击左侧 + 添加，例如 immersiveengineering:hammer"
+}

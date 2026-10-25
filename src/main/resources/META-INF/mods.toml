@@ -62,4 +62,18 @@ versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
-# cloth_config / ldlib 等界面库已随功能模块迁到 solaris_functions
+# Cloth Config 仅用于配置界面（客户端）；未安装时 mod 仍可加载
+[[dependencies."${mod_id}"]]
+modId = "cloth_config"
+mandatory = false
+versionRange = "[0,)"
+ordering = "AFTER"
+side = "CLIENT"
+
+# GeckoLib：整机渲染（BE 实现 GeoAnimatable），服务端也会加载该类
+[[dependencies."${mod_id}"]]
+modId = "geckolib"
+mandatory = true
+versionRange = "[4.8.4,)"
+ordering = "AFTER"
+side = "BOTH"

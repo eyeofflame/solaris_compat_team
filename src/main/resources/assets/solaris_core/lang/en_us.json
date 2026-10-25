@@ -1,0 +1,8 @@
+{
+  "block.solaris_core.part": "Multiblock Part",
+  "config.solaris_core.title": "Solaris Core",
+  "config.solaris_core.multiblock": "Multiblock",
+  "config.solaris_core.trigger_items": "Trigger Items",
+  "config.solaris_core.trigger_items.add": "Add trigger item",
+  "config.solaris_core.trigger_items.tooltip": "Item ResourceLocations that can trigger multiblock formation. Click the + button to add one, e.g. immersiveengineering:hammer"
+}

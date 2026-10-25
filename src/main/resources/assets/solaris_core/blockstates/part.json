@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "slave=false": {
+      "model": "solaris_core:block/part"
+    },
+    "slave=true": {
+      "model": "solaris_core:block/part"
+    }
+  }
+}
