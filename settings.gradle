@@ -14,3 +14,6 @@ plugins {
 }
 
 rootProject.name = 'solaris_core'
+
+// 功能模块独立为第二个 mod 子项目
+include 'solaris_functions'

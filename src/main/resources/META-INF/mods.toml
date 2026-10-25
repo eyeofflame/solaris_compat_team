@@ -62,9 +62,4 @@ versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies."${mod_id}"]]
-modId = "cloth_config"
-mandatory = true
-versionRange = "[0,)"
-ordering = "AFTER"
-side = "BOTH"
+# cloth_config / ldlib 等界面库已随功能模块迁到 solaris_functions

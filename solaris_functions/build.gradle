@@ -1,0 +1,157 @@
+// mixingradle 由根项目的 buildscript classpath 继承，避免二次解析依赖
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+}
+
+apply plugin: 'org.spongepowered.mixin'
+
+def fnId = 'solaris_functions'
+def fnName = 'SolarisFunctions'
+def fnVersion = rootProject.property('mod_version')
+def fnGroup = rootProject.property('mod_group_id')
+def fnAuthors = rootProject.property('mod_authors')
+def fnLicense = rootProject.property('mod_license')
+
+group = fnGroup
+version = fnVersion
+
+base {
+    archivesName = fnId
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+}
+
+minecraft {
+    mappings channel: rootProject.mapping_channel, version: rootProject.mapping_version
+
+    copyIdeResources = true
+
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            // 开发环境同时加载 solaris_core（消费它的 named classes）
+            args '--mixin.config', 'solaris_core.mixins.json'
+
+            mods {
+                // 开发环境把 core 也注册为一个来源，ForgeGradle 会把它的 classes/资源写进 MOD_CLASSES
+                solaris_core {
+                    source rootProject.sourceSets.main
+                }
+                solaris_functions {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        client {
+            property 'forge.enabledGameTestNamespaces', fnId
+            jvmArgs("-Xmx8G")
+        }
+
+        server {
+            property 'forge.enabledGameTestNamespaces', fnId
+            args '--nogui'
+        }
+
+        data {
+            workingDirectory project.file('run-data')
+
+            args '--mod', fnId, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+        }
+    }
+}
+
+mixin {
+    add sourceSets.main, "${fnId}.refmap.json"
+
+    config "${fnId}.mixins.json"
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    flatDir {
+        dir rootProject.file('libs')
+    }
+}
+
+jarJar.enable()
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${rootProject.minecraft_version}-${rootProject.forge_version}"
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    implementation(
+            fg.deobf("libs:cloth-config:11.1.136-forge"),
+            fg.deobf("libs:ldlib:forge-1.20.1-1.0.52"),
+            fg.deobf("libs:packetfixer:3.3.2-1.18-1.20.4-merged")
+    )
+
+    jarJar("libs:cloth-config:11.1.136-forge") {
+        jarJar.ranged(it, "[0,100)")
+    }
+    jarJar("libs:ldlib:forge-1.20.1-1.0.52") {
+        jarJar.ranged(it, "[0,100)")
+    }
+    jarJar("libs:packetfixer:3.3.2-1.18-1.20.4-merged") {
+        jarJar.ranged(it, "[0,100)")
+    }
+
+    // 编译期消费 solaris_core 的 named classes 变体（build/classes/java/main）
+    // 不能直接依赖其 jar：jar 会被 reobfJar 原地覆盖成 SRG 名。
+    compileOnly files(rootProject.sourceSets.main.output.classesDirs)
+
+    // 开发环境的 core 由 runs.modFonts 的 mods { } 块注入（见上），无需再重复挂 classpath
+}
+
+tasks.named('compileJava', JavaCompile).configure {
+    dependsOn rootProject.tasks.named('compileJava')
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [minecraft_version   : rootProject.minecraft_version,
+                             minecraft_version_range: rootProject.minecraft_version_range,
+                             forge_version       : rootProject.forge_version,
+                             forge_version_range : rootProject.forge_version_range,
+                             loader_version_range: rootProject.loader_version_range,
+                             mod_id              : fnId,
+                             mod_name            : fnName,
+                             mod_license         : fnLicense,
+                             mod_version         : fnVersion,
+                             mod_authors         : fnAuthors,
+                             mod_description     : 'SolarisCore 的功能模块（战斗/传送/清理/渲染等功能实现）',
+                             solaris_core_version: rootProject.mod_version]
+
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties + [project: project]
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    manifest {
+        attributes(["Specification-Title"     : fnId,
+                    "Specification-Vendor"    : fnAuthors,
+                    "Specification-Version"   : "1",
+                    "Implementation-Title"    : project.name,
+                    "Implementation-Version"  : project.jar.archiveVersion,
+                    "Implementation-Vendor"   : fnAuthors,
+                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")])
+    }
+
+    finalizedBy 'reobfJar'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
