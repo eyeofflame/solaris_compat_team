@@ -7,6 +7,7 @@ import dev.efm.solaris_core.client.multiblock.MultiblockModels;
 import dev.efm.solaris_core.common.SolarisRegistry;
 import dev.efm.solaris_core.config.SolarisConfigScreen;
 import dev.efm.solaris_core.config.SolarisCoreConfig;
+import dev.efm.solaris_core.example.CokeOvenLogic;
 import dev.efm.solaris_core.example.SMuti;
 import dev.efm.solaris_core.functions.structureReplacement.DataLoader;
 import dev.efm.solaris_core.helper.GameHelper;
@@ -48,6 +49,8 @@ public class SolarisCore {
                 level.getServer().sendSystemMessage(Component.literal("yes!"));
             }
         });
+
+        CokeOvenLogic.register();
 
         MultiblockModels.register(SMuti.COKE.getId(), new MultiblockModels.MultiblockModel(
                 GameHelper.buildRes("solaris_core", "geo/multiblock/example.geo.json"),
